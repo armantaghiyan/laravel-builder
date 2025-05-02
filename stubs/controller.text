@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Dto\{model}\{model}IndexData;
+use App\Dto\{model}\{model}StoreData;
+use App\Dto\{model}\{model}UpdateData;
+use App\Http\Resources\GlobalResources\SuccessResource;
+use App\Http\Resources\{model}IndexResource;
+use App\Http\Resources\{model}ShowResource;
+use App\Http\Resources\{model}StoreResource;
+use App\Http\Resources\{model}UpdateResource;
+use App\Services\Domain\{model}Service;
+
+class {model}Controller extends Controller {
+
+    public function __construct(
+        private {model}Service ${sumModel}Service,
+    ) {
+
+    }
+
+    public function index({model}IndexData $data): {model}IndexResource {
+        [$items, $count] = $this->{sumModel}Service->index($data);
+
+        return new {model}IndexResource([RK_ITEMS => $items, RK_COUNT => $count]);
+    }
+
+    public function store({model}StoreData $data): {model}StoreResource {
+        $item = $this->{sumModel}Service->store($data);
+
+        return new {model}StoreResource([RK_ITEM => $item]);
+    }
+
+    public function show($id): {model}ShowResource {
+        $item = $this->{sumModel}Service->show($id);
+
+        return new {model}ShowResource([RK_ITEM => $item]);
+    }
+
+    public function update({model}UpdateData $data, $id): {model}UpdateResource {
+        $item = $this->{sumModel}Service->update($data, $id);
+
+        return new {model}UpdateResource([RK_ITEM => $item]);
+    }
+
+    public function destroy($id): SuccessResource {
+        $this->{sumModel}Service->destroy($id);
+
+        return new SuccessResource([]);
+    }
+}

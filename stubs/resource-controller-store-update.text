@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use App\Http\Resources\Models\{model}Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\Infrastructure\Response\ResponseManager;
+
+class {model-action}Resource extends JsonResource {
+
+    use ResponseManager;
+
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array {
+
+        return $this->cast([
+            RK_ITEM => new {model}Resource($this[RK_ITEM]),
+        ]);
+    }
+}

@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Dto\{model};
+
+use App\Dto\GlobalDto\WithApiValidator;
+use Spatie\LaravelData\Data;
+use App\Dto\GlobalDto\WithIndexData;
+
+class {model}{action}Data extends Data {
+
+    use WithApiValidator;
+    {indexTrait}
+
+    public function __construct(
+        {items}
+    ) {
+
+    }
+}

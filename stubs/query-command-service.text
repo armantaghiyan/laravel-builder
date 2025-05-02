@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Services\Domain;
+
+use App\Models\{model};
+use App\Dto\{model}\{model}StoreData;
+use App\Dto\{model}\{model}UpdateData;
+
+class {model}CommandService {
+
+    public function store({model}StoreData $data): {model} {
+        $item = new {model}();
+        {items}
+        $item->save();
+
+        return $item;
+    }
+
+    public function update({model}UpdateData $data, $id): {model} {
+        $item = {model}::where({id}, $id)->firstOrError();
+        {items}
+        $item->save();
+
+        return $item;
+    }
+
+    public function destroy($id): void {
+        $item = {model}::where({id}, $id)->firstOrError();
+
+        $item->delete();
+    }
+}
