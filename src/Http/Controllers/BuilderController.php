@@ -2,6 +2,7 @@
 
 namespace Arman\LaravelBuilder\Http\Controllers;
 
+use Arman\LaravelBuilder\Http\Helpers\FileWriter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -72,7 +73,7 @@ class BuilderController {
 		$content = str_replace('{sumModel}', strtolower($model), $content);
 
 
-		file_put_contents(app_path("Http/Controllers/{$model}Controller.php"), $content);
+		FileWriter::put(app_path("Http/Controllers/{$model}Controller.php"), $content);
 	}
 
 	public function createService($model, $columnInfo) {
@@ -81,7 +82,7 @@ class BuilderController {
 		$content = str_replace('{sumModel}', strtolower($model), $content);
 		$content = str_replace('{model}', $model, $content);
 
-		file_put_contents(app_path("Services/Domain/{$model}Service.php"), $content);
+		FileWriter::put(app_path("Services/Domain/{$model}Service.php"), $content);
 	}
 
 	public function createQueryService($model, $columnInfo) {
@@ -108,7 +109,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{model}', $model, $content);
 
-		file_put_contents(app_path("Services/Domain/{$model}QueryService.php"), $content);
+		FileWriter::put(app_path("Services/Domain/{$model}QueryService.php"), $content);
 	}
 
 	public function createCommandService($model, $columnInfo) {
@@ -125,7 +126,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{model}', $model, $content);
 
-		file_put_contents(app_path("Services/Domain/{$model}CommandService.php"), $content);
+		FileWriter::put(app_path("Services/Domain/{$model}CommandService.php"), $content);
 	}
 
 	public function createDto($model, $action, $columnInfo) {
@@ -150,7 +151,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{action}', $action, $content);
 
-		file_put_contents(app_path("Dto/$model/{$model}{$action}Data.php"), $content);
+		FileWriter::put(app_path("Dto/$model/{$model}{$action}Data.php"), $content);
 	}
 
 	public function createRescueModel($model, $columnInfo) {
@@ -169,7 +170,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{items}', $items, $content);
 
-		file_put_contents(app_path("Http/Resources/Models/{$model}Resource.php"), $content);
+		FileWriter::put(app_path("Http/Resources/Models/{$model}Resource.php"), $content);
 	}
 
 	public function createRescueController($model, $action, $columnInfo) {
@@ -178,7 +179,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{model-action}', $model . $action, $content);
 
-		file_put_contents(app_path("Http/Resources/{$model}{$action}Resource.php"), $content);
+		FileWriter::put(app_path("Http/Resources/{$model}{$action}Resource.php"), $content);
 	}
 
 	private function createConst($model, $column) {
