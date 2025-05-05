@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use App\Http\Resources\Models\{model}Resource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Services\Infrastructure\Response\ResponseManager;
+use App\Helpers\ResponseManager;
 
 class {model-action}Resource extends JsonResource {
 

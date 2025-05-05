@@ -2,36 +2,50 @@
 
 namespace App\Services\Domain;
 
-use App\Models\{model};
 use App\Dto\{model}\{model}IndexData;
 use App\Dto\{model}\{model}StoreData;
 use App\Dto\{model}\{model}UpdateData;
+use App\Repositories\{model}Repository;
+use App\Models\{model};
 
 class {model}Service {
 
     public function __construct(
-        private {model}QueryService   ${sumModel}QueryService,
-        private {model}CommandService ${sumModel}CommandService,
+        private {model}Repository ${sumModel}Repository
     ) {
     }
 
     public function index({model}IndexData $data): array {
-        return $this->{sumModel}QueryService->index($data);
-    }
-
-    public function store({model}StoreData $data): {model} {
-        return $this->{sumModel}CommandService->store($data);
+        return $this->{sumModel}Repository->filter(
+            filters: [
+                {filters}
+            ],
+            sort: $data->sort,
+            sortType: $data->sort_type,
+            page: $data->page
+        );
     }
 
     public function show(int $id): {model} {
-        return $this->{sumModel}QueryService->show($id);
+        return $this->{sumModel}Repository->findById($id);
+    }
+
+    public function store({model}StoreData $data): {model} {
+        return $this->{sumModel}Repository->create([
+            {items}
+        ]);
     }
 
     public function update({model}UpdateData $data, int $id): {model} {
-        return $this->{sumModel}CommandService->update($data, $id);
+        $item = $this->{sumModel}Repository->findById($id);
+
+        return $this->{sumModel}Repository->update($item, [
+            {items}
+        ]);
     }
 
     public function destroy(int $id): void {
-        $this->{sumModel}CommandService->destroy($id);
+        $item = $this->{sumModel}Repository->findById($id);
+        $this->{sumModel}Repository->delete($item);
     }
 }

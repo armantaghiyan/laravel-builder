@@ -51,8 +51,7 @@ class BuilderController {
 		$this->createController($model, $columnInfo);
 
 		$this->createService($model, $columnInfo);
-		$this->createQueryService($model, $columnInfo);
-		$this->createCommandService($model, $columnInfo);
+		$this->createRepository($model, $columnInfo);
 
 		$this->createRescueModel($model, $columnInfo);
 
@@ -79,54 +78,33 @@ class BuilderController {
 	public function createService($model, $columnInfo) {
 		$content = $this->getStub('service.text');
 
-		$content = str_replace('{sumModel}', strtolower($model), $content);
 		$content = str_replace('{model}', $model, $content);
-
-		FileWriter::put(app_path("Services/Domain/{$model}Service.php"), $content);
-	}
-
-	public function createQueryService($model, $columnInfo) {
-		$content = $this->getStub('query-service.text');
+		$content = str_replace('{sumModel}', strtolower($model), $content);
 
 		$items = "";
 		$filters = "";
 		foreach ($columnInfo as $key => $value) {
-
 			if (!in_array($key, $this->ignoreFilters)) {
-				$symbol = '->';
-				if($key === 'id'){
-					$symbol = '::';
-				}
-				$filters .= sprintf("%sfilter(%s, %sdata->%s)\n\t\t\t", $symbol,$this->createConst($model,$key), '$', $key);
+				$filters .= sprintf("%s => \$data->%s,\n\t\t\t\t", $this->createConst($model, $key), $key);
 			}
 			if (!in_array($key, $this->ignoreCols)) {
-				$items .= sprintf("%sitem[%s] = %sdata->%s;\n\t\t", '$', $this->createConst($model,$key), '$' ,$key);
+				$items .= sprintf("%s => \$data->%s,\n\t\t\t", $this->createConst($model, $key), $key);
+
 			}
 		}
 
-		$content = str_replace('{id}', $this->createConst($model,'id'), $content);
 		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{items}', $items, $content);
-		$content = str_replace('{model}', $model, $content);
 
-		FileWriter::put(app_path("Services/Domain/{$model}QueryService.php"), $content);
+		$content = str_replace('{model}', $model, $content);
+		FileWriter::put(app_path("Services/Domain/{$model}Service.php"), $content);
 	}
 
-	public function createCommandService($model, $columnInfo) {
-		$content = $this->getStub('query-command-service.text');
+	public function createRepository($model, $columnInfo) {
+		$content = $this->getStub('repository.text');
 
-		$items = "";
-		foreach ($columnInfo as $key => $value) {
-			if (!in_array($key, $this->ignoreCols)) {
-				$items .= sprintf("%sitem[%s] = %sdata->%s;\n\t\t", '$', $this->createConst($model,$key), '$' ,$key);
-			}
-		}
-
-		$content = str_replace('{id}', $this->createConst($model,'id'), $content);
-		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{model}', $model, $content);
-
-		FileWriter::put(app_path("Services/Domain/{$model}CommandService.php"), $content);
+		FileWriter::put(app_path("Repositories/{$model}Repository.php"), $content);
 	}
 
 	public function createDto($model, $action, $columnInfo) {
@@ -183,11 +161,7 @@ class BuilderController {
 	}
 
 	private function createConst($model, $column) {
-		if($column == 'created_at' || $column == 'updated_at' || $column == 'deleted_at') {
-			return 'COL_' . Str::upper($column);
-		}
-
-		return 'COL_' . Str::upper($model) . '_' . Str::upper($column);
+		return sprintf("%s::%s", $model, Str::upper($column));
 	}
 
 	private function getStub($name) {

@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\{model};
+
+class {model}Repository {
+
+    public function findById(int $id): {model} {
+        return {model}::where('id', $id)->firstOrError();
+    }
+
+    public function filter(array $filters, string $sort = 'id', string $sortType = 'desc', int $page = 1): array {
+        $query = {model}::query();
+
+        foreach ($filters as $field => $value) {
+            if (!is_null($value)) {
+                $query->filters($field, $value);
+            }
+        }
+
+        $count = $query->count();
+        $items = $query->orderBy($sort, $sortType)->page2($page)->get();
+
+        return ['items' => $items, 'count' => $count];
+    }
+
+    public function create(array $data): {model} {
+        return {model}::create($data);
+    }
+
+    public function update({model} $item, array $data): {model} {
+        $item->update($data);
+        return $item;
+    }
+
+    public function delete({model} $item): void {
+        $item->delete();
+    }
+}

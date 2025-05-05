@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\GlobalResources;
 
+use App\Services\Infrastructure\Response\ResponseManager;
 use Illuminate\Http\Request;
-use App\Http\Resources\Models\{model}Resource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Helpers\ResponseManager;
 
-class {model-action}Resource extends JsonResource {
+class SuccessResource extends JsonResource {
 
     use ResponseManager;
 
@@ -18,8 +17,6 @@ class {model-action}Resource extends JsonResource {
      */
     public function toArray(Request $request): array {
 
-        return $this->cast([
-            RK_ITEM => new {model}Resource($this[RK_ITEM]),
-        ]);
+        return $this->cast();
     }
 }

@@ -31,7 +31,9 @@ class LaravelBuilderProvider extends ServiceProvider {
 	protected function registerCommands(): void {
 		if ($this->app->runningInConsole()) {
 			$this->commands([
-				Console\BuilderCommand::class,
+				Console\BuilderBackendCommand::class,
+				Console\BuilderPublishCommand::class,
+				Console\BuilderConst::class,
 			]);
 		}
 	}

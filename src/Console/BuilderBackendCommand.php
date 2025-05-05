@@ -5,14 +5,14 @@ namespace Arman\LaravelBuilder\Console;
 use Arman\LaravelBuilder\Http\Controllers\BuilderController;
 use Illuminate\Console\Command;
 
-class BuilderCommand extends Command {
+class BuilderBackendCommand extends Command {
 
 	/**
 	 * The name and signature of the console command.
 	 *
 	 * @var string
 	 */
-	protected $signature = 'builder';
+	protected $signature = 'builder:backend';
 
 	/**
 	 * The console command description.
@@ -27,7 +27,7 @@ class BuilderCommand extends Command {
 	 * @return void
 	 */
 	public function handle(): void {
-		if(config('app.env') !== 'local') {
+		if (config('app.env') !== 'local') {
 			$this->error('Please run this command in local environment.');
 			return;
 		}
