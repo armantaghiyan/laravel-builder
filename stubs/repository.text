@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\{model};
+use App\Dto\User\{model}IndexData;
 
 class {model}Repository {
 
@@ -10,19 +11,15 @@ class {model}Repository {
         return {model}::where('id', $id)->firstOrError();
     }
 
-    public function filter(array $filters, string $sort = 'id', string $sortType = 'desc', int $page = 1): array {
+    public function index({model}IndexData $data): array {
         $query = {model}::query();
 
-        foreach ($filters as $field => $value) {
-            if (!is_null($value)) {
-                $query->filters($field, $value);
-            }
-        }
+        {filters}
 
         $count = $query->count();
-        $items = $query->orderBy($sort, $sortType)->page2($page)->get();
+        $items = $query->orderBy($data->sort, $data->sort_type)->page2($data->page_rows)->get();
 
-        return ['items' => $items, 'count' => $count];
+        return [$items, $count];
     }
 
     public function create(array $data): {model} {

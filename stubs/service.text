@@ -16,14 +16,7 @@ class {model}Service {
     }
 
     public function index({model}IndexData $data): array {
-        return $this->{sumModel}Repository->filter(
-            filters: [
-                {filters}
-            ],
-            sort: $data->sort,
-            sortType: $data->sort_type,
-            page: $data->page
-        );
+        return $this->{sumModel}Repository->index($data);
     }
 
     public function show(int $id): {model} {

@@ -82,18 +82,13 @@ class BuilderController {
 		$content = str_replace('{sumModel}', strtolower($model), $content);
 
 		$items = "";
-		$filters = "";
 		foreach ($columnInfo as $key => $value) {
-			if (!in_array($key, $this->ignoreFilters)) {
-				$filters .= sprintf("%s => \$data->%s,\n\t\t\t\t", $this->createConst($model, $key), $key);
-			}
 			if (!in_array($key, $this->ignoreCols)) {
 				$items .= sprintf("%s => \$data->%s,\n\t\t\t", $this->createConst($model, $key), $key);
 
 			}
 		}
 
-		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{items}', $items, $content);
 
 		$content = str_replace('{model}', $model, $content);
@@ -103,6 +98,14 @@ class BuilderController {
 	public function createRepository($model, $columnInfo) {
 		$content = $this->getStub('repository.text');
 
+		$filters = "";
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreFilters)) {
+				$filters .= sprintf("\$query->filter(%s, \$data->%s);\n\t\t", $this->createConst($model, $key), $key);
+			}
+		}
+
+		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{model}', $model, $content);
 		FileWriter::put(app_path("Repositories/{$model}Repository.php"), $content);
 	}
@@ -152,7 +155,11 @@ class BuilderController {
 	}
 
 	public function createRescueController($model, $action, $columnInfo) {
-		$content = $this->getStub('resource-controller-store-update.text');
+		if($action === 'Index'){
+			$content = $this->getStub('resource-controller-index.text');
+		}else{
+			$content = $this->getStub('resource-controller-store-update.text');
+		}
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{model-action}', $model . $action, $content);
