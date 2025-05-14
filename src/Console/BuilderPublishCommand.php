@@ -37,6 +37,7 @@ class BuilderPublishCommand extends Command {
 
 		$this->publishDir('Console', 'app/Console');
 		$this->publishDir('Exceptions', 'app/Exceptions');
+		$this->publishDir('Repositories', 'app/Repositories');
 		$this->publishDir('Helpers', 'app/Helpers');
 		$this->publishDir('Dto', 'app/Dto');
 		$this->publishDir('Middleware', 'app/Http/Middleware');

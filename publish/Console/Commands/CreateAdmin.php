@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Console\Commands;
 
 use App\Dto\User\Admin\AdminStoreData;
 use App\Services\Domain\User\Admin\AdminService;

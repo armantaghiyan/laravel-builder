@@ -11,40 +11,49 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable {
 
-    use HasFactory, Notifiable, HasApiTokens, BaseModel;
+	use HasFactory, Notifiable, HasApiTokens, BaseModel;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        COL_ADMIN_NAME,
-        COL_ADMIN_USERNAME,
-        COL_ADMIN_PASSWORD,
-    ];
+	const ID = 'id';
+	const NAME = 'name';
+	const USERNAME = 'username';
+	const PASSWORD = 'password';
+	const IMAGE = 'image';
+	const LAST_LOGIN = 'last_login';
+	const CREATED_AT = 'created_at';
+	const UPDATED_AT = 'updated_at';
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        COL_ADMIN_PASSWORD,
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $fillable = [
+		COL_ADMIN_NAME,
+		COL_ADMIN_USERNAME,
+		COL_ADMIN_PASSWORD,
+	];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array {
-        return [
-            COL_ADMIN_PASSWORD => 'hashed',
-        ];
-    }
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = [
+		COL_ADMIN_PASSWORD,
+	];
 
-    //------------------------------------------------------------------------------------------------------------------
-    //-----------------------------------------  Accessors and Mutators ------------------------------------------------
-    //------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array {
+		return [
+			COL_ADMIN_PASSWORD => 'hashed',
+		];
+	}
+
+	//------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------  Accessors and Mutators ------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------
 }

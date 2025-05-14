@@ -3,17 +3,24 @@
 namespace App\Services\Domain\User\Admin;
 
 use App\Dto\User\Admin\AdminChangePasswordData;
+use App\Dto\User\Admin\AdminIndexData;
 use App\Dto\User\Admin\AdminLoginData;
 use App\Dto\User\Admin\AdminStoreData;
 use App\Dto\User\Admin\AdminUpdateData;
 use App\Exceptions\ErrorMessageException;
 use App\Helpers\StatusCodes;
 use App\Models\User\Admin;
+use App\Repositories\AdminRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService {
+
+	public function __construct(
+		private AdminRepository $adminRepository,
+	) {
+	}
 
 	/**
 	 * @throws ErrorMessageException
@@ -39,35 +46,6 @@ class AdminService {
 		$admin->currentAccessToken()->delete();
 	}
 
-	public function store(AdminStoreData $data): Admin {
-		$admin = new Admin();
-		$admin[COL_ADMIN_NAME] = $data->name;
-		$admin[COL_ADMIN_USERNAME] = $data->username;
-		$admin[COL_ADMIN_PASSWORD] = Hash::make($data->password);
-		$admin[COL_ADMIN_CREATED_AT] = Carbon::now();
-		$admin->save();
-
-		return $admin;
-	}
-
-	/**
-	 * @throws ErrorMessageException
-	 */
-	public function update(string $id, AdminUpdateData $data): Admin {
-		$admin = Admin::where(COL_ADMIN_ID, $id)->firstOrError();
-
-		$existing = Admin::where(COL_ADMIN_USERNAME, $data->username)->first();
-		if ($existing && $existing[COL_ADMIN_ID] !== $admin[COL_ADMIN_ID]) {
-			throw new ErrorMessageException(__('error.username_already_registered'), StatusCodes::Bad_request);
-		}
-
-		$admin[COL_ADMIN_NAME] = $data->name;
-		$admin[COL_ADMIN_USERNAME] = $data->username;
-		$admin->save();
-
-		return $admin;
-	}
-
 	/**
 	 * @throws ErrorMessageException
 	 */
@@ -82,11 +60,37 @@ class AdminService {
 		$admin->save();
 	}
 
-	public function show(string $id): Admin {
-		return Admin::where(COL_ADMIN_ID, $id)->firstOrError();
-	}
-
 	public function profile() {
 		return Auth::guard('admin')->user();
+	}
+
+	public function index(AdminIndexData $data): array {
+		return $this->adminRepository->index($data);
+	}
+
+	public function show($id): Admin {
+		return $this->adminRepository->findById($id);
+	}
+
+	public function store(AdminStoreData $data): Admin {
+		return $this->adminRepository->create([
+			Admin::NAME => $data->name,
+			Admin::USERNAME => $data->username,
+			Admin::PASSWORD => $data->password,
+		]);
+	}
+
+	public function update(AdminUpdateData $data, int $id): Admin {
+		$item = $this->adminRepository->findById($id);
+
+		return $this->adminRepository->update($item, [
+			Admin::NAME => $data->name,
+			Admin::USERNAME => $data->username,
+		]);
+	}
+
+	public function destroy(int $id): void {
+		$item = $this->adminRepository->findById($id);
+		$this->adminRepository->delete($item);
 	}
 }
