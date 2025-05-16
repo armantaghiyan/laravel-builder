@@ -33,6 +33,7 @@ class LaravelBuilderProvider extends ServiceProvider {
 			$this->commands([
 				Console\BuilderBackendCommand::class,
 				Console\BuilderPublishCommand::class,
+				Console\BuilderInstallCommand::class,
 			]);
 		}
 	}

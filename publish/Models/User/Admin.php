@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 
 class Admin extends Authenticatable {
 
-	use HasFactory, Notifiable, HasApiTokens, BaseModel;
+	use HasFactory, Notifiable, HasApiTokens, BaseModel, HasRoles;
 
 	const ID = 'id';
 	const NAME = 'name';
@@ -28,9 +29,9 @@ class Admin extends Authenticatable {
 	 * @var array<int, string>
 	 */
 	protected $fillable = [
-		COL_ADMIN_NAME,
-		COL_ADMIN_USERNAME,
-		COL_ADMIN_PASSWORD,
+		Admin::ID,
+		Admin::USERNAME,
+		Admin::PASSWORD,
 	];
 
 	/**
@@ -39,7 +40,7 @@ class Admin extends Authenticatable {
 	 * @var array<int, string>
 	 */
 	protected $hidden = [
-		COL_ADMIN_PASSWORD,
+		Admin::PASSWORD,
 	];
 
 	/**
@@ -49,7 +50,7 @@ class Admin extends Authenticatable {
 	 */
 	protected function casts(): array {
 		return [
-			COL_ADMIN_PASSWORD => 'hashed',
+			Admin::PASSWORD => 'hashed',
 		];
 	}
 
