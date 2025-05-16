@@ -10,87 +10,88 @@ use App\Dto\User\Admin\AdminUpdateData;
 use App\Exceptions\ErrorMessageException;
 use App\Helpers\StatusCodes;
 use App\Models\User\Admin;
-use App\Repositories\AdminRepository;
+use App\Repositories\User\AdminRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService {
 
-    public function __construct(
-        private AdminRepository $adminRepository,
-    ) {
-    }
+	public function __construct(
+		private AdminRepository $adminRepository,
+	) {
+	}
 
-    /**
-     * @throws ErrorMessageException
-     */
-    public function login(AdminLoginData $data): array {
-        $admin = Admin::where(COL_ADMIN_USERNAME, $data->username)
-            ->first([COL_ADMIN_ID, COL_ADMIN_NAME, COL_ADMIN_USERNAME, COL_ADMIN_IMAGE, COL_ADMIN_PASSWORD]);
+	/**
+	 * @throws ErrorMessageException
+	 */
+	public function login(AdminLoginData $data): array {
+		$admin = Admin::where(Admin::USERNAME, $data->username)
+			->first([Admin::ID, Admin::NAME, Admin::USERNAME, Admin::IMAGE, Admin::PASSWORD]);
 
-        if (!$admin || !Hash::check($data->password, $admin[COL_ADMIN_PASSWORD])) {
-            throw new ErrorMessageException(__('error.password_incorrect'), StatusCodes::Bad_request);
-        }
 
-        $token = $admin->createToken("ADMIN TOKEN", ['*'], Carbon::now()->addWeek())->plainTextToken;
+		if (!$admin || !Hash::check($data->password, $admin[Admin::PASSWORD])) {
+			throw new ErrorMessageException(__('error.password_incorrect'), StatusCodes::Bad_request);
+		}
 
-        $admin[COL_ADMIN_LAST_LOGIN] = Carbon::now();
-        $admin->save();
+		$token = $admin->createToken("ADMIN TOKEN", ['*'], Carbon::now()->addWeek())->plainTextToken;
 
-        return [$admin, $token];
-    }
+		$admin[Admin::LAST_LOGIN] = Carbon::now();
+		$admin->save();
 
-    public function logout(): void {
-        $admin = Auth::guard('admin')->user();
-        $admin->currentAccessToken()->delete();
-    }
+		return [$admin, $token];
+	}
 
-    /**
-     * @throws ErrorMessageException
-     */
-    public function changePassword(AdminChangePasswordData $data): void {
-        $admin = Auth::guard('admin')->user();
+	public function logout(): void {
+		$admin = Auth::guard('admin')->user();
+		$admin->currentAccessToken()->delete();
+	}
 
-        if (!Hash::check($data->old_password, $admin[COL_ADMIN_PASSWORD])) {
-            throw new ErrorMessageException(__('error.old_password_incorrect'), StatusCodes::Bad_request);
-        }
+	/**
+	 * @throws ErrorMessageException
+	 */
+	public function changePassword(AdminChangePasswordData $data): void {
+		$admin = Auth::guard('admin')->user();
 
-        $admin[COL_ADMIN_PASSWORD] = Hash::make($data->new_password);
-        $admin->save();
-    }
+		if (!Hash::check($data->old_password, $admin[Admin::PASSWORD])) {
+			throw new ErrorMessageException(__('error.old_password_incorrect'), StatusCodes::Bad_request);
+		}
 
-    public function profile() {
-        return Auth::guard('admin')->user();
-    }
+		$admin[Admin::PASSWORD] = Hash::make($data->new_password);
+		$admin->save();
+	}
 
-    public function index(AdminIndexData $data): array {
-        return $this->adminRepository->index($data);
-    }
+	public function profile() {
+		return Auth::guard('admin')->user();
+	}
 
-    public function show($id): Admin {
-        return $this->adminRepository->findById($id);
-    }
+	public function index(AdminIndexData $data): array {
+		return $this->adminRepository->index($data);
+	}
 
-    public function store(AdminStoreData $data): Admin {
-        return $this->adminRepository->create([
-            Admin::NAME => $data->name,
-            Admin::USERNAME => $data->username,
-            Admin::PASSWORD => $data->password,
-        ]);
-    }
+	public function show($id): Admin {
+		return $this->adminRepository->findById($id);
+	}
 
-    public function update(AdminUpdateData $data, int $id): Admin {
-        $item = $this->adminRepository->findById($id);
+	public function store(AdminStoreData $data): Admin {
+		return $this->adminRepository->create([
+			Admin::NAME => $data->name,
+			Admin::USERNAME => $data->username,
+			Admin::PASSWORD => $data->password,
+		]);
+	}
 
-        return $this->adminRepository->update($item, [
-            Admin::NAME => $data->name,
-            Admin::USERNAME => $data->username,
-        ]);
-    }
+	public function update(AdminUpdateData $data, int $id): Admin {
+		$item = $this->adminRepository->findById($id);
 
-    public function destroy(int $id): void {
-        $item = $this->adminRepository->findById($id);
-        $this->adminRepository->delete($item);
-    }
+		return $this->adminRepository->update($item, [
+			Admin::NAME => $data->name,
+			Admin::USERNAME => $data->username,
+		]);
+	}
+
+	public function destroy(int $id): void {
+		$item = $this->adminRepository->findById($id);
+		$this->adminRepository->delete($item);
+	}
 }

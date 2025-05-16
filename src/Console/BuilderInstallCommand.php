@@ -39,11 +39,6 @@ class BuilderInstallCommand extends Command {
 			$this->info('✅ Package installed successfully.');
 			$this->line($process->output());
 
-			$this->info('Publishing Spatie permission config...');
-			Artisan::call('vendor:publish', [
-				'--provider' => 'Spatie\Permission\PermissionServiceProvider',
-			]);
-			$this->info(Artisan::output());
 		} else {
 			$this->error('❌ Failed to install package.');
 			$this->line($process->errorOutput());
@@ -58,16 +53,26 @@ class BuilderInstallCommand extends Command {
 			$this->info('✅ Package installed successfully.');
 			$this->line($process->output());
 
-			$this->info('Publishing Spatie Laravel Data config...');
-			Artisan::call('vendor:publish', [
-				'--provider' => 'Spatie\LaravelData\LaravelDataServiceProvider',
-				'--tag' => 'data-config',
-			]);
-			$this->info(Artisan::output());
 		} else {
 			$this->error('❌ Failed to install package.');
 			$this->line($process->errorOutput());
 		}
+
+		sleep(10);
+
+		$this->info('Publishing Spatie permission config...');
+		Artisan::call('vendor:publish', [
+			'--provider' => 'Spatie\Permission\PermissionServiceProvider',
+		]);
+		$this->info(Artisan::output());
+
+
+		$this->info('Publishing Spatie Laravel Data config...');
+		Artisan::call('vendor:publish', [
+			'--provider' => 'Spatie\LaravelData\LaravelDataServiceProvider',
+			'--tag' => 'data-config',
+		]);
+		$this->info(Artisan::output());
 
 
 	}

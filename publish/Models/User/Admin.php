@@ -14,6 +14,7 @@ class Admin extends Authenticatable {
 
 	use HasFactory, Notifiable, HasApiTokens, BaseModel, HasRoles;
 
+	const TB = 'admins';
 	const ID = 'id';
 	const NAME = 'name';
 	const USERNAME = 'username';
