@@ -27,8 +27,7 @@ class AdminController extends Controller {
 		private AccessService $accessService,
 	) {
 
-		$this->middleware('permission:' . Permissions::ADMIN_INDEX)->only(['index']);
-		$this->middleware('permission:' . Permissions::ADMIN_INDEX)->only(['show']);
+		$this->middleware('permission:' . Permissions::ADMIN_INDEX)->only(['index', 'show']);
 		$this->middleware('permission:' . Permissions::ADMIN_STORE)->only(['store']);
 		$this->middleware('permission:' . Permissions::ADMIN_UPDATE)->only(['update']);
 	}
@@ -47,7 +46,7 @@ class AdminController extends Controller {
 
 	public function show($id): AdminShowResource {
 		$item = $this->adminService->show($id);
-		$adminRoles = $this->accessService->getAdminRoles('admin');
+		$adminRoles = $this->accessService->getAdminRoles($id);
 		$roles = $this->accessService->getAllRolls('admin');
 
 		return new AdminShowResource([RK_ITEM => $item, RK_ADMIN_ROLES => $adminRoles, RK_ROLES => $roles]);

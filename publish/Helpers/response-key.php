@@ -8,5 +8,6 @@ const RK_ITEM = 'item';
 const RK_COUNT = 'count';
 const RK_ADMIN_ROLES = 'admin_roles';
 const RK_ROLES = 'roles';
+const RK_ROLE = 'role';
 const RK_PERMISSIONS = 'permissions';
 

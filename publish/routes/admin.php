@@ -15,6 +15,7 @@ Route::middleware('auth:admin')->group(function () {
 	Route::resource('admin', AdminController::class);
 
 	Route::controller(\App\Http\Controllers\App\AccessController::class)->group(function () {
+		Route::get('access/role/{id}', 'showRole');
 		Route::post('access/role-toggle', 'roleToggle');
 		Route::post('access/permission-toggle', 'permissionToggle');
 		Route::resource('access', AccessController::class);

@@ -2,6 +2,8 @@
 
 namespace App\Services\Domain\Access;
 
+use App\Dto\App\Access\AccessStoreData;
+use App\Dto\App\Access\AccessUpdateData;
 use App\Exceptions\ErrorMessageException;
 use App\Helpers\StatusCodes;
 use App\Models\User\Admin;
@@ -16,8 +18,8 @@ class AccessService {
         return Role::where('guard_name', $guard)->get(['id', 'name', 'created_at', 'updated_at']);
     }
 
-    public function getAdminRoles($guard) {
-        $admin = Auth::guard($guard)->user();
+    public function getAdminRoles($adminId) {
+        $admin = Admin::where(Admin::ID, $adminId)->firstOrError();
 
         if ($admin) {
             return $admin->roles()->get(['id', 'name'])->makeHidden(['pivot']);
@@ -33,7 +35,7 @@ class AccessService {
             return Permission::where('guard_name', $guard)->get(['id', 'name'])->makeHidden(['pivot']);
         }
 
-        return null;
+        return [];
     }
 
     /**
@@ -81,5 +83,39 @@ class AccessService {
         } else {
             $role->givePermissionTo($permission);
         }
+    }
+
+    /**
+     * @throws ErrorMessageException
+     */
+    public function showRole(int $roleId) {
+        $role = Role::find($roleId);
+        if (!$role){
+            throw new ErrorMessageException(__('error.unexpected_error'), StatusCodes::Conflict);
+        }
+
+        return $role;
+    }
+
+    public function store(AccessStoreData $data) {
+        $role = Role::create(['name' => $data->name, 'guard_name' => 'admin']);
+
+        return $role;
+    }
+
+    public function update(int $id, AccessUpdateData $data) {
+        $role = Role::find($id);
+        if (!$role){
+            throw new ErrorMessageException(__('error.unexpected_error'), StatusCodes::Conflict);
+        }
+
+        $role['name'] = $data->name;
+        $role->save();
+
+        return $role;
+    }
+
+    public function destroy($id) {
+        Role::where('id', $id)->delete();
     }
 }

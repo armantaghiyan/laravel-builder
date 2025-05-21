@@ -9,27 +9,26 @@ use Spatie\Permission\Models\Role;
 
 class AccessSeeder extends Seeder {
 
-	/**
-	 * Create the initial roles and permissions.
-	 */
-	public function run(): void {
-		$role = Role::create([
-			'name' => 'admin',
-			'guard_name' => 'admin',
-		]);
+    /**
+     * Create the initial roles and permissions.
+     */
+    public function run(): void {
+        Role::create(['name' => 'Super Admin', 'guard_name' => 'admin']);
 
-		$permissions = [
-			Permissions::ADMIN_INDEX,
-			Permissions::ADMIN_UPDATE,
-			Permissions::ADMIN_STORE,
-		];
+        $permissions = [
+            Permissions::ADMIN_INDEX,
+            Permissions::ADMIN_UPDATE,
+            Permissions::ADMIN_STORE,
+            Permissions::ADMIN_ADD_ROLE,
 
-		foreach ($permissions as $permission) {
-			$perm = Permission::create([
-				'name' => $permission,
-				'guard_name' => 'admin',
-			]);
-			$role->givePermissionTo($perm);
-		}
-	}
+            Permissions::ROLE_INDEX,
+            Permissions::ROLE_UPDATE,
+            Permissions::ROLE_STORE,
+            Permissions::ROLE_DESTROY,
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission, 'guard_name' => 'admin']);
+        }
+    }
 }
