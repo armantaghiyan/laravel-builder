@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers\User;
 
-use App\Dto\App\Access\AccessPermissionToggleData;
-use App\Dto\App\Access\AccessRoleToggleData;
-use App\Dto\App\Access\AccessStoreData;
-use App\Dto\App\Access\AccessUpdateData;
+use App\Dto\User\Access\AccessPermissionToggleData;
+use App\Dto\User\Access\AccessRoleToggleData;
+use App\Dto\User\Access\AccessStoreData;
+use App\Dto\User\Access\AccessUpdateData;
 use App\Exceptions\ErrorMessageException;
 use App\Helpers\Permissions;
-use App\Http\Resources\App\Access\AccessIndexResource;
-use App\Http\Resources\App\Access\AccessShowResource;
-use App\Http\Resources\App\Access\AccessShowRoleResource;
-use App\Http\Resources\App\Access\AccessStoreResource;
-use App\Http\Resources\App\Access\AccessUpdateResource;
 use App\Http\Resources\GlobalResources\SuccessResource;
-use App\Services\Domain\Access\AccessService;
+use App\Http\Resources\User\Access\AccessIndexResource;
+use App\Http\Resources\User\Access\AccessShowResource;
+use App\Http\Resources\User\Access\AccessShowRoleResource;
+use App\Http\Resources\User\Access\AccessStoreResource;
+use App\Http\Resources\User\Access\AccessUpdateResource;
+use App\Services\Domain\User\AccessService;
 use Illuminate\Routing\Controller;
 
 class AccessController extends Controller {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\App\AccessController;
+use App\Http\Controllers\User\AccessController;
 use App\Http\Controllers\User\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +14,7 @@ Route::controller(\App\Http\Controllers\User\AdminController::class)->group(func
 Route::middleware('auth:admin')->group(function () {
 	Route::resource('admin', AdminController::class);
 
-	Route::controller(\App\Http\Controllers\App\AccessController::class)->group(function () {
+	Route::controller(\App\Http\Controllers\User\AccessController::class)->group(function () {
 		Route::get('access/role/{id}', 'showRole');
 		Route::post('access/role-toggle', 'roleToggle');
 		Route::post('access/permission-toggle', 'permissionToggle');

@@ -10,4 +10,4 @@ const RK_ADMIN_ROLES = 'admin_roles';
 const RK_ROLES = 'roles';
 const RK_ROLE = 'role';
 const RK_PERMISSIONS = 'permissions';
-
+const RK_ADMIN_PERMISSIONS = 'admin_permissions';

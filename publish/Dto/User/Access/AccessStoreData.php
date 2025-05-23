@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\App\Access;
+namespace App\Dto\User\Access;
 
 use Spatie\LaravelData\Attributes\Validation\Max;
 use Spatie\LaravelData\Data;
