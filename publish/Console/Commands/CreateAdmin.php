@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Dto\User\Admin\AdminStoreData;
 use App\Models\User\Admin;
-use App\Services\Domain\Access\AccessService;
+use App\Services\Domain\User\AccessService;
 use App\Services\Domain\User\AdminService;
 use Illuminate\Console\Command;
 
