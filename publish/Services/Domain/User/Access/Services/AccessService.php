@@ -3,7 +3,7 @@
 namespace App\Services\Domain\User\Access\Services;
 
 use App\Exceptions\ErrorMessageException;
-use App\Helpers\StatusCodes;
+use App\Services\Domain\Common\Constants\StatusCodes;
 use App\Services\Domain\User\Access\Dto\AccessStoreData;
 use App\Services\Domain\User\Access\Dto\AccessUpdateData;
 use App\Services\Domain\User\Access\Repositories\AccessRepository;

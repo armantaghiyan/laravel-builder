@@ -2,26 +2,33 @@
 
 namespace App\Services\Domain\User\Admin\Resources;
 
-use App\Helpers\ResponseManager;
+use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Domain\User\Access\Resources\PermissionResource;
+use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminStartResource extends JsonResource {
 
-    use ResponseManager;
+	public function __construct(
+		public $admin,
+		public $permissions,
+		public $adminPermissions,
+	) {
+		parent::__construct($admin);
+	}
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array {
+	/**
+	 * Transform the resource into an array.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toArray(Request $request): array {
 
-        return $this->cast([
-            RK_ADMIN => new AdminResource($this[RK_ADMIN]),
-            RK_PERMISSIONS => PermissionResource::collection($this[RK_PERMISSIONS]),
-            RK_ADMIN_PERMISSIONS => PermissionResource::collection($this[RK_ADMIN_PERMISSIONS]),
-        ]);
-    }
+		return (new ResponseManager())->cast([
+			Rk::ADMIN => new AdminResource($this->admin),
+			Rk::PERMISSIONS => PermissionResource::collection($this->permissions),
+			Rk::ADMIN_PERMISSIONS => PermissionResource::collection($this->adminPermissions),
+		]);
+	}
 }

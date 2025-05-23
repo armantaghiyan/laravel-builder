@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Services\Domain\User\Access\Constants;
 
 class Permissions {
     const ADMIN_INDEX = 'admin.index';

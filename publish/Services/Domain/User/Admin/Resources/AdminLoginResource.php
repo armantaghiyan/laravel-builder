@@ -2,24 +2,30 @@
 
 namespace App\Services\Domain\User\Admin\Resources;
 
-use App\Helpers\ResponseManager;
+use App\Services\Domain\Common\Constants\Rk;
+use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminLoginResource extends JsonResource {
 
-    use ResponseManager;
+	public function __construct(
+		public $admin,
+		public $apiToken,
+	) {
+		parent::__construct($admin);
+	}
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array {
+	/**
+	 * Transform the resource into an array.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toArray(Request $request): array {
 
-        return $this->cast([
-            RK_ADMIN => new AdminResource($this[RK_ADMIN]),
-            RK_API_TOKEN => $this[RK_API_TOKEN],
-        ]);
-    }
+		return (new ResponseManager())->cast([
+			Rk::ADMIN => new AdminResource($this->admin),
+			Rk::API_TOKEN => $this->apiToken,
+		]);
+	}
 }

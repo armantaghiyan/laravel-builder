@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\StatusCodes;
+use App\Services\Domain\Common\Constants\StatusCodes;
 use Illuminate\Http\JsonResponse;
 
 class ErrorMessageException extends \Exception {

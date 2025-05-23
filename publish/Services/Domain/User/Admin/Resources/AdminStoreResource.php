@@ -2,23 +2,28 @@
 
 namespace App\Services\Domain\User\Admin\Resources;
 
-use App\Helpers\ResponseManager;
+use App\Services\Domain\Common\Constants\Rk;
+use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminStoreResource extends JsonResource {
 
-    use ResponseManager;
+	public function __construct(
+		public $item,
+	) {
+		parent::__construct($item);
+	}
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array {
+	/**
+	 * Transform the resource into an array.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toArray(Request $request): array {
 
-        return $this->cast([
-            RK_ITEM => new AdminResource($this[RK_ITEM]),
-        ]);
-    }
+		return (new ResponseManager())->cast([
+			Rk::ITEM => new AdminResource($this->item),
+		]);
+	}
 }

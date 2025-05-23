@@ -35,18 +35,14 @@ class BuilderPublishCommand extends Command {
 		}
 
 		$this->publishDir('Services', 'app/Services');
-
 		$this->publishDir('Console', 'app/Console');
 		$this->publishDir('Exceptions', 'app/Exceptions');
-		$this->publishDir('Helpers', 'app/Helpers');
 		$this->publishDir('Middleware', 'app/Http/Middleware');
 		$this->publishDir('lang', 'lang');
 		$this->publishDir('database/migrations', 'database/migrations');
-		$this->publishDir('config', 'config');
 		$this->publishDir('seeders', 'database/seeders');
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishFile('routes/admin.php', 'routes/admin.php');
-		$this->publishFile('Providers/HelperServiceProvider.php', 'app/Providers/HelperServiceProvider.php');
 
 		$this->info('Publishing configuration successfully.');
 	}

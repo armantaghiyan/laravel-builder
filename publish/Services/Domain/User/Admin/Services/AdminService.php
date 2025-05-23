@@ -3,7 +3,7 @@
 namespace App\Services\Domain\User\Admin\Services;
 
 use App\Exceptions\ErrorMessageException;
-use App\Helpers\StatusCodes;
+use App\Services\Domain\Common\Constants\StatusCodes;
 use App\Services\Domain\User\Admin\Dto\AdminChangePasswordData;
 use App\Services\Domain\User\Admin\Dto\AdminIndexData;
 use App\Services\Domain\User\Admin\Dto\AdminLoginData;
@@ -11,6 +11,7 @@ use App\Services\Domain\User\Admin\Dto\AdminStoreData;
 use App\Services\Domain\User\Admin\Dto\AdminUpdateData;
 use App\Services\Domain\User\Admin\Models\Admin;
 use App\Services\Domain\User\Admin\Repositories\AdminRepository;
+use App\Services\Domain\User\Admin\Resources\AdminIndexResource;
 use App\Services\Infrastructure\Auth\AuthManger;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
