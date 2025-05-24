@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Dto\{model};
+namespace App\Services\{model}\Dto;
 
-use App\Dto\GlobalDto\WithApiValidator;
+use App\Services\Infrastructure\Dto\WithApiValidator;
+use App\Services\Infrastructure\Dto\WithIndexData;
 use Spatie\LaravelData\Data;
-use App\Dto\GlobalDto\WithIndexData;
 
 class {model}{action}Data extends Data {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services\{model}\Repositories;
 
 use App\Models\{model};
-use App\Dto\User\{model}IndexData;
+use App\Services\{model}\Dto\{model}IndexData;
 
 class {model}Repository {
 
     public function findById(int $id): {model} {
-        return {model}::where('id', $id)->firstOrError();
+        return {model}::where({model}::ID, $id)->firstOrError();
     }
 
     public function index({model}IndexData $data): array {

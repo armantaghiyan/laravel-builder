@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services\{model}\Controllers;
 
-use App\Dto\{model}\{model}IndexData;
-use App\Dto\{model}\{model}StoreData;
-use App\Dto\{model}\{model}UpdateData;
-use App\Http\Resources\GlobalResources\SuccessResource;
-use App\Http\Resources\{model}IndexResource;
-use App\Http\Resources\{model}ShowResource;
-use App\Http\Resources\{model}StoreResource;
-use App\Http\Resources\{model}UpdateResource;
-use App\Services\Domain\{model}Service;
+use App\Services\Infrastructure\Resources\SuccessResource;
+use App\Services\{model}\Dto\UserIndexData;
+use App\Services\{model}\Dto\UserStoreData;
+use App\Services\{model}\Dto\UserUpdateData;
+use App\Services\{model}\Resources\UserIndexResource;
+use App\Services\{model}\Resources\UserShowResource;
+use App\Services\{model}\Resources\UserStoreResource;
+use App\Services\{model}\Resources\UserUpdateResource;
+use App\Services\{model}\Services\UserService;
+use Illuminate\Routing\Controller;
 
 class {model}Controller extends Controller {
 
@@ -23,25 +24,25 @@ class {model}Controller extends Controller {
     public function index({model}IndexData $data): {model}IndexResource {
         [$items, $count] = $this->{sumModel}Service->index($data);
 
-        return new {model}IndexResource([RK_ITEMS => $items, RK_COUNT => $count]);
+        return new {model}IndexResource($items, $count);
     }
 
     public function store({model}StoreData $data): {model}StoreResource {
         $item = $this->{sumModel}Service->store($data);
 
-        return new {model}StoreResource([RK_ITEM => $item]);
+        return new {model}StoreResource($item);
     }
 
     public function show($id): {model}ShowResource {
         $item = $this->{sumModel}Service->show($id);
 
-        return new {model}ShowResource([RK_ITEM => $item]);
+        return new {model}ShowResource($item);
     }
 
     public function update({model}UpdateData $data, $id): {model}UpdateResource {
         $item = $this->{sumModel}Service->update($data, $id);
 
-        return new {model}UpdateResource([RK_ITEM => $item]);
+        return new {model}UpdateResource($item);
     }
 
     public function destroy($id): SuccessResource {

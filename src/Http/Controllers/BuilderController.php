@@ -72,7 +72,7 @@ class BuilderController {
 		$content = str_replace('{sumModel}', strtolower($model), $content);
 
 
-		FileWriter::put(app_path("Http/Controllers/{$model}Controller.php"), $content);
+		FileWriter::put(app_path("Services/{$model}/Controllers/{$model}Controller.php"), $content);
 	}
 
 	public function createService($model, $columnInfo) {
@@ -92,7 +92,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 
 		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Services/Domain/{$model}Service.php"), $content);
+		FileWriter::put(app_path("Services/{$model}/Services/{$model}Service.php"), $content);
 	}
 
 	public function createRepository($model, $columnInfo) {
@@ -107,7 +107,7 @@ class BuilderController {
 
 		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Repositories/{$model}Repository.php"), $content);
+		FileWriter::put(app_path("Services/{$model}/Repositories/{$model}Repository.php"), $content);
 	}
 
 	public function createDto($model, $action, $columnInfo) {
@@ -132,7 +132,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{action}', $action, $content);
 
-		FileWriter::put(app_path("Dto/$model/{$model}{$action}Data.php"), $content);
+		FileWriter::put(app_path("Services/$model/Dto/{$model}{$action}Data.php"), $content);
 	}
 
 	public function createRescueModel($model, $columnInfo) {
@@ -151,7 +151,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{items}', $items, $content);
 
-		FileWriter::put(app_path("Http/Resources/Models/{$model}Resource.php"), $content);
+		FileWriter::put(app_path("Services/{$model}/Resources/{$model}Resource.php"), $content);
 	}
 
 	public function createRescueController($model, $action, $columnInfo) {
@@ -164,7 +164,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{model-action}', $model . $action, $content);
 
-		FileWriter::put(app_path("Http/Resources/{$model}{$action}Resource.php"), $content);
+		FileWriter::put(app_path("Services/$model/Resources/{$model}{$action}Resource.php"), $content);
 	}
 
 	private function createConst($model, $column) {
