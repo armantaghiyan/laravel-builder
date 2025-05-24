@@ -2,7 +2,7 @@
 
 namespace App\Services\Infrastructure\Dto;
 
-use App\Exceptions\ValidationException;
+use App\Services\Infrastructure\Exceptions\ValidationException;
 use Illuminate\Validation\Validator;
 
 trait WithApiValidator {

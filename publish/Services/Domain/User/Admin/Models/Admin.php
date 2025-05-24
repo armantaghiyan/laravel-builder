@@ -1,73 +1,62 @@
 <?php
 
-namespace App\Models;
+namespace App\Services\Domain\User\Admin\Models;
 
-use App\Exceptions\ErrorMessageException;
-use App\Services\Domain\Common\Constants\StatusCodes;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 
-/**
- * @method static \Illuminate\Database\Eloquent\Builder|static page(int $loadedCount, int $perPage = 20)
- * @method static \Illuminate\Database\Eloquent\Builder|static filter(string $col, mixed $value)
- * @method static mixed firstOrError(array $cols = ['*'], string $message = 'not fount item.')
- * @method static \Illuminate\Database\Eloquent\Builder|static page2(int $perPage = 20)
- * @method static \Illuminate\Database\Eloquent\Builder|static search(array $cols, $value)
- */
-trait BaseModel {
+class Admin extends Authenticatable {
 
-	private function checkParam(mixed $value): bool {
-		if ($value === null || $value === '')
-			return false;
+    use HasFactory, Notifiable, HasApiTokens, BaseModel, HasRoles;
 
-		return true;
-	}
+    const TB = 'admins';
+    const ID = 'id';
+    const NAME = 'name';
+    const USERNAME = 'username';
+    const PASSWORD = 'password';
+    const IMAGE = 'image';
+    const LAST_LOGIN = 'last_login';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
-	public function scopePage(Builder $query, int $loadedCount, int $perPage = 20): Builder {
-		return $query->skip($loadedCount)->limit($perPage);
-	}
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        Admin::ID,
+        Admin::NAME,
+        Admin::USERNAME,
+        Admin::PASSWORD,
+    ];
 
-	public function scopeFilter(Builder $query, string $col, mixed $value): Builder {
-		if ($this->checkParam($value)) {
-			if (gettype($value) === 'string' && str_contains($value, '%')) {
-				return $query->where($col, 'LIKE', $value);
-			}
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        Admin::PASSWORD,
+    ];
 
-			return $query->where($col, $value);
-		}
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array {
+        return [
+            Admin::PASSWORD => 'hashed',
+        ];
+    }
 
-		return $query;
-	}
-
-	public function scopeSearch(Builder $query, array $cols, mixed $value): Builder {
-		if ($this->checkParam($value)) {
-			$query->where(function ($query) use ($cols, $value){
-				foreach ($cols as $col){
-					$query->orWhere($col, 'LIKE', "%$value%");
-				}
-			});
-
-			return $query;
-		}
-
-		return $query;
-	}
-
-	/**
-	 * @throws ErrorMessageException
-	 */
-	public function scopeFirstOrError(Builder $query, array $cols = ['*'], string $message = 'not fount item.'): mixed {
-		$result = $query->first($cols);
-
-		if (!$result) {
-			throw new ErrorMessageException($message, StatusCodes::Not_found);
-		}
-
-		return $result;
-	}
-
-	public function scopePage2(Builder $query, $perPage = 20) {
-		$offset = ((int)request('page', 1) - 1) * $perPage;
-		return $query->offset($offset)->limit($perPage);
-	}
+    //------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------  Accessors and Mutators ------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
 }

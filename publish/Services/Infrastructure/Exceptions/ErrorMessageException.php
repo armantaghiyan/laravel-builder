@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Services\Infrastructure\Exceptions;
 
 use App\Services\Domain\Common\Constants\StatusCodes;
 use Illuminate\Http\JsonResponse;
