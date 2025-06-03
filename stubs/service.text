@@ -3,10 +3,10 @@
 namespace App\Services\{model}\Services;
 
 use App\Models\{model};
-use App\Services\{model}\Dto\UserIndexData;
-use App\Services\{model}\Dto\UserStoreData;
-use App\Services\{model}\Dto\UserUpdateData;
-use App\Services\{model}\Repositories\UserRepository;
+use App\Services\{model}\Dto\{model}IndexData;
+use App\Services\{model}\Dto\{model}StoreData;
+use App\Services\{model}\Dto\{model}UpdateData;
+use App\Services\{model}\Repositories\{model}Repository;
 
 class {model}Service {
 

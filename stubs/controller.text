@@ -3,14 +3,14 @@
 namespace App\Services\{model}\Controllers;
 
 use App\Services\Infrastructure\Resources\SuccessResource;
-use App\Services\{model}\Dto\UserIndexData;
-use App\Services\{model}\Dto\UserStoreData;
-use App\Services\{model}\Dto\UserUpdateData;
-use App\Services\{model}\Resources\UserIndexResource;
-use App\Services\{model}\Resources\UserShowResource;
-use App\Services\{model}\Resources\UserStoreResource;
-use App\Services\{model}\Resources\UserUpdateResource;
-use App\Services\{model}\Services\UserService;
+use App\Services\{model}\Dto\{model}IndexData;
+use App\Services\{model}\Dto\{model}StoreData;
+use App\Services\{model}\Dto\{model}UpdateData;
+use App\Services\{model}\Resources\{model}IndexResource;
+use App\Services\{model}\Resources\{model}ShowResource;
+use App\Services\{model}\Resources\{model}StoreResource;
+use App\Services\{model}\Resources\{model}UpdateResource;
+use App\Services\{model}\Services\{model}Service;
 use Illuminate\Routing\Controller;
 
 class {model}Controller extends Controller {

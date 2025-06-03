@@ -22,7 +22,7 @@ class {model-action}Resource extends JsonResource {
     public function toArray(Request $request): array {
 
         return (new \App\Services\Infrastructure\Http\ResponseManager())->cast([
-            Rk::ITEM => new UserResource($this->item),
+            Rk::ITEM => new {model}Resource($this->item),
         ]);
     }
 }
