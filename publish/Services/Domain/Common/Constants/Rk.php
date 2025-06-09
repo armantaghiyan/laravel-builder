@@ -13,4 +13,5 @@ class Rk {
     const ROLE = 'role';
     const PERMISSIONS = 'permissions';
     const ADMIN_PERMISSIONS = 'admin_permissions';
+    const ENUMS = 'enums';
 }

@@ -7,8 +7,8 @@ use App\Services\{model}\Dto\{model}IndexData;
 
 class {model}Repository {
 
-    public function findById(int $id): {model} {
-        return {model}::where({model}::ID, $id)->firstOrError();
+    public function model(): string {
+        return {model}::class;
     }
 
     public function index({model}IndexData $data): array {
@@ -20,18 +20,5 @@ class {model}Repository {
         $items = $query->orderBy($data->sort, $data->sort_type)->page2($data->page_rows)->get();
 
         return [$items, $count];
-    }
-
-    public function create(array $data): {model} {
-        return {model}::create($data);
-    }
-
-    public function update({model} $item, array $data): {model} {
-        $item->update($data);
-        return $item;
-    }
-
-    public function delete({model} $item): void {
-        $item->delete();
     }
 }

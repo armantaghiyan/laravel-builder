@@ -20,7 +20,7 @@ class {model}Service {
     }
 
     public function show(int $id): {model} {
-        return $this->{sumModel}Repository->findById($id);
+        return $this->{sumModel}Repository->findOrErrorById($id);
     }
 
     public function store({model}StoreData $data): {model} {
@@ -30,7 +30,7 @@ class {model}Service {
     }
 
     public function update({model}UpdateData $data, int $id): {model} {
-        $item = $this->{sumModel}Repository->findById($id);
+        $item = $this->{sumModel}Repository->findOrErrorById($id);
 
         return $this->{sumModel}Repository->update($item, [
             {items}
@@ -38,7 +38,7 @@ class {model}Service {
     }
 
     public function destroy(int $id): void {
-        $item = $this->{sumModel}Repository->findById($id);
+        $item = $this->{sumModel}Repository->findOrErrorById($id);
         $this->{sumModel}Repository->delete($item);
     }
 }
