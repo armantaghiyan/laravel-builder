@@ -2,8 +2,8 @@
 
 namespace Arman\LaravelBuilder\Console;
 
-use Arman\LaravelBuilder\Http\Controllers\BuilderController;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 class BuilderPublishCommand extends Command {
@@ -35,6 +35,7 @@ class BuilderPublishCommand extends Command {
 		}
 
 		$this->publishDir('Services', 'app/Services');
+		$this->publishDir('Exceptions', 'app/Http/Exceptions');
 		$this->publishDir('Console', 'app/Console');
 		$this->publishDir('Middleware', 'app/Http/Middleware');
 		$this->publishDir('lang', 'lang');
@@ -42,6 +43,7 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('seeders', 'database/seeders');
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishDir('routes', 'routes');
+		Artisan::call('lang:publish');
 
 		$this->info('Publishing configuration successfully.');
 	}
@@ -49,6 +51,7 @@ class BuilderPublishCommand extends Command {
 	private function publishDir($from, $to): void {
 		File::copyDirectory(__DIR__ . "/../../publish/$from", base_path($to));
 	}
+
 	private function publishFile($from, $to): void {
 		File::copy(__DIR__ . "/../../publish/$from", base_path($to));
 	}

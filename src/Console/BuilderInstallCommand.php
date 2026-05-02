@@ -73,7 +73,11 @@ class BuilderInstallCommand extends Command {
 			'--tag' => 'data-config',
 		]);
 		$this->info(Artisan::output());
+		//==============================================================================================================
+		$this->info('Installing api');
 
+		Artisan::call('install:api --force -n');
 
+		$this->info(Artisan::output());
 	}
 }
