@@ -44,6 +44,7 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishDir('routes', 'routes');
 		Artisan::call('lang:publish');
+		$this->publishConfig();
 
 		$this->info('Publishing configuration successfully.');
 	}
@@ -54,5 +55,26 @@ class BuilderPublishCommand extends Command {
 
 	private function publishFile($from, $to): void {
 		File::copy(__DIR__ . "/../../publish/$from", base_path($to));
+	}
+
+	private function publishConfig(): void {
+		// add cors config
+		Artisan::call('config:publish cors');
+
+		$content = file_get_contents(base_path('config/cors.php'));
+		if (!str_contains($content, 'admin/*')) {
+			$content = str_replace('api/*', "api/*', 'admin/*", $content);
+			file_put_contents(base_path('config/cors.php'), $content);
+		}
+
+
+		// add auth config
+		$content = file_get_contents(base_path('config/auth.php'));
+		if (!str_contains($content, 'admin')) {
+			$content = str_replace("'guards' => [", "'guards' => [ 'admin' => ['driver' => 'sanctum', 'provider' => 'admins',], 'api' => ['driver' => 'sanctum', 'provider' => 'users',],", $content);
+			$content = str_replace("'providers' => [", "'providers' => ['admins' => ['driver' => 'eloquent', 'model' => \App\Services\Domain\User\Admin\Models\Admin::class,],", $content);
+
+			file_put_contents(base_path('config/auth.php'), $content);
+		}
 	}
 }
