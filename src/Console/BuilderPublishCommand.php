@@ -2,6 +2,7 @@
 
 namespace Arman\LaravelBuilder\Console;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -43,8 +44,34 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('seeders', 'database/seeders');
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishDir('routes', 'routes');
+		$this->publishDir('resources', 'resources');
+		$this->publishDir('app/Providers', 'Providers');
+		$this->publishFile('tsconfig.json', 'tsconfig.json');
+		$this->publishFile('vite.config.js', 'vite.config.js');
+
 		Artisan::call('lang:publish');
 		$this->publishConfig();
+
+		$this->addPackageDependency("@tailwindcss/vite", "^4.2.4", "devDependencies");
+		$this->addPackageDependency("@types/node", "^25.6.0", "devDependencies");
+		$this->addPackageDependency("@types/toastify-js", "^1.12.4", "devDependencies");
+		$this->addPackageDependency("@vitejs/plugin-vue", "^6.0.6", "devDependencies");
+		$this->addPackageDependency("concurrently", "^9.0.1", "devDependencies");
+		$this->addPackageDependency("laravel-vite-plugin", "^2.1.0", "devDependencies");
+		$this->addPackageDependency("tailwindcss", "^4.2.4", "devDependencies");
+		$this->addPackageDependency("typescript", "^6.0.3", "devDependencies");
+		$this->addPackageDependency("vite", "^7.3.2", "devDependencies");
+		$this->addPackageDependency("vue-tsc", "^3.2.8", "devDependencies");
+		$this->addPackageDependency( "@headlessui/vue", "^1.7.23");
+		$this->addPackageDependency( "axios", "^1.16.0");
+		$this->addPackageDependency( "browser-image-compression", "^2.0.2");
+		$this->addPackageDependency( "pinia", "^3.0.4");
+		$this->addPackageDependency( "sweetalert2", "^11.26.24");
+		$this->addPackageDependency( "tippy.js", "^6.3.7");
+		$this->addPackageDependency( "toastify-js", "^1.12.0");
+		$this->addPackageDependency( "vue", "^3.5.34");
+		$this->addPackageDependency( "vue-i18n", "^12.0.0-alpha.3");
+		$this->addPackageDependency( "vue-router", "^5.0.6");
 
 		$this->info('Publishing configuration successfully.');
 	}
@@ -77,4 +104,29 @@ class BuilderPublishCommand extends Command {
 			file_put_contents(base_path('config/auth.php'), $content);
 		}
 	}
+
+	function addPackageDependency($name, $version, $type = 'dependencies') {
+		$file = base_path('package.json');
+
+		if (!file_exists($file)) {
+			throw new Exception('package.json file not found!');
+		}
+
+		$content = json_decode(file_get_contents($file), true);
+
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			throw new Exception('Invalid JSON in package.json');
+		}
+
+		if (!isset($content[$type])) {
+			$content[$type] = [];
+		}
+
+		$content[$type][$name] = $version;
+
+		file_put_contents($file, json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+		return true;
+	}
+
 }

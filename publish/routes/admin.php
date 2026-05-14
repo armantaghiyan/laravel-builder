@@ -18,3 +18,5 @@ Route::middleware('auth:admin')->group(function () {
 		Route::resource('access', App\Services\Domain\User\Access\Controllers\AccessController::class);
 	});
 });
+
+Route::view('/{any?}', 'admin.main')->where('any', '.*');

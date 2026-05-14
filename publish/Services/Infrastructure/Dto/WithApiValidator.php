@@ -2,16 +2,16 @@
 
 namespace App\Services\Infrastructure\Dto;
 
+use App\Http\Exceptions\ValidationException;
 use Illuminate\Validation\Validator;
-use ValidationException;
 
 trait WithApiValidator {
 
-    public static function withValidator(Validator $validator): void {
-        if ($validator->fails()) {
-            if ($validator->fails()) {
-                throw new ValidationException($validator->errors());
-            }
-        }
-    }
+	public static function withValidator(Validator $validator): void {
+		if ($validator->fails()) {
+			if ($validator->fails()) {
+				throw new ValidationException($validator->errors());
+			}
+		}
+	}
 }

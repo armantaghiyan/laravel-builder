@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Dto\User\Admin\AdminStoreData;
-use App\Models\User\Admin;
-use App\Services\Domain\User\AccessService;
-use App\Services\Domain\User\AdminService;
+use App\Services\Domain\User\Access\Services\AccessService;
+use App\Services\Domain\User\Admin\Dto\AdminStoreData;
+use App\Services\Domain\User\Admin\Models\Admin;
+use App\Services\Domain\User\Admin\Services\AdminService;
 use Illuminate\Console\Command;
 
 class CreateAdmin extends Command {
