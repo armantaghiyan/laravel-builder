@@ -45,7 +45,7 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishDir('routes', 'routes');
 		$this->publishDir('resources', 'resources');
-		$this->publishDir('app/Providers', 'Providers');
+		$this->publishDir('Providers', 'app/Providers');
 		$this->publishFile('tsconfig.json', 'tsconfig.json');
 		$this->publishFile('vite.config.js', 'vite.config.js');
 
@@ -62,8 +62,8 @@ class BuilderPublishCommand extends Command {
 		$this->addPackageDependency("typescript", "^6.0.3", "devDependencies");
 		$this->addPackageDependency("vite", "^7.3.2", "devDependencies");
 		$this->addPackageDependency("vue-tsc", "^3.2.8", "devDependencies");
+		$this->addPackageDependency( "axios", "^1.16.0", "devDependencies");
 		$this->addPackageDependency( "@headlessui/vue", "^1.7.23");
-		$this->addPackageDependency( "axios", "^1.16.0");
 		$this->addPackageDependency( "browser-image-compression", "^2.0.2");
 		$this->addPackageDependency( "pinia", "^3.0.4");
 		$this->addPackageDependency( "sweetalert2", "^11.26.24");
