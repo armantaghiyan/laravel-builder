@@ -47,8 +47,6 @@ export default {
         list: 'List',
         admin: 'Admin',
         access: 'Roles and permission',
-        financial: 'Financial',
-        payments: 'Payments',
     },
     admin: {
         last_login: 'Last login',
@@ -56,9 +54,6 @@ export default {
         add_a_admin: 'Add a new Admin',
         admin_information: 'Admin information',
         roles: 'Roles',
-    },
-    list: {
-
     },
     pagination: {
         desc: "Showing {p1} to {p2} of {p3} entries"
@@ -73,6 +68,8 @@ export default {
         admin: 'Admins',
         role: 'Role',
         "Super Admin": 'Super admin',
+        add_a_role: 'Add a new role',
+        role_information: 'Role information',
     },
     access: {
         permissions: 'Permissions',
@@ -89,11 +86,6 @@ export default {
                 update: "Role update",
                 destroy: "Role destroy",
             },
-            ai_model: {
-                index: "Model list",
-                store: "Model store",
-                update: "Model update",
-            }
         }
     }
 }

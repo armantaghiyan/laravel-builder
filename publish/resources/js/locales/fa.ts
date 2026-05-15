@@ -24,13 +24,6 @@ export default {
         created_at: 'تاریخ ایجاد',
         updated_at: 'تاریخ بروزرسانی',
         submit: 'ثبت',
-        user_id: 'شناسه کاربری',
-        title: 'عنوان',
-        target_id: 'شناسه مقصد',
-        target_type: 'مقصد',
-        description: 'توضیحات',
-        gift: 'افزایش اعتبار',
-        type: 'نوع'
     },
     auth: {
         welcome: 'به پنل خوش آمدید! 👋',
@@ -54,13 +47,6 @@ export default {
         list: 'لیست',
         admin: 'مدیران',
         access: 'نقش ها و دسترسی ها',
-        model: 'مدل ها',
-        user: 'کاربران',
-        financial: 'مالی',
-        payments: 'پرداخت ها',
-        chats: 'چت ها',
-        transactions: 'تراکنش ها',
-        sms_confirmation: 'کد های تایید',
     },
     admin: {
         last_login: 'آخرین ورود',
@@ -69,7 +55,6 @@ export default {
         admin_information: 'اطلاعات مدیر',
         roles: 'نقش ها',
     },
-    list: {},
     pagination: {
         desc: "نمایش {p1} تا {p2} از {p3} ورودی"
     },
@@ -82,9 +67,9 @@ export default {
     roles: {
         admin: 'مدیران',
         role: 'نقش ها',
-        ai_model: 'مدل ها',
-        user: 'کاربران',
         "Super Admin": 'مدیر کل',
+        add_a_role: 'اضافه کردن دسترسی جدید',
+        role_information: 'اطلاعات نقش',
     },
     access: {
         permissions: 'دسترسی ها',
@@ -101,57 +86,6 @@ export default {
                 update: "بروزرسانی نقش ها",
                 destroy: "حذف نقش ها",
             },
-            ai_model: {
-                index: "لیست مدل ها",
-                store: "ایجاد مدل",
-                update: "بروزرسانی مدل ها",
-            },
-            user: {
-                index: "لیست کاربران",
-                update: "بروزرسانی کاربرها",
-            },
-            payment: {
-                index: "لیست پرداخت ها",
-            },
-            chat: {
-                index: "لیست چت ها",
-            },
-            transaction: {
-                index: "لیست تراکنش ها",
-            },
-            sms_confirmation_index: {
-                index: "لیست پیامک های اعتبار سنجی",
-            }
         }
     },
-    ai_model: {
-        model_name: 'مدل',
-        input_price: 'قیمت توکن ورودی',
-        output_price: 'قیمت توکن خروجی',
-        price_desc: 'قیمت ها برای هر 1 میلیون توکن می باشد.',
-        add_a_model: 'اضافه کردن مدل جدید',
-        model_information: 'اصلاعات مدل',
-        thumbnail: 'عکس',
-    },
-    user: {
-        mobile_number: 'شماره موبایل',
-        balance: 'اعتبار حساب',
-        reserved_balance: 'اعتبار برداشت نشده',
-        image: 'عکس',
-        user_detail: 'جزئیات کاربر',
-        active: 'فعال سازی کاربر',
-        banned: 'مسدود سازی کاربر',
-    },
-    payment: {
-        price: "مبلغ",
-        detail: "جزئیات پرداخت",
-    },
-    chat: {
-        input_token: 'توکن ورودی',
-        output_token: 'توکن خروجی',
-        total_price: 'قیمت کل',
-    },
-    smsConfirmation: {
-        token: 'کد تایید'
-    }
 }

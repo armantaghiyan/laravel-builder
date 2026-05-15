@@ -31,10 +31,10 @@ onMounted(() => {
 <template>
     <div>
         <div class="pb-6 pt-2">
-            <h4 class="font-medium text-[24px] pb-2">{{$t('admin.add_a_admin')}}</h4>
+            <h4 class="font-medium text-[24px] pb-2">{{$t('roles.add_a_role')}}</h4>
         </div>
 
-        <card :title="$t('admin.admin_information')">
+        <card :title="$t('roles.role_information')">
             <div class="px-6 pb-6 flex flex-col gap-6">
                 <text-input id="name" :title="$t('global.name')" v-model="storeAndUpdateParams.name"/>
 
