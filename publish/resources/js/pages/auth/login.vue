@@ -16,9 +16,9 @@ const {login, form} = useAuthLogin();
                     <span class="ps-3 font-bold">{{ t('app_name') }}</span>
                 </div>
                 <div>
-                    <img src="/resources/accests/images/bg/auth-login.png" alt="auth login" class="max-w-[520px] py-5">
+                    <img src="/resources/assets/images/bg/auth-login.png" alt="auth login" class="max-w-[520px] py-5">
                 </div>
-                <img src="/resources/accests/images/bg/bg-shape-image-light.png" alt="" class="absolute w-full h-[320px] bottom-0">
+                <img src="/resources/assets/images/bg/bg-shape-image-light.png" alt="" class="absolute w-full h-[320px] bottom-0">
             </div>
             <div class="flex items-center justify-center p-12">
                 <div class="w-full">

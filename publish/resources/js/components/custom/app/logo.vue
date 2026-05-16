@@ -1,3 +1,5 @@
 <template>
-    <img src="/resources/accests/images/icon/favicon.svg" alt="">
+    <img src="/resources/assets/images/icon/favicon.svg" alt="">
 </template>
+<script setup lang="ts">
+</script>

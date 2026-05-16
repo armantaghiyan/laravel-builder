@@ -21,12 +21,12 @@ onMounted(() => {
     <div class="flex flex-col gap-6">
         <card>
             <div
-                class="bg-[url('/resources/accests/images/bg/profile-banner.jpg')] bg-cover bg-center md:h-[250px] h-[150px] rounded-t-[6px]"></div>
+                class="bg-[url('/resources/assets/images/bg/profile-banner.jpg')] bg-cover bg-center md:h-[250px] h-[150px] rounded-t-[6px]"></div>
 
             <div class="relative">
                 <div class="flex items-end gap-6 absolute top-[-50px] h-30 px-6">
                     <div class="border-5 border-white md:w-[120px] w-[100px] rounded-[2px]">
-                        <img src="/resources/accests/images/icon/user.jpg" class="w-full h-full" alt="">
+                        <img src="/resources/assets/images/icon/user.jpg" class="w-full h-full" alt="">
                     </div>
 
                     <div class="flex flex-col gap-3">

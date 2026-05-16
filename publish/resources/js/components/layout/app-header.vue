@@ -38,7 +38,7 @@ const changeLanguage = (newLocale) => {
                     </icon-button>
                 </div>
 
-                <img src="/resources/accests/images/icon/user.jpg" alt="user icon" class="size-10 rounded-full">
+                <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-10 rounded-full">
             </div>
         </card>
     </div>
