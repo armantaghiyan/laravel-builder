@@ -5,6 +5,7 @@ import path from 'path';
 import tailwindcss from '@tailwindcss/vite'
 
 
+
 export default defineConfig({
     plugins: [
         vue(),
@@ -23,7 +24,32 @@ export default defineConfig({
     server: {
         https: false,
         host: 'localhost',
-        port: 5173,
+        port: 5174,
         strictPort: true,
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                assetFileNames: (assetInfo) => {
+                    let ext = assetInfo.name.split('.').at(1);
+
+                    if(ext === 'css'){
+                        return `assets/[name]-[hash][extname]`;
+                    }
+
+                    if(ext === 'eot' || ext === 'ttf' || ext === 'woff' || ext === 'woff2'){
+                        return `fonts/[name][extname]`;
+                    }
+
+                    if(ext === 'png' || ext === 'svg'){
+                        return `images/[name][extname]`;
+                    }
+
+                    return `${ext}/[name][extname]`;
+                },
+                chunkFileNames: 'assets/[name]-[hash].js',
+                entryFileNames: 'assets/[name]-[hash].js',
+            },
+        },
     },
 });
