@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import {Menu, MenuButton, MenuItems} from "@headlessui/vue";
-import {appStore} from "@/stores/app.ts";
 
 const {
     rounded = 6,
     width = 250,
-    position = 'right',
     top = 0,
 } = defineProps<{
-    position?: 'left' | 'right' | 'auto',
     width?: number
     rounded?: number
     top?: number
 }>();
-
-const $app = appStore();
 </script>
 
 <template>
@@ -34,11 +29,7 @@ const $app = appStore();
             leave-to-class="transform scale-95 opacity-0"
         >
             <MenuItems
-                class="absolute z-50 bg-white shadow-lg"
-                :class="{
-                    'left-0': $app.dir === 'rtl',
-                    'right-0': $app.dir === 'ltr'
-                }"
+                class="absolute z-50 bg-white shadow-lg end-0"
                 :style="`width: ${width}px;border-radius: ${rounded}px; top: ${top}px`"
             >
                 <slot/>

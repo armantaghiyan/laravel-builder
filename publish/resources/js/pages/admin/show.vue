@@ -4,13 +4,13 @@ import useAdmin from "@/composables/admin/useAdmin.js";
 import {usePermission} from "@/composables/usePermission.js";
 import {useRoute} from "vue-router";
 import {onMounted} from "vue";
-import {useI18n} from "vue-i18n";
+import {useTranslations} from "@/composables/useTranslations.js";
 
 const {show, item, adminRoles, roles} = useAdmin();
 const {hasPermission} = usePermission();
 
 const route = useRoute();
-const {t} = useI18n();
+const {t} = useTranslations();
 
 onMounted(() => {
     show(route.params.id);
@@ -49,7 +49,7 @@ onMounted(() => {
                 <label-item :title="t('global.created_at')">{{item?.created_at}}</label-item>
                 <label-item :title="t('global.updated_at')">{{item?.updated_at}}</label-item>
             </card>
-            <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles')" class="lg:col-span-8 col-span-12">
+            <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles.role')" class="lg:col-span-8 col-span-12">
 
                 <div class="px-6 pb-6 grid grid-cols-2 gap-6">
                     <role-adapter v-for="role in roles" :role="role" :adminRoles="adminRoles" :adminId="item.id"/>

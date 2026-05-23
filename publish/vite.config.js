@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite'
+import Components from "unplugin-vue-components/vite";
 
 
 
@@ -14,6 +15,21 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        Components({
+            dirs: ['resources/js/components'],
+            directoryAsNamespace: false,
+            resolve: (name) => {
+                const pascal = snakeToPascal(name.replace(/-/g, '_'))
+
+                return {
+                    name: pascal,
+                    from: `resources/js/components/${pascal}.vue`,
+                }
+            },
+
+            dts: 'resources/js/components.d.ts',
+        }),
+
     ],
     resolve: {
         alias: {
@@ -53,3 +69,10 @@ export default defineConfig({
         },
     },
 });
+
+function snakeToPascal(name) {
+    return name
+        .split('_')
+        .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+        .join('')
+}
