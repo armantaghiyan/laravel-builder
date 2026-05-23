@@ -70,7 +70,6 @@ class BuilderPublishCommand extends Command {
 		$this->addPackageDependency( "tippy.js", "^6.3.7");
 		$this->addPackageDependency( "toastify-js", "^1.12.0");
 		$this->addPackageDependency( "vue", "^3.5.34");
-		$this->addPackageDependency( "vue-i18n", "^12.0.0-alpha.3");
 		$this->addPackageDependency( "vue-router", "^5.0.6");
 
 		$this->info('Publishing configuration successfully.');
