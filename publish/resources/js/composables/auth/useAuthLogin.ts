@@ -21,8 +21,8 @@ export function useAuthLogin() {
         showLoading();
         callApi.post<AdminLoginResponse>('admin/login', form).then(res => {
             $user.tryGetUser = 0;
-            $user.login(res.data.data.admin);
             set(res.data.data.api_token);
+            $user.login(res.data.data.admin, true);
             router.replace({path: '/'});
         });
     }
