@@ -14,9 +14,14 @@ export const userStore = defineStore('user', {
         adminPermissions: [] as Permission[],
     }),
     actions: {
-        login(user: Admin) {
+        login(user: Admin, runAppStart = false) {
             this.user = user;
             this.isAuth = true;
+
+            if (runAppStart) {
+                const $user = userStore();
+                $user.checkAuth()
+            }
         },
         async checkAuth() {
             const {callApi} = useCallApi()
