@@ -1,17 +1,6 @@
-import {useCallApi} from "@/composables/useCallApi.ts";
-import {useRouter} from "vue-router";
-import {showLoading} from "@/utils/helper.ts";
 import BaseResponse from "@/utils/api/base.ts";
-import {
-    AccessIndexResponse,
-    AccessRoleShowResponse,
-    AccessShowResponse,
-    AccessStoreAndUpdateResponse
-} from "@/utils/api/access.ts";
-import {reactive, ref} from "vue";
 import Role from "@/utils/models/Role.ts";
 import Permission from "@/stores/Permission.ts";
-import {useAlert} from "@/composables/useAlert.ts";
 
 export function useAccess() {
     const {callApi} = useCallApi();

@@ -46,7 +46,6 @@
 <script setup>
 import imageCompression from 'browser-image-compression'
 import {useAlert} from "@/composables/useAlert.js";
-import {onMounted, ref, watch} from "vue";
 
 // Props
 const props = defineProps({

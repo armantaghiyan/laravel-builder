@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {useI18n} from "vue-i18n";
-import {onMounted, ref, watch} from "vue";
-import {useCookie} from "@/composables/useCookie.ts";
-
-const {locale} = useI18n();
+const {locale} = useTranslations();
 const {value, set} = useCookie('lang', {expires: 365});
 
 const direction = ref<string>('ltr');

@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import {usePermission} from "@/composables/usePermission.ts";
-import {onMounted} from "vue";
-import {useAccess} from "@/composables/access/useAccess.ts";
 import {Permissions} from "@/utils/models/enums.ts";
-
 
 const {fetchData, items, destroy} = useAccess();
 const {hasPermission} = usePermission();
+const {t} = useTranslations();
 
 function destroyRole(roleId: number, index: number){
     destroy(roleId, () => {
@@ -21,7 +18,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <card :title="$t('menu.access')">
+        <card :title="t('menu.access')">
             <action-content>
                 <div class="flex gap-4"></div>
 
@@ -35,11 +32,11 @@ onMounted(() => {
             <custom-table>
                 <custom-thead>
                     <custom-tr>
-                        <custom-th fixed :width="120">{{ $t('global.id') }}</custom-th>
-                        <custom-th>{{ $t('global.name') }}</custom-th>
-                        <custom-th>{{ $t('global.created_at') }}</custom-th>
-                        <custom-th>{{ $t('global.updated_at') }}</custom-th>
-                        <custom-th>{{ $t('global.actions') }}</custom-th>
+                        <custom-th fixed :width="120">{{ t('global.id') }}</custom-th>
+                        <custom-th>{{ t('global.name') }}</custom-th>
+                        <custom-th>{{ t('global.created_at') }}</custom-th>
+                        <custom-th>{{ t('global.updated_at') }}</custom-th>
+                        <custom-th>{{ t('global.actions') }}</custom-th>
                     </custom-tr>
                 </custom-thead>
                 <custom-tbody>

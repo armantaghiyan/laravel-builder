@@ -1,5 +1,3 @@
-import {createWebHistory, createRouter} from "vue-router";
-
 import {appStore} from "@/stores/app.ts";
 import {userStore} from "@/stores/user.ts";
 
@@ -13,6 +11,7 @@ import AccessShowPage from "@/pages/access/show.vue";
 import AdminIndexPage from "@/pages/admin/index.vue";
 import AdminCreatePage from "@/pages/admin/create.vue";
 import AdminShowPage from "@/pages/admin/show.vue";
+import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},

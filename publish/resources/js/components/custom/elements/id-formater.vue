@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useId} from "vue";
-
 defineProps<{
     id: string | number
 }>();

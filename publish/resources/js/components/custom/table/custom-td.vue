@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useClipboard} from "@/composables/useClipboard.ts";
-
 const {copyToClipboard} = useClipboard();
 
 const {

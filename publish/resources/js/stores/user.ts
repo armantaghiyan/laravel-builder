@@ -1,9 +1,5 @@
-import {defineStore} from 'pinia';
 import Admin from "@/utils/models/Admin.ts";
 import Permission from "@/stores/Permission.ts";
-import {useCallApi} from "@/composables/useCallApi.ts";
-import {AdminStartResponse} from "@/utils/api/admin.ts";
-import {appStore} from "@/stores/app.ts";
 
 export const userStore = defineStore('user', {
     state: () => ({
@@ -14,9 +10,14 @@ export const userStore = defineStore('user', {
         adminPermissions: [] as Permission[],
     }),
     actions: {
-        login(user: Admin) {
+        login(user: Admin, runAppStart = false) {
             this.user = user;
             this.isAuth = true;
+
+            if (runAppStart) {
+                const $user = userStore();
+                $user.checkAuth()
+            }
         },
         async checkAuth() {
             const {callApi} = useCallApi()

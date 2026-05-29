@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {useAccess} from "@/composables/access/useAccess.ts";
 import Permission from "@/stores/Permission.ts";
-import {onMounted, ref} from "vue";
-import {showLoading} from "@/utils/helper.ts";
 
 const props = defineProps<{
     roleId: number,
@@ -13,6 +10,7 @@ const props = defineProps<{
 const {togglePermission} = useAccess();
 const active = ref(false);
 const canToggle = ref(true);
+const {t} = useTranslations();
 
 function isActive() {
     if (props.rolePermissions.find(rolePermission => rolePermission.id === props.permission.id) || props.roleId == 1) {
@@ -34,5 +32,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <switch-input :title="$t(`access.permission.${permission.name}`)" v-model="active" @on-click="doTogglePermission" :disabled="props.roleId == 1"/>
+    <switch-input :title="t(`access.permission.${permission.name}`)" v-model="active" @on-click="doTogglePermission" :disabled="props.roleId == 1"/>
 </template>

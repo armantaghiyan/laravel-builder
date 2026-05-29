@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {useI18n} from "vue-i18n";
+import {useTranslations} from "@/composables/useTranslations.ts";
 
-const {t} = useI18n();
+const {t} = useTranslations();
 </script>
 
 <template>

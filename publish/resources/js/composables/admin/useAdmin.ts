@@ -1,10 +1,5 @@
-import {useRouter} from "vue-router";
-import {useCallApi} from "@/composables/useCallApi.ts";
-import {reactive, ref, watch} from "vue";
 import Admin from "@/utils/models/Admin.ts";
-import {AdminIndexResponse, AdminShowResponse, AdminStoreAndUpdateResponse} from "@/utils/api/admin.ts";
 import Role from "@/utils/models/Role.ts";
-import {showLoading} from "@/utils/helper.ts";
 
 export default function useAdmin() {
     const router = useRouter();

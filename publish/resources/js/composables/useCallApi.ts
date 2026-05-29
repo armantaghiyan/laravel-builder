@@ -1,12 +1,13 @@
 import axios from "axios";
 import {errorToast} from "@/utils/toastify.ts";
-import {ref} from "vue";
 import {appStore} from "@/stores/app.ts";
 import {useCookie} from "@/composables/useCookie.ts";
+import {useTranslations} from "@/composables/useTranslations.ts";
 
 export function useCallApi() {
     const apiToken = useCookie('api_token');
-    const {value} = useCookie('lang');
+    const {locale} = useTranslations();
+
 
     const $app = appStore();
     const pending = ref(false);
@@ -26,7 +27,8 @@ export function useCallApi() {
             config.headers.Authorization = `Bearer ${apiToken.value.value}`;
         }
 
-        config.headers['Accept-Language'] = value.value;
+        console.log(locale.value);
+        config.headers['Accept-Language'] = locale.value;
 
         return config;
     }, (error) => {

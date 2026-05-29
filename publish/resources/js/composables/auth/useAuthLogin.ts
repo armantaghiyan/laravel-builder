@@ -1,11 +1,3 @@
-import {reactive} from "vue";
-import {useCallApi} from "@/composables/useCallApi.ts";
-import {useRouter} from "vue-router";
-import {showLoading} from "@/utils/helper.ts";
-import {AdminLoginResponse} from "@/utils/api/admin.ts";
-import {userStore} from "@/stores/user.ts";
-import {useCookie} from "@/composables/useCookie.ts";
-
 export function useAuthLogin() {
     const router = useRouter();
     const {set} = useCookie('api_token', {expires: 7});

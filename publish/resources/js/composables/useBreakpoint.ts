@@ -1,5 +1,3 @@
-import {ref, onMounted, onBeforeUnmount} from 'vue'
-
 export function useBreakpoint() {
     const breakpoint = ref('');
 

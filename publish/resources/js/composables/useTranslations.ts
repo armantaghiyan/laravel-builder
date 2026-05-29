@@ -1,4 +1,3 @@
-import { ref, computed } from 'vue'
 import { locales, type LocaleKey } from '@/locales'
 
 type NestedObject = {

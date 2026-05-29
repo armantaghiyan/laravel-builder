@@ -1,6 +1,5 @@
 import Admin from "@/utils/models/Admin.ts";
 import Permission from "@/stores/Permission.ts";
-import {AppEnum} from "@/utils/models/AppEnum.ts";
 import BaseResponse from "@/utils/api/base.ts";
 import Role from "@/utils/models/Role.ts";
 

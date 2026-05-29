@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {useAccess} from "@/composables/access/useAccess.ts";
-import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
 import Role from "@/utils/models/Role.ts";
 
 const {storeAndUpdateParams, update, store, showRole} = useAccess();
 
 const route = useRoute();
 const updateMode = ref(false);
+const {t} = useTranslations();
+
 
 function submitForm(){
     if(updateMode.value){
@@ -31,14 +30,14 @@ onMounted(() => {
 <template>
     <div>
         <div class="pb-6 pt-2">
-            <h4 class="font-medium text-[24px] pb-2">{{$t('roles.add_a_role')}}</h4>
+            <h4 class="font-medium text-[24px] pb-2">{{t('roles.add_a_role')}}</h4>
         </div>
 
-        <card :title="$t('roles.role_information')">
+        <card :title="t('roles.role_information')">
             <div class="px-6 pb-6 flex flex-col gap-6">
-                <text-input id="name" :title="$t('global.name')" v-model="storeAndUpdateParams.name"/>
+                <text-input id="name" :title="t('global.name')" v-model="storeAndUpdateParams.name"/>
 
-                <btn-primary @click="submitForm" class="w-full">{{$t('global.submit')}}</btn-primary>
+                <btn-primary @click="submitForm" class="w-full">{{t('global.submit')}}</btn-primary>
             </div>
         </card>
     </div>

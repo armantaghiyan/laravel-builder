@@ -1,6 +1,3 @@
-import {defineStore} from 'pinia';
-import {AppEnum} from "@/utils/models/AppEnum.ts";
-
 export const appStore = defineStore('app', {
     state: () => ({
         loading: true,

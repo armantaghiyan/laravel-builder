@@ -1,13 +1,11 @@
 <script setup>
-import {useI18n} from "vue-i18n";
-import {appStore} from "@/stores/app.js";
-
 const $app = appStore()
-const {locale, availableLocales} = useI18n();
+const {t, locale, getAvailableLocales} = useTranslations();
 
 const changeLanguage = (newLocale) => {
     locale.value = newLocale;
 }
+
 </script>
 
 <template>
@@ -28,8 +26,8 @@ const changeLanguage = (newLocale) => {
                         </template>
 
                         <div class="flex flex-col p-2 gap-1">
-                            <btn-clickable v-for="lang in availableLocales" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">
-                                {{ $t(`app.${lang}`) }}
+                            <btn-clickable v-for="lang in getAvailableLocales()" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">
+                                {{ t(`app.${lang}`) }}
                             </btn-clickable>
                         </div>
                     </option-menu>

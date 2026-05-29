@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import {appStore} from "@/stores/app.ts";
-import {useBreakpoint} from "@/composables/useBreakpoint.ts";
-
 const $app = appStore()
 
 const {breakpoint} = useBreakpoint();

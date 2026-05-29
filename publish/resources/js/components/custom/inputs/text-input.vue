@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {ref, watch} from "vue";
-
 const { type = 'text', inputMode } = defineProps<{
     title?: string
     type?: 'text' | 'password'

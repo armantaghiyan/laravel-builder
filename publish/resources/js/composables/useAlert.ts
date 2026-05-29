@@ -1,8 +1,7 @@
 import Swal from 'sweetalert2'
-import {useI18n} from "vue-i18n";
 
 export function useAlert() {
-    const { t } = useI18n()
+    const { t } = useTranslations()
 
     async function confirm(): Promise<boolean> {
         const result = await Swal.fire({

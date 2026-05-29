@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import {useI18n} from "vue-i18n";
-import {onMounted, ref, watch} from "vue";
-
 const props = defineProps<{
     count: number,
     pageRows: number,
@@ -10,7 +7,7 @@ const props = defineProps<{
 const emit = defineEmits(['change']);
 
 const page = defineModel<number>();
-const {t} = useI18n();
+const {t} = useTranslations();
 const paginationPageCount = ref(1);
 
 function changePage(newPage: number|'...') {

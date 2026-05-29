@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {appStore} from "@/stores/app.ts";
-
 const $app = appStore();
 </script>
 

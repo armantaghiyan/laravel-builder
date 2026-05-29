@@ -5,9 +5,6 @@ import {
     ListboxOptions,
     ListboxOption,
 } from '@headlessui/vue'
-import {appStore} from "@/stores/app.ts";
-import {useI18n} from "vue-i18n";
-import {nextTick, onMounted, ref, watch} from "vue";
 
 const {type = null, label='label',value='value', options, withAll=false} = defineProps<{
     title?: string,
@@ -19,7 +16,7 @@ const {type = null, label='label',value='value', options, withAll=false} = defin
 }>()
 
 const $app = appStore();
-const { t } = useI18n()
+const { t } = useTranslations()
 const model = defineModel<any>();
 const floatLabel = ref(false);
 const localOptions = ref<any>([]);

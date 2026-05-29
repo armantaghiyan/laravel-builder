@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {useAccess} from "@/composables/access/useAccess.ts";
 import Role from "@/utils/models/Role.ts";
-import {showLoading} from "@/utils/helper.ts";
 
 const props = defineProps<{
     adminId: number
@@ -13,6 +10,7 @@ const props = defineProps<{
 const {toggleAccess} = useAccess();
 const active = ref(false);
 const canToggle = ref(true);
+const {t} = useTranslations();
 
 function isActive() {
     if (props.adminRoles.find(adminRole => adminRole.id === props.role.id)) {
@@ -34,5 +32,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <switch-input :title="$t(`roles.${role.name}`)" :href="`/access/${role.id}`" v-model="active" @on-click="toggleRole"/>
+    <switch-input :title="t(`roles.${role.name}`)" :href="`/access/${role.id}`" v-model="active" @on-click="toggleRole"/>
 </template>

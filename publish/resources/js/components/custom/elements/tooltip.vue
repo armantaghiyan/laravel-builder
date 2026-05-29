@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import tippy from 'tippy.js';
-import {nextTick, onMounted} from "vue";
 
 const props = defineProps<{
     text: string,

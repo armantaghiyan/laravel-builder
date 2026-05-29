@@ -1,6 +1,3 @@
-// composables/useCookie.ts
-import { ref, watch, type Ref } from 'vue'
-
 type SameSite = 'strict' | 'lax' | 'none'
 
 interface CookieOptions {

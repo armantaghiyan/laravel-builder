@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import {usePermission} from "@/composables/usePermission.ts";
-import {onMounted} from "vue";
 import {Permissions} from "@/utils/models/enums.ts";
-import useAdmin from "@/composables/admin/useAdmin.ts";
 
-
+const {t} = useTranslations();
 const {fetchData, items, count, params, reFetchData} = useAdmin();
 const {hasPermission} = usePermission();
 
@@ -15,17 +12,17 @@ onMounted(() => {
 
 <template>
     <div>
-        <card :title="$t('app.filter')">
+        <card :title="t('app.filter')">
             <form @submit.prevent="reFetchData">
                 <filter-content>
-                    <text-input :title="$t('global.id')" v-model="params.id"/>
-                    <text-input :title="$t('global.name')" v-model="params.name"/>
-                    <text-input :title="$t('global.username')" v-model="params.username"/>
+                    <text-input :title="t('global.id')" v-model="params.id"/>
+                    <text-input :title="t('global.name')" v-model="params.name"/>
+                    <text-input :title="t('global.username')" v-model="params.username"/>
                 </filter-content>
 
                 <action-content>
                     <div class="flex gap-4">
-                        <text-input :placeholder="$t('global.search')" class="sm:w-50 w-full" v-model="params.search"/>
+                        <text-input :placeholder="t('global.search')" class="sm:w-50 w-full" v-model="params.search"/>
                         <btn-search/>
                     </div>
 
@@ -42,13 +39,13 @@ onMounted(() => {
             <custom-table>
                 <custom-thead>
                     <custom-tr>
-                        <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ $t('global.id') }}</custom-th>
-                        <custom-th>{{ $t('global.name') }}</custom-th>
-                        <custom-th>{{ $t('global.username') }}</custom-th>
-                        <custom-th :width="165" sort-key="last_login" v-model:sort="params.sort" v-model:sort-type="params.last_login">{{ $t('admin.last_login') }}</custom-th>
-                        <custom-th :width="165" sort-key="created_at" v-model:sort="params.sort" v-model:sort-type="params.created_at">{{ $t('global.created_at') }}</custom-th>
-                        <custom-th :width="165" sort-key="updated_at" v-model:sort="params.sort" v-model:sort-type="params.updated_at">{{ $t('global.updated_at') }}</custom-th>
-                        <custom-th fixed :width="100">{{ $t('global.actions') }}</custom-th>
+                        <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
+                        <custom-th>{{ t('global.name') }}</custom-th>
+                        <custom-th>{{ t('global.username') }}</custom-th>
+                        <custom-th :width="165" sort-key="last_login" v-model:sort="params.sort" v-model:sort-type="params.last_login">{{ t('admin.last_login') }}</custom-th>
+                        <custom-th :width="165" sort-key="created_at" v-model:sort="params.sort" v-model:sort-type="params.created_at">{{ t('global.created_at') }}</custom-th>
+                        <custom-th :width="165" sort-key="updated_at" v-model:sort="params.sort" v-model:sort-type="params.updated_at">{{ t('global.updated_at') }}</custom-th>
+                        <custom-th fixed :width="100">{{ t('global.actions') }}</custom-th>
                     </custom-tr>
                 </custom-thead>
                 <custom-tbody>

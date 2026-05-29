@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useRoute} from "vue-router";
-
 const route = useRoute();
 
 function fullPage() {
@@ -10,25 +8,23 @@ function fullPage() {
 </script>
 
 <template>
-    <i18n-provider>
-        <app-loading>
-            <div v-if="!fullPage()" class="w-full min-h-screen start-0 bg-panel">
-                <app-sidebar/>
-                <app-content>
-                    <app-header/>
-                    <div class="py-6 px-4">
-                        <transition name="blur" mode="out-in">
-                            <router-view/>
-                        </transition>
-                    </div>
-                </app-content>
-            </div>
+    <app-loading>
+        <div v-if="!fullPage()" class="w-full min-h-screen start-0 bg-panel">
+            <app-sidebar/>
+            <app-content>
+                <app-header/>
+                <div class="py-6 px-4">
+                    <transition name="blur" mode="out-in">
+                        <router-view/>
+                    </transition>
+                </div>
+            </app-content>
+        </div>
 
-            <div v-else>
-                <router-view/>
-            </div>
-        </app-loading>
-    </i18n-provider>
+        <div v-else>
+            <router-view/>
+        </div>
+    </app-loading>
 </template>
 
 <style scoped>

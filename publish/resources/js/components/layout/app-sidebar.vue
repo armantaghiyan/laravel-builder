@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import {usePermission} from "@/composables/usePermission.ts";
-import {useBreakpoint} from "@/composables/useBreakpoint.ts";
-import {appStore} from "@/stores/app.ts";
-import {watch} from "vue";
 import {Permissions} from "@/utils/models/enums.ts";
 
 const {hasPermission} = usePermission();
 const {breakpoint} = useBreakpoint();
 const $app = appStore()
+const {t} = useTranslations();
 
 
 watch(breakpoint, () => {
@@ -29,18 +26,18 @@ watch(breakpoint, () => {
             <div>
                 <div class="h-16 flex items-center gap-2 ps-[22px] pe-2">
                     <logo/>
-                    <span class="text-white text-[22px] font-bold">{{ $t('app_name')}}</span>
+                    <span class="text-white text-[22px] font-bold">{{ t('app_name')}}</span>
                 </div>
                 <div class="px-3">
-                    <menu-item href="/" :title="$t('menu.dashboard')">
+                    <menu-item href="/" :title="t('menu.dashboard')">
                         <i class="menu-icon tf-icons ti ti-smart-home text-[22px]"></i>
                     </menu-item>
 
-                    <menu-section v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)">{{$t('menu.settings')}}</menu-section>
-                    <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="$t('menu.admin')">
+                    <menu-section v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)">{{t('menu.settings')}}</menu-section>
+                    <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="t('menu.admin')">
                         <i class="menu-icon ti ti-user text-[22px]"></i>
                     </menu-item>
-                    <menu-item v-if="hasPermission(Permissions.ROLE_INDEX)" href="/access" :title="$t('menu.access')">
+                    <menu-item v-if="hasPermission(Permissions.ROLE_INDEX)" href="/access" :title="t('menu.access')">
                         <i class="ti ti-fingerprint text-[22px]"></i>
                     </menu-item>
                 </div>

@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import useAdmin from "@/composables/admin/useAdmin.ts";
-import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
-import {errorToast} from "@/utils/toastify.ts";
 import Admin from "@/utils/models/Admin.ts";
-import {useI18n} from "vue-i18n";
 
 const {storeAndUpdateParams, update, store, show} = useAdmin();
 
 const route = useRoute();
-const {t} = useI18n();
+const {t} = useTranslations();
 
 const updateMode = ref(false);
 

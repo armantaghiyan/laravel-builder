@@ -2,8 +2,6 @@
 import {Permissions} from "@/utils/models/enums.ts";
 import useAdmin from "@/composables/admin/useAdmin.js";
 import {usePermission} from "@/composables/usePermission.js";
-import {useRoute} from "vue-router";
-import {onMounted} from "vue";
 import {useTranslations} from "@/composables/useTranslations.js";
 
 const {show, item, adminRoles, roles} = useAdmin();
