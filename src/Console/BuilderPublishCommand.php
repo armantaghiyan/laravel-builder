@@ -72,6 +72,7 @@ class BuilderPublishCommand extends Command {
 		$this->addPackageDependency( "vue", "^3.5.34");
 		$this->addPackageDependency( "vue-router", "^5.0.6");
 		$this->addPackageDependency( "unplugin-vue-components", "^32.1.0");
+		$this->addPackageDependency( "unplugin-auto-import", "^21.0.0");
 
 		$this->info('Publishing configuration successfully.');
 	}
