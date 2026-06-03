@@ -1,0 +1,31 @@
+import BaseResponse from "@/utils/api/base.ts";
+import {model} from "@/utils/models/{model}.ts";
+
+export interface {model}ShowResponse extends BaseResponse {
+
+    data: {
+        item: {model}
+    }
+}
+
+export interface {model}IndexResponse extends BaseResponse {
+
+    data: {
+        items: {model}[]
+        count: number
+    }
+}
+
+export interface {model}StoreAndUpdateResponse extends BaseResponse {
+
+    data: {
+        item: {model}
+    }
+}
+
+export interface {model}RoleShowResponse extends BaseResponse {
+
+    data: {
+        item: {model}
+    }
+}

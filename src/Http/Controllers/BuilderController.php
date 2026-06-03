@@ -11,6 +11,7 @@ class BuilderController {
 	private $ignoreCols = ['id', 'created_at', 'updated_at', 'deleted_at'];
 	private $ignoreFilters = ['created_at', 'updated_at', 'deleted_at'];
 	private $ignoreResourceModel = ['deleted_at'];
+	private $ignoreTable = ['id', 'deleted_at'];
 
 
 	public function getTables() {
@@ -63,10 +64,21 @@ class BuilderController {
 		$this->createRescueController($model, 'Store', $columnInfo);
 		$this->createRescueController($model, 'Update', $columnInfo);
 		$this->createRescueController($model, 'Show', $columnInfo);
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$this->createInterface($model, $columnInfo);
+		$this->createListComposable($model, $columnInfo);
+		$this->createShowComposable($model, $columnInfo);
+		$this->createStoreUpdateComposable($model, $columnInfo);
+		$this->createDestroyComposable($model, $columnInfo);
+
+		$this->createVueTemplate($model, 'index', $columnInfo);
+		$this->createVueTemplate($model, 'create', $columnInfo);
+		$this->createVueTemplate($model, 'show', $columnInfo);
+		$this->createVueRoutes($model);
 	}
 
 	public function createController($model, $columnInfo) {
-		$content = $this->getStub('controller.text');
+		$content = $this->getBackendStub('controller.text');
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{sumModel}', strtolower($model), $content);
@@ -76,7 +88,7 @@ class BuilderController {
 	}
 
 	public function createService($model, $columnInfo) {
-		$content = $this->getStub('service.text');
+		$content = $this->getBackendStub('service.text');
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{sumModel}', strtolower($model), $content);
@@ -96,7 +108,7 @@ class BuilderController {
 	}
 
 	public function createRepository($model, $columnInfo) {
-		$content = $this->getStub('repository.text');
+		$content = $this->getBackendStub('repository.text');
 
 		$filters = "";
 		foreach ($columnInfo as $key => $value) {
@@ -111,7 +123,7 @@ class BuilderController {
 	}
 
 	public function createDto($model, $action, $columnInfo) {
-		$content = $this->getStub('dto.text');
+		$content = $this->getBackendStub('dto.text');
 
 		$items = "";
 		foreach ($columnInfo as $key => $value) {
@@ -136,7 +148,7 @@ class BuilderController {
 	}
 
 	public function createRescueModel($model, $columnInfo) {
-		$content = $this->getStub('resource-model.text');
+		$content = $this->getBackendStub('resource-model.text');
 
 		$items = "";
 		foreach ($columnInfo as $key => $value) {
@@ -156,9 +168,9 @@ class BuilderController {
 
 	public function createRescueController($model, $action, $columnInfo) {
 		if($action === 'Index'){
-			$content = $this->getStub('resource-controller-index.text');
+			$content = $this->getBackendStub('resource-controller-index.text');
 		}else{
-			$content = $this->getStub('resource-controller-store-update.text');
+			$content = $this->getBackendStub('resource-controller-store-update.text');
 		}
 
 		$content = str_replace('{model}', $model, $content);
@@ -171,9 +183,189 @@ class BuilderController {
 		return sprintf("%s::%s", $model, Str::upper($column));
 	}
 
-	private function getStub($name) {
-		$content = file_get_contents(__DIR__ . "../../../../stubs/$name");
+	private function getBackendStub($name) {
+		$content = file_get_contents(__DIR__ . "../../../../stubs/backend/$name");
 
 		return $content;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function createInterface($model, $columnInfo) {
+		$lowerModel = strtolower($model);
+
+		$content = $this->getFrontStub('interface.text');
+
+		$params = '';
+		foreach ($columnInfo as $key => $value) {
+			$params .= sprintf("%s: string,\n\t", $key);
+		}
+
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{params}', $params, $content);
+
+
+
+		FileWriter::put(resource_path("js/utils/models/$model.ts"), $content);
+
+		$content = $this->getFrontStub('api.text');
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+		FileWriter::put(resource_path("js/utils/api/$lowerModel.ts"), $content);
+	}
+
+	public function createListComposable($model, $columnInfo) {
+		$content = $this->getFrontStub('use-list.text');
+
+		$lowerModel = strtolower($model);
+		$params = $this->createSearchParams($columnInfo);
+
+		$content = str_replace('{params}', $params, $content);
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+
+		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}List.ts"), $content);
+	}
+
+	public function createShowComposable($model, $columnInfo) {
+		$content = $this->getFrontStub('use-show.text');
+
+		$lowerModel = strtolower($model);
+
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+
+		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}Show.ts"), $content);
+	}
+
+	public function createStoreUpdateComposable($model, $columnInfo) {
+		$content = $this->getFrontStub('use-store-update.text');
+
+		$lowerModel = strtolower($model);
+		$params = $this->createUpdateStoreParams($columnInfo);
+
+		$content = str_replace('{params}', $params, $content);
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+
+		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}StoreUpdate.ts"), $content);
+	}
+
+	public function createDestroyComposable($model, $columnInfo) {
+		$content = $this->getFrontStub('use-destroy.text');
+
+		$lowerModel = strtolower($model);
+
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+
+		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}Destroy.ts"), $content);
+	}
+
+	public function createVueTemplate($model, $template,$columnInfo) {
+		$content = $this->getFrontStub("$template.text");
+
+		$lowerModel = strtolower($model);
+
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{name}', $lowerModel, $content);
+
+
+		$filters = "";
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreFilters)) {
+				$filters .= "<text-input :title=\"t('global.{$key}')\" v-model=\"params.{$key}\"/>\n\t\t\t\t\t\t";
+			}
+		}
+		$content = str_replace('{filter}', $filters, $content);
+
+		$thead = "";
+		$tbody = "";
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreTable)) {
+				$thead .= "<custom-th sort-key=\"{$key}\" v-model:sort=\"params.sort\" v-model:sort-type=\"params.sort_type\">{{ t('global.{$key}') }}</custom-th>\n\t\t\t\t\t\t";
+				$tbody .= "<custom-td>{{ item.{$key} }}</custom-td>\n\t\t\t\t\t";
+			}
+		}
+
+		$content = str_replace('{thead}', $thead, $content);
+		$content = str_replace('{tbody}', $tbody, $content);
+
+
+		$updateStoreParams = "";
+		$inputItems = "";
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreCols)) {
+				$updateStoreParams .= "storeAndUpdateParams.$key = $lowerModel.{$key};";
+				$inputItems .= "<text-input id=\"{$key}\" :title=\"t('global.{$key}')\" v-model=\"storeAndUpdateParams.{$key}\"/>";
+			}
+		}
+
+		$labelsList = '';
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreResourceModel)) {
+				$labelsList .= "<label-item :title=\"t('global.{$key}')\">{{item?.{$key}}}</label-item>\n\t\t\t";
+			}
+		}
+
+		$content = str_replace('{updateStoreParams}', $updateStoreParams, $content);
+		$content = str_replace('{inputItems}', $inputItems, $content);
+		$content = str_replace('{labels-list}', $labelsList, $content);
+
+
+		FileWriter::put(resource_path("js/pages/$lowerModel/$template.vue"), $content);
+	}
+
+	public function createVueRoutes($model) {
+		$content = file_get_contents(resource_path('js/router.ts'));
+
+		if (str_contains($content, $model)) {
+			return;
+		}
+
+		$lowerModel = strtolower($model);
+
+
+		$content = sprintf("import %sIndexPage from '@/pages/%s/index.vue';\n\n", $model, $lowerModel) . $content;
+		$content = sprintf("import %sCreatePage from '@/pages/%s/create.vue';\n", $model, $lowerModel) . $content;
+		$content = sprintf("import %sShowPage from '@/pages/%s/show.vue';\n", $model, $lowerModel) . $content;
+
+		$routes = '';
+		$routes .= "\n\t{path: '/{$lowerModel}', name: '{$model}IndexPage', component: {$model}IndexPage},\n";
+		$routes .= "\t{path: '/{$lowerModel}/create/:id?', name: '{$model}CreatePage', component: {$model}CreatePage},\n";
+		$routes .= "\t{path: '/{$lowerModel}/:id', name: '{$model}ShowPage', component: {$model}ShowPage},\n];";
+
+		$content = str_replace('];', $routes, $content);
+
+		FileWriter::put(resource_path("js/router.ts"), $content);
+	}
+
+	private function getFrontStub($name) {
+		$content = file_get_contents(__DIR__ . "../../../../stubs/front/$name");
+
+		return $content;
+	}
+
+	private function createSearchParams($columnInfo) {
+		$params = '';
+
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreResourceModel)) {
+				$params .= sprintf("%s: '',\n\t\t", $key);
+			}
+		}
+
+		return $params;
+	}
+
+	private function createUpdateStoreParams($columnInfo) {
+		$params = '';
+
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreCols)) {
+				$params .= sprintf("%s: '',\n\t\t", $key);
+			}
+		}
+
+		return $params;
 	}
 }

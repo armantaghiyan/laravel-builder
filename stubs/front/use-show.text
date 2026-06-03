@@ -1,0 +1,21 @@
+import {model} from "@/utils/models/{model}.ts";
+import {{model}ShowResponse} from "@/utils/api/{name}.ts";
+
+export default function use{model}Show() {
+    const item = ref<{model}>();
+    const {callApi} = useCallApi();
+
+
+    function show(id: string | number, callback?: ({name}: {model}) => void) {
+        showLoading();
+        callApi.get<{model}ShowResponse>(`/{name}/${id}`).then(res => {
+            item.value = res.data.data.item;
+            callback?.(res.data.data.item);
+        });
+    }
+
+    return {
+        item,
+        show,
+    }
+}

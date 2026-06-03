@@ -1,0 +1,44 @@
+<script setup>
+import use{model}Show from "@/composables/{name}/use{model}Show.js";
+import use{model}Destroy from "@/composables/{name}/use{model}Destroy.js";
+
+const {show, item} = use{model}Show();
+const {destroy} = use{model}Destroy();
+
+const route = useRoute();
+const router = useRouter();
+const {t} = useTranslations();
+
+function destroyItem (){
+    destroy(route.params.id, () => {
+        router.replace({path: '/{name}'});
+    });
+}
+
+onMounted(() => {
+    show(route.params.id);
+});
+</script>
+
+<template>
+    <card :title="t('faq.name_detail')" class="col-span-12">
+        <template #header>
+            <option-menu :width="240" :top="50" position="auto">
+                <template #button>
+                    <btn-option/>
+                </template>
+                <div class="flex flex-col p-2 gap-1">
+                    <router-link :to="`/faq/create/${route.params.id}`">
+                        <btn-clickable>{{ t(`app.edit`) }}</btn-clickable>
+                    </router-link>
+                    <btn-clickable @click="destroyItem">{{ t(`app.delete`) }}</btn-clickable>
+                </div>
+            </option-menu>
+        </template>
+
+        <div class="grid grid-cols-2 px-6 pb-6">
+           {labels-list}
+        </div>
+    </card>
+</template>
+

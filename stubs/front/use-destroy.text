@@ -1,0 +1,20 @@
+import BaseResponse from "@/utils/api/base.ts";
+
+export default function use{model}Destroy() {
+    const {callApi} = useCallApi();
+    const alert = useAlert();
+
+
+    async function destroy(id: string | number, callback?: () => void) {
+        if (await alert.confirm()) {
+            showLoading();
+            callApi.delete<BaseResponse>(`/{name}/${id}`).then(() => {
+                callback?.();
+            });
+        }
+    }
+
+    return {
+        destroy
+    }
+}

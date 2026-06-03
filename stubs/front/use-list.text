@@ -1,0 +1,45 @@
+import {model} from "@/utils/models/{model}.ts";
+import {{model}IndexResponse} from "@/utils/api/{name}.ts";
+
+
+export default function use{model}List() {
+    const {callApi} = useCallApi();
+    const items = ref<{model}[]>([]);
+    const count = ref(0);
+
+    const params = reactive({
+        {params}
+        search: '',
+        page_rows: 7,
+        page: 1,
+        sort: 'id',
+        sort_type: 'desc',
+    });
+
+    function fetchData() {
+        showLoading();
+        callApi.get<{model}IndexResponse>('/{name}', {
+            params: params,
+        }).then(res => {
+            items.value = res.data.data.items;
+            count.value = res.data.data.count;
+        });
+    }
+
+    function reFetchData() {
+        params.page = 1;
+        fetchData();
+    }
+
+    watch(() => params.sort, reFetchData);
+    watch(() => params.sort_type, reFetchData);
+    watch(() => params.page_rows, reFetchData);
+
+    return {
+        fetchData,
+        items,
+        count,
+        params,
+        reFetchData,
+    }
+}

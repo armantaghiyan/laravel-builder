@@ -1,0 +1,46 @@
+<script setup lang="ts">
+import {model} from "@/utils/models/{model}.ts";
+import useFaqStoreUpdate from "@/composables/{name}/use{model}StoreUpdate.ts";
+import use{model}Show from "@/composables/{name}/use{model}Show.ts";
+
+const {storeAndUpdateParams, update, store} = use{model}StoreUpdate();
+const {show} = use{model}Show();
+
+const route = useRoute();
+const {t} = useTranslations();
+
+const updateMode = ref(false);
+
+function submitForm(){
+    if(updateMode.value){
+        update(route.params.id as string);
+    }else {
+        store();
+    }
+}
+
+onMounted(() => {
+    if(route.params.id){
+        updateMode.value = true;
+        show(route.params.id as string, ({name}: {model}) => {
+            {updateStoreParams}
+        });
+    }
+});
+</script>
+
+<template>
+    <div>
+        <div class="pb-6 pt-2">
+            <h4 class="font-medium text-[24px] pb-2">{{t('name.add_a_{name}')}}</h4>
+        </div>
+
+        <card :title="t('admin.admin_information')">
+            <div class="px-6 pb-6 flex flex-col gap-6">
+                {inputItems}
+
+                <btn-primary @click="submitForm" class="w-full">{{t('global.submit')}}</btn-primary>
+            </div>
+        </card>
+    </div>
+</template>

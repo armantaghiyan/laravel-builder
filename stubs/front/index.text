@@ -1,0 +1,63 @@
+<script setup lang="ts">
+import use{model}List from "@/composables/{name}/use{model}List.ts";
+
+const {t} = useTranslations();
+const {fetchData, items, count, params, reFetchData} = use{model}List();
+
+onMounted(() => {
+    fetchData();
+});
+</script>
+
+<template>
+    <div>
+        <card :title="t('menu.{name}')">
+            <form @submit.prevent="reFetchData">
+                <filter-content>
+                    {filter}
+                </filter-content>
+
+                <action-content>
+                    <div class="flex gap-4">
+                        <text-input :placeholder="t('global.search')" class="sm:w-50 w-full" v-model="params.search"/>
+                        <btn-search/>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <page-rows v-model="params.page_rows"/>
+
+                        <router-link to="/{name}/create">
+                            <btn-primary-add/>
+                        </router-link>
+                    </div>
+                </action-content>
+            </form>
+
+            <custom-table>
+                <custom-thead>
+                    <custom-tr>
+                        <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
+                        {thead}
+                        <custom-th fixed :width="100">{{ t('global.actions') }}</custom-th>
+                    </custom-tr>
+                </custom-thead>
+                <custom-tbody>
+                    <custom-tr v-for="item in items" :key="item.id" class="border-b border-gray-5">
+                        <custom-td :copy="item.id">
+                            <id-formater :id="item.id"/>
+                        </custom-td>
+                        {tbody}
+                        <custom-td class="flex">
+                            <btn-see :href="`/{name}/${item.id}`"/>
+                            <router-link :to="`/{name}/create/${item.id}`">
+                                <btn-edit/>
+                            </router-link>
+                        </custom-td>
+                    </custom-tr>
+                </custom-tbody>
+            </custom-table>
+
+            <pagination v-model="params.page" :count="count" :page-rows="params.page_rows" @change="fetchData"/>
+        </card>
+    </div>
+</template>

@@ -5,6 +5,8 @@ export default {
         fa: 'فارسی',
         filter: 'فیلتر',
         all: 'همه',
+        edit: 'ویرایش',
+        delete: 'حذف',
     },
     global: {
         id: "شناسه",

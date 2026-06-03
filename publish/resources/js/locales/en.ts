@@ -5,6 +5,8 @@ export default {
         fa: 'Persian',
         filter: 'Filter',
         all: 'All',
+        edit: 'Edit',
+        delete: 'Delete',
     },
     global: {
         id: "Id",
