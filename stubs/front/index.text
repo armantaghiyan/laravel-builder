@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import use{model}List from "@/composables/{name}/use{model}List.ts";
+import use{model}Destroy from "@/composables/{name}/use{model}Destroy.ts";
+import {model} from "@/utils/models/{model}.ts";
 
 const {t} = useTranslations();
-const {fetchData, items, count, params, reFetchData} = use{model}List();
+const {fetchData, items, count, params, reFetchData, loading} = use{model}List();
+const {destroy} = use{model}Destroy();
+
+function destroyItem (targetItem: {model}){
+    destroy(targetItem.id, () => {
+        items.value = items.value.filter(item => item.id !== targetItem.id);
+    });
+}
 
 onMounted(() => {
     fetchData();
@@ -20,7 +29,7 @@ onMounted(() => {
                 <action-content>
                     <div class="flex gap-4">
                         <text-input :placeholder="t('global.search')" class="sm:w-50 w-full" v-model="params.search"/>
-                        <btn-search/>
+                        <btn-search :disabled="loading"/>
                     </div>
 
                     <div class="flex gap-4">
@@ -48,6 +57,7 @@ onMounted(() => {
                         </custom-td>
                         {tbody}
                         <custom-td class="flex">
+                            <btn-delete @click="destroyItem(item)"/>
                             <btn-see :href="`/{name}/${item.id}`"/>
                             <router-link :to="`/{name}/create/${item.id}`">
                                 <btn-edit/>

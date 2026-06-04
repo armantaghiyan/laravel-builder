@@ -3,7 +3,7 @@ import {{model}IndexResponse} from "@/utils/api/{name}.ts";
 
 
 export default function use{model}List() {
-    const {callApi} = useCallApi();
+    const {callApi, pending} = useCallApi();
     const items = ref<{model}[]>([]);
     const count = ref(0);
 
@@ -17,7 +17,6 @@ export default function use{model}List() {
     });
 
     function fetchData() {
-        showLoading();
         callApi.get<{model}IndexResponse>('/{name}', {
             params: params,
         }).then(res => {
@@ -41,5 +40,6 @@ export default function use{model}List() {
         count,
         params,
         reFetchData,
+        loading: pending,
     }
 }
