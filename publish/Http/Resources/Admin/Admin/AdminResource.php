@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Resources;
+namespace App\Http\Resources\Admin\Admin;
 
 use App\Services\Domain\User\Admin\Models\Admin;
 use Illuminate\Http\Request;

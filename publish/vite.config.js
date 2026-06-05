@@ -4,7 +4,7 @@ import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite'
 import Components from "unplugin-vue-components/vite";
-
+import AutoImport from 'unplugin-auto-import/vite';
 
 
 export default defineConfig({
@@ -29,7 +29,26 @@ export default defineConfig({
 
             dts: 'resources/js/components.d.ts',
         }),
+        AutoImport({
+            imports: [
+                'vue',
+                'vue-router',
+                'pinia'
+            ],
 
+            dts: 'resources/js/auto-imports.d.ts',
+
+            dirs: [
+                'resources/js/composables',
+                'resources/js/composables/access',
+                'resources/js/composables/admin',
+                'resources/js/composables/auth',
+                'resources/js/stores',
+                'resources/js/utils',
+                'resources/js/utils/api',
+                'resources/js/utils/models',
+            ],
+        }),
     ],
     resolve: {
         alias: {

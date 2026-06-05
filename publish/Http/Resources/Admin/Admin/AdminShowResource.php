@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Services\Domain\User\Access\Resources;
+namespace App\Http\Resources\Admin\Admin;
 
+use App\Http\Resources\Admin\Access\RoleResource;
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccessShowResource extends JsonResource {
+class AdminShowResource extends JsonResource {
 
 	public function __construct(
-		public $permissions,
+		public $item,
+		public $roles,
+		public $admin_roles,
 	) {
-		parent::__construct($this->permissions);
+		parent::__construct($item);
 	}
 
 	/**
@@ -23,7 +26,9 @@ class AccessShowResource extends JsonResource {
 	public function toArray(Request $request): array {
 
 		return (new ResponseManager())->cast([
-			Rk::PERMISSIONS => PermissionResource::collection($this->permissions),
+			Rk::ITEM => new AdminResource($this->item),
+			Rk::ROLES => RoleResource::collection($this->roles),
+			Rk::ADMIN_ROLES => RoleResource::collection($this->admin_roles),
 		]);
 	}
 }

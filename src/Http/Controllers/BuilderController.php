@@ -84,7 +84,7 @@ class BuilderController {
 		$content = str_replace('{sumModel}', strtolower($model), $content);
 
 
-		FileWriter::put(app_path("Services/{$model}/Controllers/{$model}Controller.php"), $content);
+		FileWriter::put(app_path("Http/Controllers/Admin/{$model}Controller.php"), $content);
 	}
 
 	public function createService($model, $columnInfo) {
@@ -176,7 +176,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{model-action}', $model . $action, $content);
 
-		FileWriter::put(app_path("Services/$model/Resources/{$model}{$action}Resource.php"), $content);
+		FileWriter::put(app_path("Http/Resources/Admin/$model/{$action}Resource.php"), $content);
 	}
 
 	private function createConst($model, $column) {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Resources;
+namespace App\Http\Resources\Admin\Admin;
 
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdminStoreResource extends JsonResource {
+class AdminUpdateResource extends JsonResource {
 
 	public function __construct(
 		public $item,

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\Domain\User\Access\Resources;
+namespace App\Http\Resources\Admin\Access;
 
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccessShowRoleResource extends JsonResource {
+class AccessStoreResource extends JsonResource {
 
 	public function __construct(
 		public $item,

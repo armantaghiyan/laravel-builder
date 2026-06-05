@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Services\Domain\User\Access\Resources;
+namespace App\Http\Resources\Admin\Access;
 
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccessIndexResource extends JsonResource {
+class AccessShowRoleResource extends JsonResource {
 
 	public function __construct(
-		public $items,
+		public $item,
 	) {
-		parent::__construct($this->items);
+		parent::__construct($item);
 	}
 
 	/**
@@ -23,7 +23,7 @@ class AccessIndexResource extends JsonResource {
 	public function toArray(Request $request): array {
 
 		return (new ResponseManager())->cast([
-			Rk::ITEMS => RoleResource::collection($this->items),
+			Rk::ITEM => new RoleResource($this->item),
 		]);
 	}
 }

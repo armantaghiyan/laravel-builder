@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\{model}\Resources;
+namespace App\Http\Resources\Admin\{model};
 
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Infrastructure\Http\ResponseManager;

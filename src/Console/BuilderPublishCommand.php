@@ -36,9 +36,8 @@ class BuilderPublishCommand extends Command {
 		}
 
 		$this->publishDir('Services', 'app/Services');
-		$this->publishDir('Exceptions', 'app/Http/Exceptions');
+		$this->publishDir('Http', 'app/Http');
 		$this->publishDir('Console', 'app/Console');
-		$this->publishDir('Middleware', 'app/Http/Middleware');
 		$this->publishDir('lang', 'lang');
 		$this->publishDir('database/migrations', 'database/migrations');
 		$this->publishDir('seeders', 'database/seeders');

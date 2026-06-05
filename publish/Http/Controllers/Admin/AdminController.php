@@ -1,7 +1,13 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\Admin\Admin\AdminIndexResource;
+use App\Http\Resources\Admin\Admin\AdminLoginResource;
+use App\Http\Resources\Admin\Admin\AdminShowResource;
+use App\Http\Resources\Admin\Admin\AdminStartResource;
+use App\Http\Resources\Admin\Admin\AdminStoreResource;
+use App\Http\Resources\Admin\Admin\AdminUpdateResource;
 use App\Services\Domain\Common\Constants\Rk;
 use App\Services\Domain\User\Access\Constants\Permissions;
 use App\Services\Domain\User\Access\Services\AccessService;
@@ -9,12 +15,6 @@ use App\Services\Domain\User\Admin\Dto\AdminIndexData;
 use App\Services\Domain\User\Admin\Dto\AdminLoginData;
 use App\Services\Domain\User\Admin\Dto\AdminStoreData;
 use App\Services\Domain\User\Admin\Dto\AdminUpdateData;
-use App\Services\Domain\User\Admin\Resources\AdminIndexResource;
-use App\Services\Domain\User\Admin\Resources\AdminLoginResource;
-use App\Services\Domain\User\Admin\Resources\AdminShowResource;
-use App\Services\Domain\User\Admin\Resources\AdminStartResource;
-use App\Services\Domain\User\Admin\Resources\AdminStoreResource;
-use App\Services\Domain\User\Admin\Resources\AdminUpdateResource;
 use App\Services\Domain\User\Admin\Services\AdminService;
 use App\Services\Infrastructure\Exceptions\ErrorMessageException;
 use App\Services\Infrastructure\Resources\SuccessResource;

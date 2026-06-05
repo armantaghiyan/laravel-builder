@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Resources;
+namespace App\Http\Resources\Admin\Admin;
 
+use App\Http\Resources\Admin\Access\PermissionResource;
 use App\Services\Domain\Common\Constants\Rk;
-use App\Services\Domain\User\Access\Resources\PermissionResource;
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
