@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Domain\User\Access\Dto;
+namespace App\Http\Data\Admin\Access;
 
 use Spatie\LaravelData\Data;
 

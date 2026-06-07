@@ -2,9 +2,9 @@
 
 namespace App\Services\Domain\User\Access\Services;
 
+use App\Http\Data\Admin\Access\AccessStoreData;
+use App\Http\Data\Admin\Access\AccessUpdateData;
 use App\Services\Domain\Common\Constants\StatusCodes;
-use App\Services\Domain\User\Access\Dto\AccessStoreData;
-use App\Services\Domain\User\Access\Dto\AccessUpdateData;
 use App\Services\Domain\User\Access\Repositories\AccessRepository;
 use App\Services\Infrastructure\Exceptions\ErrorMessageException;
 use Illuminate\Support\Facades\Auth;

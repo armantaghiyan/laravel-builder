@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Dto;
+namespace App\Http\Data\Admin\Admin;
 
-use App\Services\Infrastructure\Dto\WithApiValidator;
-use App\Services\Infrastructure\Dto\WithIndexData;
+use App\Http\Data\WithApiValidator;
+use App\Http\Data\WithIndexData;
 use Spatie\LaravelData\Data;
 
 class AdminIndexData extends Data {

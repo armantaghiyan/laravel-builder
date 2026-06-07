@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Services\Infrastructure\Resources\SuccessResource;
-use App\Services\{model}\Dto\{model}IndexData;
-use App\Services\{model}\Dto\{model}StoreData;
-use App\Services\{model}\Dto\{model}UpdateData;
+use App\Http\Data\Admin\{model}\{model}IndexData;
+use App\Http\Data\Admin\{model}\{model}StoreData;
+use App\Http\Data\Admin\{model}\{model}UpdateData;
 use App\Services\{model}\Resources\{model}IndexResource;
 use App\Services\{model}\Resources\{model}ShowResource;
 use App\Services\{model}\Resources\{model}StoreResource;

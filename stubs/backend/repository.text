@@ -3,7 +3,7 @@
 namespace App\Services\{model}\Repositories;
 
 use App\Models\{model};
-use App\Services\{model}\Dto\{model}IndexData;
+use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Services\Domain\Common\Repositories\BaseRepository;
 
 class {model}Repository extends BaseRepository {

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Data\Admin\Access\AccessPermissionToggleData;
+use App\Http\Data\Admin\Access\AccessRoleToggleData;
+use App\Http\Data\Admin\Access\AccessStoreData;
+use App\Http\Data\Admin\Access\AccessUpdateData;
 use App\Http\Resources\Admin\Access\AccessIndexResource;
 use App\Http\Resources\Admin\Access\AccessShowResource;
 use App\Http\Resources\Admin\Access\AccessShowRoleResource;
 use App\Http\Resources\Admin\Access\AccessStoreResource;
 use App\Http\Resources\Admin\Access\AccessUpdateResource;
 use App\Services\Domain\User\Access\Constants\Permissions;
-use App\Services\Domain\User\Access\Dto\AccessPermissionToggleData;
-use App\Services\Domain\User\Access\Dto\AccessRoleToggleData;
-use App\Services\Domain\User\Access\Dto\AccessStoreData;
-use App\Services\Domain\User\Access\Dto\AccessUpdateData;
 use App\Services\Domain\User\Access\Services\AccessService;
 use App\Services\Infrastructure\Exceptions\ErrorMessageException;
 use App\Services\Infrastructure\Resources\SuccessResource;

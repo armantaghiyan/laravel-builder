@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Domain\User\Admin\Dto;
+namespace App\Http\Data\Admin\Admin;
 
-use App\Services\Infrastructure\Dto\WithApiValidator;
+use App\Http\Data\WithApiValidator;
 use Spatie\LaravelData\Attributes\Validation\Max;
 use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Attributes\Validation\Required;

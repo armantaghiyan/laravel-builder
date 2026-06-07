@@ -2,7 +2,7 @@
 
 namespace App\Services\Domain\User\Admin\Repositories;
 
-use App\Services\Domain\User\Admin\Dto\AdminIndexData;
+use App\Http\Data\Admin\Admin\AdminIndexData;
 use App\Services\Domain\User\Admin\Models\Admin;
 
 class AdminRepository {

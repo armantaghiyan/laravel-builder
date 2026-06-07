@@ -3,9 +3,9 @@
 namespace App\Services\{model}\Services;
 
 use App\Models\{model};
-use App\Services\{model}\Dto\{model}IndexData;
-use App\Services\{model}\Dto\{model}StoreData;
-use App\Services\{model}\Dto\{model}UpdateData;
+use App\Http\Data\Admin\{model}\{model}IndexData;
+use App\Http\Data\Admin\{model}\{model}StoreData;
+use App\Http\Data\Admin\{model}\{model}UpdateData;
 use App\Services\{model}\Repositories\{model}Repository;
 
 class {model}Service {

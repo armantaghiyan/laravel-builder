@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Infrastructure\Dto;
+namespace App\Http\Data;
 
 trait WithIndexData {
 

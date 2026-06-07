@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Infrastructure\Dto;
+namespace App\Http\Data;
 
 use App\Http\Exceptions\ValidationException;
 use Illuminate\Validation\Validator;
