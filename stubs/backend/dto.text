@@ -2,8 +2,8 @@
 
 namespace App\Http\Data\Admin\{model};
 
-use App\Services\Infrastructure\Dto\WithApiValidator;
-use App\Services\Infrastructure\Dto\WithIndexData;
+use App\Http\Data\WithApiValidator;
+use App\Http\Data\WithIndexData;
 use Spatie\LaravelData\Data;
 
 class {model}{action}Data extends Data {

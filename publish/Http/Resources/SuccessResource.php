@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Infrastructure\Resources;
+namespace App\Http\Resources;
 
 use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;

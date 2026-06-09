@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Services\Infrastructure\Resources\SuccessResource;
+use App\Http\Resources\SuccessResource;
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Http\Data\Admin\{model}\{model}StoreData;
 use App\Http\Data\Admin\{model}\{model}UpdateData;

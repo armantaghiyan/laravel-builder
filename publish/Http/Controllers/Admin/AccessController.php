@@ -11,10 +11,10 @@ use App\Http\Resources\Admin\Access\AccessShowResource;
 use App\Http\Resources\Admin\Access\AccessShowRoleResource;
 use App\Http\Resources\Admin\Access\AccessStoreResource;
 use App\Http\Resources\Admin\Access\AccessUpdateResource;
+use App\Http\Resources\SuccessResource;
 use App\Services\Domain\User\Access\Constants\Permissions;
 use App\Services\Domain\User\Access\Services\AccessService;
 use App\Services\Infrastructure\Exceptions\ErrorMessageException;
-use App\Services\Infrastructure\Resources\SuccessResource;
 use Illuminate\Routing\Controller;
 
 class AccessController extends Controller {
