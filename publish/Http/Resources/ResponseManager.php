@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Infrastructure\Http;
+namespace App\Http\Resources;
 
 class ResponseManager {
 

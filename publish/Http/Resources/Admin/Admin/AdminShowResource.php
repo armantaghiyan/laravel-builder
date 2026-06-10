@@ -3,8 +3,8 @@
 namespace App\Http\Resources\Admin\Admin;
 
 use App\Http\Resources\Admin\Access\RoleResource;
+use App\Http\Resources\ResponseManager;
 use App\Services\Domain\Common\Constants\Rk;
-use App\Services\Infrastructure\Http\ResponseManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
