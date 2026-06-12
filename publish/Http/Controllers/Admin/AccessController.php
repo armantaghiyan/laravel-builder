@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\Domain\User\Access\Constants\Permissions;
+use App\Core\Domain\User\Access\Services\AccessService;
+use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Access\AccessPermissionToggleData;
 use App\Http\Data\Admin\Access\AccessRoleToggleData;
 use App\Http\Data\Admin\Access\AccessStoreData;
@@ -12,9 +15,6 @@ use App\Http\Resources\Admin\Access\AccessShowRoleResource;
 use App\Http\Resources\Admin\Access\AccessStoreResource;
 use App\Http\Resources\Admin\Access\AccessUpdateResource;
 use App\Http\Resources\SuccessResource;
-use App\Services\Domain\User\Access\Constants\Permissions;
-use App\Services\Domain\User\Access\Services\AccessService;
-use App\Services\Infrastructure\Exceptions\ErrorMessageException;
 use Illuminate\Routing\Controller;
 
 class AccessController extends Controller {

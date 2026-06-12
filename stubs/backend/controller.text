@@ -6,11 +6,11 @@ use App\Http\Resources\SuccessResource;
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Http\Data\Admin\{model}\{model}StoreData;
 use App\Http\Data\Admin\{model}\{model}UpdateData;
-use App\Services\{model}\Resources\{model}IndexResource;
-use App\Services\{model}\Resources\{model}ShowResource;
-use App\Services\{model}\Resources\{model}StoreResource;
-use App\Services\{model}\Resources\{model}UpdateResource;
-use App\Services\{model}\Services\{model}Service;
+use App\Core\{model}\Resources\{model}IndexResource;
+use App\Core\{model}\Resources\{model}ShowResource;
+use App\Core\{model}\Resources\{model}StoreResource;
+use App\Core\{model}\Resources\{model}UpdateResource;
+use App\Core\{model}\Services\{model}Service;
 use Illuminate\Routing\Controller;
 
 class {model}Controller extends Controller {

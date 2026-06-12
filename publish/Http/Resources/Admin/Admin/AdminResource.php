@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Admin\Admin;
 
-use App\Services\Domain\User\Admin\Models\Admin;
+use App\Core\Domain\User\Admin\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;

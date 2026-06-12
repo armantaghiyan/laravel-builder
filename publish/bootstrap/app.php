@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Domain\Common\Constants\StatusCodes;
+use App\Core\Domain\Common\Constants\StatusCodes;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -30,7 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
 	->withExceptions(function (Exceptions $exceptions) {
 
 		$exceptions->render(function (UnauthorizedException $e, Request $request) {
-			throw new \App\Services\Infrastructure\Exceptions\ErrorMessageException(__('error.no_access'), StatusCodes::Forbidden);
+			throw new \App\Core\Infrastructure\Exceptions\ErrorMessageException(__('error.no_access'), StatusCodes::Forbidden);
 		});
 
 	})->create();

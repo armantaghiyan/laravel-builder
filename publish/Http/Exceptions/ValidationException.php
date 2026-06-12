@@ -3,7 +3,7 @@
 namespace App\Http\Exceptions;
 
 
-use App\Services\Domain\Common\Constants\StatusCodes;
+use App\Core\Domain\Common\Constants\StatusCodes;
 use Illuminate\Http\JsonResponse;
 
 class ValidationException extends \Exception {

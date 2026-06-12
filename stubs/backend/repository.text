@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\{model}\Repositories;
+namespace App\Core\{model}\Repositories;
 
 use App\Models\{model};
 use App\Http\Data\Admin\{model}\{model}IndexData;
-use App\Services\Domain\Common\Repositories\BaseRepository;
+use App\Core\Domain\Common\Repositories\BaseRepository;
 
 class {model}Repository extends BaseRepository {
 

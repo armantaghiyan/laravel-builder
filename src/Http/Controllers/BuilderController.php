@@ -104,7 +104,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 
 		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Services/{$model}/Services/{$model}Service.php"), $content);
+		FileWriter::put(app_path("Core/{$model}/Services/{$model}Service.php"), $content);
 	}
 
 	public function createRepository($model, $columnInfo) {
@@ -119,7 +119,7 @@ class BuilderController {
 
 		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Services/{$model}/Repositories/{$model}Repository.php"), $content);
+		FileWriter::put(app_path("Core/{$model}/Repositories/{$model}Repository.php"), $content);
 	}
 
 	public function createDto($model, $action, $columnInfo) {
@@ -144,7 +144,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{action}', $action, $content);
 
-		FileWriter::put(app_path("Services/$model/Dto/{$model}{$action}Data.php"), $content);
+		FileWriter::put(app_path("Core/$model/Dto/{$model}{$action}Data.php"), $content);
 	}
 
 	public function createRescueModel($model, $columnInfo) {
@@ -163,7 +163,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{items}', $items, $content);
 
-		FileWriter::put(app_path("Services/{$model}/Resources/{$model}Resource.php"), $content);
+		FileWriter::put(app_path("Core/{$model}/Resources/{$model}Resource.php"), $content);
 	}
 
 	public function createRescueController($model, $action, $columnInfo) {

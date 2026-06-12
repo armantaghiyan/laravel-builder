@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\{model}\Services;
+namespace App\Core\{model}\Services;
 
 use App\Models\{model};
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Http\Data\Admin\{model}\{model}StoreData;
 use App\Http\Data\Admin\{model}\{model}UpdateData;
-use App\Services\{model}\Repositories\{model}Repository;
+use App\Core\{model}\Repositories\{model}Repository;
 
 class {model}Service {
 

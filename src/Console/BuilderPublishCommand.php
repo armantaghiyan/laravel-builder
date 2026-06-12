@@ -35,7 +35,7 @@ class BuilderPublishCommand extends Command {
 			return;
 		}
 
-		$this->publishDir('Services', 'app/Services');
+		$this->publishDir('Core', 'app/Core');
 		$this->publishDir('Http', 'app/Http');
 		$this->publishDir('Console', 'app/Console');
 		$this->publishDir('lang', 'lang');
