@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Core\Domain\User\Access\Constants\Permissions;
-use App\Core\Domain\User\Access\Services\AccessService;
+use App\Core\Domain\Access\Constants\Permissions;
+use App\Core\Domain\Access\Services\AccessService;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Access\AccessPermissionToggleData;
 use App\Http\Data\Admin\Access\AccessRoleToggleData;

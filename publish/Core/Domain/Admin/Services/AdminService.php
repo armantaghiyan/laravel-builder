@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Domain\User\Admin\Services;
+namespace App\Core\Domain\Admin\Services;
 
+use App\Core\Domain\Admin\Models\Admin;
+use App\Core\Domain\Admin\Repositories\AdminRepository;
 use App\Core\Domain\Common\Constants\StatusCodes;
-use App\Core\Domain\User\Admin\Models\Admin;
-use App\Core\Domain\User\Admin\Repositories\AdminRepository;
 use App\Core\Infrastructure\Auth\AuthManger;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Admin\AdminChangePasswordData;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Domain\User\Access\Services;
+namespace App\Core\Domain\Access\Services;
 
+use App\Core\Domain\Access\Repositories\AccessRepository;
 use App\Core\Domain\Common\Constants\StatusCodes;
-use App\Core\Domain\User\Access\Repositories\AccessRepository;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Access\AccessStoreData;
 use App\Http\Data\Admin\Access\AccessUpdateData;

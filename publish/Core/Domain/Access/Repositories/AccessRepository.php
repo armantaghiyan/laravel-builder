@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Domain\User\Access\Repositories;
+namespace App\Core\Domain\Access\Repositories;
 
-use App\Core\Domain\User\Admin\Models\Admin;
+use App\Core\Domain\Admin\Models\Admin;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 

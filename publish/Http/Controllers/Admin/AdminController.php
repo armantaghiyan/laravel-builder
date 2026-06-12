@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\Domain\Access\Constants\Permissions;
+use App\Core\Domain\Access\Services\AccessService;
+use App\Core\Domain\Admin\Services\AdminService;
 use App\Core\Domain\Common\Constants\Rk;
-use App\Core\Domain\User\Access\Constants\Permissions;
-use App\Core\Domain\User\Access\Services\AccessService;
-use App\Core\Domain\User\Admin\Services\AdminService;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use App\Http\Data\Admin\Admin\AdminLoginData;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Domain\User\Admin\Repositories;
+namespace App\Core\Domain\Admin\Repositories;
 
-use App\Core\Domain\User\Admin\Models\Admin;
+use App\Core\Domain\Admin\Models\Admin;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 
 class AdminRepository {

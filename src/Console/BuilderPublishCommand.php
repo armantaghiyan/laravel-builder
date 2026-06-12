@@ -99,7 +99,7 @@ class BuilderPublishCommand extends Command {
 		$content = file_get_contents(base_path('config/auth.php'));
 		if (!str_contains($content, 'admin')) {
 			$content = str_replace("'guards' => [", "'guards' => [ 'admin' => ['driver' => 'sanctum', 'provider' => 'admins',], 'api' => ['driver' => 'sanctum', 'provider' => 'users',],", $content);
-			$content = str_replace("'providers' => [", "'providers' => ['admins' => ['driver' => 'eloquent', 'model' => \App\Services\Domain\User\Admin\Models\Admin::class,],", $content);
+			$content = str_replace("'providers' => [", "'providers' => ['admins' => ['driver' => 'eloquent', 'model' => \App\Core\Domain\Admin\Models\Admin::class,],", $content);
 
 			file_put_contents(base_path('config/auth.php'), $content);
 		}
