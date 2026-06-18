@@ -22,7 +22,7 @@ abstract class BaseRepository {
         return $this->model->find($id);
     }
 
-    public function findOrErrorById(int|string $id): ?Model {
+    public function findOrErrorById(int|string $id): Model {
         return $this->model->where('id', $id)->firstOrError();
     }
 

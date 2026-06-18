@@ -2,12 +2,13 @@
 
 namespace App\Http\Resources\Admin\{model};
 
-use App\Core\Domain\Common\Constants\Rk;
+use App\Http\Resources\Rk;
 use App\Http\Resources\ResponseManager;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class {model-action}Resource extends JsonResource {
+
+class {model-action}Resource extends ResourceCollection {
 
     public function __construct(
    		public $items,
