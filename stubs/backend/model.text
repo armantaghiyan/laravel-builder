@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Core\Domain\Faq\Models;
+
+use App\Core\Domain\Common\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
+
+class {model} extends Model {
+
+    use BaseModel;
+
+    const TB = '{sumModel}';
+    {cols}
+
+    protected $fillable = [
+        {fillable}
+    ];
+
+
+    //------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------  Accessors and Mutators ------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------
+}

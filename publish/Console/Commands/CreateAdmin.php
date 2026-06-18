@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Core\Domain\Access\Services\AccessService;
-use App\Core\Domain\Admin\Models\Admin;
+use App\Core\Domain\Admin\Models\Faq;
 use App\Core\Domain\Admin\Services\AdminService;
 use App\Http\Data\Admin\Admin\AdminStoreData;
 use Illuminate\Console\Command;
@@ -39,6 +39,6 @@ class CreateAdmin extends Command {
 
 		$admin = $adminService->store(new AdminStoreData($name, $username, $password));
 
-		$accessService->toggleAdminRole($admin[Admin::ID], 1);
+		$accessService->toggleAdminRole($admin[Faq::ID], 1);
 	}
 }

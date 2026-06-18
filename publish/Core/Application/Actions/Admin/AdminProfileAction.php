@@ -2,7 +2,7 @@
 
 namespace App\Core\Application\Actions\Admin;
 
-use App\Core\Domain\Admin\Models\Admin;
+use App\Core\Domain\Admin\Models\Faq;
 use App\Core\Infrastructure\Auth\AuthManger;
 
 readonly class AdminProfileAction {
@@ -12,7 +12,7 @@ readonly class AdminProfileAction {
     ) {
     }
 
-    public function execute(): ?Admin {
+    public function execute(): ?Faq {
         return $this->authService->currentAdmin();
     }
 }

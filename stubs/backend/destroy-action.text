@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Core\Application\Actions\{model};
+
+use App\Core\Domain\{model}\Repositories\{model}Repository;
+
+readonly class {model}DestroyAction {
+
+	public function __construct(
+		private {model}Repository ${sumModel}Repository,
+	) {
+	}
+
+	public function execute(int $id): void {
+        $item = $this->{sumModel}Repository->findOrErrorById($id);
+        $this->{sumModel}Repository->delete($item);
+	}
+}

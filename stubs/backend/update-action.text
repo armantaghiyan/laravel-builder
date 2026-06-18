@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Core\Application\Actions\{model};
+
+use App\Core\Domain\{model}\Models\{model};
+use App\Core\Domain\{model}\Repositories\{model}Repository;
+use App\Http\Data\Admin\{model}\{model}UpdateData;
+
+readonly class {model}UpdateAction {
+
+    public function __construct(
+        private {model}Repository ${sumModel}Repository,
+    ) {
+    }
+
+    public function execute({model}UpdateData $data, int $id): {model} {
+        $item = $this->{sumModel}Repository->findOrErrorById($id);
+        $this->{sumModel}Repository->update($item, [
+            {items}
+        ]);
+
+        return $item;
+    }
+}

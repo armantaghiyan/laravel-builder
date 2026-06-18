@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Admin\Admin;
 
-use App\Core\Domain\Common\Constants\Rk;
 use App\Http\Resources\Admin\Access\RoleResource;
 use App\Http\Resources\ResponseManager;
+use App\Http\Resources\Rk;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

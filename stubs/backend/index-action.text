@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Core\Application\Actions\{model};
+
+use App\Core\Domain\{model}\Repositories\{model}Repository;
+use App\Http\Data\Admin\{model}\{model}IndexData;
+
+readonly class {model}IndexAction {
+
+    public function __construct(
+        private {model}Repository ${sumModel}Repository,
+    ) {
+    }
+
+    public function execute({model}IndexData $data): array {
+        return $this->{sumModel}Repository->index($data);
+    }
+}

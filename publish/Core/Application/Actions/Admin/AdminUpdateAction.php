@@ -2,7 +2,7 @@
 
 namespace App\Core\Application\Actions\Admin;
 
-use App\Core\Domain\Admin\Models\Admin;
+use App\Core\Domain\Admin\Models\Faq;
 use App\Core\Domain\Admin\Repositories\AdminRepository;
 use App\Http\Data\Admin\Admin\AdminUpdateData;
 
@@ -13,12 +13,12 @@ readonly class AdminUpdateAction {
     ) {
     }
 
-    public function execute(AdminUpdateData $data, int $id): Admin {
+    public function execute(AdminUpdateData $data, int $id): Faq {
         $admin = $this->adminRepository->findById($id);
 
         return $this->adminRepository->update($admin, [
-            Admin::NAME => $data->name,
-            Admin::USERNAME => $data->username,
+            Faq::NAME => $data->name,
+            Faq::USERNAME => $data->username,
         ]);
     }
 }

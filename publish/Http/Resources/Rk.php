@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Common\Constants;
+namespace App\Http\Resources;
 
 class Rk {
     const API_TOKEN = 'api_token';

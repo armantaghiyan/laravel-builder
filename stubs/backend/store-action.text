@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Core\Application\Actions\{model};
+
+use App\Core\Domain\{model}\Models\{model};
+use App\Core\Domain\{model}\Repositories\{model}Repository;
+use App\Http\Data\Admin\{model}\{model}StoreData;
+use Illuminate\Support\Facades\Hash;
+
+readonly class {model}StoreAction {
+
+    public function __construct(
+        private {model}Repository ${sumModel}Repository,
+    ) {
+    }
+
+    public function execute({model}StoreData $data): {model} {
+        return $this->{sumModel}Repository->create([
+            {items}
+        ]);
+    }
+}

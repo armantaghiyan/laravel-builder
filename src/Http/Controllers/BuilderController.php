@@ -49,11 +49,16 @@ class BuilderController {
 
 		$model = Str::studly(Str::singular($table));
 
+		$this->createModel($model, $columnInfo);
 		$this->createController($model, $columnInfo);
 
-		$this->createService($model, $columnInfo);
-		$this->createRepository($model, $columnInfo);
+		$this->createAction($model, 'Index', $columnInfo);
+		$this->createAction($model, 'Store', $columnInfo);
+		$this->createAction($model, 'Update', $columnInfo);
+		$this->createAction($model, 'Show', $columnInfo);
+		$this->createAction($model, 'Destroy', $columnInfo);
 
+		$this->createRepository($model, $columnInfo);
 		$this->createRescueModel($model, $columnInfo);
 
 		$this->createDto($model, 'Index', $columnInfo);
@@ -77,6 +82,29 @@ class BuilderController {
 		$this->createVueRoutes($model);
 	}
 
+	public function createModel($model, $columnInfo) {
+		$content = $this->getBackendStub('model.text');
+
+		$cols = "";
+		foreach ($columnInfo as $key => $value) {
+			$cols .= sprintf("const %s = '%s';\n\t", strtoupper($key), $key);
+		}
+
+		$fillable = "";
+		foreach ($columnInfo as $key => $value) {
+			if (!in_array($key, $this->ignoreCols)) {
+				$fillable .= sprintf("%s::%s,\n\t\t", $model, strtoupper($key));
+			}
+		}
+
+		$content = str_replace('{cols}', $cols, $content);
+		$content = str_replace('{fillable}', $fillable, $content);
+		$content = str_replace('{model}', $model, $content);
+		$content = str_replace('{sumModel}', strtolower($model), $content);
+
+		FileWriter::put(app_path("Core/Domain/{$model}/Models/{$model}.php"), $content);
+	}
+
 	public function createController($model, $columnInfo) {
 		$content = $this->getBackendStub('controller.text');
 
@@ -87,8 +115,9 @@ class BuilderController {
 		FileWriter::put(app_path("Http/Controllers/Admin/{$model}Controller.php"), $content);
 	}
 
-	public function createService($model, $columnInfo) {
-		$content = $this->getBackendStub('service.text');
+	public function createAction($model, $action, $columnInfo) {
+		$lowerAction = strtolower($action);
+		$content = $this->getBackendStub("$lowerAction-action.text");
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{sumModel}', strtolower($model), $content);
@@ -97,14 +126,11 @@ class BuilderController {
 		foreach ($columnInfo as $key => $value) {
 			if (!in_array($key, $this->ignoreCols)) {
 				$items .= sprintf("%s => \$data->%s,\n\t\t\t", $this->createConst($model, $key), $key);
-
 			}
 		}
 
 		$content = str_replace('{items}', $items, $content);
-
-		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Core/{$model}/Services/{$model}Service.php"), $content);
+		FileWriter::put(app_path("Core/Application/Actions/{$model}/{$model}{$action}Action.php"), $content);
 	}
 
 	public function createRepository($model, $columnInfo) {
@@ -113,13 +139,13 @@ class BuilderController {
 		$filters = "";
 		foreach ($columnInfo as $key => $value) {
 			if (!in_array($key, $this->ignoreFilters)) {
-				$filters .= sprintf("\$query->filter(%s, \$data->%s);\n\t\t", $this->createConst($model, $key), $key);
+				$filters .= sprintf("%sfilter(%s, \$data->%s)\n\t\t\t", $filters === ""? '':'->' , $this->createConst($model, $key), $key);
 			}
 		}
 
 		$content = str_replace('{filters}', $filters, $content);
 		$content = str_replace('{model}', $model, $content);
-		FileWriter::put(app_path("Core/{$model}/Repositories/{$model}Repository.php"), $content);
+		FileWriter::put(app_path("Core/Domain/{$model}/Repositories/{$model}Repository.php"), $content);
 	}
 
 	public function createDto($model, $action, $columnInfo) {
@@ -144,7 +170,7 @@ class BuilderController {
 		$content = str_replace('{items}', $items, $content);
 		$content = str_replace('{action}', $action, $content);
 
-		FileWriter::put(app_path("Core/$model/Dto/{$model}{$action}Data.php"), $content);
+		FileWriter::put(app_path("Http/Data/Admin/$model/{$model}{$action}Data.php"), $content);
 	}
 
 	public function createRescueModel($model, $columnInfo) {
@@ -163,7 +189,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{items}', $items, $content);
 
-		FileWriter::put(app_path("Core/{$model}/Resources/{$model}Resource.php"), $content);
+		FileWriter::put(app_path("Http/Resources/Admin/{$model}/{$model}Resource.php"), $content);
 	}
 
 	public function createRescueController($model, $action, $columnInfo) {
@@ -176,7 +202,7 @@ class BuilderController {
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{model-action}', $model . $action, $content);
 
-		FileWriter::put(app_path("Http/Resources/Admin/$model/{$action}Resource.php"), $content);
+		FileWriter::put(app_path("Http/Resources/Admin/$model/{$model}{$action}Resource.php"), $content);
 	}
 
 	private function createConst($model, $column) {

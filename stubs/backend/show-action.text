@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Core\Application\Actions\{model};
+
+use App\Core\Domain\{model}\Repositories\{model}Repository;
+
+readonly class {model}ShowAction {
+
+    public function __construct(
+        private {model}Repository ${sumModel}Repository,
+    ) {
+    }
+
+    public function execute(int $id) {
+        return $this->{sumModel}Repository->findOrErrorById($id);
+    }
+}

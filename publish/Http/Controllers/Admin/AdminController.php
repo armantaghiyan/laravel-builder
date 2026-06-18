@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Core\Application\Actions\Admin\AdminChangePasswordAction;
 use App\Core\Application\Actions\Admin\AdminDestroyAction;
 use App\Core\Application\Actions\Admin\AdminIndexAction;
 use App\Core\Application\Actions\Admin\AdminLoginAction;
@@ -12,7 +11,6 @@ use App\Core\Application\Actions\Admin\AdminStartAction;
 use App\Core\Application\Actions\Admin\AdminStoreAction;
 use App\Core\Application\Actions\Admin\AdminUpdateAction;
 use App\Core\Domain\Access\Constants\Permissions;
-use App\Core\Domain\Common\Constants\Rk;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use App\Http\Data\Admin\Admin\AdminLoginData;
@@ -24,6 +22,7 @@ use App\Http\Resources\Admin\Admin\AdminShowResource;
 use App\Http\Resources\Admin\Admin\AdminStartResource;
 use App\Http\Resources\Admin\Admin\AdminStoreResource;
 use App\Http\Resources\Admin\Admin\AdminUpdateResource;
+use App\Http\Resources\Rk;
 use App\Http\Resources\SuccessResource;
 use Illuminate\Routing\Controller;
 

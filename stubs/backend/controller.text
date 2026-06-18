@@ -6,47 +6,55 @@ use App\Http\Resources\SuccessResource;
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Http\Data\Admin\{model}\{model}StoreData;
 use App\Http\Data\Admin\{model}\{model}UpdateData;
-use App\Core\{model}\Resources\{model}IndexResource;
-use App\Core\{model}\Resources\{model}ShowResource;
-use App\Core\{model}\Resources\{model}StoreResource;
-use App\Core\{model}\Resources\{model}UpdateResource;
-use App\Core\{model}\Services\{model}Service;
+use App\Http\Resources\Admin\{model}\{model}IndexResource;
+use App\Http\Resources\Admin\{model}\{model}ShowResource;
+use App\Http\Resources\Admin\{model}\{model}StoreResource;
+use App\Http\Resources\Admin\{model}\{model}UpdateResource;
+use App\Core\Application\Actions\{model}\{model}IndexAction;
+use App\Core\Application\Actions\{model}\{model}ShowAction;
+use App\Core\Application\Actions\{model}\{model}StoreAction;
+use App\Core\Application\Actions\{model}\{model}UpdateAction;
+use App\Core\Application\Actions\{model}\{model}DestroyAction;
 use Illuminate\Routing\Controller;
 
 class {model}Controller extends Controller {
 
     public function __construct(
-        private {model}Service ${sumModel}Service,
+        private readonly {model}IndexAction   $indexAction,
+        private readonly {model}ShowAction    $showAction,
+        private readonly {model}StoreAction   $storeAction,
+        private readonly {model}UpdateAction  $updateAction,
+        private readonly {model}DestroyAction $destroyAction,
     ) {
 
     }
 
     public function index({model}IndexData $data): {model}IndexResource {
-        [$items, $count] = $this->{sumModel}Service->index($data);
+        [$items, $count] = $this->indexAction->execute($data);
 
         return new {model}IndexResource($items, $count);
     }
 
     public function store({model}StoreData $data): {model}StoreResource {
-        $item = $this->{sumModel}Service->store($data);
+        $item = $this->storeAction->execute($data);
 
         return new {model}StoreResource($item);
     }
 
     public function show($id): {model}ShowResource {
-        $item = $this->{sumModel}Service->show($id);
+        $item = $this->showAction->execute($id);
 
         return new {model}ShowResource($item);
     }
 
     public function update({model}UpdateData $data, $id): {model}UpdateResource {
-        $item = $this->{sumModel}Service->update($data, $id);
+        $item = $this->updateAction->execute($data, $id);
 
         return new {model}UpdateResource($item);
     }
 
     public function destroy($id): SuccessResource {
-        $this->{sumModel}Service->destroy($id);
+        $this->destroyAction->execute($id);
 
         return new SuccessResource([]);
     }
