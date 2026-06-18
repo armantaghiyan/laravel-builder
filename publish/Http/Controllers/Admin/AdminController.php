@@ -10,8 +10,8 @@ use App\Core\Application\Actions\Admin\AdminShowAction;
 use App\Core\Application\Actions\Admin\AdminStartAction;
 use App\Core\Application\Actions\Admin\AdminStoreAction;
 use App\Core\Application\Actions\Admin\AdminUpdateAction;
-use App\Core\Domain\Access\Constants\Permissions;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
+use App\Http\Constants\Permissions;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use App\Http\Data\Admin\Admin\AdminLoginData;
 use App\Http\Data\Admin\Admin\AdminStoreData;
@@ -28,72 +28,72 @@ use Illuminate\Routing\Controller;
 
 class AdminController extends Controller {
 
-	public function __construct(
-		private readonly AdminLoginAction   $loginAction,
-		private readonly AdminLogoutAction  $logoutAction,
-		private readonly AdminStartAction   $startAction,
-		private readonly AdminIndexAction   $indexAction,
-		private readonly AdminShowAction    $showAction,
-		private readonly AdminStoreAction   $storeAction,
-		private readonly AdminUpdateAction  $updateAction,
-		private readonly AdminDestroyAction $destroyAction,
-	) {
-		$this->middleware('permission:' . Permissions::ADMIN_INDEX)->only(['index', 'show']);
-		$this->middleware('permission:' . Permissions::ADMIN_STORE)->only(['store']);
-		$this->middleware('permission:' . Permissions::ADMIN_UPDATE)->only(['update']);
-	}
+    public function __construct(
+        private readonly AdminLoginAction   $loginAction,
+        private readonly AdminLogoutAction  $logoutAction,
+        private readonly AdminStartAction   $startAction,
+        private readonly AdminIndexAction   $indexAction,
+        private readonly AdminShowAction    $showAction,
+        private readonly AdminStoreAction   $storeAction,
+        private readonly AdminUpdateAction  $updateAction,
+        private readonly AdminDestroyAction $destroyAction,
+    ) {
+        $this->middleware('permission:' . Permissions::ADMIN_INDEX)->only(['index', 'show']);
+        $this->middleware('permission:' . Permissions::ADMIN_STORE)->only(['store']);
+        $this->middleware('permission:' . Permissions::ADMIN_UPDATE)->only(['update']);
+    }
 
-	public function index(AdminIndexData $data): AdminIndexResource {
-		[$items, $count] = $this->indexAction->execute($data);
+    public function index(AdminIndexData $data): AdminIndexResource {
+        [$items, $count] = $this->indexAction->execute($data);
 
-		return new AdminIndexResource($items, $count);
-	}
+        return new AdminIndexResource($items, $count);
+    }
 
-	public function store(AdminStoreData $data): AdminStoreResource {
-		$item = $this->storeAction->execute($data);
+    public function store(AdminStoreData $data): AdminStoreResource {
+        $item = $this->storeAction->execute($data);
 
-		return new AdminStoreResource([Rk::ITEM => $item]);
-	}
+        return new AdminStoreResource([Rk::ITEM => $item]);
+    }
 
-	public function show(int $id): AdminShowResource {
-		[$item, $roles, $adminRoles] = $this->showAction->execute($id);
+    public function show(int $id): AdminShowResource {
+        [$item, $roles, $adminRoles] = $this->showAction->execute($id);
 
-		return new AdminShowResource($item, $roles, $adminRoles);
-	}
+        return new AdminShowResource($item, $roles, $adminRoles);
+    }
 
-	public function update(AdminUpdateData $data, int $id): AdminUpdateResource {
-		$item = $this->updateAction->execute($data, $id);
+    public function update(AdminUpdateData $data, int $id): AdminUpdateResource {
+        $item = $this->updateAction->execute($data, $id);
 
-		return new AdminUpdateResource($item);
-	}
+        return new AdminUpdateResource($item);
+    }
 
-	public function destroy(int $id): SuccessResource {
-		$this->destroyAction->execute($id);
+    public function destroy(int $id): SuccessResource {
+        $this->destroyAction->execute($id);
 
-		return new SuccessResource([]);
-	}
+        return new SuccessResource([]);
+    }
 
-	/**
-	 * @throws ErrorMessageException
-	 */
-	public function login(AdminLoginData $data): AdminLoginResource {
-		[$admin, $apiToken] = $this->loginAction->execute($data);
+    /**
+     * @throws ErrorMessageException
+     */
+    public function login(AdminLoginData $data): AdminLoginResource {
+        [$admin, $apiToken] = $this->loginAction->execute($data);
 
-		return new AdminLoginResource($admin, $apiToken);
-	}
+        return new AdminLoginResource($admin, $apiToken);
+    }
 
-	/**
-	 * @throws ErrorMessageException
-	 */
-	public function adminStart() {
-		[$admin, $permissions, $adminPermissions] = $this->startAction->execute();
+    /**
+     * @throws ErrorMessageException
+     */
+    public function adminStart() {
+        [$admin, $permissions, $adminPermissions] = $this->startAction->execute();
 
-		return new AdminStartResource($admin, $permissions, $adminPermissions);
-	}
+        return new AdminStartResource($admin, $permissions, $adminPermissions);
+    }
 
-	public function logout(): SuccessResource {
-		$this->logoutAction->execute();
+    public function logout(): SuccessResource {
+        $this->logoutAction->execute();
 
-		return new SuccessResource([]);
-	}
+        return new SuccessResource([]);
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Access\Constants\Permissions;
+use App\Http\Constants\Permissions;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
