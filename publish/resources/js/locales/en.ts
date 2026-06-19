@@ -7,6 +7,7 @@ export default {
         all: 'All',
         edit: 'Edit',
         delete: 'Delete',
+        logout: 'Logout',
     },
     global: {
         id: "Id",

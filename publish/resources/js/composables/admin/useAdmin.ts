@@ -3,6 +3,7 @@ import Role from "@/utils/models/Role.ts";
 
 export default function useAdmin() {
     const router = useRouter();
+    const $user = userStore();
 
     //==================================================================================================================
     const {callApi} = useCallApi();
@@ -88,6 +89,19 @@ export default function useAdmin() {
     const store = () => storeAndUpdate('', 'post')
     const update = (id: string | number) => storeAndUpdate(id, 'patch')
 
+    //==================================================================================================================
+
+    function logout() {
+        showLoading();
+        callApi.post('/admin/logout', {
+            params: params,
+        }).then(() => {
+            $user.logout();
+            router.replace({path: '/login'});
+        });
+    }
+
+
     return {
         loginForm,
 
@@ -105,5 +119,7 @@ export default function useAdmin() {
         storeAndUpdateParams,
         store,
         update,
+
+        logout,
     }
 }

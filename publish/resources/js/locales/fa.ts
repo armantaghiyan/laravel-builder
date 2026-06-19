@@ -7,6 +7,7 @@ export default {
         all: 'همه',
         edit: 'ویرایش',
         delete: 'حذف',
+        logout: 'خروج',
     },
     global: {
         id: "شناسه",

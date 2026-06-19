@@ -1,6 +1,10 @@
 <script setup>
+import BtnDanger from "@/components/custom/buttons/btn-danger.vue";
+
 const $app = appStore()
+const $user = userStore()
 const {t, locale, getAvailableLocales} = useTranslations();
+const {logout} = useAdmin();
 
 const changeLanguage = (newLocale) => {
     locale.value = newLocale;
@@ -17,7 +21,7 @@ const changeLanguage = (newLocale) => {
                 </icon-button>
             </div>
             <div class="flex gap-2">
-                <div class="flex">
+                <div class="flex items-center">
                     <option-menu :width="160" :top="60" position="auto">
                         <template #button>
                             <icon-button>
@@ -36,7 +40,24 @@ const changeLanguage = (newLocale) => {
                     </icon-button>
                 </div>
 
-                <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-10 rounded-full">
+                <option-menu :width="224" :top="60" position="auto">
+                    <template #button>
+                        <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-10 rounded-full mt-1.5 cursor-pointer">
+                    </template>
+
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2 border-b border-light-dark p-3">
+                            <img src="/resources/assets/images/icon/user.jpg" class="rounded-full size-10" alt="">
+                            <div class="font-medium text-[15px]">
+                                {{$user.user.name}}
+                            </div>
+                        </div>
+
+                        <div class="p-2">
+                            <btn-danger @click="logout" class="w-full">{{ t('app.logout') }}</btn-danger>
+                        </div>
+                    </div>
+                </option-menu>
             </div>
         </card>
     </div>

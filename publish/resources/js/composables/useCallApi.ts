@@ -27,7 +27,6 @@ export function useCallApi() {
             config.headers.Authorization = `Bearer ${apiToken.value.value}`;
         }
 
-        console.log(locale.value);
         config.headers['Accept-Language'] = locale.value;
 
         return config;

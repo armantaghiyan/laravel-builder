@@ -9,14 +9,19 @@ const route = useRoute();
 
 
 watch(() => route.path, () => {
-    if(isXl.value) {
+    if(!isXl.value) {
         $app.isOpenSidebar = false;
     }
 });
 
-watch(() => isXl, () => {
-    $app.isOpenSidebar = !isXl.value;
+watch(isXl, () => {
+    $app.isOpenSidebar = !!isXl.value;
 });
+
+
+onMounted(() => {
+    $app.isOpenSidebar = !!isXl.value;
+})
 </script>
 
 <template>

@@ -128,7 +128,6 @@ function handleInput(e: Event) {
     }
 
     const caret = input.selectionStart ?? input.value.length;
-    // تعداد ارقام واقعی (بدون کاما) قبل از커서، برای بازگردانی درست커서 بعد از فرمت
     const digitsBeforeCaret = unformat(input.value.slice(0, caret)).length;
 
     const rawValue = filterNumberValue(unformat(input.value));
@@ -219,16 +218,6 @@ defineExpose({ focus: () => inputRef.value?.focus() });
                 @click="clear"
             >
                 ✕
-            </button>
-
-            <button
-                v-if="type === 'password'"
-                type="button"
-                tabindex="-1"
-                class="absolute inset-y-0 left-3.5 flex items-center text-gray-3 hover:text-gray-4"
-                @click="showPassword = !showPassword"
-            >
-                {{ showPassword ? '🙈' : '👁' }}
             </button>
 
             <slot name="suffix" />
