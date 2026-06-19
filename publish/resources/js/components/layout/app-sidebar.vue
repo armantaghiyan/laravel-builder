@@ -2,29 +2,32 @@
 import {Permissions} from "@/utils/models/enums.ts";
 
 const {hasPermission} = usePermission();
-const {breakpoint} = useBreakpoint();
+const isXl = useBreakpoint('xl');
 const $app = appStore()
 const {t} = useTranslations();
+const route = useRoute();
 
 
-watch(breakpoint, () => {
-    if(breakpoint.value === 'xl'){
-        $app.isOpenSidebar = true;
-    }else{
+watch(() => route.path, () => {
+    if(isXl.value) {
         $app.isOpenSidebar = false;
     }
+});
+
+watch(() => isXl, () => {
+    $app.isOpenSidebar = !isXl.value;
 });
 </script>
 
 <template>
     <div class="relative z-100">
         <fade-animate :duration="200">
-            <div v-if="$app.isOpenSidebar && breakpoint !== 'xl'" @click="$app.isOpenSidebar = false" class="bg-gray-4/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
+            <div v-if="$app.isOpenSidebar && !isXl" @click="$app.isOpenSidebar = false" class="bg-gray-4/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
         </fade-animate>
 
-        <aside class="fixed bg-menu-theme text-menu-color w-[260px] duration-200 h-full z-40" :class="{'start-0': $app.isOpenSidebar, 'start-[-260px]': !$app.isOpenSidebar}">
+        <aside class="fixed bg-menu-theme text-menu-color w-65 duration-200 h-full z-40" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
             <div>
-                <div class="h-16 flex items-center gap-2 ps-[22px] pe-2">
+                <div class="h-16 flex items-center gap-2 ps-5.5 pe-2">
                     <logo/>
                     <span class="text-white text-[22px] font-bold">{{ t('app_name')}}</span>
                 </div>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
 const $app = appStore()
 
-const {breakpoint} = useBreakpoint();
+const isXl = useBreakpoint('xl');
 </script>
 
 <template>
     <div class="relative bg-panel duration-200"
          :class="{
-            'w-[calc(100%-260px)] start-[260px]': $app.isOpenSidebar && breakpoint === 'xl',
-            'start-0': $app.isOpenSidebar && breakpoint !== 'xl'
+            'w-[calc(100%-260px)] inset-s-65': $app.isOpenSidebar && isXl,
+            'inset-s-0': $app.isOpenSidebar && !isXl
         }">
 
-        <div class="max-w-[1390px] mx-auto min-h-screen">
+        <div class="max-w-347.5 mx-auto min-h-screen">
             <slot/>
         </div>
     </div>

@@ -1,30 +1,31 @@
-export function useBreakpoint() {
-    const breakpoint = ref('');
+import {onMounted, onUnmounted, ref, type Ref} from 'vue'
 
-    const updateBreakpoint = () => {
-        const width = window.innerWidth;
+type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
-        if (width >= 1280) {
-            breakpoint.value = 'xl';
-        } else if (width >= 1024) {
-            breakpoint.value = 'lg';
-        } else if (width >= 768) {
-            breakpoint.value = 'md';
-        } else if (width >= 640) {
-            breakpoint.value = 'sm';
-        } else {
-            breakpoint.value = 'xs';
-        }
+const breakpoints: Record<Breakpoint, number> = {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536,
+}
+
+export function useBreakpoint(bp: Breakpoint): Ref<boolean> {
+    const matches = ref(false)
+
+    const check = () => {
+        if (typeof window === 'undefined') return
+        matches.value = window.innerWidth >= breakpoints[bp]
     }
 
     onMounted(() => {
-        updateBreakpoint();
-        window.addEventListener('resize', updateBreakpoint);
+        check()
+        window.addEventListener('resize', check)
     })
 
-    onBeforeUnmount(() => {
-        window.removeEventListener('resize', updateBreakpoint);
+    onUnmounted(() => {
+        window.removeEventListener('resize', check)
     })
 
-    return {breakpoint}
+    return matches
 }

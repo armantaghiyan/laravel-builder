@@ -78,12 +78,12 @@ onMounted(() => {
         <Listbox v-model="model">
             <div>
                 <ListboxButton
-                    class="relative w-full h-[38px] rounded-[6px] border border-gray-2 hover:border-gray-3 focus:border-[2px] focus:border-primary px-3.5 focus:px-4 duration-150"
+                    class="relative w-full h-9.5 rounded-md border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150"
                 >
 
                     <div class="flex items-start">{{ localOptions.filter((item: any) => item[value] == model )?.[0]?.[label] }}</div>
 
-                    <div class="pointer-events-none absolute inset-y-0 end-4 flex items-center">
+                    <div class="pointer-events-none absolute inset-y-0 inset-e-4 flex items-center">
                         <i class="ti ti-chevron-down"></i>
                     </div>
                 </ListboxButton>
@@ -94,7 +94,7 @@ onMounted(() => {
                     leave-to-class="opacity-0"
                 >
                     <ListboxOptions
-                        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-[6px] bg-white py-1 shadow-md text-base ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-md text-base ring-1 ring-black/5 focus:outline-none sm:text-sm"
                     >
                         <ListboxOption v-slot="{ active, selected }" v-for="(option, index) in localOptions" :key="index" :value="option[value]" as="template">
                             <li
