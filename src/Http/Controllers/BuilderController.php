@@ -80,6 +80,9 @@ class BuilderController {
 		$this->createVueTemplate($model, 'create', $columnInfo);
 		$this->createVueTemplate($model, 'show', $columnInfo);
 		$this->createVueRoutes($model);
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		$this->createPermissions($model);
 	}
 
 	public function createModel($model, $columnInfo) {
@@ -110,6 +113,7 @@ class BuilderController {
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{sumModel}', strtolower($model), $content);
+		$content = str_replace('{upperModel}', strtoupper($model), $content);
 
 
 		FileWriter::put(app_path("Http/Controllers/Admin/{$model}Controller.php"), $content);
@@ -315,6 +319,7 @@ class BuilderController {
 
 		$content = str_replace('{thead}', $thead, $content);
 		$content = str_replace('{tbody}', $tbody, $content);
+		$content = str_replace('{upperModel}', strtoupper($model), $content);
 
 
 		$updateStoreParams = "";
@@ -393,5 +398,37 @@ class BuilderController {
 		}
 
 		return $params;
+	}
+
+
+	private function createPermissions($model) {
+		$content = file_get_contents(app_path('Http/Constants/Permissions.php'));
+
+		$lowerModel = strtolower($model);
+		$upperModel = strtoupper($model);
+
+		$perms = "Permissions {\n
+	const {$upperModel}_INDEX = '{$lowerModel}.index';
+	const {$upperModel}_UPDATE = '{$lowerModel}.update';
+	const {$upperModel}_STORE = '{$lowerModel}.store';
+	const {$upperModel}_DESTROY = '{$lowerModel}.destroy';\n
+";
+
+		$content = str_replace('Permissions {', $perms, $content);
+		FileWriter::put(app_path("Http/Constants/Permissions.php"), $content);
+
+
+		$content = file_get_contents(resource_path('js/utils/models/enums.ts'));
+
+		$permsFront = "Permissions { \n
+	{$upperModel}_INDEX = '{$lowerModel}.index',
+    {$upperModel}_UPDATE = '{$lowerModel}.update',
+    {$upperModel}_STORE = '{$lowerModel}.store',
+    {$upperModel}_DESTROY = '{$lowerModel}.destroy',\n
+";
+
+		$content = str_replace('Permissions {', $permsFront, $content);
+
+		FileWriter::put(resource_path('js/utils/models/enums.ts'), $content);
 	}
 }

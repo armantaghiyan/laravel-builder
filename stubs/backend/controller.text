@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Constants\Permissions;
 use App\Http\Resources\SuccessResource;
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Http\Data\Admin\{model}\{model}StoreData;
@@ -26,7 +27,10 @@ class {model}Controller extends Controller {
         private readonly {model}UpdateAction  $updateAction,
         private readonly {model}DestroyAction $destroyAction,
     ) {
-
+        $this->middleware('permission:' . Permissions::{upperModel}_INDEX)->only(['index', 'show']);
+        $this->middleware('permission:' . Permissions::{upperModel}_STORE)->only(['store']);
+        $this->middleware('permission:' . Permissions::{upperModel}_UPDATE)->only(['update']);
+        $this->middleware('permission:' . Permissions::{upperModel}_DESTROY)->only(['destroy']);
     }
 
     public function index({model}IndexData $data): {model}IndexResource {

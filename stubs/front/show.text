@@ -1,9 +1,13 @@
 <script setup>
 import use{model}Show from "@/composables/{name}/use{model}Show.js";
 import use{model}Destroy from "@/composables/{name}/use{model}Destroy.js";
+import {Permissions} from "@/utils/models/enums.ts";
+import {usePermission} from "@/composables/usePermission.ts";
 
 const {show, item} = use{model}Show();
 const {destroy} = use{model}Destroy();
+const {hasPermission} = usePermission();
+
 
 const route = useRoute();
 const router = useRouter();
@@ -23,15 +27,15 @@ onMounted(() => {
 <template>
     <card :title="t('faq.name_detail')" class="col-span-12">
         <template #header>
-            <option-menu :width="240" :top="50" position="auto">
+            <option-menu v-if="hasPermission(Permissions.{upperModel}_UPDATE) || hasPermission(Permissions.{upperModel}_DESTROY)" :width="240" :top="50" position="auto">
                 <template #button>
                     <btn-option/>
                 </template>
                 <div class="flex flex-col p-2 gap-1">
-                    <router-link :to="`/faq/create/${route.params.id}`">
+                    <router-link v-if="hasPermission(Permissions.{upperModel}_UPDATE)" :to="`/faq/create/${route.params.id}`">
                         <btn-clickable>{{ t(`app.edit`) }}</btn-clickable>
                     </router-link>
-                    <btn-clickable @click="destroyItem">{{ t(`app.delete`) }}</btn-clickable>
+                    <btn-clickable v-if="hasPermission(Permissions.{upperModel}_DESTROY)" @click="destroyItem">{{ t(`app.delete`) }}</btn-clickable>
                 </div>
             </option-menu>
         </template>

@@ -31,6 +31,24 @@ class BuilderInstallCommand extends Command {
 			return;
 		}
 
+		$this->info('Installing hekmatinasser/verta...');
+
+		$process = Process::timeout(600)->run('composer require hekmatinasser/verta');
+		if ($process->successful()) {
+			$this->info('✅ Package installed successfully.');
+			$this->line($process->output());
+
+		} else {
+			$this->error('❌ Failed to install package.');
+			$this->line($process->errorOutput());
+		}
+
+		$this->info('Publishing verta config...');
+		Artisan::call('vendor:publish', [
+			'--provider' => 'Hekmatinasser\Verta\VertaServiceProvider',
+		]);
+		$this->info(Artisan::output());
+		//==============================================================================================================
 		$this->info('Installing spatie/laravel-permission...');
 
 		$process = Process::timeout(600)->run('composer require spatie/laravel-permission');

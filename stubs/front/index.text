@@ -2,10 +2,14 @@
 import use{model}List from "@/composables/{name}/use{model}List.ts";
 import use{model}Destroy from "@/composables/{name}/use{model}Destroy.ts";
 import {model} from "@/utils/models/{model}.ts";
+import {Permissions} from "@/utils/models/enums.ts";
+import {usePermission} from "@/composables/usePermission.ts";
 
 const {t} = useTranslations();
 const {fetchData, items, count, params, reFetchData, loading} = use{model}List();
 const {destroy} = use{model}Destroy();
+const {hasPermission} = usePermission();
+
 
 function destroyItem (targetItem: {model}){
     destroy(targetItem.id, () => {
@@ -35,7 +39,7 @@ onMounted(() => {
                     <div class="flex gap-4">
                         <page-rows v-model="params.page_rows"/>
 
-                        <router-link to="/{name}/create">
+                        <router-link v-if="hasPermission(Permissions.{upperModel}_STORE)" to="/{name}/create">
                             <btn-primary-add/>
                         </router-link>
                     </div>
@@ -57,9 +61,9 @@ onMounted(() => {
                         </custom-td>
                         {tbody}
                         <custom-td class="flex">
-                            <btn-delete @click="destroyItem(item)"/>
+                            <btn-delete v-if="hasPermission(Permissions.{upperModel}_DESTROY)" @click="destroyItem(item)"/>
                             <btn-see :href="`/{name}/${item.id}`"/>
-                            <router-link :to="`/{name}/create/${item.id}`">
+                            <router-link v-if="hasPermission(Permissions.{upperModel}_UPDATE)" :to="`/{name}/create/${item.id}`">
                                 <btn-edit/>
                             </router-link>
                         </custom-td>
