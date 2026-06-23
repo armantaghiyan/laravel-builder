@@ -86,6 +86,7 @@ class AccessController extends Controller {
 		return new AccessShowRoleResource($role);
 	}
 
+	#[Middleware('permission:' . Permissions::ROLE_STORE)]
 	public function store(AccessStoreData $data): AccessStoreResource {
 		$role = $this->storeAction->execute($data);
 
