@@ -16,6 +16,7 @@ use App\Core\Application\Actions\{model}\{model}ShowAction;
 use App\Core\Application\Actions\{model}\{model}StoreAction;
 use App\Core\Application\Actions\{model}\{model}UpdateAction;
 use App\Core\Application\Actions\{model}\{model}DestroyAction;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Controller;
 
 class {model}Controller extends Controller {
@@ -27,36 +28,37 @@ class {model}Controller extends Controller {
         private readonly {model}UpdateAction  $updateAction,
         private readonly {model}DestroyAction $destroyAction,
     ) {
-        $this->middleware('permission:' . Permissions::{upperModel}_INDEX)->only(['index', 'show']);
-        $this->middleware('permission:' . Permissions::{upperModel}_STORE)->only(['store']);
-        $this->middleware('permission:' . Permissions::{upperModel}_UPDATE)->only(['update']);
-        $this->middleware('permission:' . Permissions::{upperModel}_DESTROY)->only(['destroy']);
     }
 
+    #[Middleware('permission:' . Permissions::{upperModel}_INDEX)]
     public function index({model}IndexData $data): {model}IndexResource {
         [$items, $count] = $this->indexAction->execute($data);
 
         return new {model}IndexResource($items, $count);
     }
 
+    #[Middleware('permission:' . Permissions::{upperModel}_STORE)]
     public function store({model}StoreData $data): {model}StoreResource {
         $item = $this->storeAction->execute($data);
 
         return new {model}StoreResource($item);
     }
 
+    #[Middleware('permission:' . Permissions::{upperModel}_INDEX)]
     public function show($id): {model}ShowResource {
         $item = $this->showAction->execute($id);
 
         return new {model}ShowResource($item);
     }
 
+    #[Middleware('permission:' . Permissions::{upperModel}_UPDATE)]
     public function update({model}UpdateData $data, $id): {model}UpdateResource {
         $item = $this->updateAction->execute($data, $id);
 
         return new {model}UpdateResource($item);
     }
 
+    #[Middleware('permission:' . Permissions::{upperModel}_DESTROY)]
     public function destroy($id): SuccessResource {
         $this->destroyAction->execute($id);
 
