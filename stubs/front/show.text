@@ -25,14 +25,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <card :title="t('faq.name_detail')" class="col-span-12">
+    <card :title="t('{name}.name_detail')" class="col-span-12">
         <template #header>
             <option-menu v-if="hasPermission(Permissions.{upperModel}_UPDATE) || hasPermission(Permissions.{upperModel}_DESTROY)" :width="240" :top="50" position="auto">
                 <template #button>
                     <btn-option/>
                 </template>
                 <div class="flex flex-col p-2 gap-1">
-                    <router-link v-if="hasPermission(Permissions.{upperModel}_UPDATE)" :to="`/faq/create/${route.params.id}`">
+                    <router-link v-if="hasPermission(Permissions.{upperModel}_UPDATE)" :to="`/{name}/create/${route.params.id}`">
                         <btn-clickable>{{ t(`app.edit`) }}</btn-clickable>
                     </router-link>
                     <btn-clickable v-if="hasPermission(Permissions.{upperModel}_DESTROY)" @click="destroyItem">{{ t(`app.delete`) }}</btn-clickable>

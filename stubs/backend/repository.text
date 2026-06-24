@@ -2,7 +2,7 @@
 
 namespace App\Core\Domain\{model}\Repositories;
 
-use App\Core\Domain\Faq\Models\{model};
+use App\Core\Domain\{model}\Models\{model};
 use App\Http\Data\Admin\{model}\{model}IndexData;
 use App\Core\Domain\Common\Repositories\BaseRepository;
 

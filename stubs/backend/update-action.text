@@ -5,6 +5,8 @@ namespace App\Core\Application\Actions\{model};
 use App\Core\Domain\{model}\Models\{model};
 use App\Core\Domain\{model}\Repositories\{model}Repository;
 use App\Http\Data\Admin\{model}\{model}UpdateData;
+use Illuminate\Database\Eloquent\Model;
+
 
 readonly class {model}UpdateAction {
 
@@ -13,7 +15,7 @@ readonly class {model}UpdateAction {
     ) {
     }
 
-    public function execute({model}UpdateData $data, int $id): {model} {
+    public function execute({model}UpdateData $data, int $id): Model {
         $item = $this->{sumModel}Repository->findOrErrorById($id);
         $this->{sumModel}Repository->update($item, [
             {items}

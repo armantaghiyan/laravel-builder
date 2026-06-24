@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {model} from "@/utils/models/{model}.ts";
-import useFaqStoreUpdate from "@/composables/{name}/use{model}StoreUpdate.ts";
+import use{model}StoreUpdate from "@/composables/{name}/use{model}StoreUpdate.ts";
 import use{model}Show from "@/composables/{name}/use{model}Show.ts";
 
 const {storeAndUpdateParams, update, store} = use{model}StoreUpdate();
@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
     <div>
         <div class="pb-6 pt-2">
-            <h4 class="font-medium text-[24px] pb-2">{{t('name.add_a_{name}')}}</h4>
+            <h4 class="font-medium text-[24px] pb-2">{{t('{name}.add_a_{name}')}}</h4>
         </div>
 
         <card :title="t('admin.admin_information')">
