@@ -55,9 +55,15 @@ onMounted(() => {
                         </custom-td>
                         <custom-td>{{ item.name }}</custom-td>
                         <custom-td>{{ item.username }}</custom-td>
-                        <custom-td>{{ item.last_login }}</custom-td>
-                        <custom-td>{{ item.created_at }}</custom-td>
-                        <custom-td>{{ item.updated_at }}</custom-td>
+                        <custom-td>
+                            <span dir="ltr">{{ item.last_login }}</span>
+                        </custom-td>
+                        <custom-td>
+                            <span dir="ltr">{{ item.created_at }}</span>
+                        </custom-td>
+                        <custom-td>
+                            <span dir="ltr">{{ item.updated_at }}</span>
+                        </custom-td>
                         <custom-td class="flex">
                             <btn-see :href="`/admin/${item.id}`"/>
                             <router-link v-if="hasPermission(Permissions.ADMIN_UPDATE)" :to="`/admin/create/${item.id}`">

@@ -43,9 +43,15 @@ onMounted(() => {
                 <label-item :title="t('global.id')">{{item?.id}}</label-item>
                 <label-item :title="t('global.name')">{{item?.name}}</label-item>
                 <label-item :title="t('global.username')">{{item?.username}}</label-item>
-                <label-item :title="t('admin.last_login')">{{item?.last_login}}</label-item>
-                <label-item :title="t('global.created_at')">{{item?.created_at}}</label-item>
-                <label-item :title="t('global.updated_at')">{{item?.updated_at}}</label-item>
+                <label-item :title="t('admin.last_login')">
+                    <span dir="ltr">{{item?.last_login}}</span>
+                </label-item>
+                <label-item :title="t('global.created_at')">
+                    <span dir="ltr">{{item?.created_at}}</span>
+                </label-item>
+                <label-item :title="t('global.updated_at')">
+                    <span dir="ltr">{{item?.updated_at}}</span>
+                </label-item>
             </card>
             <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles.role')" class="lg:col-span-8 col-span-12">
 

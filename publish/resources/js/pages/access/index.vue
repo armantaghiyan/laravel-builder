@@ -45,8 +45,12 @@ onMounted(() => {
                             <id-formater :id="item.id"/>
                         </custom-td>
                         <custom-td>{{ item.name }}</custom-td>
-                        <custom-td>{{ item.created_at }}</custom-td>
-                        <custom-td>{{ item.updated_at }}</custom-td>
+                        <custom-td>
+                            <span dir="ltr">{{ item.created_at }}</span>
+                        </custom-td>
+                        <custom-td>
+                            <span dir="ltr">{{ item.updated_at }}</span>
+                        </custom-td>
                         <custom-td class="flex">
                             <btn-see v-if="hasPermission(Permissions.ROLE_UPDATE)" :href="`/access/${item.id}`"/>
                             <btn-delete v-if="hasPermission(Permissions.ROLE_DESTROY)" @click="destroyRole(item.id, index)"/>
