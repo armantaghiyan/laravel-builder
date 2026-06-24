@@ -2,7 +2,7 @@
 
 namespace App\Core\Application\Actions\Admin;
 
-use App\Core\Domain\Admin\Models\Faq;
+use App\Core\Domain\Admin\Models\Admin;
 use App\Core\Domain\Admin\Repositories\AdminRepository;
 use App\Core\Domain\Common\Constants\StatusCodes;
 use App\Core\Infrastructure\Auth\AuthManger;
@@ -24,12 +24,12 @@ readonly class AdminChangePasswordAction {
     public function execute(AdminChangePasswordData $data): void {
         $admin = $this->authService->currentAdmin();
 
-        if (!Hash::check($data->old_password, $admin[Faq::PASSWORD])) {
+        if (!Hash::check($data->old_password, $admin[Admin::PASSWORD])) {
             throw new ErrorMessageException(__('error.old_password_incorrect'), StatusCodes::Bad_request);
         }
 
         $this->adminRepository->updateField($admin, [
-            Faq::PASSWORD => Hash::make($data->new_password),
+            Admin::PASSWORD => Hash::make($data->new_password),
         ]);
     }
 }

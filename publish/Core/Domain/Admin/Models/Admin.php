@@ -30,10 +30,10 @@ class Admin extends Authenticatable {
 	 * @var array<int, string>
 	 */
 	protected $fillable = [
-		Faq::ID,
-		Faq::NAME,
-		Faq::USERNAME,
-		Faq::PASSWORD,
+		Admin::ID,
+		Admin::NAME,
+		Admin::USERNAME,
+		Admin::PASSWORD,
 	];
 
 	/**
@@ -42,7 +42,7 @@ class Admin extends Authenticatable {
 	 * @var array<int, string>
 	 */
 	protected $hidden = [
-		Faq::PASSWORD,
+		Admin::PASSWORD,
 	];
 
 	/**
@@ -52,7 +52,7 @@ class Admin extends Authenticatable {
 	 */
 	protected function casts(): array {
 		return [
-			Faq::PASSWORD => 'hashed',
+			Admin::PASSWORD => 'hashed',
 		];
 	}
 

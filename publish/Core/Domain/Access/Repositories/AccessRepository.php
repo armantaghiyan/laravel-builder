@@ -2,7 +2,7 @@
 
 namespace App\Core\Domain\Access\Repositories;
 
-use App\Core\Domain\Admin\Models\Faq;
+use App\Core\Domain\Admin\Models\Admin;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -20,11 +20,11 @@ class AccessRepository {
         return $role->permissions()->get(['id', 'name'])->makeHidden(['pivot', 'updated_at', 'created_at', 'guard_name']);
     }
 
-    public function getAdminById(int $id): Faq {
-        return Faq::where(Faq::ID, $id)->firstOrError();
+    public function getAdminById(int $id): Admin {
+        return Admin::where(Admin::ID, $id)->firstOrError();
     }
 
-    public function getAdminRoles(Faq $admin) {
+    public function getAdminRoles(Admin $admin) {
         return $admin->roles()->get(['id', 'name'])->makeHidden(['pivot']);
     }
 
@@ -65,15 +65,15 @@ class AccessRepository {
         $role->givePermissionTo($permission);
     }
 
-    public function adminHasRole(Faq $admin, string $roleName): bool {
+    public function adminHasRole(Admin $admin, string $roleName): bool {
         return $admin->hasRole($roleName);
     }
 
-    public function assignRole(Faq $admin, string $roleName): void {
+    public function assignRole(Admin $admin, string $roleName): void {
         $admin->assignRole($roleName);
     }
 
-    public function removeRole(Faq $admin, string $roleName): void {
+    public function removeRole(Admin $admin, string $roleName): void {
         $admin->removeRole($roleName);
     }
 }
