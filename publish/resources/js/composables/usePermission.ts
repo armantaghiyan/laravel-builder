@@ -6,6 +6,11 @@ export const usePermission = () => {
 
     function hasPermission(permission: Permissions) {
         // @ts-ignore
+        if($user.adminPermissions.find(item => item.name === Permissions.ADMIN_SUPER_ADMIN)) {
+            return true;
+        }
+
+        // @ts-ignore
         return $user.adminPermissions.find(item => item.name === permission);
     }
 

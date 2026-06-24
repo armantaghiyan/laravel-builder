@@ -1,5 +1,5 @@
 export enum Permissions {
-    ADMIN_INDEX = 'admin.index',
+    ADMIN_SUPER_ADMIN = 'admin.super_admin',
     ADMIN_STORE = 'admin.store',
     ADMIN_UPDATE = 'admin.update',
     ADMIN_ADD_ROLE = 'admin.add_role',
