@@ -51,7 +51,7 @@ class AdminController extends Controller {
 	public function store(AdminStoreData $data): AdminStoreResource {
 		$item = $this->storeAction->execute($data);
 
-		return new AdminStoreResource([Rk::ITEM => $item]);
+		return new AdminStoreResource($item);
 	}
 
 	#[Middleware('permission:' . Permissions::ADMIN_INDEX)]

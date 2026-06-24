@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Core\Domain\Access\Services\AccessService;
-use App\Core\Domain\Admin\Models\Faq;
-use App\Core\Domain\Admin\Services\AdminService;
+use App\Core\Application\Actions\Access\AccessToggleAdminRoleAction;
+use App\Core\Application\Actions\Admin\AdminStoreAction;
+use App\Core\Domain\Admin\Models\Admin;
 use App\Http\Data\Admin\Admin\AdminStoreData;
 use Illuminate\Console\Command;
 
@@ -29,16 +29,15 @@ class CreateAdmin extends Command {
 	 * Execute the console command.
 	 */
 	public function handle(
-		AdminService $adminService,
-		AccessService $accessService
+		AdminStoreAction            $adminStoreAction,
+		AccessToggleAdminRoleAction $accessToggleAdminRoleAction,
 	) {
 		$name = $this->ask('Please enter your name');
 		$username = $this->ask('Please enter the username');
 		$password = $this->secret('Please enter the password');
 
+		$admin = $adminStoreAction->execute(new AdminStoreData($name, $username, $password));
 
-		$admin = $adminService->store(new AdminStoreData($name, $username, $password));
-
-		$accessService->toggleAdminRole($admin[Faq::ID], 1);
+		$accessToggleAdminRoleAction->execute($admin[Admin::ID], 1);
 	}
 }

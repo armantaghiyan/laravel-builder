@@ -78,6 +78,7 @@ export default {
         permissions: 'Permissions',
         permission: {
             admin: {
+                super_admin: 'Super admin',
                 index: "Admin list",
                 store: "Admin store",
                 update: "Admin update",

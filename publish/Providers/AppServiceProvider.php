@@ -2,16 +2,16 @@
 
 namespace App\Providers;
 
+use App\Http\Constants\Permissions;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
+
 	/**
 	 * Register any application services.
 	 */
-	public function register(): void
-	{
+	public function register(): void {
 		//
 	}
 
@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
 	public function boot(): void {
 
 		Gate::before(function ($user, $ability) {
-			return $user->hasRole('Super Admin') ? true : null;
+			return $user->hasPermissionTo(Permissions::ADMIN_SUPER_ADMIN) ? true : null;
 		});
 	}
 }

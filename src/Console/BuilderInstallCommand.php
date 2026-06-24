@@ -62,6 +62,15 @@ class BuilderInstallCommand extends Command {
 			$this->line($process->errorOutput());
 		}
 
+		sleep(10);
+
+		$this->info('Publishing Spatie data config...');
+		Artisan::call('vendor:publish', [
+			'--provider' => 'Spatie\Permission\PermissionServiceProvider',
+		]);
+
+		$this->info(Artisan::output());
+
 		//==============================================================================================================
 		$this->info('Installing spatie/laravel-data...');
 
@@ -77,13 +86,6 @@ class BuilderInstallCommand extends Command {
 		}
 
 		sleep(10);
-
-		$this->info('Publishing Spatie permission config...');
-		Artisan::call('vendor:publish', [
-			'--provider' => 'Spatie\Permission\PermissionServiceProvider',
-		]);
-		$this->info(Artisan::output());
-
 
 		$this->info('Publishing Spatie Laravel Data config...');
 		Artisan::call('vendor:publish', [

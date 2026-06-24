@@ -13,7 +13,7 @@ const canToggle = ref(true);
 const {t} = useTranslations();
 
 function isActive() {
-    if (props.rolePermissions.find(rolePermission => rolePermission.id === props.permission.id) || props.roleId == 1) {
+    if (props.rolePermissions.find(rolePermission => rolePermission.id === props.permission.id)) {
         active.value = true;
     }
 }
@@ -32,5 +32,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <switch-input :title="t(`access.permission.${permission.name}`)" v-model="active" @on-click="doTogglePermission" :disabled="props.roleId == 1"/>
+    <switch-input :title="t(`access.permission.${permission.name}`)" v-model="active" @on-click="doTogglePermission"/>
 </template>

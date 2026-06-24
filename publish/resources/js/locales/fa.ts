@@ -78,6 +78,7 @@ export default {
         permissions: 'دسترسی ها',
         permission: {
             admin: {
+                super_admin: 'مدیر کل',
                 index: "لیست مدیران",
                 store: "ایجاد مدیر",
                 update: "ویرایش مدیران",
