@@ -9,13 +9,13 @@
             class="relative w-full rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-200"
             :class="{
                 'ring-2 ring-primary/30 border-primary': isOpen,
-                '!border-red-400 ring-2 ring-red-100': error,
+                'border-red-400! ring-2 ring-red-100': error,
                 'opacity-50 cursor-not-allowed pointer-events-none': disabled,
             }"
         >
             <!-- Inner: wrap tags + input -->
             <div
-                class="flex flex-wrap items-center gap-1.5 px-3 py-2 min-h-[42px] cursor-text"
+                class="flex flex-wrap items-center gap-1.5 px-3 py-2 min-h-10.5 cursor-text"
                 @click="openDropdown"
             >
                 <!-- تمام تگ‌ها — بدون هیچ محدودیتی -->
@@ -26,11 +26,11 @@
                             :key="trackBy ? item[trackBy] : item"
                             class="inline-flex items-center gap-1 bg-primary/10 text-primary text-[12px] font-medium rounded-full pl-2.5 pr-1.5 py-1 border border-primary/20 hover:border-primary/40 transition-colors"
                         >
-                            <span class="max-w-[140px] truncate">{{ getLabel(item) }}</span>
+                            <span class="max-w-35 truncate">{{ getLabel(item) }}</span>
                             <button
                                 type="button"
                                 tabindex="-1"
-                                class="w-3.5 h-3.5 rounded-full bg-primary/15 hover:bg-red-100 hover:text-red-500 text-primary/60 transition-all flex items-center justify-center flex-shrink-0"
+                                class="w-3.5 h-3.5 rounded-full bg-primary/15 hover:bg-red-100 hover:text-red-500 text-primary/60 transition-all flex items-center justify-center shrink-0"
                                 :disabled="disabled"
                                 @click.stop="removeItem(i)"
                             >
@@ -53,7 +53,7 @@
                     ref="searchRef"
                     v-model="searchQuery"
                     type="text"
-                    class="auto-placeholder flex-1 min-w-[100px] outline-none bg-transparent text-sm text-gray-700 placeholder:text-gray-400 placeholder:text-[13px] py-0.5"
+                    class="auto-placeholder flex-1 min-w-25 outline-none bg-transparent text-sm text-gray-700 placeholder:text-gray-400 placeholder:text-[13px] py-0.5"
                     :placeholder="hasSelection ? '' : placeholder"
                     :disabled="disabled"
                     @focus="openDropdown"
@@ -66,7 +66,7 @@
                 </span>
 
                 <!-- Clear + chevron — همیشه آخر ردیف -->
-                <div class="flex items-center gap-1 ml-auto pl-1 flex-shrink-0 self-center">
+                <div class="flex items-center gap-1 ml-auto pl-1 shrink-0 self-center">
                     <button
                         v-if="clearable && hasSelection"
                         type="button"
@@ -127,7 +127,7 @@
                             @mousedown.prevent="toggleAll"
                         >
                             <span
-                                class="w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all"
+                                class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-all"
                                 :class="allSelected ? 'bg-primary border-primary' : someSelected ? 'bg-primary/10 border-primary/50' : 'border-gray-300'"
                             >
                                 <svg v-if="allSelected" class="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg>
@@ -142,7 +142,7 @@
                             class="flex items-center gap-3 mx-1.5 px-3 py-2.5 text-sm cursor-pointer select-none rounded-lg transition-all duration-100"
                             :class="[
                                 isSelected(option) ? 'bg-primary/8 text-primary' : 'text-gray-700 hover:bg-gray-50',
-                                idx === highlightedIndex ? '!bg-gray-100' : '',
+                                idx === highlightedIndex ? 'bg-gray-100!' : '',
                             ]"
                             role="option"
                             :aria-selected="isSelected(option)"
@@ -150,7 +150,7 @@
                         >
                             <span
                                 v-if="multiple"
-                                class="w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all"
+                                class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-all"
                                 :class="isSelected(option) ? 'bg-primary border-primary' : 'border-gray-300'"
                             >
                                 <svg v-if="isSelected(option)" class="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg>
@@ -162,7 +162,7 @@
 
                             <svg
                                 v-if="!multiple && isSelected(option)"
-                                class="w-4 h-4 text-primary ml-auto flex-shrink-0"
+                                class="w-4 h-4 text-primary ml-auto shrink-0"
                                 viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"
                             >
                                 <path d="M2 7l3.5 3.5L12 3"/>
@@ -383,12 +383,8 @@ async function fetchOptions(query = '') {
     if (!props.fetchUrl) return
     isLoading.value = true
     try {
-        const url = new URL(props.fetchUrl)
-        if (query) url.searchParams.set('q', query)
-        Object.entries(props.fetchParams).forEach(([k, v]) => url.searchParams.set(k, v))
-
         const {callApi} = useCallApi();
-        const res = await callApi(url.toString())
+        const res = await callApi(props.fetchUrl)
         fetchedOptions.value = res.data.data.items;
     } catch (err) {
         emit('fetch-error', err)
