@@ -9,7 +9,7 @@ export function hideLoading() {
 }
 
 export function formatMoney(amount: number, withUnit: boolean = true): string {
-    return amount.toLocaleString() + (withUnit ? ' تومان ' : '');
+    return amount?.toLocaleString() + (withUnit ? ' تومان ' : '');
 }
 
 
