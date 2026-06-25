@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|static page2(int $perPage = 20)
  * @method static \Illuminate\Database\Eloquent\Builder|static search(array $cols, $value)
  * @method static \Illuminate\Database\Eloquent\Builder|static searchInColumns($value, array $cols)
+ * @method static \Illuminate\Database\Eloquent\Builder|static filterByDate($value, string $col, $date)
  */
 trait BaseModel {
 
@@ -83,4 +84,21 @@ trait BaseModel {
 
         return $query;
     }
+
+	public function scopeFilterByDate(Builder $query, string $column, $dates): Builder {
+		if ($dates == null) {
+			return $query;
+		}
+
+		$dates = array_values(array_filter($dates));
+
+		if (count($dates) === 1) {
+			$query->whereDate($column, $dates[0]);
+		} elseif (count($dates) === 2) {
+			$query->whereDate($column, '>=', $dates[0])
+				->whereDate($column, '<=', $dates[1]);
+		}
+
+		return $query;
+	}
 }
