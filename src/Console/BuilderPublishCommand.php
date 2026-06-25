@@ -73,6 +73,7 @@ class BuilderPublishCommand extends Command {
 		$this->addPackageDependency( "unplugin-vue-components", "^32.1.0");
 		$this->addPackageDependency( "unplugin-auto-import", "^21.0.0");
 		$this->addPackageDependency( "vue-multiselect", "^3.5.0");
+		$this->addPackageDependency( "vue3-persian-datetime-picker", "^1.2.2");
 
 		$this->info('Publishing configuration successfully.');
 	}

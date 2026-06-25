@@ -1,12 +1,12 @@
 <template>
     <div ref="wrapperRef">
-        <label v-if="title" :for="inputId" class="pb-1 text-[13px] font-medium text-gray-600 block">
+        <label v-if="title" :for="inputId" class="text-[13px]  block">
             {{ title }}
             <span v-if="required" class="text-red-500 ml-0.5">*</span>
         </label>
 
         <div
-            class="relative w-full rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-200"
+            class="relative w-full rounded-lg border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary bg-white transition-all duration-200"
             :class="{
                 'ring-2 ring-primary/30 border-primary': isOpen,
                 'border-red-400! ring-2 ring-red-100': error,
@@ -15,7 +15,7 @@
         >
             <!-- Inner: wrap tags + input -->
             <div
-                class="flex flex-wrap items-center gap-1.5 px-3 py-2 min-h-10.5 cursor-text"
+                class="flex flex-wrap items-center gap-1.5 px-3 py-2 max-h-9 cursor-text"
                 @click="openDropdown"
             >
                 <!-- تمام تگ‌ها — بدون هیچ محدودیتی -->
