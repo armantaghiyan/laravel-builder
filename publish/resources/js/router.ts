@@ -1,3 +1,5 @@
+import {createRouter, createWebHistory} from "vue-router";
+
 import {appStore} from "@/stores/app.ts";
 import {userStore} from "@/stores/user.ts";
 
@@ -11,7 +13,8 @@ import AccessShowPage from "@/pages/access/show.vue";
 import AdminIndexPage from "@/pages/admin/index.vue";
 import AdminCreatePage from "@/pages/admin/create.vue";
 import AdminShowPage from "@/pages/admin/show.vue";
-import {createRouter, createWebHistory} from "vue-router";
+
+import SampleChartPage from "@/pages/sample/chart.vue";
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
@@ -25,6 +28,8 @@ const routes = [
     {path: "/admin", name: "AdminIndexPage", component: AdminIndexPage},
     {path: "/admin/create/:id?", name: "AdminCreatePage", component: AdminCreatePage},
     {path: "/admin/:id", name: "AdminShowPage", component: AdminShowPage},
+
+    {path: '/chart', name: 'SampleChartPage', component: SampleChartPage},
 ];
 
 const router = createRouter({

@@ -71,10 +71,15 @@ export function useCallApi() {
                     newDiv.classList.add('error-message');
                     element.appendChild(newDiv);
 
-                    const inputChild = element.querySelector('input');
-                    if (inputChild){
-                        inputChild.classList.add('error-input');
+
+                    let inputChild;
+                    if (element?.classList?.contains('custom-multiselect')) {
+                        inputChild = element.querySelector('.custom-multiselect-content');
+                    } else {
+                        inputChild = element.querySelector('input');
                     }
+
+                    inputChild?.classList.add('error-input');
                 }
             }
         })

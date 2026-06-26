@@ -1,12 +1,12 @@
 <template>
-    <div ref="wrapperRef">
+    <div ref="wrapperRef" class="custom-multiselect">
         <label v-if="title" :for="inputId" class="text-[13px]  block">
             {{ title }}
             <span v-if="required" class="text-red-500 ml-0.5">*</span>
         </label>
 
         <div
-            class="relative w-full rounded-lg border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary bg-white transition-all duration-200"
+            class="custom-multiselect-content relative w-full rounded-lg border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary bg-white transition-all duration-200"
             :class="{
                 'ring-2 ring-primary/30 border-primary': isOpen,
                 'border-red-400! ring-2 ring-red-100': error,
