@@ -11,7 +11,7 @@ const {t} = useTranslations();
 </script>
 
 <template>
-    <app-button type="submit" variant="primary" :disabled="disabled">
+    <app-button type="submit" variant="primary" :loading="disabled">
         <template #icon-right>
             <span class="pt-2"><i class="ti ti-search"></i></span>
         </template>
