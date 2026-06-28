@@ -3,7 +3,7 @@ import Role from "@/utils/models/Role.ts";
 import Permission from "@/stores/Permission.ts";
 
 export function useAccess() {
-    const {callApi} = useCallApi();
+    const {callApi, pending} = useCallApi();
     const router = useRouter();
     const alert = useAlert();
 
@@ -60,7 +60,6 @@ export function useAccess() {
     });
 
     function storeAndUpdate(id: string | number, method: 'post' | 'patch') {
-        showLoading();
         callApi[method]<AccessStoreAndUpdateResponse>(`/access/${id}`, storeAndUpdateParams).then(res => {
             router.replace({path: `/access/${res.data.data.item.id}`})
         });
@@ -105,6 +104,7 @@ export function useAccess() {
         update,
         showRole,
 
-        destroy
+        destroy,
+        pending
     }
 }

@@ -51,11 +51,15 @@ function changeSort() {
         :class="{ 'cursor-pointer': !!sortKey }"
         :style="`width: ${getFixWidth()}; min-width: ${getWidth()}; max-width: ${getWidth()};`"
     >
-        <slot/>
+        <div :class="{
+            'ps-2' : sortKey
+        }">
+            <slot/>
+        </div>
 
         <div
             v-if="sortKey"
-            class="absolute top-0 bottom-0 end-0 w-6 flex items-center justify-center"
+            class="absolute top-0 bottom-0 inset-s-1 w-6 flex items-center justify-center"
         >
             <div class="rotate-90">
                 <i class="ti ti-chevron-left duration-200" :class="{'text-gray-2': sort !== sortKey || sortType !== 'desc'}"></i>

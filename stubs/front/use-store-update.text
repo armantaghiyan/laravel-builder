@@ -1,7 +1,7 @@
 import {{model}StoreAndUpdateResponse} from "@/utils/api/{name}.ts";
 
 export default function use{model}StoreUpdate() {
-    const {callApi} = useCallApi();
+    const {callApi, pending} = useCallApi();
     const router = useRouter();
 
     const storeAndUpdateParams = reactive({
@@ -9,7 +9,6 @@ export default function use{model}StoreUpdate() {
     });
 
     function storeAndUpdate(id: string | number, method: 'post'|'patch') {
-        showLoading();
         callApi[method]<{model}StoreAndUpdateResponse>(`/{name}/${id}`, storeAndUpdateParams).then(res => {
             router.replace({path: `/{name}/${res.data.data.item.id}`})
         });
@@ -23,5 +22,6 @@ export default function use{model}StoreUpdate() {
         storeAndUpdate,
         update,
         store,
+        pending,
     }
 }

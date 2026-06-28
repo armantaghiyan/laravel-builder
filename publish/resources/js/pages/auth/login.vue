@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { t } = useTranslations();
 
-const {login, form} = useAuthLogin();
+const {login, form, pending} = useAuthLogin();
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const {login, form} = useAuthLogin();
                         <form @submit.prevent="login" class="flex flex-col gap-6">
                             <text-input id="username" :title="t('auth.username')" :placeholder="t('auth.enter_username')" v-model="form.username"/>
                             <text-input id="password" type="password" :title="t('auth.password')" placeholder="············" v-model="form.password"/>
-                            <app-button type="submit" variant="primary" class="w-full">{{ t('auth.sin_in') }}</app-button>
+                            <app-button type="submit" variant="primary" :loading="pending" class="w-full">{{ t('auth.sin_in') }}</app-button>
                         </form>
                     </div>
                 </div>

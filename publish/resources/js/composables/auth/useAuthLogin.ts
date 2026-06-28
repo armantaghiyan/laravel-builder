@@ -1,7 +1,7 @@
 export function useAuthLogin() {
     const router = useRouter();
     const {set} = useCookie('api_token', {expires: 7});
-    const {callApi} = useCallApi();
+    const {callApi, pending} = useCallApi();
     const $user = userStore();
 
     const form = reactive({
@@ -10,7 +10,6 @@ export function useAuthLogin() {
     });
 
     function login() {
-        showLoading();
         callApi.post<AdminLoginResponse>('admin/login', form).then(res => {
             $user.tryGetUser = 0;
             set(res.data.data.api_token);
@@ -22,5 +21,6 @@ export function useAuthLogin() {
     return {
         form,
         login,
+        pending,
     }
 }

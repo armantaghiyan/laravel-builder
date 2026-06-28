@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Role from "@/utils/models/Role.ts";
 
-const {storeAndUpdateParams, update, store, showRole} = useAccess();
+const {storeAndUpdateParams, update, store, showRole, pending} = useAccess();
 
 const route = useRoute();
 const updateMode = ref(false);
@@ -37,7 +37,7 @@ onMounted(() => {
             <div class="px-6 pb-6 flex flex-col gap-6">
                 <text-input id="name" :title="t('global.name')" v-model="storeAndUpdateParams.name"/>
 
-                <app-button @click="submitForm" class="w-full">{{t('global.submit')}}</app-button>
+                <app-button @click="submitForm" :loading="pending" class="w-full">{{t('global.submit')}}</app-button>
             </div>
         </card>
     </div>

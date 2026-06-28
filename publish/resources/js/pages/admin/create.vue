@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Admin from "@/utils/models/Admin.ts";
 
-const {storeAndUpdateParams, update, store, show} = useAdmin();
+const {storeAndUpdateParams, update, store, show, pending} = useAdmin();
 
 const route = useRoute();
 const {t} = useTranslations();
@@ -49,7 +49,7 @@ onMounted(() => {
                     <text-input :title="t('auth.repeat_password')" type="password" v-model="storeAndUpdateParams.repeat_password"/>
                 </div>
 
-                <app-button @click="submitForm" class="w-full">{{t('global.submit')}}</app-button>
+                <app-button @click="submitForm" :loading="pending" class="w-full">{{t('global.submit')}}</app-button>
             </div>
         </card>
     </div>

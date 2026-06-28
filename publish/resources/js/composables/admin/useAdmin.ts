@@ -6,7 +6,7 @@ export default function useAdmin() {
     const $user = userStore();
 
     //==================================================================================================================
-    const {callApi} = useCallApi();
+    const {callApi, pending} = useCallApi();
 
     const loginForm = reactive({
         username: '',
@@ -79,7 +79,6 @@ export default function useAdmin() {
     });
 
     function storeAndUpdate(id: string | number, method: 'post'|'patch') {
-        showLoading();
         callApi[method]<AdminStoreAndUpdateResponse>(`/admin/${id}`, storeAndUpdateParams).then(res => {
             router.replace({path: `/admin/${res.data.data.item.id}`})
             item.value = res.data.data.item;
@@ -121,5 +120,6 @@ export default function useAdmin() {
         update,
 
         logout,
+        pending,
     }
 }

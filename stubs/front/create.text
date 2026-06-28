@@ -3,7 +3,7 @@ import {model} from "@/utils/models/{model}.ts";
 import use{model}StoreUpdate from "@/composables/{name}/use{model}StoreUpdate.ts";
 import use{model}Show from "@/composables/{name}/use{model}Show.ts";
 
-const {storeAndUpdateParams, update, store} = use{model}StoreUpdate();
+const {storeAndUpdateParams, update, store, pending} = use{model}StoreUpdate();
 const {show} = use{model}Show();
 
 const route = useRoute();
@@ -39,7 +39,7 @@ onMounted(() => {
             <div class="px-6 pb-6 flex flex-col gap-6">
                 {inputItems}
 
-                <app-button @click="submitForm" class="w-full">{{t('global.submit')}}</app-button>
+                <app-button @click="submitForm" :loading="pending" class="w-full">{{t('global.submit')}}</app-button>
             </div>
         </card>
     </div>
