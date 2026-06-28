@@ -22,22 +22,22 @@ const changeLanguage = (newLocale) => {
             </div>
             <div class="flex gap-2">
                 <div class="flex items-center">
-                    <option-menu :width="160" :top="60" position="auto">
-                        <template #button>
-                            <icon-button>
-                                <i class="ti ti-language ti-md"></i>
-                            </icon-button>
-                        </template>
+<!--                    <option-menu :width="160" :top="60" position="auto">-->
+<!--                        <template #button>-->
+<!--                            <icon-button>-->
+<!--                                <i class="ti ti-language ti-md"></i>-->
+<!--                            </icon-button>-->
+<!--                        </template>-->
 
-                        <div class="flex flex-col p-2 gap-1">
-                            <btn-clickable v-for="lang in getAvailableLocales()" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">
-                                {{ t(`app.${lang}`) }}
-                            </btn-clickable>
-                        </div>
-                    </option-menu>
-                    <icon-button>
-                        <i class="ti ti-bell ti-md"></i>
-                    </icon-button>
+<!--                        <div class="flex flex-col p-2 gap-1">-->
+<!--                            <btn-clickable v-for="lang in getAvailableLocales()" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">-->
+<!--                                {{ t(`app.${lang}`) }}-->
+<!--                            </btn-clickable>-->
+<!--                        </div>-->
+<!--                    </option-menu>-->
+<!--                    <icon-button>-->
+<!--                        <i class="ti ti-bell ti-md"></i>-->
+<!--                    </icon-button>-->
                 </div>
 
                 <option-menu :width="224" :top="60" position="auto">
@@ -54,7 +54,7 @@ const changeLanguage = (newLocale) => {
                         </div>
 
                         <div class="p-2">
-                            <btn-danger @click="logout" class="w-full">{{ t('app.logout') }}</btn-danger>
+                            <app-button variant="danger" @click="logout" class="w-full">{{ t('app.logout') }}</app-button>
                         </div>
                     </div>
                 </option-menu>

@@ -40,6 +40,12 @@ onMounted(() => {
                     <menu-item href="/" :title="t('menu.dashboard')">
                         <i class="menu-icon tf-icons ti ti-smart-home text-[22px]"></i>
                     </menu-item>
+                    <menu-item v-if="hasPermission(Permissions.TRANSACTION_INDEX)" href="/transaction" :title="t('menu.transactions')">
+                        <i class="ti ti-credit-card-pay text-[22px]"></i>
+                    </menu-item>
+                    <menu-item v-if="hasPermission(Permissions.CATEGORY_INDEX)" href="/category" :title="t('menu.categories')">
+                        <i class="ti ti-category-2 text-[22px]"></i>
+                    </menu-item>
 
                     <menu-section v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)">{{t('menu.settings')}}</menu-section>
                     <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="t('menu.admin')">

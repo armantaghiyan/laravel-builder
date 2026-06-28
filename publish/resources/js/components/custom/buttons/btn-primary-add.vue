@@ -5,11 +5,13 @@ const {t} = useTranslations();
 </script>
 
 <template>
-    <btn-primary class="flex gap-1 items-center">
-        <i class="ti ti-plus text-white"></i>
+    <app-button class="flex gap-1 items-center">
+        <template #icon-right>
+            <i class="ti ti-plus"></i>
+        </template>
 
         <span class="sm:flex hidden">
             {{t('global.add')}}
         </span>
-    </btn-primary>
+    </app-button>
 </template>

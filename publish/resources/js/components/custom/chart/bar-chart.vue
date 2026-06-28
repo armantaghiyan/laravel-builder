@@ -61,7 +61,7 @@ import {
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title)
 
-const FONT_FAMILY = "'VazirMatn', 'Vazir', Tahoma, sans-serif"
+const FONT_FAMILY = "'vazirmatn', Tahoma, sans-serif"
 
 export default defineComponent({
     name: 'BarChart',
@@ -206,7 +206,7 @@ export default defineComponent({
                     callbacks: {
                         label(ctx) {
                             return `  ${ctx.dataset.label}: ${ctx.parsed[props.horizontal ? 'x' : 'y']}`
-                        },
+                        }
                     },
                 },
             },
@@ -285,8 +285,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* ── فونت VazirMatn از CDN ── */
-@import url('https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css');
 
 /* ───── Card Shell ───── */
 .bar-chart-card {
@@ -294,7 +292,7 @@ export default defineComponent({
     border-radius: 0.875rem;
     padding: 1.5rem;
     box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
-    font-family: 'VazirMatn', 'Vazir', Tahoma, sans-serif;
+    font-family: vazirmatn, 'Vazir',serif;
     width: 100%;
     box-sizing: border-box;
     display: flex;

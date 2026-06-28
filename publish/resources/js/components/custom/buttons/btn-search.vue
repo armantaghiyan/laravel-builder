@@ -11,8 +11,11 @@ const {t} = useTranslations();
 </script>
 
 <template>
-    <btn-primary type="submit" :disabled="disabled">
+    <app-button type="submit" variant="primary" :disabled="disabled">
+        <template #icon-right>
+            <span class="pt-2"><i class="ti ti-search"></i></span>
+        </template>
+
         <span class="sm:flex hidden">{{ t('global.search') }}</span>
-        <span class="sm:hidden flex"><i class="ti ti-search"></i></span>
-    </btn-primary>
+    </app-button>
 </template>

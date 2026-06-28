@@ -15,6 +15,7 @@ import AdminCreatePage from "@/pages/admin/create.vue";
 import AdminShowPage from "@/pages/admin/show.vue";
 
 import SampleChartPage from "@/pages/sample/chart.vue";
+import SampleButtonPage from "@/pages/sample/button.vue";
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
@@ -30,6 +31,7 @@ const routes = [
     {path: "/admin/:id", name: "AdminShowPage", component: AdminShowPage},
 
     {path: '/chart', name: 'SampleChartPage', component: SampleChartPage},
+    {path: '/button', name: 'SampleButtonPage', component: SampleButtonPage},
 ];
 
 const router = createRouter({

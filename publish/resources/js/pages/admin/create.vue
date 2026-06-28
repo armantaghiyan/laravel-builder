@@ -49,7 +49,7 @@ onMounted(() => {
                     <text-input :title="t('auth.repeat_password')" type="password" v-model="storeAndUpdateParams.repeat_password"/>
                 </div>
 
-                <btn-primary @click="submitForm" class="w-full">{{t('global.submit')}}</btn-primary>
+                <app-button @click="submitForm" class="w-full">{{t('global.submit')}}</app-button>
             </div>
         </card>
     </div>

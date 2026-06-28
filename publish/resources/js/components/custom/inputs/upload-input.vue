@@ -14,13 +14,13 @@
                     :multiple="multiple"
                 />
                 <div :title="name" @click="fileInput.click()" class="w-full">
-                    <btn-primary v-if="fileSelected" class="flex-center-center text-dark w-full">
+                    <app-button v-if="fileSelected" class="flex-center-center text-dark w-full">
                         {{ truncateText(name, 20) }}
-                    </btn-primary>
-                    <btn-primary v-else class="w-full">
+                    </app-button>
+                    <app-button v-else class="w-full">
                         <div v-if="placeholder">{{ placeholder }}</div>
                         <div v-else>انتخاب فایل</div>
-                    </btn-primary>
+                    </app-button>
                 </div>
             </div>
         </div>
