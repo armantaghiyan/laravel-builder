@@ -7,14 +7,15 @@ defineProps<{
 
 <template>
     <card class="p-6">
-        <div class="flex gap-4 items-center">
-            <div class="flex items-center justify-center size-10.5 bg-light-dark rounded-md text-[26px]">
-                <slot name="icon"/>
+        <div class="flex items-center gap-2.5">
+            <div class="flex size-9.5 items-center justify-center rounded-lg bg-light-dark text-[18px] shrink-0">
+                <slot name="icon" />
             </div>
-
-            <div class="text-[24px] font-medium">{{ value }}</div>
+            <div class="text-[22px] font-medium leading-tight">{{ value }}</div>
         </div>
 
-        <div v-if="desc" class="ps-14.5 pt-1 text-gray-4">{{ desc }}</div>
+        <p v-if="desc" class="text-[13px] text-gray-4 leading-snug pt-4">
+            {{ desc }}
+        </p>
     </card>
 </template>

@@ -1,6 +1,4 @@
 <script setup>
-import BtnDanger from "@/components/custom/buttons/btn-danger.vue";
-
 const $app = appStore()
 const $user = userStore()
 const {t, locale, getAvailableLocales} = useTranslations();
