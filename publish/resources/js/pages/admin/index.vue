@@ -36,7 +36,7 @@ onMounted(() => {
                 </action-content>
             </form>
 
-            <custom-table>
+            <custom-table :loading="pending">
                 <custom-thead>
                     <custom-tr>
                         <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
