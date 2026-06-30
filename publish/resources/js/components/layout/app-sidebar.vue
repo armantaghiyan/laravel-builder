@@ -47,13 +47,18 @@ onMounted(() => {
                         <i class="ti ti-category-2 text-[22px]"></i>
                     </menu-item>
 
-                    <menu-section v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)">{{t('menu.settings')}}</menu-section>
-                    <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="t('menu.admin')">
-                        <i class="menu-icon ti ti-user text-[22px]"></i>
-                    </menu-item>
-                    <menu-item v-if="hasPermission(Permissions.ROLE_INDEX)" href="/access" :title="t('menu.access')">
-                        <i class="ti ti-fingerprint text-[22px]"></i>
-                    </menu-item>
+                    <menu-group v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)" :title="t('menu.settings')">
+                        <template #icon>
+                            <i class="ti ti-settings-cog text-[22px]"></i>
+                        </template>
+
+                        <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="t('menu.admin')">
+                            <i class="menu-icon ti ti-user text-[22px]"></i>
+                        </menu-item>
+                        <menu-item v-if="hasPermission(Permissions.ROLE_INDEX)" href="/access" :title="t('menu.access')">
+                            <i class="ti ti-fingerprint text-[22px]"></i>
+                        </menu-item>
+                    </menu-group>
                 </div>
             </div>
         </aside>

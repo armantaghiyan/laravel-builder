@@ -39,18 +39,24 @@ onMounted(() => {
 
         <div class="grid grid-cols-12 gap-6">
             <card class="lg:col-span-4 col-span-12 p-6">
-                <label-title>{{t('admin.admin_detail')}}</label-title>
-                <label-item :title="t('global.id')">{{item?.id}}</label-item>
-                <label-item :title="t('global.name')">{{item?.name}}</label-item>
-                <label-item :title="t('global.username')">{{item?.username}}</label-item>
-                <label-item :title="t('admin.last_login')">
-                    <span dir="ltr">{{item?.last_login}}</span>
+                <label-title>{{ t('admin.admin_detail') }}</label-title>
+
+                <label-item icon="ti-hash" :title="t('global.id')">{{ item?.id }}</label-item>
+
+                <label-item icon="ti-user" :title="t('global.name')">{{ item?.name }}</label-item>
+
+                <label-item icon="ti-at" :title="t('global.username')">{{ item?.username }}</label-item>
+
+                <label-item icon="ti-login" :title="t('admin.last_login')">
+                    <span dir="ltr">{{ item?.last_login }}</span>
                 </label-item>
-                <label-item :title="t('global.created_at')">
-                    <span dir="ltr">{{item?.created_at}}</span>
+
+                <label-item icon="ti-calendar-plus" :title="t('global.created_at')">
+                    <span dir="ltr">{{ item?.created_at }}</span>
                 </label-item>
-                <label-item :title="t('global.updated_at')">
-                    <span dir="ltr">{{item?.updated_at}}</span>
+
+                <label-item icon="ti-calendar-event" :title="t('global.updated_at')">
+                    <span dir="ltr">{{ item?.updated_at }}</span>
                 </label-item>
             </card>
             <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles.role')" class="lg:col-span-8 col-span-12">
