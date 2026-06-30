@@ -2,7 +2,7 @@
 import {Permissions} from "@/utils/models/enums.ts";
 
 const {t} = useTranslations();
-const {fetchData, items, count, params, reFetchData} = useAdmin();
+const {fetchData, items, count, params, reFetchData, pending} = useAdmin();
 const {hasPermission} = usePermission();
 
 onMounted(() => {
@@ -23,7 +23,7 @@ onMounted(() => {
                 <action-content>
                     <div class="flex gap-4">
                         <text-input :placeholder="t('global.search')" class="sm:w-50 w-full" v-model="params.search"/>
-                        <btn-search/>
+                        <btn-search :loading="pending"/>
                     </div>
 
                     <div class="flex gap-4">

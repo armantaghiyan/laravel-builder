@@ -33,7 +33,6 @@ export default function useAdmin() {
     });
 
     function fetchData() {
-        showLoading();
         callApi.get<AdminIndexResponse>('/admin', {
             params: params,
         }).then(res => {

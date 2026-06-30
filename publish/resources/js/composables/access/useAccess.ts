@@ -46,7 +46,6 @@ export function useAccess() {
     const items = ref<Role[]>([]);
 
     function fetchData() {
-        showLoading();
         callApi.get<AccessIndexResponse>('/access').then(res => {
             items.value = res.data.data.items
         });
