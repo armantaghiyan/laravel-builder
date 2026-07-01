@@ -15,13 +15,83 @@ watch(() => route.path, () => {
 });
 
 watch(isXl, () => {
-    $app.isOpenSidebar = !!isXl.value;
+    $app.isOpenSidebar = isXl.value;
 });
 
 
 onMounted(() => {
-    $app.isOpenSidebar = !!isXl.value;
-})
+    $app.isOpenSidebar = isXl.value;
+});
+
+
+interface MenuChild {
+    href: string;
+    titleKey: string;
+    icon: string;
+    permission?: Permissions;
+}
+
+interface MenuLeaf {
+    type: 'item';
+    href: string;
+    titleKey: string;
+    icon: string;
+    permission?: Permissions;
+}
+
+interface MenuGroupEntry {
+    type: 'group';
+    titleKey: string;
+    icon: string;
+    children: MenuChild[];
+}
+
+type MenuEntry = MenuLeaf | MenuGroupEntry;
+
+const menuConfig: MenuEntry[] = [
+    {
+        type: 'item',
+        href: '/',
+        titleKey: 'menu.dashboard',
+        icon: 'ti ti-smart-home',
+    },
+    {
+        type: 'group',
+        titleKey: 'menu.settings',
+        icon: 'ti ti-settings-cog',
+        children: [
+            {
+                href: '/admin',
+                titleKey: 'menu.admin',
+                icon: 'ti ti-user',
+                permission: Permissions.ADMIN_INDEX,
+            },
+            {
+                href: '/access',
+                titleKey: 'menu.access',
+                icon: 'ti ti-fingerprint',
+                permission: Permissions.ROLE_INDEX,
+            },
+        ],
+    },
+];
+
+
+function canSeeChild(child: { permission?: any }) {
+    return !child.permission || hasPermission(child.permission);
+}
+
+function isGroupVisible(entry: (typeof menuConfig)[number]) {
+    if (entry.type !== 'group') return true;
+    return entry.children.some(canSeeChild);
+}
+
+const visibleMenu = computed(() =>
+    menuConfig.filter((entry) => {
+        if (entry.type === 'item') return canSeeChild(entry);
+        return isGroupVisible(entry);
+    })
+);
 </script>
 
 <template>
@@ -37,28 +107,34 @@ onMounted(() => {
                     <span class="text-white text-[22px] font-bold">{{ t('app_name')}}</span>
                 </div>
                 <div class="px-3">
-                    <menu-item href="/" :title="t('menu.dashboard')">
-                        <i class="menu-icon tf-icons ti ti-smart-home text-[22px]"></i>
-                    </menu-item>
-                    <menu-item v-if="hasPermission(Permissions.TRANSACTION_INDEX)" href="/transaction" :title="t('menu.transactions')">
-                        <i class="ti ti-credit-card-pay text-[22px]"></i>
-                    </menu-item>
-                    <menu-item v-if="hasPermission(Permissions.CATEGORY_INDEX)" href="/category" :title="t('menu.categories')">
-                        <i class="ti ti-category-2 text-[22px]"></i>
-                    </menu-item>
-
-                    <menu-group v-if="hasPermission(Permissions.ADMIN_INDEX) || hasPermission(Permissions.ROLE_INDEX)" :title="t('menu.settings')">
-                        <template #icon>
-                            <i class="ti ti-settings-cog text-[22px]"></i>
-                        </template>
-
-                        <menu-item v-if="hasPermission(Permissions.ADMIN_INDEX)" href="/admin" :title="t('menu.admin')">
-                            <i class="menu-icon ti ti-user text-[22px]"></i>
+                    <template v-for="(entry, idx) in visibleMenu" :key="idx">
+                        <menu-item
+                            v-if="entry.type === 'item'"
+                            :href="entry.href"
+                            :title="t(entry.titleKey)"
+                        >
+                            <i class="menu-icon tf-icons" :class="`${entry.icon} text-[22px]`"></i>
                         </menu-item>
-                        <menu-item v-if="hasPermission(Permissions.ROLE_INDEX)" href="/access" :title="t('menu.access')">
-                            <i class="ti ti-fingerprint text-[22px]"></i>
-                        </menu-item>
-                    </menu-group>
+
+                        <menu-group
+                            v-else
+                            :title="t(entry.titleKey)"
+                            :items="entry.children"
+                        >
+                            <template #icon>
+                                <i class="tf-icons" :class="`${entry.icon} text-[22px]`"></i>
+                            </template>
+
+                            <menu-item
+                                v-for="child in entry.children.filter(canSeeChild)"
+                                :key="child.href"
+                                :href="child.href"
+                                :title="t(child.titleKey)"
+                            >
+                                <i class="menu-icon tf-icons" :class="`${child.icon} text-[22px]`"></i>
+                            </menu-item>
+                        </menu-group>
+                    </template>
                 </div>
             </div>
         </aside>

@@ -1,9 +1,31 @@
 <script setup lang="ts">
-defineProps<{
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const props = defineProps<{
     title: string;
+    items?: { href: string }[];
 }>();
 
-const isOpen = ref(false);
+const route = useRoute();
+
+function matchesCurrentRoute() {
+    if (!props.items) return false;
+    return props.items.some(
+        (item) => route.path === item.href || route.path.startsWith(item.href + '/')
+    );
+}
+
+const isOpen = ref(matchesCurrentRoute());
+
+watch(
+    () => route.path,
+    () => {
+        if (matchesCurrentRoute()) {
+            isOpen.value = true;
+        }
+    }
+);
 </script>
 
 <template>
@@ -17,10 +39,7 @@ const isOpen = ref(false);
             <span class="text-[15px] pt-1 flex-1 text-start">
                 {{ title }}
             </span>
-            <i
-                class="ti ti-chevron-down text-sm duration-300"
-                :class="{ 'rotate-180': isOpen }"
-            ></i>
+            <i class="ti ti-chevron-down text-sm duration-300" :class="{ 'rotate-180': isOpen }"></i>
         </button>
 
         <div
@@ -28,7 +47,7 @@ const isOpen = ref(false);
             :class="isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
         >
             <div class="overflow-hidden">
-                <div class="flex flex-col ps-4 border-s border-menu-color-light/30 ms-4">
+                <div class="flex flex-col ps-2 border-s border-menu-color-light ms-4">
                     <slot />
                 </div>
             </div>
