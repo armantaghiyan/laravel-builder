@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {Permissions} from "@/utils/models/enums.ts";
+import CustomScroll from "@/components/custom/app/custom-scroll.vue";
 
 const {hasPermission} = usePermission();
 const isXl = useBreakpoint('xl');
@@ -100,7 +101,7 @@ const visibleMenu = computed(() =>
             <div v-if="$app.isOpenSidebar && !isXl" @click="$app.isOpenSidebar = false" class="bg-gray-4/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
         </fade-animate>
 
-        <aside class="fixed bg-menu-theme text-menu-color w-65 duration-200 h-full z-40" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
+        <custom-scroll class="fixed bg-menu-theme text-menu-color w-65 duration-200 h-full z-40" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
             <div>
                 <div class="h-16 flex items-center gap-2 ps-5.5 pe-2">
                     <logo/>
@@ -137,6 +138,6 @@ const visibleMenu = computed(() =>
                     </template>
                 </div>
             </div>
-        </aside>
+        </custom-scroll>
     </div>
 </template>
