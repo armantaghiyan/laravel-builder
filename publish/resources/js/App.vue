@@ -9,12 +9,12 @@ function fullPage() {
 
 <template>
     <app-loading>
-        <div v-if="!fullPage()" class="w-full min-h-screen start-0 bg-panel">
+        <div v-if="!fullPage()" class="w-full min-h-screen inset-s-0 bg-panel">
             <app-sidebar/>
             <app-content>
                 <app-header/>
                 <div class="py-6 px-4">
-                    <transition name="blur" mode="out-in">
+                    <transition name="scale" mode="out-in">
                         <router-view/>
                     </transition>
                 </div>
@@ -28,18 +28,18 @@ function fullPage() {
 </template>
 
 <style scoped>
-.blur-enter-active,
-.blur-leave-active {
-    transition: all 300ms ease;
+.scale-enter-active,
+.scale-leave-active {
+    transition: all 280ms ease;
 }
 
-.blur-enter-from {
+.scale-enter-from {
     opacity: 0;
-    filter: blur(10px);
+    transform: scale(0.96);
 }
 
-.blur-leave-to {
+.scale-leave-to {
     opacity: 0;
-    filter: blur(10px);
+    transform: scale(1.04);
 }
 </style>

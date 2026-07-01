@@ -65,6 +65,10 @@ function calcPaginationPageCount(){
     paginationPageCount.value = Math.ceil(props.count / props.pageRows);
 }
 
+watch(() => props.pageRows, () => {
+    calcPaginationPageCount();
+});
+
 watch(() => props.count, () => {
     calcPaginationPageCount();
 });
