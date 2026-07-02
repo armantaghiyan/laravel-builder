@@ -47,12 +47,12 @@ const sizeClasses = computed(() => {
 
 /* ── Variant color maps ─────────────────────────────────────── */
 const solidClasses: Record<Variant, string> = {
-    primary: 'bg-primary text-white hover:bg-[#6159d6] active:bg-[#554fc4] shadow-[0_4px_12px_rgba(115,103,240,0.4)] hover:shadow-[0_6px_18px_rgba(115,103,240,0.5)]',
-    danger:  'bg-danger  text-white hover:bg-[#e6444a] active:bg-[#cc3c41] shadow-[0_4px_12px_rgba(255,76,81,0.4)]   hover:shadow-[0_6px_18px_rgba(255,76,81,0.5)]',
-    success: 'bg-success text-white hover:bg-[#23b363] active:bg-[#1e9d57] shadow-[0_4px_12px_rgba(40,199,111,0.4)]  hover:shadow-[0_6px_18px_rgba(40,199,111,0.5)]',
-    info:    'bg-info    text-white hover:bg-[#00a7bc] active:bg-[#0094a7] shadow-[0_4px_12px_rgba(0,186,209,0.4)]   hover:shadow-[0_6px_18px_rgba(0,186,209,0.5)]',
-    warning: 'bg-warning text-white hover:bg-[#e68f3c] active:bg-[#cc7f35] shadow-[0_4px_12px_rgba(255,159,67,0.4)]  hover:shadow-[0_6px_18px_rgba(255,159,67,0.5)]',
-    dark:    'bg-dark    text-white hover:bg-[#717482] active:bg-[#636671] shadow-[0_4px_12px_rgba(128,131,144,0.4)] hover:shadow-[0_6px_18px_rgba(128,131,144,0.5)]',
+    primary: 'bg-primary text-white hover:bg-primary/90 active:bg-primary/80 shadow-[0_4px_12px_theme(colors.primary/40%)] hover:shadow-[0_6px_18px_theme(colors.primary/50%)]',
+    danger:  'bg-danger  text-white hover:bg-danger/90  active:bg-danger/80  shadow-[0_4px_12px_theme(colors.danger/40%)]  hover:shadow-[0_6px_18px_theme(colors.danger/50%)]',
+    success: 'bg-success text-white hover:bg-success/90 active:bg-success/80 shadow-[0_4px_12px_theme(colors.success/40%)] hover:shadow-[0_6px_18px_theme(colors.success/50%)]',
+    info:    'bg-info    text-white hover:bg-info/90    active:bg-info/80    shadow-[0_4px_12px_theme(colors.info/40%)]    hover:shadow-[0_6px_18px_theme(colors.info/50%)]',
+    warning: 'bg-warning text-white hover:bg-warning/90 active:bg-warning/80 shadow-[0_4px_12px_theme(colors.warning/40%)] hover:shadow-[0_6px_18px_theme(colors.warning/50%)]',
+    dark:    'bg-dark    text-white hover:bg-dark/90    active:bg-dark/80    shadow-[0_4px_12px_theme(colors.dark/40%)]    hover:shadow-[0_6px_18px_theme(colors.dark/50%)]',
 };
 
 const outlineClasses: Record<Variant, string> = {

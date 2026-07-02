@@ -9,6 +9,16 @@ import AutoImport from 'unplugin-auto-import/vite';
 
 export default defineConfig({
     plugins: [
+        {
+            name: 'auto-tailwind-reference',
+            enforce: 'pre',
+            transform(code, id) {
+                const isVueStyleBlock = /\.vue\?.*type=style/.test(id)
+                if (isVueStyleBlock && code.includes('@apply') && !code.includes('@reference')) {
+                    return `@reference "@/../css/app.css";\n${code}`
+                }
+            }
+        },
         vue(),
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.ts'],

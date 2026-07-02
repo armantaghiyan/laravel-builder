@@ -8,8 +8,12 @@ export function hideLoading() {
     appStore().hideLoading();
 }
 
-export function formatMoney(amount: number, withUnit: boolean = true): string {
-    return amount?.toLocaleString() + (withUnit ? ' تومان ' : '');
+export function formatMoney(amount: any, withUnit: boolean = true): string {
+    try {
+        return amount.toLocaleString() + (withUnit ? ' تومان ' : '');
+    }catch (e) {
+        return '';
+    }
 }
 
 
@@ -41,4 +45,10 @@ export function chunkArray<T>(arr: T[], size: number): T[][] {
     }
 
     return result;
+}
+
+export function getTailwindColor(variableName: string): string {
+    return getComputedStyle(document.documentElement)
+        .getPropertyValue(`--color-${variableName}`)
+        .trim();
 }

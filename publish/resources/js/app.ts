@@ -20,7 +20,7 @@ app.use(Vue3PersianDatetimePicker, {
         editable: false,
         inputClass: 'form-date-control',
         placeholder: 'انتخاب تاریخ',
-        color: '#7367f0',
+        color: getTailwindColor('primary'),
         autoSubmit: true,
     }
 })

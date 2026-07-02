@@ -40,9 +40,7 @@ defineProps<{
 }
 
 .menu-active-item {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    font-weight: 600;
+    @apply bg-primary font-semibold text-white;
 }
 
 .menu-active-item .indicator {

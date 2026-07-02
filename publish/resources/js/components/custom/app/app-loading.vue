@@ -24,7 +24,7 @@ const $app = appStore();
 .loader {
     width: 45px;
     aspect-ratio: 1;
-    --c: no-repeat linear-gradient(#7367f0 0 0);
+    --c: no-repeat linear-gradient(var(--color-primary) 0 0);
     background: var(--c) 0 50%,
     var(--c) 50% 50%,
     var(--c) 100% 50%;
