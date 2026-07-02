@@ -1,0 +1,27 @@
+{
+    "name": "Admin Panel",
+    "short_name": "Admin",
+    "description": "Admin Panel",
+    "start_url": "/admin",
+    "scope": "/admin",
+    "display": "standalone",
+    "orientation": "landscape",
+    "theme_color": "#7367f0",
+    "background_color": "#7367f0",
+    "lang": "fa",
+    "dir": "rtl",
+    "icons": [
+        {
+            "src": "/admin-assets/pwa/ic_logo_manifest_256.png",
+            "sizes": "256x256",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/admin-assets/pwa/ic_logo_manifest_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

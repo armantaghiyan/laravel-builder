@@ -45,6 +45,7 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('routes', 'routes');
 		$this->publishDir('resources', 'resources');
 		$this->publishDir('Providers', 'app/Providers');
+		$this->publishDir('admin-assets', 'public/admin-assets');
 		$this->publishFile('tsconfig.json', 'tsconfig.json');
 		$this->publishFile('vite.config.js', 'vite.config.js');
 
