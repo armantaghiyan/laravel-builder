@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
 	->withMiddleware(function (Middleware $middleware) {
 		$middleware->prepend([
 			\App\Http\Middleware\SetRealIp::class,
+			\App\Http\Middleware\CaptureClientMeta::class,
 			\App\Http\Middleware\SetLocale::class,
 			\App\Http\Middleware\TrimStrings::class,
 			\App\Http\Middleware\ConvertPersianArabicNumbers::class,
