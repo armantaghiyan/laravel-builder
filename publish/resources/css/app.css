@@ -97,3 +97,13 @@
 .error-input {
     @apply border-2 border-danger;
 }
+
+
+.custom-toast-success {
+    background-color: #11B46E !important;
+    border-radius: 24px !important;
+}
+.custom-toast-error {
+    background-color: #F13246 !important;
+    border-radius: 24px !important;
+}
