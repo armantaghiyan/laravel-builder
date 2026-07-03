@@ -49,6 +49,18 @@ const actualType = computed(() => {
     return 'text';
 });
 
+const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+function toEnglishDigits(value: string): string {
+    return value.replace(/[۰-۹٠-٩]/g, (d) => {
+        const pIndex = persianDigits.indexOf(d);
+        if (pIndex !== -1) return String(pIndex);
+        const aIndex = arabicDigits.indexOf(d);
+        return aIndex !== -1 ? String(aIndex) : d;
+    });
+}
+
 function unformat(value: string): string {
     return value.replace(/,/g, '');
 }
@@ -118,6 +130,7 @@ function clampOnBlur() {
 
 function handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
+    input.value = toEnglishDigits(input.value);
 
     if (!props.numberType) {
         if (props.maxlength !== undefined && input.value.length > props.maxlength) {
@@ -158,7 +171,7 @@ function handleInput(e: Event) {
 function handlePaste(e: ClipboardEvent) {
     if (!props.numberType) return;
     e.preventDefault();
-    const pasted = e.clipboardData?.getData('text') ?? '';
+    const pasted = toEnglishDigits(e.clipboardData?.getData('text') ?? '');
     const filtered = filterNumberValue(unformat(pasted));
     model.value = filtered;
     const input = e.target as HTMLInputElement;
