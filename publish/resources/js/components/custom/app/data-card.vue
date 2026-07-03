@@ -14,7 +14,7 @@ defineProps<{
             <div class="text-[22px] font-medium leading-tight">{{ value }}</div>
         </div>
 
-        <p v-if="desc" class="text-[13px] text-gray-4 leading-snug pt-4">
+        <p v-if="desc" class="text-[13px] text-gray-500 leading-snug pt-4">
             {{ desc }}
         </p>
     </card>

@@ -40,7 +40,7 @@ onMounted(() => {
                     </custom-tr>
                 </custom-thead>
                 <custom-tbody>
-                    <custom-tr v-for="(item, index) in items" :key="item.id" class="border-b border-gray-5">
+                    <custom-tr v-for="(item, index) in items" :key="item.id" class="border-b border-gray-200">
                         <custom-td :copy="item.id">
                             <id-formater :id="item.id"/>
                         </custom-td>

@@ -80,7 +80,7 @@ onMounted(() => {
 
 <template>
     <div  class="flex md:justify-between justify-center items-center p-4">
-        <div class="text-gray-8 md:flex hidden">
+        <div class="text-gray-400 md:flex hidden">
             {{
                 t('pagination.desc', {
                     p1: pageRows * (page as number) - (pageRows - 1),

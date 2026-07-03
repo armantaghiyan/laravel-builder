@@ -78,7 +78,7 @@ onMounted(() => {
         <Listbox v-model="model">
             <div>
                 <ListboxButton
-                    class="relative w-full h-9.5 rounded-md border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150"
+                    class="relative w-full h-9.5 rounded-md border border-gray-300 hover:border-gray-600 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150"
                 >
 
                     <div class="flex items-start">{{ localOptions.filter((item: any) => item[value] == model )?.[0]?.[label] }}</div>

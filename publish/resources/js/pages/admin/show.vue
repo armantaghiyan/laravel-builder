@@ -29,7 +29,7 @@ onMounted(() => {
 
                     <div class="flex flex-col gap-3">
                         <div class="text-[24px]">{{ item?.name }}</div>
-                        <div class="text-gray-9">@{{ item?.username }}</div>
+                        <div class="text-gray-700">@{{ item?.username }}</div>
                     </div>
                 </div>
             </div>

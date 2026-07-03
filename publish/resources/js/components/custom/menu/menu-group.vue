@@ -32,7 +32,7 @@ watch(
     <div class="w-full">
         <button
             type="button"
-            class="flex gap-2 w-full items-center h-9.5 px-3 mt-1.5 rounded-md hover:bg-menu-color-light hover:text-white duration-300 cursor-pointer"
+            class="flex gap-2 w-full items-center h-9.5 px-3 mt-1.5 rounded-md hover:bg-menu-hover hover:text-white duration-300 cursor-pointer"
             @click="isOpen = !isOpen"
         >
             <slot name="icon" />
@@ -47,7 +47,7 @@ watch(
             :class="isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
         >
             <div class="overflow-hidden">
-                <div class="flex flex-col ps-2 border-s border-menu-color-light ms-4">
+                <div class="flex flex-col ps-2 border-s border-menu-hover ms-4">
                     <slot />
                 </div>
             </div>

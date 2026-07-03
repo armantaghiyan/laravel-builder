@@ -10,11 +10,11 @@ function simulateLoad() {
 </script>
 
 <template>
-    <div class="p-8 space-y-10 bg-panel min-h-screen font-sans text-base text-gray-9">
+    <div class="p-8 space-y-10 bg-panel min-h-screen font-sans text-base text-gray-50">
 
         <!-- Solid variants -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Solid</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Solid</h2>
             <div class="flex flex-wrap gap-3">
                 <app-button variant="primary">Primary</app-button>
                 <app-button variant="danger">Danger</app-button>
@@ -27,7 +27,7 @@ function simulateLoad() {
 
         <!-- Outline variants -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Outline</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Outline</h2>
             <div class="flex flex-wrap gap-3">
                 <app-button variant="primary" outline>Primary</app-button>
                 <app-button variant="danger"  outline>Danger</app-button>
@@ -40,7 +40,7 @@ function simulateLoad() {
 
         <!-- Sizes -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Sizes</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Sizes</h2>
             <div class="flex flex-wrap items-center gap-3">
                 <app-button variant="primary" size="sm">Small</app-button>
                 <app-button variant="primary" size="md">Medium</app-button>
@@ -50,7 +50,7 @@ function simulateLoad() {
 
         <!-- Rounded pill -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Rounded (pill)</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Rounded (pill)</h2>
             <div class="flex flex-wrap gap-3">
                 <app-button variant="primary" rounded>Primary</app-button>
                 <app-button variant="success" rounded outline>Success</app-button>
@@ -60,7 +60,7 @@ function simulateLoad() {
 
         <!-- With icons -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">With Icons</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">With Icons</h2>
             <div class="flex flex-wrap items-center gap-3">
                 <!-- icon-left -->
                 <app-button variant="primary">
@@ -102,7 +102,7 @@ function simulateLoad() {
 
         <!-- Icon-only -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Icon Only</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Icon Only</h2>
             <div class="flex flex-wrap items-center gap-3">
                 <app-button variant="primary" icon-only size="sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
@@ -124,7 +124,7 @@ function simulateLoad() {
 
         <!-- Loading state -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Loading</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Loading</h2>
             <div class="flex flex-wrap gap-3">
                 <app-button variant="primary" :loading="loading" @click="simulateLoad">
                     <template #icon-left>
@@ -141,7 +141,7 @@ function simulateLoad() {
 
         <!-- Disabled state -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Disabled</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Disabled</h2>
             <div class="flex flex-wrap gap-3">
                 <app-button variant="primary" disabled>Primary</app-button>
                 <app-button variant="danger"  disabled outline>Danger</app-button>
@@ -151,7 +151,7 @@ function simulateLoad() {
 
         <!-- Block -->
         <section class="space-y-3">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-3">Block (full width)</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-600">Block (full width)</h2>
             <app-button variant="primary" block>
                 <template #icon-left>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">

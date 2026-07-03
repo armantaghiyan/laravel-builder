@@ -14,7 +14,7 @@ defineProps<{
 
         <div>
             <div class="text-base font-medium">{{name}}</div>
-            <div class="text-gray-6 text-[13px]">{{sub}}</div>
+            <div class="text-gray-800 text-[13px]">{{sub}}</div>
         </div>
     </div>
 </template>

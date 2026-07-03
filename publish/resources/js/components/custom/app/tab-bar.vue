@@ -40,7 +40,7 @@ defineProps<{
                         'text-base transition-all duration-250',
                         model === tab.key
                             ? 'text-primary scale-110'
-                            : 'text-gray-400 group-hover:text-gray-600'
+                            : 'text-gray-400 group-hover:text-gray-800'
                     ]"
                 />
             </span>

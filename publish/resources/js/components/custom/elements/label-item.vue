@@ -15,7 +15,7 @@ defineProps<{
 
         <div class="flex flex-wrap items-center gap-1 leading-6">
             <span class="font-medium text-base">{{ title }}:</span>
-            <span class="text-gray-9">
+            <span class="text-gray-700">
                 <slot />
             </span>
         </div>

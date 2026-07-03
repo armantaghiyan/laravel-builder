@@ -189,7 +189,7 @@ defineExpose({ focus: () => inputRef.value?.focus() });
             <input
                 :id="inputId"
                 ref="inputRef"
-                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-2 hover:border-gray-3 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-300 hover:border-gray-600 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                 :class="{
                     '!placeholder:text-start': type === 'password',
                     'border-red-500': error,
@@ -214,7 +214,7 @@ defineExpose({ focus: () => inputRef.value?.focus() });
                 v-if="clearable && model"
                 type="button"
                 tabindex="-1"
-                class="absolute inset-y-0 left-3.5 flex items-center text-gray-3 hover:text-gray-4"
+                class="absolute inset-y-0 left-3.5 flex items-center text-gray-600 hover:text-gray-500"
                 @click="clear"
             >
                 ✕

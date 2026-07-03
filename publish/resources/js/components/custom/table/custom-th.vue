@@ -62,8 +62,8 @@ function changeSort() {
             class="absolute top-0 bottom-0 inset-s-1 w-6 flex items-center justify-center"
         >
             <div class="rotate-90">
-                <i class="ti ti-chevron-left duration-200" :class="{'text-gray-2': sort !== sortKey || sortType !== 'desc'}"></i>
-                <i class="ti ti-chevron-right duration-200" :class="{'text-gray-2': sort !== sortKey || sortType !== 'asc'}"></i>
+                <i class="ti ti-chevron-left duration-200" :class="{'text-gray-300': sort !== sortKey || sortType !== 'desc'}"></i>
+                <i class="ti ti-chevron-right duration-200" :class="{'text-gray-300': sort !== sortKey || sortType !== 'asc'}"></i>
             </div>
         </div>
     </th>

@@ -57,6 +57,20 @@ const menuConfig: MenuEntry[] = [
         icon: 'ti ti-smart-home',
     },
     {
+        type: 'item',
+        href: '/transaction',
+        titleKey: 'menu.transactions',
+        icon: 'ti ti-credit-card-pay',
+        permission: Permissions.TRANSACTION_INDEX,
+    },
+    {
+        type: 'item',
+        href: '/category',
+        titleKey: 'menu.categories',
+        icon: 'ti ti-category-2',
+        permission: Permissions.CATEGORY_INDEX,
+    },
+    {
         type: 'group',
         titleKey: 'menu.settings',
         icon: 'ti ti-settings-cog',
@@ -98,7 +112,7 @@ const visibleMenu = computed(() =>
 <template>
     <div class="relative z-100">
         <fade-animate :duration="200">
-            <div v-if="$app.isOpenSidebar && !isXl" @click="$app.isOpenSidebar = false" class="bg-gray-4/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
+            <div v-if="$app.isOpenSidebar && !isXl" @click="$app.isOpenSidebar = false" class="bg-gray-500/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
         </fade-animate>
 
         <custom-scroll class="fixed bg-menu-theme text-menu-color w-65 duration-200 h-full z-40" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">

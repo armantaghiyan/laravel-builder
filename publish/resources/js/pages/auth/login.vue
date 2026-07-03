@@ -7,7 +7,7 @@ const {login, form, pending} = useAuthLogin();
 <template>
     <div>
         <div class="grid lg:grid-cols-3 grid-cols-1 min-h-screen">
-            <div class="relative lg:flex flex-col hidden col-span-2 bg-gray-1 items-center justify-center">
+            <div class="relative lg:flex flex-col hidden col-span-2 bg-gray-100 items-center justify-center">
                 <div class="flex absolute inset-s-6 top-10 text-[22px] items-center">
                     <logo/>
                     <span class="ps-3 font-bold">{{ t('app_name') }}</span>

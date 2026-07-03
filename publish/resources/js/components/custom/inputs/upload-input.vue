@@ -26,14 +26,14 @@
         </div>
 
         <div v-if="file.length !== 0 || oldFiles.length !== 0" class="flex flex-wrap pt-1" style="gap: 8px;">
-            <div v-for="(item, index) in oldFiles" :key="'old-' + index" class="flex items-center py-1 px-2 rounded-[10px] bg-gray-2">
+            <div v-for="(item, index) in oldFiles" :key="'old-' + index" class="flex items-center py-1 px-2 rounded-[10px] bg-gray-300">
                 <a target="_blank" :href="item.file">فایل {{ index + 1 }}</a>
                 <div @click="$emit('onRemove', item)" class="p-1.5 cursor-pointer">
                     <i class="ti ti-x text-danger"></i>
                 </div>
             </div>
 
-            <div v-for="(item, index) in file" :key="'new-' + index" class="flex items-center py-1 px-2 rounded-[10px] bg-gray-2">
+            <div v-for="(item, index) in file" :key="'new-' + index" class="flex items-center py-1 px-2 rounded-[10px] bg-gray-300">
                 <a target="_blank" :href="getImageHref(item)">فایل {{ oldFiles.length + index + 1 }}</a>
                 <div @click="removeFile(index)" class="p-1.5 cursor-pointer">
                     <i class="ti ti-x text-danger"></i>
