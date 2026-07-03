@@ -9,26 +9,61 @@ use Throwable;
 
 class SecurityHeaders {
 
-    public function handle(Request $request, Closure $next): Response {
-        $response = $next($request);
+	public function handle(Request $request, Closure $next): Response {
+		$response = $next($request);
 
-        try {
-            $response->headers->set('X-Content-Type-Options', 'nosniff');
-            $response->headers->set('X-Frame-Options', 'DENY');
-            $response->headers->set('X-XSS-Protection', '1; mode=block');
-            $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
-            $response->headers->set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+		try {
+			/*
+			|--------------------------------------------------------------------------
+			| Security headers
+			|--------------------------------------------------------------------------
+			*/
 
-            if ($request->isSecure()) {
-                $response->headers->set(
-                    'Strict-Transport-Security',
-                    'max-age=31536000; includeSubDomains'
-                );
-            }
-        } catch (Throwable $e) {
-            report($e);
-        }
+			$response->headers->set('X-Content-Type-Options', 'nosniff');
+			$response->headers->set('X-Frame-Options', 'DENY');
+			$response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
-        return $response;
-    }
+			$response->headers->set(
+				'Permissions-Policy',
+				'geolocation=(), microphone=(), camera=()'
+			);
+
+			/*
+			|--------------------------------------------------------------------------
+			| HSTS (only HTTPS)
+			|--------------------------------------------------------------------------
+			*/
+			if ($request->isSecure()) {
+				$response->headers->set(
+					'Strict-Transport-Security',
+					'max-age=31536000; includeSubDomains'
+				);
+			}
+
+			/*
+			|--------------------------------------------------------------------------
+			| CSP (basic safe default)
+			|--------------------------------------------------------------------------
+			*/
+			$response->headers->set(
+				'Content-Security-Policy',
+				"frame-ancestors 'none';"
+			);
+
+			/*
+			|--------------------------------------------------------------------------
+			| Remove sensitive / fingerprinting headers (Laravel-level)
+			|--------------------------------------------------------------------------
+			*/
+			$response->headers->remove('X-Powered-By');
+			$response->headers->remove('Server');
+			$response->headers->remove('X-Generator');
+			$response->headers->remove('X-AspNet-Version');
+			$response->headers->remove('X-AspNetMvc-Version');
+		} catch (Throwable $e) {
+			report($e);
+		}
+
+		return $response;
+	}
 }
