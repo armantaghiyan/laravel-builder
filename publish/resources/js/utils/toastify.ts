@@ -12,8 +12,6 @@ export function errorToast(message: string, errorTitle = "") {
 }
 
 function showToast(message: string, errorTitle: string, type: ToastType) {
-    console.log('showToast');
-
 
     try {
         const isError = type === "error";
