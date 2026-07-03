@@ -8,17 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CaptureClientMeta {
 
-	public function handle(Request $request, Closure $next): Response {
-		$timestamp = $request->header('X-Timestamp');
-		$appVersion = $request->header('X-App-Version');
-		$os = $request->header('X-OS');
+    public function handle(Request $request, Closure $next): Response {
+        $timestamp = $request->header('X-Timestamp');
+        $appVersion = $request->header('X-App-Version');
+        $os = $request->header('X-OS');
 
-		$request->merge([
-			'timestamp' => $timestamp,
-			'version' => $appVersion,
-			'os' => $os,
-		]);
+        $request->merge([
+            'timestamp' => $timestamp,
+            'version' => $appVersion,
+            'os' => $os,
+        ]);
 
-		return $next($request);
-	}
+        return $next($request);
+    }
 }

@@ -21,6 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
 	->withMiddleware(function (Middleware $middleware) {
 		$middleware->prepend([
 			\App\Http\Middleware\SetRealIp::class,
+			\App\Http\Middleware\RequestId::class,
+			\App\Http\Middleware\RequestLogger::class,
+			\App\Http\Middleware\SlowRequestDetector::class,
+			\App\Http\Middleware\ResponseTime::class,
+			\App\Http\Middleware\ForceHttps::class,
 			\App\Http\Middleware\CaptureClientMeta::class,
 			\App\Http\Middleware\SetLocale::class,
 			\App\Http\Middleware\TrimStrings::class,

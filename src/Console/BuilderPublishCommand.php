@@ -107,6 +107,17 @@ class BuilderPublishCommand extends Command {
 
 			file_put_contents(base_path('config/auth.php'), $content);
 		}
+
+		// add log config
+		$content = file_get_contents(base_path('config/logging.php'));
+		if (!str_contains($content, 'slow_request')) {
+			$errorChanel = "'error_requests' => ['driver' => 'daily', 'path' => storage_path('logs/error-requests/error-requests.log'), 'level' => 'warning', 'days' => 30,]";
+			$slowChanel = "'slow_request' => ['driver' => 'daily', 'path' => storage_path('logs/slow-request/slow-request.log'), 'level' => 'warning', 'days' => 30,]";
+
+			$content = str_replace("'channels' => [", "'channels' => [ $slowChanel, $errorChanel,", $content);
+
+			file_put_contents(base_path('config/logging.php'), $content);
+		}
 	}
 
 	function addPackageDependency($name, $version, $type = 'dependencies') {
