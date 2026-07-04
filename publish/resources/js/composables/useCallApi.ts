@@ -8,17 +8,26 @@ export function useCallApi() {
     const apiToken = useCookie('api_token');
     const {locale} = useTranslations();
 
-
     const $app = appStore();
     const pending = ref(false);
 
     const callApi = axios.create({
-        baseURL: `${window.location.origin}/admin/admin/`,
+        baseURL: `${window.location.origin}/admin/`,
         timeout: 30000,
         headers: {
             'Accept': 'application/json',
         },
     });
+
+    function detectOS(): string {
+        const ua = navigator.userAgent;
+        if (/windows/i.test(ua)) return 'windows';
+        if (/android/i.test(ua)) return 'android';
+        if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
+        if (/mac/i.test(ua)) return 'mac';
+        if (/linux/i.test(ua)) return 'linux';
+        return 'Unknown';
+    }
 
     callApi.interceptors.request.use((config) => {
         pending.value = true;
@@ -28,6 +37,10 @@ export function useCallApi() {
         }
 
         config.headers['Accept-Language'] = locale.value;
+
+        config.headers['X-Timestamp'] = Date.now().toString();
+        config.headers['X-App-Version'] = '1.0.0';
+        config.headers['X-OS'] = detectOS();
 
         return config;
     }, (error) => {
@@ -50,6 +63,8 @@ export function useCallApi() {
             if(error?.response?.data?.result === 'error_validation'){
                 addErrorToInput(error?.response?.data?.errors);
             }else if(error?.response?.data?.result === 'error_message'){
+                errorToast(error?.response?.data?.message);
+            }else if(error?.response?.data?.result === 'rate_limit'){
                 errorToast(error?.response?.data?.message);
             }
         }catch (e) {}

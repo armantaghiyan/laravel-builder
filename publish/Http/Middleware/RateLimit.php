@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Exceptions\RateLimitException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ class RateLimit {
 	 * @param int      $maxAttempts
 	 *
 	 * @return mixed
+	 * @throws RateLimitException
 	 */
 	public function handle(Request $request, Closure $next, int $maxAttempts = 60): mixed {
 		$key = $this->throttleKey($request);
