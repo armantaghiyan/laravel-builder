@@ -49,8 +49,8 @@ class BuilderController {
 
 		$model = Str::studly(Str::singular($table));
 
-		$this->createModel($model, $columnInfo);
-		$this->createController($model, $columnInfo);
+		$this->createModel($model, $columnInfo, $table);
+		$this->createController($model, $columnInfo, $table);
 
 		$this->createAction($model, 'Index', $columnInfo);
 		$this->createAction($model, 'Store', $columnInfo);
@@ -70,22 +70,22 @@ class BuilderController {
 		$this->createRescueController($model, 'Update', $columnInfo);
 		$this->createRescueController($model, 'Show', $columnInfo);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$this->createInterface($model, $columnInfo);
-		$this->createListComposable($model, $columnInfo);
-		$this->createShowComposable($model, $columnInfo);
-		$this->createStoreUpdateComposable($model, $columnInfo);
-		$this->createDestroyComposable($model, $columnInfo);
+		$this->createInterface($model, $columnInfo, $table);
+		$this->createListComposable($model, $columnInfo, $table);
+		$this->createShowComposable($model, $columnInfo, $table);
+		$this->createStoreUpdateComposable($model, $columnInfo, $table);
+		$this->createDestroyComposable($model, $columnInfo, $table);
 
-		$this->createVueTemplate($model, 'index', $columnInfo);
-		$this->createVueTemplate($model, 'create', $columnInfo);
-		$this->createVueTemplate($model, 'show', $columnInfo);
-		$this->createVueRoutes($model);
+		$this->createVueTemplate($model, 'index', $columnInfo, $table);
+		$this->createVueTemplate($model, 'create', $columnInfo, $table);
+		$this->createVueTemplate($model, 'show', $columnInfo, $table);
+		$this->createVueRoutes($model, $table);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		$this->createPermissions($model);
+		$this->createPermissions($model, $table);
 	}
 
-	public function createModel($model, $columnInfo) {
+	public function createModel($model, $columnInfo, $table) {
 		$content = $this->getBackendStub('model.text');
 
 		$cols = "";
@@ -103,17 +103,17 @@ class BuilderController {
 		$content = str_replace('{cols}', $cols, $content);
 		$content = str_replace('{fillable}', $fillable, $content);
 		$content = str_replace('{model}', $model, $content);
-		$content = str_replace('{sumModel}', strtolower($model), $content);
+		$content = str_replace('{sumModel}', $table, $content);
 
 		FileWriter::put(app_path("Core/Domain/{$model}/Models/{$model}.php"), $content);
 	}
 
-	public function createController($model, $columnInfo) {
+	public function createController($model, $columnInfo, $table) {
 		$content = $this->getBackendStub('controller.text');
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{sumModel}', strtolower($model), $content);
-		$content = str_replace('{upperModel}', strtoupper($model), $content);
+		$content = str_replace('{upperModel}', strtoupper(Str::singular($table)), $content);
 
 
 		FileWriter::put(app_path("Http/Controllers/Admin/{$model}Controller.php"), $content);
@@ -220,8 +220,8 @@ class BuilderController {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public function createInterface($model, $columnInfo) {
-		$lowerModel = strtolower($model);
+	public function createInterface($model, $columnInfo, $table) {
+		$lowerModel = Str::camel(Str::singular($table));
 
 		$content = $this->getFrontStub('interface.text');
 
@@ -234,7 +234,6 @@ class BuilderController {
 		$content = str_replace('{params}', $params, $content);
 
 
-
 		FileWriter::put(resource_path("js/utils/models/$model.ts"), $content);
 
 		$content = $this->getFrontStub('api.text');
@@ -243,10 +242,10 @@ class BuilderController {
 		FileWriter::put(resource_path("js/utils/api/$lowerModel.ts"), $content);
 	}
 
-	public function createListComposable($model, $columnInfo) {
+	public function createListComposable($model, $columnInfo, $table) {
 		$content = $this->getFrontStub('use-list.text');
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 		$params = $this->createSearchParams($columnInfo);
 
 		$content = str_replace('{params}', $params, $content);
@@ -256,10 +255,10 @@ class BuilderController {
 		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}List.ts"), $content);
 	}
 
-	public function createShowComposable($model, $columnInfo) {
+	public function createShowComposable($model, $columnInfo, $table) {
 		$content = $this->getFrontStub('use-show.text');
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{name}', $lowerModel, $content);
@@ -267,10 +266,10 @@ class BuilderController {
 		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}Show.ts"), $content);
 	}
 
-	public function createStoreUpdateComposable($model, $columnInfo) {
+	public function createStoreUpdateComposable($model, $columnInfo, $table) {
 		$content = $this->getFrontStub('use-store-update.text');
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 		$params = $this->createUpdateStoreParams($columnInfo);
 
 		$content = str_replace('{params}', $params, $content);
@@ -280,10 +279,10 @@ class BuilderController {
 		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}StoreUpdate.ts"), $content);
 	}
 
-	public function createDestroyComposable($model, $columnInfo) {
+	public function createDestroyComposable($model, $columnInfo, $table) {
 		$content = $this->getFrontStub('use-destroy.text');
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{name}', $lowerModel, $content);
@@ -291,10 +290,10 @@ class BuilderController {
 		FileWriter::put(resource_path("js/composables/$lowerModel/use{$model}Destroy.ts"), $content);
 	}
 
-	public function createVueTemplate($model, $template,$columnInfo) {
+	public function createVueTemplate($model, $template,$columnInfo, $table) {
 		$content = $this->getFrontStub("$template.text");
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{name}', $lowerModel, $content);
@@ -346,14 +345,14 @@ class BuilderController {
 		FileWriter::put(resource_path("js/pages/$lowerModel/$template.vue"), $content);
 	}
 
-	public function createVueRoutes($model) {
+	public function createVueRoutes($model, $table) {
 		$content = file_get_contents(resource_path('js/router.ts'));
 
 		if (str_contains($content, $model)) {
 			return;
 		}
 
-		$lowerModel = strtolower($model);
+		$lowerModel = Str::camel(Str::singular($table));
 
 
 		$content = sprintf("import %sIndexPage from '@/pages/%s/index.vue';\n\n", $model, $lowerModel) . $content;
@@ -401,11 +400,11 @@ class BuilderController {
 	}
 
 
-	private function createPermissions($model) {
+	private function createPermissions($model, $table) {
 		$content = file_get_contents(app_path('Http/Constants/Permissions.php'));
 
-		$lowerModel = strtolower($model);
-		$upperModel = strtoupper($model);
+		$lowerModel = strtolower(Str::singular($table));
+		$upperModel = strtoupper(Str::singular($table));
 
 		$perms = "Permissions {\n
 	const {$upperModel}_INDEX = '{$lowerModel}.index';
