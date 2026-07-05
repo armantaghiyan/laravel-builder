@@ -318,7 +318,8 @@ class BuilderController {
 
 		$content = str_replace('{thead}', $thead, $content);
 		$content = str_replace('{tbody}', $tbody, $content);
-		$content = str_replace('{upperModel}', strtoupper($model), $content);
+		$content = str_replace('{upperModel}', strtoupper(Str::singular($table)), $content);
+		$content = str_replace('{name2}', Str::singular($table), $content);
 
 
 		$updateStoreParams = "";
