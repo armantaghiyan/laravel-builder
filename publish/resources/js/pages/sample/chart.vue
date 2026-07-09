@@ -48,5 +48,16 @@ import {getTailwindColor} from "@/utils/helper.ts";
             :show-legend="false"
             :height="260"
         />
+
+
+        <pie-chart
+            title="سهم فروش محصولات"
+            :labels="['موبایل', 'لپ‌تاپ', 'لوازم جانبی']"
+            :data="[45, 35, 20]"
+            cutout="70"
+            center-label="۵۰۴"
+            center-sub-label="مجموع فروش"
+            :stats="[{ label: 'رشد ماهانه', value: '۱۲٪', trend: 'up' }]"
+        />
     </div>
 </template>
