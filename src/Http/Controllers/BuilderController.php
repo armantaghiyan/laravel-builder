@@ -124,7 +124,7 @@ class BuilderController {
 		$content = $this->getBackendStub("$lowerAction-action.text");
 
 		$content = str_replace('{model}', $model, $content);
-		$content = str_replace('{sumModel}', strtolower($model), $content);
+		$content = str_replace('{sumModel}', lcfirst($model), $content);
 
 		$items = "";
 		foreach ($columnInfo as $key => $value) {
