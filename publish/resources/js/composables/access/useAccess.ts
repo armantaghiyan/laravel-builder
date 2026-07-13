@@ -58,13 +58,14 @@ export function useAccess() {
         name: '',
     });
 
-    function storeAndUpdate(id: string | number, method: 'post' | 'patch') {
-        callApi[method]<AccessStoreAndUpdateResponse>(`/access/${id}`, storeAndUpdateParams).then(res => {
+    function storeAndUpdate(id: string | number | null, method: 'post' | 'patch') {
+        const url = id? `/access/${id}` : `/access`;
+        callApi[method]<AccessStoreAndUpdateResponse>(url, storeAndUpdateParams).then(res => {
             router.replace({path: `/access/${res.data.data.item.id}`})
         });
     }
 
-    const store = () => storeAndUpdate('', 'post')
+    const store = () => storeAndUpdate(null, 'post')
     const update = (id: string | number) => storeAndUpdate(id, 'patch')
 
     //==================================================================================================================

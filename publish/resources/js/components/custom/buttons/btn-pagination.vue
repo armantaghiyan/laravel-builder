@@ -9,10 +9,10 @@ const {
 
 <template>
     <button
-        class="sm:size-9.5 sm:text-[15px] text-[13px] size-8 rounded-md duration-200 flex items-center justify-center cursor-pointer disabled:cursor-default disabled:bg-gray-7 disabled:opacity-50"
+        class="sm:size-9.5 sm:text-[15px] text-[13px] size-8 rounded-md duration-200 flex items-center justify-center cursor-pointer disabled:cursor-default disabled:bg-gray-200 disabled:opacity-50"
         :class="{
             'bg-primary text-white': isActive && !disabled,
-            'bg-gray-7 hover:bg-light-primary hover:text-primary': !isActive && !disabled
+            'bg-gray-100 hover:bg-light-primary hover:text-primary': !isActive && !disabled
          }"
         :disabled="disabled"
     >

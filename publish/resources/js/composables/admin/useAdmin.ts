@@ -77,14 +77,15 @@ export default function useAdmin() {
         repeat_password: '',
     });
 
-    function storeAndUpdate(id: string | number, method: 'post'|'patch') {
-        callApi[method]<AdminStoreAndUpdateResponse>(`/admin/${id}`, storeAndUpdateParams).then(res => {
+    function storeAndUpdate(id: string | number | null, method: 'post'|'patch') {
+        const url = id? `/admin/${id}` : `/admin`;
+        callApi[method]<AdminStoreAndUpdateResponse>(url, storeAndUpdateParams).then(res => {
             router.replace({path: `/admin/${res.data.data.item.id}`})
             item.value = res.data.data.item;
         });
     }
 
-    const store = () => storeAndUpdate('', 'post')
+    const store = () => storeAndUpdate(null, 'post')
     const update = (id: string | number) => storeAndUpdate(id, 'patch')
 
     //==================================================================================================================

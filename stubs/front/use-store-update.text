@@ -8,13 +8,14 @@ export default function use{model}StoreUpdate() {
         {params}
     });
 
-    function storeAndUpdate(id: string | number, method: 'post'|'patch') {
-        callApi[method]<{model}StoreAndUpdateResponse>(`/{name}/${id}`, storeAndUpdateParams).then(res => {
+    function storeAndUpdate(id: string | number | null, method: 'post'|'patch') {
+        const url = id? `/{name}/${id}` : `/{name}`;
+        callApi[method]<{model}StoreAndUpdateResponse>(url, storeAndUpdateParams).then(res => {
             router.replace({path: `/{name}/${res.data.data.item.id}`})
         });
     }
 
-    const store = () => storeAndUpdate('', 'post')
+    const store = () => storeAndUpdate(null, 'post')
     const update = (id: string | number) => storeAndUpdate(id, 'patch')
 
     return {
