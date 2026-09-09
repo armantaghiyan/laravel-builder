@@ -11,11 +11,11 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex border-b border-gray-200">
+    <div class="flex flex-nowrap overflow-x-auto scrollbar-hide border-b border-gray-200">
         <button
             v-for="tab in tabs"
             :key="tab.key"
-            class="tab-item group relative flex flex-col items-center px-5 pt-2.5 pb-0 cursor-pointer border-none bg-transparent outline-none rounded-t-lg overflow-hidden"
+            class="tab-item group relative flex flex-shrink-0 flex-col items-center px-5 pt-2.5 pb-0 cursor-pointer border-none bg-transparent outline-none rounded-t-lg overflow-hidden"
             :class="{ active: model === tab.key }"
             @click="model = tab.key"
         >
@@ -57,6 +57,15 @@ defineProps<{
 <style scoped>
 .tab-indicator {
     animation: slide-in 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
 }
 
 @keyframes slide-in {
