@@ -9,7 +9,7 @@ defineProps<{
     <router-link
         :to="href"
         active-class="menu-active-item"
-        class="menu-item-link group relative flex items-center gap-2.5 w-full h-10 px-3 mt-1.5 rounded-lg
+        class="menu-item-link group relative flex items-center gap-3 w-full h-11 px-3.5 mt-1.5 rounded-xl
                text-slate-300 transition-all duration-300
                hover:bg-white/10 hover:text-white
                active:scale-[0.98]"
@@ -31,16 +31,18 @@ defineProps<{
 
 <style scoped>
 .menu-item-link {
-    color: #a3a9c2;
+    color: #aeb5ce;
 }
 
 .menu-item-link:hover {
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.09);
 }
 
 .menu-active-item {
-    @apply bg-primary font-semibold text-white;
+    background: linear-gradient(110deg, #635bff, #7d72ff);
+    box-shadow: 0 8px 18px rgba(99, 91, 255, 0.30);
+    @apply font-semibold text-white;
 }
 
 .menu-active-item .indicator {

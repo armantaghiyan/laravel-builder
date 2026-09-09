@@ -27,7 +27,7 @@ const groupedPermissions = computed(() => {
 </script>
 
 <template>
-    <card :title="t('access.permissions')">
+    <card :title="t('access.permissions')" class="detail-surface">
         <div v-if="rolePermissionLoaded" class="px-6 pb-6 grid md:grid-cols-2 grid-cols-1 gap-6">
             <div v-for="(permissions, group) in groupedPermissions" :key="group">
                 <h3 class="font-bold mb-2">{{ t(`roles.${group}`) }}</h3>

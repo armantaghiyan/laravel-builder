@@ -6,15 +6,16 @@ defineProps<{
 </script>
 
 <template>
-    <card class="p-6">
-        <div class="flex items-center gap-2.5">
-            <div class="flex size-9.5 items-center justify-center rounded-lg bg-light-dark text-[18px] shrink-0">
+    <card class="p-6 relative overflow-hidden group">
+        <div class="absolute -left-7 -top-7 size-24 rounded-full bg-primary/[0.055] transition-transform duration-500 group-hover:scale-150"></div>
+        <div class="flex items-center gap-3 relative">
+            <div class="flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-light-primary to-white text-primary text-[21px] shrink-0 ring-1 ring-primary/10 shadow-sm">
                 <slot name="icon" />
             </div>
-            <div class="text-[22px] font-medium leading-tight">{{ value }}</div>
+            <div class="text-[23px] font-bold tracking-tight leading-tight">{{ value }}</div>
         </div>
 
-        <p v-if="desc" class="text-[13px] text-gray-500 leading-snug pt-4">
+        <p v-if="desc" class="text-[13px] text-gray-500 leading-snug pt-5 relative">
             {{ desc }}
         </p>
     </card>

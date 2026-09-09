@@ -11,8 +11,8 @@ const changeLanguage = (newLocale) => {
 </script>
 
 <template>
-    <div class="sticky top-0 pt-4 px-4 z-50 bg-panel">
-        <card class="h-14 flex px-6 items-center justify-between">
+    <div class="sticky top-0 pt-4 px-4 z-50 bg-panel/85 backdrop-blur-xl">
+        <card class="h-15 flex px-6 items-center justify-between !rounded-xl !shadow-[0_6px_22px_rgba(33,43,85,0.06)]">
             <div>
                 <icon-button @click="$app.isOpenSidebar=!$app.isOpenSidebar">
                     <i class="ti ti-menu-2"></i>
@@ -40,7 +40,7 @@ const changeLanguage = (newLocale) => {
 
                 <option-menu :width="224" :top="60" position="auto">
                     <template #button>
-                        <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-10 rounded-full mt-1.5 cursor-pointer">
+                        <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-9 rounded-xl mt-1.5 cursor-pointer ring-2 ring-primary/10 transition-transform hover:scale-105">
                     </template>
 
                     <div class="flex flex-col gap-1">

@@ -109,19 +109,23 @@ const visibleMenu = computed(() =>
 );
 </script>
 
+
 <template>
     <div class="relative z-100">
         <fade-animate :duration="200">
             <div v-if="$app.isOpenSidebar && !isXl" @click="$app.isOpenSidebar = false" class="bg-gray-500/50 w-full h-screen fixed to-pink-50 right-0 left-0 z-40"></div>
         </fade-animate>
 
-        <custom-scroll class="fixed bg-menu-theme text-menu-color w-65 duration-200 h-full z-40" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
+        <custom-scroll class="fixed sidebar-surface text-menu-color w-65 duration-200 h-full z-40 shadow-[0_0_35px_rgba(26,29,47,0.20)]" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
             <div>
-                <div class="h-16 flex items-center gap-2 ps-5.5 pe-2">
-                    <logo/>
-                    <span class="text-white text-[22px] font-bold">{{ t('app_name')}}</span>
+                <div class="h-22 flex items-center gap-3 px-5">
+                    <div class="size-10 rounded-xl bg-white/10 ring-1 ring-white/10 flex items-center justify-center shadow-lg"><logo/></div>
+                    <div class="flex flex-col">
+                        <span class="text-white text-[21px] font-bold tracking-tight">{{ t('app_name')}}</span>
+                        <span class="text-[11px] text-white/45 tracking-wide">CONTROL CENTER</span>
+                    </div>
                 </div>
-                <div class="px-3">
+                <div class="px-3 pb-6">
                     <template v-for="(entry, idx) in visibleMenu" :key="idx">
                         <menu-item
                             v-if="entry.type === 'item'"

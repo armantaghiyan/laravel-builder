@@ -17,19 +17,19 @@ onMounted(() => {
 
 <template>
     <div class="flex flex-col gap-6">
-        <card>
+        <card class="overflow-hidden detail-surface">
             <div
-                class="bg-[url('/resources/assets/images/bg/profile-banner.jpg')] bg-cover bg-center md:h-[250px] h-[150px] rounded-t-[6px]"></div>
+                class="bg-[url('/resources/assets/images/bg/profile-banner.jpg')] bg-cover bg-center md:h-[250px] h-[150px] rounded-t-2xl"></div>
 
             <div class="relative">
                 <div class="flex items-end gap-6 absolute top-[-50px] h-30 px-6">
-                    <div class="border-5 border-white md:w-[120px] w-[100px] rounded-[2px]">
+                    <div class="border-5 border-white md:w-[120px] w-[100px] rounded-2xl shadow-xl overflow-hidden">
                         <img src="/resources/assets/images/icon/user.jpg" class="w-full h-full" alt="">
                     </div>
 
                     <div class="flex flex-col gap-3">
-                        <div class="text-[24px]">{{ item?.name }}</div>
-                        <div class="text-gray-700">@{{ item?.username }}</div>
+                        <div class="text-[24px] font-bold">{{ item?.name }}</div>
+                        <div class="text-gray-500">@{{ item?.username }}</div>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ onMounted(() => {
         </card>
 
         <div class="grid grid-cols-12 gap-6">
-            <card class="lg:col-span-4 col-span-12 p-6">
+            <card class="lg:col-span-4 col-span-12 p-6 detail-surface">
                 <label-title>{{ t('admin.admin_detail') }}</label-title>
 
                 <label-item icon="ti-hash" :title="t('global.id')">{{ item?.id }}</label-item>
@@ -59,7 +59,7 @@ onMounted(() => {
                     <span dir="ltr">{{ item?.updated_at }}</span>
                 </label-item>
             </card>
-            <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles.role')" class="lg:col-span-8 col-span-12">
+            <card v-if="hasPermission(Permissions.ADMIN_ADD_ROLE)" :title="t('roles.role')" class="lg:col-span-8 col-span-12 detail-surface">
 
                 <div class="px-6 pb-6 grid grid-cols-2 gap-6">
                     <role-adapter v-for="role in roles" :role="role" :adminRoles="adminRoles" :adminId="item.id"/>

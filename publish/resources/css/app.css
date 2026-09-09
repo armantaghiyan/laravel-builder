@@ -9,8 +9,8 @@
 @import "~/css/tabler-icons-outline.min.css";
 
 @theme {
-    --color-primary: #7367f0;
-    --color-light-primary: #E8E7FD;
+    --color-primary: #635bff;
+    --color-light-primary: #eeedff;
 
     --color-success: #28c76f;
     --color-light-success: #DDF6E8;
@@ -31,12 +31,12 @@
     --color-menu-color: #cfcce4;
     --color-menu-hover: #393d53;
 
-    --color-panel: #f6f4f8;
-    --color-base: #444050;
+    --color-panel: #f4f6fb;
+    --color-base: #252b45;
 
-    --color-gray-50:  #f8f7fa;
-    --color-gray-100: #eeeeef;
-    --color-gray-200: #e6d6e8;
+    --color-gray-50:  #fafbff;
+    --color-gray-100: #f0f2f8;
+    --color-gray-200: #e4e8f2;
     --color-gray-300: #d1d0d4;
     --color-gray-400: #acaab1;
     --color-gray-500: #97959e;
@@ -66,7 +66,8 @@
 @layer base {
     body {
         font-family: vazirmatn, serif;
-        @apply text-base font-normal text-[15px] leading-[20.6px];
+        @apply font-normal text-[15px] leading-[20.6px] text-base;
+        background-color: var(--color-panel);
     }
 
     h4 {
@@ -83,6 +84,11 @@
 
     a:hover {
         @apply text-primary;
+    }
+
+    ::selection {
+        background: #dedcff;
+        color: #312e81;
     }
 }
 
@@ -106,4 +112,24 @@
 .custom-toast-error {
     background-color: #F13246 !important;
     border-radius: 24px !important;
+}
+
+.detail-surface {
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #22c5d9, #72dfae);
+}
+
+.sidebar-surface {
+    background:
+            radial-gradient(circle at 5% 0%, rgba(121, 111, 255, 0.24), transparent 29%),
+            radial-gradient(circle at 100% 100%, rgba(42, 195, 215, 0.13), transparent 31%),
+            #24293f;
 }
