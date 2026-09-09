@@ -27,7 +27,7 @@ const {login, form, pending} = useAuthLogin();
                         <form @submit.prevent="login" class="flex flex-col gap-5">
                             <text-input id="username" :title="t('auth.username')" :placeholder="t('auth.enter_username')" v-model="form.username"/>
                             <text-input id="password" type="password" :title="t('auth.password')" placeholder="············" v-model="form.password"/>
-                            <app-button type="submit" variant="primary" :loading="pending" class="w-full !h-11.5 !rounded-xl !shadow-[0_10px_20px_rgba(99,91,255,0.25)]">{{ t('auth.sin_in') }}</app-button>
+                            <app-button type="submit" variant="primary" :loading="pending" class="w-full h-11.5! rounded-xl! shadow-[0_10px_20px_rgba(99,91,255,0.25)]!">{{ t('auth.sin_in') }}</app-button>
                         </form>
                     </div>
                 </div>

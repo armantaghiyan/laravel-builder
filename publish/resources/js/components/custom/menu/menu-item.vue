@@ -40,7 +40,7 @@ defineProps<{
 }
 
 .menu-active-item {
-    background: linear-gradient(110deg, #635bff, #7d72ff);
+    background: linear-gradient(110deg, var(--color-primary), var(--color-primary-dark));
     box-shadow: 0 8px 18px rgba(99, 91, 255, 0.30);
     @apply font-semibold text-white;
 }

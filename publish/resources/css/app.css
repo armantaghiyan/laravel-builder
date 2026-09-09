@@ -10,6 +10,7 @@
 
 @theme {
     --color-primary: #635bff;
+    --color-primary-dark: #7d72ff;
     --color-light-primary: #eeedff;
 
     --color-success: #28c76f;
