@@ -20,22 +20,22 @@ const changeLanguage = (newLocale) => {
             </div>
             <div class="flex gap-2">
                 <div class="flex items-center">
-<!--                    <option-menu :width="160" :top="60" position="auto">-->
-<!--                        <template #button>-->
-<!--                            <icon-button>-->
-<!--                                <i class="ti ti-language ti-md"></i>-->
-<!--                            </icon-button>-->
-<!--                        </template>-->
+                    <!--                    <option-menu :width="160" :top="60" position="auto">-->
+                    <!--                        <template #button>-->
+                    <!--                            <icon-button>-->
+                    <!--                                <i class="ti ti-language ti-md"></i>-->
+                    <!--                            </icon-button>-->
+                    <!--                        </template>-->
 
-<!--                        <div class="flex flex-col p-2 gap-1">-->
-<!--                            <btn-clickable v-for="lang in getAvailableLocales()" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">-->
-<!--                                {{ t(`app.${lang}`) }}-->
-<!--                            </btn-clickable>-->
-<!--                        </div>-->
-<!--                    </option-menu>-->
-<!--                    <icon-button>-->
-<!--                        <i class="ti ti-bell ti-md"></i>-->
-<!--                    </icon-button>-->
+                    <!--                        <div class="flex flex-col p-2 gap-1">-->
+                    <!--                            <btn-clickable v-for="lang in getAvailableLocales()" @click="changeLanguage(lang)" :class="{'text-primary bg-light-primary': lang === locale}">-->
+                    <!--                                {{ t(`app.${lang}`) }}-->
+                    <!--                            </btn-clickable>-->
+                    <!--                        </div>-->
+                    <!--                    </option-menu>-->
+                    <!--                    <icon-button>-->
+                    <!--                        <i class="ti ti-bell ti-md"></i>-->
+                    <!--                    </icon-button>-->
                 </div>
 
                 <option-menu :width="224" :top="60" position="auto">
@@ -44,8 +44,8 @@ const changeLanguage = (newLocale) => {
                     </template>
 
                     <div class="flex flex-col gap-1">
-                        <div class="flex items-center gap-2 border-b border-light-dark p-3">
-                            <img src="/resources/assets/images/icon/user.jpg" class="rounded-full size-10" alt="">
+                        <div class="flex items-center gap-3 border-b border-light-dark p-3">
+                            <img src="/resources/assets/images/icon/user.jpg" alt="user icon" class="size-9 rounded-xl mt-1.5 cursor-pointer ring-2 ring-primary/10 transition-transform hover:scale-105">
                             <div class="font-medium text-[15px]">
                                 {{$user.user.name}}
                             </div>

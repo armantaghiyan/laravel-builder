@@ -22,31 +22,49 @@ const $app = appStore();
 
 <style>
 .loader {
-    width: 45px;
-    aspect-ratio: 1;
-    --c: no-repeat linear-gradient(var(--color-primary) 0 0);
-    background: var(--c) 0 50%,
-    var(--c) 50% 50%,
-    var(--c) 100% 50%;
-    background-size: 20% 100%;
-    animation: l1 1s infinite linear;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+    position: relative;
+    animation: loader-radar 1.4s ease-out infinite;
 }
 
-@keyframes l1 {
+.loader::before {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    opacity: 0.7;
+    animation: loader-radar-dot 1.4s ease-in-out infinite;
+}
+
+@keyframes loader-radar {
     0% {
-        background-size: 20% 100%, 20% 100%, 20% 100%
+        transform: scale(0.75);
+        opacity: 0.4;
     }
-    33% {
-        background-size: 20% 10%, 20% 100%, 20% 100%
+
+    70% {
+        transform: scale(1);
+        opacity: 1;
     }
-    50% {
-        background-size: 20% 100%, 20% 10%, 20% 100%
-    }
-    66% {
-        background-size: 20% 100%, 20% 100%, 20% 10%
-    }
+
     100% {
-        background-size: 20% 100%, 20% 100%, 20% 100%
+        transform: scale(1.15);
+        opacity: 0.2;
+    }
+}
+
+@keyframes loader-radar-dot {
+    0%,
+    100% {
+        transform: scale(0.7);
+    }
+
+    50% {
+        transform: scale(1);
     }
 }
 </style>
