@@ -11,7 +11,7 @@ const isXl = useBreakpoint('xl');
             'inset-s-0': $app.isOpenSidebar && !isXl
         }">
 
-        <div class="mx-auto min-h-screen">
+        <div class="mx-auto min-h-screen duration-200" :class="{'max-w-347.5': $app.isContentMaxWidth}">
             <slot/>
         </div>
     </div>

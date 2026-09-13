@@ -22,6 +22,7 @@ watch(isXl, () => {
 
 onMounted(() => {
     $app.isOpenSidebar = isXl.value;
+    $app.loadContentMaxWidth();
 });
 
 
@@ -118,7 +119,15 @@ const visibleMenu = computed(() =>
 
         <custom-scroll class="fixed sidebar-surface text-menu-color w-65 duration-200 h-full z-40 shadow-[0_0_35px_rgba(26,29,47,0.20)]" :class="{'inset-s-0': $app.isOpenSidebar, '-inset-s-65': !$app.isOpenSidebar}">
             <div>
-                <div class="h-22 flex items-center gap-3 px-5">
+                <button
+                    type="button"
+                    class="absolute top-3 left-3 size-8 rounded-lg text-white/70 hover:bg-white/10 hover:text-white"
+                    aria-label="Toggle content width"
+                    @click="$app.toggleContentMaxWidth()"
+                >
+                    <i class="tf-icons text-[20px]" :class="$app.isContentMaxWidth ? 'ti ti-arrows-maximize' : 'ti ti-arrows-minimize'"></i>
+                </button>
+                <div class="h-22 flex items-center gap-3 px-5 pl-14">
                     <div class="size-10 rounded-xl bg-white/10 ring-1 ring-white/10 flex items-center justify-center shadow-lg"><logo/></div>
                     <div class="flex flex-col">
                         <span class="text-white text-[21px] font-bold tracking-tight">{{ t('app_name')}}</span>
