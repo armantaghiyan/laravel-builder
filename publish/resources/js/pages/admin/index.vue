@@ -42,6 +42,7 @@ onMounted(() => {
                         <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
                         <custom-th>{{ t('global.name') }}</custom-th>
                         <custom-th>{{ t('global.username') }}</custom-th>
+                        <custom-th>{{ t('admin.roles') }}</custom-th>
                         <custom-th :width="165" sort-key="last_login" v-model:sort="params.sort" v-model:sort-type="params.last_login">{{ t('admin.last_login') }}</custom-th>
                         <custom-th :width="165" sort-key="created_at" v-model:sort="params.sort" v-model:sort-type="params.created_at">{{ t('global.created_at') }}</custom-th>
                         <custom-th :width="165" sort-key="updated_at" v-model:sort="params.sort" v-model:sort-type="params.updated_at">{{ t('global.updated_at') }}</custom-th>
@@ -55,6 +56,18 @@ onMounted(() => {
                         </custom-td>
                         <custom-td>{{ item.name }}</custom-td>
                         <custom-td>{{ item.username }}</custom-td>
+                        <custom-td>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    v-for="role in item.roles"
+                                    :key="role.id"
+                                    class="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary"
+                                >
+                                    {{ t(`roles.${role.name}`) }}
+                                </span>
+                                <span v-if="!item.roles.length">-</span>
+                            </div>
+                        </custom-td>
                         <custom-td>
                             <span dir="ltr">{{ item.last_login }}</span>
                         </custom-td>

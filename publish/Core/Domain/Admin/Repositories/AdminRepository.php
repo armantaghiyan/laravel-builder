@@ -12,7 +12,7 @@ class AdminRepository {
     }
 
     public function index(AdminIndexData $data): array {
-        $query = Admin::query();
+		$query = Admin::query()->with('roles');
 
         $query->filter(Admin::ID, $data->id);
         $query->filter(Admin::NAME, "%{$data->name}%");
