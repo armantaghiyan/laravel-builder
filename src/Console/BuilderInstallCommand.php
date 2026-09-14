@@ -99,5 +99,49 @@ class BuilderInstallCommand extends Command {
 		Artisan::call('install:api --force -n');
 
 		$this->info(Artisan::output());
+		//==============================================================================================================
+		$this->info('Published file');
+
+		Artisan::call('builder:publish');
+
+		$this->info(Artisan::output());
+		//==============================================================================================================
+		$this->info('Run migration');
+
+		Artisan::call('migrate');
+
+		$this->info(Artisan::output());
+		//==============================================================================================================
+		$this->info('Run seeder');
+
+		Artisan::call('db:seed --class=AccessSeeder');
+
+		$this->info(Artisan::output());
+
+		//==============================================================================================================
+		$this->info('Install npm dependencies');
+
+		$result = Process::run('npm install');
+
+		$this->line($result->output());
+
+		if ($result->failed()) {
+			$this->error($result->errorOutput());
+
+			return;
+		}
+
+		$this->info('Npm build');
+
+		$result = Process::run('npm run build');
+
+		$this->line($result->output());
+
+		if ($result->failed()) {
+			$this->error($result->errorOutput());
+			return;
+		}
+
+		$this->info('install success');
 	}
 }

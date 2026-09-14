@@ -58,20 +58,6 @@ const menuConfig: MenuEntry[] = [
         icon: 'ti ti-smart-home',
     },
     {
-        type: 'item',
-        href: '/transaction',
-        titleKey: 'menu.transactions',
-        icon: 'ti ti-credit-card-pay',
-        permission: Permissions.TRANSACTION_INDEX,
-    },
-    {
-        type: 'item',
-        href: '/category',
-        titleKey: 'menu.categories',
-        icon: 'ti ti-category-2',
-        permission: Permissions.CATEGORY_INDEX,
-    },
-    {
         type: 'group',
         titleKey: 'menu.settings',
         icon: 'ti ti-settings-cog',
@@ -121,13 +107,13 @@ const visibleMenu = computed(() =>
             <div>
                 <button
                     type="button"
-                    class="absolute xl:block hidden top-3 left-3 size-8 rounded-lg text-white/70 hover:bg-white/10 hover:text-white"
+                    class="absolute xl:block hidden top-3 end-3 size-8 rounded-lg text-white/70 hover:bg-white/10 hover:text-white"
                     aria-label="Toggle content width"
                     @click="$app.toggleContentMaxWidth()"
                 >
                     <i class="tf-icons text-[20px]" :class="$app.isContentMaxWidth ? 'ti ti-arrows-maximize' : 'ti ti-arrows-minimize'"></i>
                 </button>
-                <div class="h-22 flex items-center gap-3 px-5 pl-14">
+                <div class="h-22 flex items-center gap-3 px-5 pe-14">
                     <div class="size-10 rounded-xl bg-white/10 ring-1 ring-white/10 flex items-center justify-center shadow-lg"><logo/></div>
                     <div class="flex flex-col">
                         <span class="text-white text-[21px] font-bold tracking-tight">{{ t('app_name')}}</span>
