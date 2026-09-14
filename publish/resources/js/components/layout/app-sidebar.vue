@@ -121,7 +121,7 @@ const visibleMenu = computed(() =>
             <div>
                 <button
                     type="button"
-                    class="absolute top-3 left-3 size-8 rounded-lg text-white/70 hover:bg-white/10 hover:text-white"
+                    class="absolute xl:block hidden top-3 left-3 size-8 rounded-lg text-white/70 hover:bg-white/10 hover:text-white"
                     aria-label="Toggle content width"
                     @click="$app.toggleContentMaxWidth()"
                 >
