@@ -38,6 +38,13 @@ export interface AdminShowResponse extends BaseResponse {
     }
 }
 
+export interface AdminProfileResponse extends BaseResponse {
+
+    data: {
+        item: Admin
+    }
+}
+
 export interface AdminStoreAndUpdateResponse extends BaseResponse {
 
     data: {

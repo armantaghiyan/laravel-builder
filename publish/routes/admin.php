@@ -10,6 +10,11 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 	});
 
 	Route::middleware('auth:admin')->group(function () {
+		Route::controller(\App\Http\Controllers\Admin\AdminController::class)->group(function () {
+			Route::get('admin/profile', 'profile');
+			Route::patch('admin/profile/password', 'changePassword');
+		});
+
 		Route::resource('admin', \App\Http\Controllers\Admin\AdminController::class);
 
 		Route::controller(\App\Http\Controllers\Admin\AccessController::class)->group(function () {

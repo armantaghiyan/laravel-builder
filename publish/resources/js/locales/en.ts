@@ -8,6 +8,7 @@ export default {
         edit: 'Edit',
         delete: 'Delete',
         logout: 'Logout',
+        profile: 'My profile',
     },
     global: {
         id: "Id",
@@ -35,6 +36,7 @@ export default {
         enter_username: 'Enter your username',
         password: 'Password',
         repeat_password: 'Repeat password',
+        passwords_do_not_match: 'Passwords do not match',
         sin_in: 'Sin in',
         sin_up: 'Sin up',
         new_in_platform: 'New on our platform?',
@@ -57,6 +59,9 @@ export default {
         add_a_admin: 'Add a new Admin',
         admin_information: 'Admin information',
         roles: 'Roles',
+        change_password: 'Change password',
+        current_password: 'Current password',
+        password_updated: 'Password updated successfully',
     },
     pagination: {
         desc: "Showing {p1} to {p2} of {p3} entries"

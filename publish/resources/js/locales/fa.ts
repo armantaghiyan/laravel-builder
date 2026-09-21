@@ -8,6 +8,7 @@ export default {
         edit: 'ویرایش',
         delete: 'حذف',
         logout: 'خروج',
+        profile: 'پروفایل من',
     },
     global: {
         id: "شناسه",
@@ -35,6 +36,7 @@ export default {
         enter_username: 'نام کاربری خود را وارد کنید',
         password: 'رمز عبور',
         repeat_password: 'تکرار رمز عبور',
+        passwords_do_not_match: 'رمزهای عبور یکسان نیستند',
         sin_in: 'ورود',
         sin_up: 'ثبت نام',
         new_in_platform: 'آیا حساب کاربری دارید؟',
@@ -57,6 +59,9 @@ export default {
         add_a_admin: 'اضافه کردن مدیر جدید',
         admin_information: 'اطلاعات مدیر',
         roles: 'نقش ها',
+        change_password: 'تغییر رمز عبور',
+        current_password: 'رمز عبور فعلی',
+        password_updated: 'رمز عبور با موفقیت تغییر کرد',
     },
     pagination: {
         desc: "نمایش {p1} تا {p2} از {p3} ورودی"

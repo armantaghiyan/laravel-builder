@@ -68,6 +68,29 @@ export default function useAdmin() {
         });
     }
 
+    const profileItem = ref<Admin>();
+
+    function fetchProfile() {
+        showLoading();
+        callApi.get<AdminProfileResponse>('/admin/profile').then(res => {
+            profileItem.value = res.data.data.item;
+        });
+    }
+
+    const passwordParams = reactive({
+        old_password: '',
+        new_password: '',
+        new_password_confirmation: '',
+    });
+
+    function changePassword() {
+        return callApi.patch('/admin/profile/password', passwordParams).then(() => {
+            passwordParams.old_password = '';
+            passwordParams.new_password = '';
+            passwordParams.new_password_confirmation = '';
+        });
+    }
+
     //==================================================================================================================
     const storeAndUpdateParams = reactive({
         id: '',
@@ -114,6 +137,10 @@ export default function useAdmin() {
         adminRoles,
         roles,
         show,
+        profileItem,
+        fetchProfile,
+        passwordParams,
+        changePassword,
 
         storeAndUpdateParams,
         store,

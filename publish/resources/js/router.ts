@@ -13,9 +13,11 @@ import AccessShowPage from "@/pages/access/show.vue";
 import AdminIndexPage from "@/pages/admin/index.vue";
 import AdminCreatePage from "@/pages/admin/create.vue";
 import AdminShowPage from "@/pages/admin/show.vue";
+import AdminProfilePage from "@/pages/admin/profile.vue";
 
 import SampleChartPage from "@/pages/sample/chart.vue";
 import SampleButtonPage from "@/pages/sample/button.vue";
+
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
@@ -29,6 +31,7 @@ const routes = [
     {path: "/admin", name: "AdminIndexPage", component: AdminIndexPage, meta: {keepAlive: true}},
     {path: "/admin/create/:id?", name: "AdminCreatePage", component: AdminCreatePage},
     {path: "/admin/:id", name: "AdminShowPage", component: AdminShowPage},
+    {path: "/profile", name: "AdminProfilePage", component: AdminProfilePage},
 
     {path: '/chart', name: 'SampleChartPage', component: SampleChartPage},
     {path: '/button', name: 'SampleButtonPage', component: SampleButtonPage},

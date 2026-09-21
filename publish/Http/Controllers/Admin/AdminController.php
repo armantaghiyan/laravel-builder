@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\Application\Actions\Admin\AdminChangePasswordAction;
 use App\Core\Application\Actions\Admin\AdminIndexAction;
 use App\Core\Application\Actions\Admin\AdminLoginAction;
 use App\Core\Application\Actions\Admin\AdminLogoutAction;
+use App\Core\Application\Actions\Admin\AdminProfileAction;
 use App\Core\Application\Actions\Admin\AdminShowAction;
 use App\Core\Application\Actions\Admin\AdminStartAction;
 use App\Core\Application\Actions\Admin\AdminStoreAction;
 use App\Core\Application\Actions\Admin\AdminUpdateAction;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Constants\Permissions;
+use App\Http\Data\Admin\Admin\AdminChangePasswordData;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use App\Http\Data\Admin\Admin\AdminLoginData;
 use App\Http\Data\Admin\Admin\AdminStoreData;
 use App\Http\Data\Admin\Admin\AdminUpdateData;
 use App\Http\Resources\Admin\Admin\AdminIndexResource;
 use App\Http\Resources\Admin\Admin\AdminLoginResource;
+use App\Http\Resources\Admin\Admin\AdminProfileResource;
 use App\Http\Resources\Admin\Admin\AdminShowResource;
 use App\Http\Resources\Admin\Admin\AdminStartResource;
 use App\Http\Resources\Admin\Admin\AdminStoreResource;
 use App\Http\Resources\Admin\Admin\AdminUpdateResource;
-use App\Http\Resources\Rk;
 use App\Http\Resources\SuccessResource;
 use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Controller;
@@ -29,16 +32,17 @@ use Illuminate\Routing\Controller;
 class AdminController extends Controller {
 
 	public function __construct(
-		private readonly AdminLoginAction   $loginAction,
-		private readonly AdminLogoutAction  $logoutAction,
-		private readonly AdminStartAction   $startAction,
-		private readonly AdminIndexAction   $indexAction,
-		private readonly AdminShowAction    $showAction,
-		private readonly AdminStoreAction   $storeAction,
-		private readonly AdminUpdateAction  $updateAction,
+		private readonly AdminLoginAction          $loginAction,
+		private readonly AdminLogoutAction         $logoutAction,
+		private readonly AdminStartAction          $startAction,
+		private readonly AdminIndexAction          $indexAction,
+		private readonly AdminShowAction           $showAction,
+		private readonly AdminStoreAction          $storeAction,
+		private readonly AdminUpdateAction         $updateAction,
+		private readonly AdminProfileAction        $profileAction,
+		private readonly AdminChangePasswordAction $changePasswordAction,
 	) {
 	}
-
 
 	#[Middleware('permission:' . Permissions::ADMIN_INDEX)]
 	public function index(AdminIndexData $data): AdminIndexResource {
@@ -66,6 +70,16 @@ class AdminController extends Controller {
 		$item = $this->updateAction->execute($data, $id);
 
 		return new AdminUpdateResource($item);
+	}
+
+	public function profile(): AdminProfileResource {
+		return new AdminProfileResource($this->profileAction->execute());
+	}
+
+	public function changePassword(AdminChangePasswordData $data): SuccessResource {
+		$this->changePasswordAction->execute($data);
+
+		return new SuccessResource([]);
 	}
 
 	/**

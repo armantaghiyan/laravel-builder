@@ -52,6 +52,21 @@ const changeLanguage = (newLocale) => {
                         </div>
 
                         <div class="p-2">
+                            <MenuItem v-slot="{ active }">
+                                <router-link
+                                    to="/profile"
+                                    :class="[
+                                        'flex items-center gap-1 rounded-lg px-3 py-2.5 text-sm transition-colors',
+                                        active ? 'bg-light-primary text-primary' : 'text-gray-700'
+                                    ]"
+                                >
+                                    <i class="ti ti-user-circle text-lg text-[22px]"></i>
+                                    <span>{{ t('app.profile') }}</span>
+                                </router-link>
+                            </MenuItem>
+                        </div>
+
+                        <div class="p-2 pt-0">
                             <app-button variant="danger" @click="logout" class="w-full">{{ t('app.logout') }}</app-button>
                         </div>
                     </div>
