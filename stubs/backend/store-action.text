@@ -9,12 +9,12 @@ use App\Http\Data\Admin\{model}\{model}StoreData;
 readonly class {model}StoreAction {
 
     public function __construct(
-        private {model}Repository ${sumModel}Repository,
+        private {model}Repository ${modelCamel}Repository,
     ) {
     }
 
     public function execute({model}StoreData $data): {model} {
-        return $this->{sumModel}Repository->create([
+        return $this->{modelCamel}Repository->create([
             {items}
         ]);
     }

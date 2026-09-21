@@ -21,14 +21,18 @@ class AccessSeeder extends Seeder {
 	 * Create the initial roles and permissions.
 	 */
 	public function run(): void {
-		$role = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'admin']);
+		$role = Role::firstOrCreate([
+			'name' => 'Super Admin',
+			'guard_name' => 'admin',
+		]);
 
 		$reflection = new ReflectionClass(Permissions::class);
 		$permissions = $reflection->getConstants();
 
-		foreach ($permissions as $permission) {
-			Permission::firstOrCreate(
-				['name' => $permission, 'guard_name' => 'admin']
+		foreach (array_values($permissions) as $index => $permission) {
+			Permission::updateOrCreate(
+				['name' => $permission, 'guard_name' => 'admin'],
+				['order' => $index],
 			);
 		}
 

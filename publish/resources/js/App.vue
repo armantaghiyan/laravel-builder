@@ -14,9 +14,20 @@ function fullPage() {
             <app-content>
                 <app-header/>
                 <div class="py-6 px-4">
-                    <transition name="scale" mode="out-in">
-                        <router-view/>
-                    </transition>
+                    <router-view v-slot="{ Component, route }">
+                        <keep-alive :max="1">
+                            <component
+                                :is="Component"
+                                :key="route.meta.keepAlive ? route.fullPath : route.name"
+                                v-if="route.meta.keepAlive"
+                            />
+                        </keep-alive>
+                        <component
+                            :is="Component"
+                            :key="!route.meta.keepAlive ? route.fullPath : route.name"
+                            v-if="!route.meta.keepAlive"
+                        />
+                    </router-view>
                 </div>
             </app-content>
         </div>
@@ -26,20 +37,3 @@ function fullPage() {
         </div>
     </app-loading>
 </template>
-
-<style scoped>
-.scale-enter-active,
-.scale-leave-active {
-    transition: all 280ms ease;
-}
-
-.scale-enter-from {
-    opacity: 0;
-    transform: scale(0.96);
-}
-
-.scale-leave-to {
-    opacity: 0;
-    transform: scale(1.04);
-}
-</style>

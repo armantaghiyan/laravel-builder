@@ -5,7 +5,7 @@ const {t} = useTranslations();
 const {fetchData, items, count, params, reFetchData, pending} = useAdmin();
 const {hasPermission} = usePermission();
 
-onMounted(() => {
+onActivated(() => {
     fetchData();
 });
 </script>

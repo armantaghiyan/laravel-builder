@@ -1,6 +1,6 @@
 <?php
 
-namespace Arman\LaravelBuilder\Http\Helpers;
+namespace Arman\LaravelBuilder\Helpers;
 
 class FileWriter {
 

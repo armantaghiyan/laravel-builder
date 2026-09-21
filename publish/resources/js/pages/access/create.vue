@@ -34,11 +34,11 @@ onMounted(() => {
         </div>
 
         <card :title="t('roles.role_information')">
-            <div class="px-6 pb-6 flex flex-col gap-6">
+            <form @submit.prevent="submitForm" class="px-6 pb-6 flex flex-col gap-6">
                 <text-input id="name" :title="t('global.name')" v-model="storeAndUpdateParams.name"/>
 
-                <app-button @click="submitForm" :loading="pending" class="w-full">{{t('global.submit')}}</app-button>
-            </div>
+                <app-button type="submit" :loading="pending" class="w-full">{{t('global.submit')}}</app-button>
+            </form>
         </card>
     </div>
 </template>

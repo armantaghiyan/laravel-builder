@@ -17,7 +17,7 @@ function destroyItem (targetItem: {model}){
     });
 }
 
-onMounted(() => {
+onActivated(() => {
     fetchData();
 });
 </script>

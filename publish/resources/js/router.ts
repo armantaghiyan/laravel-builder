@@ -22,11 +22,11 @@ const routes = [
 
     {path: "/", name: "HomePage", component: HomePage},
 
-    {path: "/access", name: "AccessIndexPage", component: AccessIndexPage},
+    {path: "/access", name: "AccessIndexPage", component: AccessIndexPage, meta: {keepAlive: true}},
     {path: "/access/create/:id?", name: "AccessCreatePage", component: AccessCreatePage},
     {path: "/access/:id", name: "AccessShowPage", component: AccessShowPage},
 
-    {path: "/admin", name: "AdminIndexPage", component: AdminIndexPage},
+    {path: "/admin", name: "AdminIndexPage", component: AdminIndexPage, meta: {keepAlive: true}},
     {path: "/admin/create/:id?", name: "AdminCreatePage", component: AdminCreatePage},
     {path: "/admin/:id", name: "AdminShowPage", component: AdminShowPage},
 

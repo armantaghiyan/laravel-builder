@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 readonly class {model}UpdateAction {
 
     public function __construct(
-        private {model}Repository ${sumModel}Repository,
+        private {model}Repository ${modelCamel}Repository,
     ) {
     }
 
     public function execute({model}UpdateData $data, int $id): Model {
-        $item = $this->{sumModel}Repository->findOrErrorById($id);
-        $this->{sumModel}Repository->update($item, [
+        $item = $this->{modelCamel}Repository->findOrErrorById($id);
+        $this->{modelCamel}Repository->update($item, [
             {items}
         ]);
 

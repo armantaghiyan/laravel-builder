@@ -11,7 +11,7 @@ function destroyRole(roleId: number, index: number){
     });
 }
 
-onMounted(() => {
+onActivated(() => {
     fetchData();
 });
 </script>

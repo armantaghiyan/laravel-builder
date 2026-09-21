@@ -29,7 +29,7 @@ class AccessRepository {
     }
 
     public function getPermissions(string $guard) {
-        return Permission::where('guard_name', $guard)->get(['id', 'name'])->makeHidden(['pivot']);
+		return Permission::where('guard_name', $guard)->oldest('order')->get(['id', 'name'])->makeHidden(['pivot']);
     }
 
     public function createRole(string $name, string $guard): Role {

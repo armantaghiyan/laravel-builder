@@ -9,7 +9,7 @@ class {model} extends Model {
 
     use BaseModel;
 
-    const TB = '{sumModel}';
+    const TB = '{table}';
     {cols}
 
     protected $fillable = [
