@@ -28,6 +28,16 @@ export default {
         created_at: 'تاریخ ایجاد',
         updated_at: 'تاریخ بروزرسانی',
         submit: 'ثبت',
+        category_id: 'دسته بندی',
+        user_id: 'شناسه کاربری',
+        user_guard: 'گارد',
+        event: 'رویداد',
+        message: "پیام",
+        ip_address: "IP",
+        is_reviewed: "بررسی شده",
+        target: 'مقصد',
+        target_id: 'شناسه مقصد',
+        metadata: 'متادیتا'
     },
     auth: {
         welcome: 'به پنل خوش آمدید! 👋',
@@ -52,6 +62,7 @@ export default {
         list: 'لیست',
         admin: 'مدیران',
         access: 'نقش ها و دسترسی ها',
+        log: 'لاگ ها',
     },
     admin: {
         last_login: 'آخرین ورود',
@@ -78,6 +89,7 @@ export default {
         "Super Admin": 'مدیر کل',
         add_a_role: 'اضافه کردن دسترسی جدید',
         role_information: 'اطلاعات نقش',
+        log: 'لاگ ها'
     },
     access: {
         permissions: 'دسترسی ها',
@@ -95,6 +107,13 @@ export default {
                 update: "بروزرسانی نقش ها",
                 destroy: "حذف نقش ها",
             },
+            log: {
+                index: "لیست لاگ ها",
+            }
         }
     },
+    log: {
+        level: "سطح",
+        name_detail: 'جزئیات لاگ',
+    }
 }

@@ -12,7 +12,7 @@ const {type = null, label='label',value='value', options, withAll=false} = defin
     label?: string
     value?: string
     withAll?: boolean
-    type?: 'active_inactive' | 'user_status' | 'payment_status' | 'transaction_target_type' | 'sms_confirmation_type'
+    type?: 'active_inactive' | 'yes_or_no' | 'log_levels' | 'log_user_guard' | 'log_event' | 'log_loggable_type',
 }>()
 
 const $app = appStore();
@@ -51,7 +51,14 @@ function addOptions(){
                 {value: 0, label: 'غیر فعال'},
                 {value: 1, label: 'فعال'},
             ]);
+            // @ts-ignore
+        }else if (type === 'yes_or_no') {
+            localOptions.value.push(...[
+                {value: 0, label: 'خیر'},
+                {value: 1, label: 'بله'},
+            ]);
         }else if($app.enums[type]){
+            // @ts-ignore
             localOptions.value.push(...$app.enums[type]);
         }
     }else{

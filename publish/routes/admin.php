@@ -23,6 +23,8 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 			Route::post('access/permission-toggle', 'permissionToggle');
 			Route::resource('access', \App\Http\Controllers\Admin\AccessController::class);
 		});
+
+		Route::resource('log', \App\Http\Controllers\Admin\LogController::class);
 	});
 });
 

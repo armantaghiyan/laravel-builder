@@ -18,11 +18,17 @@ import AdminProfilePage from "@/pages/admin/profile.vue";
 import SampleChartPage from "@/pages/sample/chart.vue";
 import SampleButtonPage from "@/pages/sample/button.vue";
 
+import LogIndexPage from "@/pages/log/index.vue";
+import LogShowPage from "@/pages/log/show.vue";
+
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
 
     {path: "/", name: "HomePage", component: HomePage},
+
+    {path: "/log", name: "LogIndexPage", component: LogIndexPage, meta: {keepAlive: true}},
+    {path: "/log/:id", name: "LogShowPage", component: LogShowPage},
 
     {path: "/access", name: "AccessIndexPage", component: AccessIndexPage, meta: {keepAlive: true}},
     {path: "/access/create/:id?", name: "AccessCreatePage", component: AccessCreatePage},

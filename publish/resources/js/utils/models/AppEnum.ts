@@ -1,8 +1,8 @@
 export interface AppEnum {
-    user_status: AppEnumStruct[]
-    payment_status: AppEnumStruct[]
-    transaction_target_type: AppEnumStruct[]
-    sms_confirmation_type: AppEnumStruct[]
+    log_levels: AppEnumStruct[]
+    log_user_guard: AppEnumStruct[]
+    log_event: AppEnumStruct[]
+    log_loggable_type: AppEnumStruct[]
 }
 
 export interface AppEnumStruct {

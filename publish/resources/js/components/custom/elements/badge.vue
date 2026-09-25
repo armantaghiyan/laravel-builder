@@ -4,7 +4,7 @@ const {
     theme = 'primary'
 } = defineProps<{
     type?: 'inline' | 'label'
-    theme?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'dark'
+    theme?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'dark' | string
 }>();
 </script>
 
@@ -18,7 +18,7 @@ const {
         </div>
         <div v-if="type==='label'" class="flex">
             <span v-if="type==='label'" class="flex items-center justify-center text-[13px] font-medium px-2.5 py-1.5 rounded-[4px]"
-                 :class="`bg-light-${theme} text-${theme}`">
+                  :class="`bg-light-${theme} text-${theme}`">
                 <slot/>
             </span>
         </div>

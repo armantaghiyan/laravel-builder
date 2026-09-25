@@ -1,4 +1,6 @@
 export enum Permissions {
+    LOG_INDEX = 'log.index',
+
     ADMIN_INDEX = 'admin.index',
     ADMIN_SUPER_ADMIN = 'admin.super_admin',
     ADMIN_STORE = 'admin.store',

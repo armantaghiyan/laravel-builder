@@ -15,4 +15,6 @@ class Permissions {
 	const ROLE_UPDATE = 'role.update';
 	const ROLE_STORE = 'role.store';
 	const ROLE_DESTROY = 'role.destroy';
+
+	const LOG_INDEX = 'log.index';
 }

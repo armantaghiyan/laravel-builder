@@ -154,7 +154,7 @@ class BuilderCodeCommand extends Command {
 	//------------------------------------------------------------------------------------------------------------------
 
 	private function createModel(): void {
-		['model' => $model, 'table' => $table] = $this->names;
+		['model' => $model, 'table' => $table, 'modelSnake' => $modelSnake] = $this->names;
 
 		$content = $this->getBackendStub('model.text');
 
@@ -172,6 +172,7 @@ class BuilderCodeCommand extends Command {
 
 		$content = str_replace('{cols}', $cols, $content);
 		$content = str_replace('{fillable}', $fillable, $content);
+		$content = str_replace('{modelSnake}', $modelSnake, $content);
 		$content = str_replace('{model}', $model, $content);
 		$content = str_replace('{table}', $table, $content);
 

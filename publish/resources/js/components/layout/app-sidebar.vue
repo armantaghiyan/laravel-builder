@@ -74,6 +74,12 @@ const menuConfig: MenuEntry[] = [
                 icon: 'ti ti-fingerprint',
                 permission: Permissions.ROLE_INDEX,
             },
+            {
+                href: '/log',
+                titleKey: 'menu.log',
+                icon: 'ti ti-device-desktop',
+                permission: Permissions.LOG_INDEX,
+            },
         ],
     },
 ];
