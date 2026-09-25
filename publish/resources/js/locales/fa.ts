@@ -109,11 +109,14 @@ export default {
             },
             log: {
                 index: "لیست لاگ ها",
+                update: "بروزرسانی لاگ ها",
             }
         }
     },
     log: {
         level: "سطح",
         name_detail: 'جزئیات لاگ',
+        mark_as_reviewed: 'علامت‌گذاری به‌عنوان بررسی‌شده',
+        mark_as_not_reviewed: 'لغو علامت بررسی‌شده',
     }
 }

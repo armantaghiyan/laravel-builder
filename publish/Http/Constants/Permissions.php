@@ -17,4 +17,5 @@ class Permissions {
 	const ROLE_DESTROY = 'role.destroy';
 
 	const LOG_INDEX = 'log.index';
+	const LOG_UPDATE = 'log.update';
 }

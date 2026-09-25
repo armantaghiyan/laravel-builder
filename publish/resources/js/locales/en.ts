@@ -108,12 +108,14 @@ export default {
                 destroy: "Delete Role",
             },
             log: {
-                index: "Log List",
-            }
+                index: "Log list",
+                update: "Log update",
+            },
         }
     },
     log: {
         level: "Level",
-        name_detail: 'Log Details',
+        mark_as_reviewed: 'Mark as reviewed',
+        mark_as_not_reviewed: 'Remove reviewed mark',
     }
 }

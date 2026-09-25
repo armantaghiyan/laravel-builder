@@ -1,5 +1,6 @@
 export enum Permissions {
     LOG_INDEX = 'log.index',
+    LOG_UPDATE = 'log.update',
 
     ADMIN_INDEX = 'admin.index',
     ADMIN_SUPER_ADMIN = 'admin.super_admin',

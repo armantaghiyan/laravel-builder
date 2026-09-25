@@ -1,8 +1,11 @@
 <script setup>
 import useLogShow from "@/composables/log/useLogShow.js";
 import {usePermission} from "@/composables/usePermission.ts";
+import {Permissions} from "@/utils/models/enums.ts";
+import useLogUpdateReviewed from "@/composables/log/useLogUpdateReviewed.ts";
 
 const {show, item} = useLogShow();
+const {updateReviewed} = useLogUpdateReviewed();
 const {hasPermission} = usePermission();
 
 
@@ -10,6 +13,14 @@ const route = useRoute();
 const router = useRouter();
 const {t} = useTranslations();
 
+function toggleReviewed() {
+    if (!item.value) {
+        return;
+    }
+
+    updateReviewed(item.value.id, Number(item.value.is_reviewed) === 1 ? 0 : 1);
+    show(route.params.id);
+}
 
 onMounted(() => {
     show(route.params.id);
@@ -18,6 +29,19 @@ onMounted(() => {
 
 <template>
     <card :title="t('log.name_detail')" class="col-span-12 detail-surface">
+        <template #header>
+            <option-menu v-if="hasPermission(Permissions.LOG_UPDATE)" :width="240" :top="50" position="auto">
+                <template #button>
+                    <btn-option/>
+                </template>
+                <div v-if="item" class="flex flex-col p-2 gap-1">
+                    <btn-clickable @click="toggleReviewed">
+                        {{ Number(item.is_reviewed) === 1 ? t('log.mark_as_not_reviewed') : t('log.mark_as_reviewed') }}
+                    </btn-clickable>
+                </div>
+            </option-menu>
+        </template>
+
         <div class="grid md:grid-cols-2 grid-cols-1 px-6 pb-6">
             <label-item icon="ti-hash" :title="t('global.id')">{{item?.id}}</label-item>
             <label-item icon="ti-user" :title="t('global.user_guard')">
@@ -40,4 +64,3 @@ onMounted(() => {
         </div>
     </card>
 </template>
-
