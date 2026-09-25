@@ -1,11 +1,12 @@
 import Log from "@/utils/models/Log.ts";
-import {LogIndexResponse} from "@/utils/api/log.ts";
+import {LogIndexResponse, LogStatistics} from "@/utils/api/log.ts";
 
 
 export default function useLogList() {
     const {callApi, pending} = useCallApi();
     const items = ref<Log[]>([]);
     const count = ref(0);
+    const statistics = ref<LogStatistics>();
 
     const params = reactive({
         id: '',
@@ -34,6 +35,7 @@ export default function useLogList() {
         }).then(res => {
             items.value = res.data.data.items;
             count.value = res.data.data.count;
+            statistics.value = res.data.data.statistics;
         });
     }
 
@@ -50,6 +52,7 @@ export default function useLogList() {
         fetchData,
         items,
         count,
+        statistics,
         params,
         reFetchData,
         loading: pending,

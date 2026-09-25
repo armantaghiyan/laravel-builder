@@ -115,6 +115,16 @@ export default {
     },
     log: {
         level: "Level",
+        report: 'Report',
+        report_description: 'Number of Logs grouped by level for the selected date range',
+        refresh_report: 'Generate report',
+        loading_report: 'Loading Logger report...',
+        by_level: 'Logs by level',
+        total: 'Total Logs',
+        reviewed: 'Reviewed Logs',
+        unreviewed: 'Unreviewed Logs',
+        reviewed_percentage: 'Review Rate',
+        select_date_range: 'Select a date range to view Logger statistics.',
         mark_as_reviewed: 'Mark as reviewed',
         mark_as_not_reviewed: 'Remove reviewed mark',
     }

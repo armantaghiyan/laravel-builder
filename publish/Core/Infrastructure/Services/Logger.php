@@ -40,7 +40,7 @@ class Logger {
 			Log::METADATA => $metadata,
 			Log::IP_ADDRESS => $ipAddress,
 			Log::USER_AGENT => $userAgent,
-			Log::IS_REVIEWED => in_array($level, [LogLevel::Info->value, LogLevel::Warning->value]) ? 1 : 0,
+			Log::IS_REVIEWED => in_array($level, [LogLevel::Info, LogLevel::Warning]) ? 1 : 0,
 		]);
 	}
 

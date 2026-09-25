@@ -24,7 +24,10 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 			Route::resource('access', \App\Http\Controllers\Admin\AccessController::class);
 		});
 
-		Route::resource('log', \App\Http\Controllers\Admin\LogController::class);
+		Route::controller(\App\Http\Controllers\Admin\LogController::class)->group(function () {
+			Route::get('log/report', 'report');
+			Route::resource('log', \App\Http\Controllers\Admin\LogController::class);
+		});
 	});
 });
 

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import useLogList from "@/composables/log/useLogList.ts";
 import {shortenIP, truncateText} from "@/utils/helper.ts";
+import LogReportFragment from '@/components/fragments/log/log-report-fragment.vue';
+import LogStatisticsFragment from '@/components/fragments/log/log-statistics-fragment.vue';
 
 const {t} = useTranslations();
-const {fetchData, items, count, params, reFetchData, loading} = useLogList();
+const {fetchData, items, count, statistics, params, reFetchData, loading} = useLogList();
+const activeTab = ref<'list' | 'report'>('list');
 
 
 onActivated(() => {
@@ -12,8 +15,19 @@ onActivated(() => {
 </script>
 
 <template>
-    <div>
-        <card :title="t('menu.log')">
+    <div class="flex flex-col gap-6">
+        <tab-bar
+            :tabs="[
+                {key: 'list', label: t('menu.list')},
+                {key: 'report', label: t('log.report')},
+            ]"
+            v-model="activeTab"
+        />
+
+        <template v-if="activeTab === 'list'">
+            <log-statistics-fragment v-if="statistics" :statistics="statistics"/>
+
+            <card :title="t('menu.log')">
             <form @submit.prevent="reFetchData">
                 <filter-content>
                     <text-input :title="t('global.id')" v-model="params.id"/>
@@ -44,14 +58,14 @@ onActivated(() => {
                 <custom-thead>
                     <custom-tr>
                         <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
-                        <custom-th :width="120" sort-key="user_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.user_guard') }}</custom-th>
-                        <custom-th :width="120" sort-key="event" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.event') }}</custom-th>
-                        <custom-th fixed :width="60">{{ t('log.level') }}</custom-th>
-                        <custom-th fixed :width="260">{{ t('global.message') }}</custom-th>
-                        <custom-th :width="120" sort-key="loggable_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.target') }}</custom-th>
-                        <custom-th fixed :width="120">{{ t('global.ip_address') }}</custom-th>
-                        <custom-th fixed :width="100">{{ t('global.is_reviewed') }}</custom-th>
-                        <custom-th fixed sort-key="created_at" :width="165" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.created_at') }}</custom-th>
+						<custom-th :width="120" sort-key="user_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.user_guard') }}</custom-th>
+						<custom-th :width="120" sort-key="event" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.event') }}</custom-th>
+						<custom-th fixed :width="60">{{ t('log.level') }}</custom-th>
+						<custom-th fixed :width="260">{{ t('global.message') }}</custom-th>
+						<custom-th :width="120" sort-key="loggable_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.target') }}</custom-th>
+						<custom-th fixed :width="120">{{ t('global.ip_address') }}</custom-th>
+						<custom-th fixed :width="100">{{ t('global.is_reviewed') }}</custom-th>
+						<custom-th fixed sort-key="created_at" :width="165" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.created_at') }}</custom-th>
 
                         <custom-th fixed :width="100">{{ t('global.actions') }}</custom-th>
                     </custom-tr>
@@ -87,5 +101,8 @@ onActivated(() => {
 
             <pagination v-model="params.page" :count="count" :page-rows="params.page_rows" @change="fetchData"/>
         </card>
+        </template>
+
+        <log-report-fragment v-else/>
     </div>
 </template>

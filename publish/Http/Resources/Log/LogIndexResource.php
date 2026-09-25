@@ -13,6 +13,7 @@ class LogIndexResource extends JsonResource {
     public function __construct(
    		public $items,
    		public $count,
+        public $statistics,
    	) {
    		parent::__construct($items);
    	}
@@ -27,6 +28,7 @@ class LogIndexResource extends JsonResource {
         return (new ResponseManager())->cast([
             Rk::ITEMS => LogResource::collection($this->items),
             Rk::COUNT => $this->count,
+            Rk::STATISTICS => $this->statistics,
         ]);
     }
 }
