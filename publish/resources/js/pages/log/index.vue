@@ -44,14 +44,14 @@ onActivated(() => {
                 <custom-thead>
                     <custom-tr>
                         <custom-th fixed :width="120" sort-key="id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.id') }}</custom-th>
-						<custom-th :width="120" sort-key="user_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.user_guard') }}</custom-th>
-						<custom-th :width="120" sort-key="event" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.event') }}</custom-th>
-						<custom-th fixed :width="60">{{ t('log.level') }}</custom-th>
-						<custom-th fixed :width="200">{{ t('global.message') }}</custom-th>
-						<custom-th :width="120" sort-key="loggable_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.target') }}</custom-th>
-						<custom-th fixed :width="120">{{ t('global.ip_address') }}</custom-th>
-						<custom-th fixed :width="100">{{ t('global.is_reviewed') }}</custom-th>
-						<custom-th fixed sort-key="created_at" :width="165" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.created_at') }}</custom-th>
+                        <custom-th :width="120" sort-key="user_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.user_guard') }}</custom-th>
+                        <custom-th :width="120" sort-key="event" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.event') }}</custom-th>
+                        <custom-th fixed :width="60">{{ t('log.level') }}</custom-th>
+                        <custom-th fixed :width="260">{{ t('global.message') }}</custom-th>
+                        <custom-th :width="120" sort-key="loggable_id" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.target') }}</custom-th>
+                        <custom-th fixed :width="120">{{ t('global.ip_address') }}</custom-th>
+                        <custom-th fixed :width="100">{{ t('global.is_reviewed') }}</custom-th>
+                        <custom-th fixed sort-key="created_at" :width="165" v-model:sort="params.sort" v-model:sort-type="params.sort_type">{{ t('global.created_at') }}</custom-th>
 
                         <custom-th fixed :width="100">{{ t('global.actions') }}</custom-th>
                     </custom-tr>
@@ -69,7 +69,7 @@ onActivated(() => {
                         <custom-td>
                             <badge :theme="item.level_color">{{ item.level_text }}</badge>
                         </custom-td>
-                        <custom-td>{{ truncateText(item.message, 25) }}</custom-td>
+                        <custom-td>{{ truncateText(item.message, 30) }}</custom-td>
                         <custom-td>
                             <span v-if="item.loggable_type">{{ item.loggable_type_text }} - {{ item.loggable_id }}</span>
                             <span v-else>-</span>
