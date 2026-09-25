@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class AccessUpdateResource extends JsonResource {
 
 	public function __construct(
-		$item,
+		public $item,
 	) {
 		parent::__construct($item);
 	}

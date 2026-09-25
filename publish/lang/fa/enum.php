@@ -18,6 +18,11 @@ return [
 		'admin_logged_out' => 'خروج مدیر',
 		'admin_created' => 'ایجاد مدیر',
 		'admin_updated' => 'به‌روزرسانی مدیر',
+		'access_deleted' => 'حذف نقش دسترسی',
+		'access_created' => 'ایجاد نقش دسترسی',
+		'access_updated' => 'به‌روزرسانی نقش دسترسی',
+		'admin_role_status_changed' => 'تغییر وضعیت نقش مدیر',
+		'permission_status_changed' => 'تغییر وضعیت دسترسی نقش',
 	],
 	'log_loggable_type' => [
 		'admin' => 'مدیر',

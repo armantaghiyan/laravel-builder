@@ -18,6 +18,11 @@ return [
 		'admin_logged_out' => 'Admin Logout',
 		'admin_created' => 'Create Admin',
 		'admin_updated' => 'Update Admin',
+		'access_deleted' => 'Delete Access Role',
+		'access_created' => 'Create Access Role',
+		'access_updated' => 'Update Access Role',
+		'admin_role_status_changed' => 'Change Admin Role Status',
+		'permission_status_changed' => 'Change Role Permission Status',
 	],
 	'log_loggable_type' => [
 		'admin' => 'Admin',

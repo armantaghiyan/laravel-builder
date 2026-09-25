@@ -4,13 +4,16 @@ namespace App\Core\Application\Actions\Access;
 
 use App\Core\Domain\Access\Repositories\AccessRepository;
 use App\Core\Domain\Common\Constants\StatusCodes;
+use App\Core\Domain\Logger\Constants\LogEvent;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
+use App\Core\Infrastructure\Services\Logger;
 use App\Http\Data\Admin\Access\AccessUpdateData;
 
 readonly class AccessUpdateAction {
 
     public function __construct(
         private AccessRepository $repository,
+        private Logger           $logger,
     ) {
     }
 
@@ -23,6 +26,13 @@ readonly class AccessUpdateAction {
             throw new ErrorMessageException(__('error.unexpected_error'), StatusCodes::Conflict);
         }
 
-        return $this->repository->updateRole($role, $data->name);
+        $role = $this->repository->updateRole($role, $data->name);
+
+        $this->logger->log(
+            LogEvent::AccessUpdated,
+            "اطلاعات نقش دسترسی «{$role->name}» (شناسه: {$role->getKey()}) به‌روزرسانی شد.",
+        );
+
+        return $role;
     }
 }
