@@ -9,6 +9,9 @@ import Vue3PersianDatetimePicker from 'vue3-persian-datetime-picker'
 const pinia = createPinia();
 const app = createApp(App);
 
+app.use(pinia);
+appStore().loadTheme();
+
 app.use(Vue3PersianDatetimePicker, {
     name: 'date-picker',
     props: {
@@ -25,7 +28,6 @@ app.use(Vue3PersianDatetimePicker, {
     }
 })
 
-app.use(pinia);
 app.use(router);
 
 app.mount('#app');

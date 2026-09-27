@@ -58,6 +58,7 @@ import {
     Legend,
     Title,
 } from 'chart.js'
+import {getTailwindColor} from '@/utils/helper.ts'
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title)
 
@@ -193,10 +194,10 @@ export default defineComponent({
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#ffffff',
-                    titleColor: '#4b4b6b',
-                    bodyColor: '#6e6b7b',
-                    borderColor: '#ebe9f1',
+                    backgroundColor: getTailwindColor('surface'),
+                    titleColor: getTailwindColor('chart-foreground'),
+                    bodyColor: getTailwindColor('chart-muted'),
+                    borderColor: getTailwindColor('chart-grid'),
                     borderWidth: 1,
                     padding: { top: 10, bottom: 10, left: 14, right: 14 },
                     cornerRadius: 8,
@@ -216,7 +217,7 @@ export default defineComponent({
                     grid: { display: false, drawBorder: false },
                     border: { display: false },
                     ticks: {
-                        color: '#b9b7c0',
+                        color: getTailwindColor('chart-tick'),
                         font: { size: 12, family: FONT_FAMILY },
                         padding: 6,
                     },
@@ -226,13 +227,13 @@ export default defineComponent({
                     min: 0,
                     max: props.yMax ?? undefined,
                     grid: {
-                        color: '#ebe9f1',
+                        color: getTailwindColor('chart-grid'),
                         drawBorder: false,
                         lineWidth: 1,
                     },
                     border: { display: false, dash: [4, 4] },
                     ticks: {
-                        color: '#b9b7c0',
+                        color: getTailwindColor('chart-tick'),
                         font: { size: 12, family: FONT_FAMILY },
                         padding: 10,
                         stepSize: props.yStepSize ?? undefined,
@@ -266,9 +267,13 @@ export default defineComponent({
             chartInstance.update('active')
         }
 
-        onMounted(initChart)
+        onMounted(() => {
+            initChart()
+            window.addEventListener('app-theme-change', updateChart)
+        })
 
         onBeforeUnmount(() => {
+            window.removeEventListener('app-theme-change', updateChart)
             chartInstance?.destroy()
             chartInstance = null
         })
@@ -288,7 +293,7 @@ export default defineComponent({
 
 /* ───── Card Shell ───── */
 .bar-chart-card {
-    background-color: #ffffff;
+    background-color: var(--color-surface);
     border-radius: 0.875rem;
     padding: 1.5rem;
     box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
@@ -319,14 +324,14 @@ export default defineComponent({
 .card-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #4b4b6b;
+    color: var(--color-chart-foreground);
     margin: 0;
     letter-spacing: 0;
 }
 
 .card-subtitle {
     font-size: 0.8rem;
-    color: #b9b7c0;
+    color: var(--color-chart-tick);
     margin: 0;
 }
 
@@ -343,7 +348,7 @@ export default defineComponent({
     align-items: center;
     gap: 0.375rem;
     font-size: 0.8rem;
-    color: #6e6b7b;
+    color: var(--color-chart-muted);
     font-weight: 500;
 }
 
@@ -368,7 +373,7 @@ export default defineComponent({
     flex-wrap: wrap;
     gap: 1.25rem;
     padding-top: 0.85rem;
-    border-top: 1px solid #ebe9f1;
+    border-top: 1px solid var(--color-chart-grid);
 }
 
 .stat-item {
@@ -381,7 +386,7 @@ export default defineComponent({
     width: 3px;
     height: 38px;
     border-radius: 4px;
-    background-color: #ebe9f1;
+    background-color: var(--color-chart-grid);
     flex-shrink: 0;
 }
 
@@ -402,12 +407,12 @@ export default defineComponent({
 .stat-value {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #4b4b6b;
+    color: var(--color-chart-foreground);
 }
 
 .stat-label {
     font-size: 0.75rem;
-    color: #b9b7c0;
+    color: var(--color-chart-tick);
 }
 
 /* ───── Responsive ───── */

@@ -34,6 +34,7 @@ import {
     Title,
     Tooltip,
 } from 'chart.js';
+import {getTailwindColor} from '@/utils/helper.ts';
 
 type Dataset = {
     label: string
@@ -75,7 +76,7 @@ function chartData() {
                 borderWidth: 3,
                 pointRadius: 2.5,
                 pointHoverRadius: 6,
-                pointBackgroundColor: '#fff',
+                pointBackgroundColor: getTailwindColor('surface'),
                 pointBorderWidth: 2,
                 tension: 0.35,
                 fill: true,
@@ -92,10 +93,10 @@ function chartOptions() {
         plugins: {
             legend: {display: false},
             tooltip: {
-                backgroundColor: '#fff',
-                titleColor: '#4b4b6b',
-                bodyColor: '#6e6b7b',
-                borderColor: '#ebe9f1',
+                backgroundColor: getTailwindColor('surface'),
+                titleColor: getTailwindColor('chart-foreground'),
+                bodyColor: getTailwindColor('chart-muted'),
+                borderColor: getTailwindColor('chart-grid'),
                 borderWidth: 1,
                 padding: {top: 12, right: 14, bottom: 12, left: 14},
                 cornerRadius: 10,
@@ -112,14 +113,14 @@ function chartOptions() {
             x: {
                 grid: {display: false},
                 border: {display: false},
-                ticks: {color: '#b9b7c0', maxRotation: 0, autoSkip: true, maxTicksLimit: 8},
+                ticks: {color: getTailwindColor('chart-tick'), maxRotation: 0, autoSkip: true, maxTicksLimit: 8},
             },
             y: {
-                grid: {color: '#ebe9f1', borderDash: [4, 4]},
+                grid: {color: getTailwindColor('chart-grid'), borderDash: [4, 4]},
                 border: {display: false},
                 grace: '5%',
                 ticks: {
-                    color: '#b9b7c0',
+                    color: getTailwindColor('chart-tick'),
                     callback(value: string | number) {
                         return Number(value).toLocaleString();
                     },
@@ -141,8 +142,14 @@ function renderChart() {
     });
 }
 
-onMounted(renderChart);
-onBeforeUnmount(() => chart?.destroy());
+onMounted(() => {
+    renderChart();
+    window.addEventListener('app-theme-change', renderChart);
+});
+onBeforeUnmount(() => {
+    window.removeEventListener('app-theme-change', renderChart);
+    chart?.destroy();
+});
 watch(() => [props.labels, props.datasets], renderChart, {deep: true});
 </script>
 
@@ -155,18 +162,18 @@ watch(() => [props.labels, props.datasets], renderChart, {deep: true});
 
 .line-chart-card {
     overflow: hidden;
-    background: linear-gradient(135deg, #ffffff 0%, #fcfcff 100%);
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);
 }
 
 .legend-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border: 1px solid #ebe9f1;
+    border: 1px solid var(--color-chart-grid);
     border-radius: 9999px;
-    background: #fff;
+    background: var(--color-surface);
     padding: 0.375rem 0.75rem;
-    color: #6e6b7b;
+    color: var(--color-chart-muted);
     font-size: 0.8125rem;
     font-weight: 600;
 }

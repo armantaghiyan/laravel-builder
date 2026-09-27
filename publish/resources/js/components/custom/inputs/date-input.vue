@@ -50,7 +50,9 @@ const {
 
 <style>
 .form-date-control {
-    background: white;
+    background: var(--color-surface);
+    color: var(--color-foreground);
+    border-color: var(--color-border);
     height: 38px;
     border-radius: 6px;
 }

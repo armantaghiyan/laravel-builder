@@ -47,7 +47,7 @@ function changeSort() {
 <template>
     <th
         @click="changeSort"
-        class="relative font-bold px-5 py-4 text-start text-[12px] text-gray-500 bg-gray-50/80 uppercase tracking-[0.035em] first:rounded-ss-xl last:rounded-es-xl transition-colors hover:bg-light-primary/45"
+        class="relative font-bold px-5 py-4 text-start text-[12px] text-gray-500 bg-gray-50/80 uppercase tracking-[0.035em] first:rounded-ss-xl last:rounded-et-xl transition-colors hover:bg-gray-100 duration-300"
         :class="{ 'cursor-pointer': !!sortKey }"
         :style="`width: ${getFixWidth()}; min-width: ${getWidth()}; max-width: ${getWidth()};`"
     >

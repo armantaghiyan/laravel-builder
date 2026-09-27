@@ -8,51 +8,172 @@
 @import "~/css/tabler-icons.min.css";
 @import "~/css/tabler-icons-outline.min.css";
 
+
 @theme {
+    --color-primary: var(--app-primary);
+    --color-primary-dark: var(--app-primary-dark);
+    --color-light-primary: var(--app-light-primary);
+
+    --color-success: var(--app-success);
+    --color-light-success: var(--app-light-success);
+
+    --color-info: var(--app-info);
+    --color-light-info: var(--app-light-info);
+
+    --color-warning: var(--app-warning);
+    --color-light-warning: var(--app-light-warning);
+
+    --color-danger: var(--app-danger);
+    --color-light-danger: var(--app-light-danger);
+
+    --color-dark: var(--app-dark);
+    --color-light-dark: var(--app-light-dark);
+
+    --color-background: var(--app-background);
+    --color-foreground: var(--app-foreground);
+    --color-surface: var(--app-surface);
+    --color-surface-elevated: var(--app-surface-elevated);
+    --color-muted: var(--app-muted);
+    --color-border: var(--app-border);
+
+    --color-menu-theme: var(--app-menu-theme);
+    --color-menu-color: var(--app-menu-color);
+    --color-menu-hover: var(--app-menu-hover);
+
+    --color-panel: var(--app-background);
+    --color-base: var(--app-foreground);
+
+    --color-chart-foreground: var(--app-chart-foreground);
+    --color-chart-muted: var(--app-chart-muted);
+    --color-chart-tick: var(--app-chart-tick);
+    --color-chart-grid: var(--app-chart-grid);
+
+    --color-gray-50: var(--app-gray-50);
+    --color-gray-100: var(--app-gray-100);
+    --color-gray-200: var(--app-gray-200);
+    --color-gray-300: var(--app-gray-300);
+    --color-gray-400: var(--app-gray-400);
+    --color-gray-500: var(--app-gray-500);
+    --color-gray-600: var(--app-gray-600);
+    --color-gray-700: var(--app-gray-700);
+    --color-gray-800: var(--app-gray-800);
+    --color-gray-900: var(--app-gray-900);
+
+    --shadow-xs: var(--app-shadow-xs);
+    --shadow-sm: var(--app-shadow-sm);
+    --shadow-md: var(--app-shadow-md);
+    --shadow-lg: var(--app-shadow-lg);
+    --shadow-xl: var(--app-shadow-xl);
+}
+
+:root {
+    color-scheme: light;
+
     --color-primary: #635bff;
     --color-primary-dark: #7d72ff;
     --color-light-primary: #eeedff;
+    --app-success: #16a34a;
+    --app-light-success: #dcfce7;
+    --app-info: #0891b2;
+    --app-light-info: #cffafe;
+    --app-warning: #f59e0b;
+    --app-light-warning: #fef3c7;
+    --app-danger: #ef4444;
+    --app-light-danger: #fee2e2;
+    --app-dark: #71717a;
+    --app-light-dark: #f4f4f5;
 
-    --color-success: #28c76f;
-    --color-light-success: #DDF6E8;
+    --app-background: #f4f8f7;
+    --app-foreground: #203a35;
+    --app-surface: #ffffff;
+    --app-surface-elevated: #fafffd;
+    --app-muted: #70817c;
+    --app-border: #e3ece9;
 
-    --color-info: #00bad1;
-    --color-light-info: #d6f4f8;
+    --app-menu-theme: #102a25;
+    --app-menu-color: #c6d8d3;
+    --app-menu-hover: #193b34;
+    --app-sidebar: #24293f;
+    --app-sidebar-glow-start: rgba(121, 111, 255, 0.24);
+    --app-sidebar-glow-end: rgba(42, 195, 215, 0.13);
 
-    --color-warning: #ff9f43;
-    --color-light-warning: #fff0e1;
+    --app-chart-foreground: #4b4b6b;
+    --app-chart-muted: #6e6b7b;
+    --app-chart-tick: #b9b7c0;
+    --app-chart-grid: #ebe9f1;
 
-    --color-danger: #ff4c51;
-    --color-light-danger: #ffe2e3;
+    --app-gray-50: #fafffd;
+    --app-gray-100: #f2f7f5;
+    --app-gray-200: #e3ece9;
+    --app-gray-300: #cdd9d5;
+    --app-gray-400: #a3b3ae;
+    --app-gray-500: #899a95;
+    --app-gray-600: #70817c;
+    --app-gray-700: #596a65;
+    --app-gray-800: #43534f;
+    --app-gray-900: #293b36;
 
-    --color-dark: #808390;
-    --color-light-dark: #ebebed;
-
-    --color-menu-theme: #2f3349;
-    --color-menu-color: #cfcce4;
-    --color-menu-hover: #393d53;
-
-    --color-panel: #f4f6fb;
-    --color-base: #252b45;
-
-    --color-gray-50:  #fafbff;
-    --color-gray-100: #f0f2f8;
-    --color-gray-200: #e4e8f2;
-    --color-gray-300: #d1d0d4;
-    --color-gray-400: #acaab1;
-    --color-gray-500: #97959e;
-    --color-gray-600: #82808b;
-    --color-gray-700: #6d6b77;
-    --color-gray-800: #6b5d77;
-    --color-gray-900: #444050;
-
-
-    --shadow-xs: 0 0.0625rem 0.375rem 0 rgba(47, 43, 61, 0.1);
-    --shadow-sm: 0 0.125rem 0.5rem 0 rgba(47, 43, 61, 0.12);
-    --shadow-md: 0 0.1875rem 0.75rem 0 rgba(47, 43, 61, 0.14);
-    --shadow-lg: 0 0.25rem 1.125rem 0 rgba(47, 43, 61, 0.16);
-    --shadow-xl: 0 0.3125rem 1.875rem 0 rgba(47, 43, 61, 0.18);
+    --app-shadow-xs: 0 0.0625rem 0.375rem 0 rgba(47, 43, 61, 0.1);
+    --app-shadow-sm: 0 0.125rem 0.5rem 0 rgba(47, 43, 61, 0.12);
+    --app-shadow-md: 0 0.1875rem 0.75rem 0 rgba(47, 43, 61, 0.14);
+    --app-shadow-lg: 0 0.25rem 1.125rem 0 rgba(47, 43, 61, 0.16);
+    --app-shadow-xl: 0 0.3125rem 1.875rem 0 rgba(47, 43, 61, 0.18);
 }
+
+.dark {
+    color-scheme: dark;
+
+    --color-primary: #635bff;
+    --color-primary-dark: #7d72ff;
+    --color-light-primary: #eeedff;
+    --app-success: #4ade80;
+    --app-light-success: #1a3326;
+    --app-info: #22d3ee;
+    --app-light-info: #16333d;
+    --app-warning: #fbbf24;
+    --app-light-warning: #3d2f13;
+    --app-danger: #fb7185;
+    --app-light-danger: #3d1f28;
+    --app-dark: #b4b7bd;
+    --app-light-dark: #2f3349;
+
+    --app-background: #161d31;
+    --app-foreground: #d0d2d6;
+    --app-surface: #283046;
+    --app-surface-elevated: #2f3349;
+    --app-muted: #9497a5;
+    --app-border: #3b4253;
+
+    --app-menu-theme: #1a2137;
+    --app-menu-color: #c3c6d4;
+    --app-menu-hover: #262c47;
+    --app-sidebar: #1a2137;
+    --app-sidebar-glow-start: rgba(115, 103, 240, 0.18);
+    --app-sidebar-glow-end: rgba(34, 211, 238, 0.09);
+
+    --app-chart-foreground: #d0d2d6;
+    --app-chart-muted: #9497a5;
+    --app-chart-tick: #6e7290;
+    --app-chart-grid: #3b4253;
+
+    --app-gray-50: #1c2338;
+    --app-gray-100: #232941;
+    --app-gray-200: #2f3349;
+    --app-gray-300: #3b4253;
+    --app-gray-400: #52596e;
+    --app-gray-500: #6e7290;
+    --app-gray-600: #9497a5;
+    --app-gray-700: #b4b7bd;
+    --app-gray-800: #d0d2d6;
+    --app-gray-900: #eeeef1;
+
+    --app-shadow-xs: 0 0.0625rem 0.375rem 0 rgba(0, 0, 0, 0.28);
+    --app-shadow-sm: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.32);
+    --app-shadow-md: 0 0.1875rem 0.75rem 0 rgba(0, 0, 0, 0.36);
+    --app-shadow-lg: 0 0.25rem 1.125rem 0 rgba(0, 0, 0, 0.4);
+    --app-shadow-xl: 0 0.3125rem 1.875rem 0 rgba(0, 0, 0, 0.44);
+}
+
 
 @layer base {
     *,
@@ -93,6 +214,30 @@
     }
 }
 
+/*
+ * Legacy neutral utilities remain the source of truth in components. These
+ * exceptions distinguish a white surface from white text used on buttons and
+ * the sidebar without requiring component-level dark variants.
+ */
+.dark .bg-white,
+.dark .hover\:bg-white:hover,
+.dark .focus\:bg-white:focus {
+    background-color: var(--color-surface);
+}
+
+.dark .border-white,
+.dark .border-white\/80 {
+    border-color: var(--color-border);
+}
+
+.dark .to-white {
+    --tw-gradient-to: var(--color-surface-elevated) var(--tw-gradient-to-position);
+}
+
+.dark .bg-gray-500\/50 {
+    background-color: rgb(0 0 0 / 0.5);
+}
+
 .menu-active-item {
     @apply bg-primary text-white;
 }
@@ -130,7 +275,7 @@
 
 .sidebar-surface {
     background:
-            radial-gradient(circle at 5% 0%, rgba(121, 111, 255, 0.24), transparent 29%),
-            radial-gradient(circle at 100% 100%, rgba(42, 195, 215, 0.13), transparent 31%),
-            #24293f;
+            radial-gradient(circle at 5% 0%, var(--app-sidebar-glow-start), transparent 29%),
+            radial-gradient(circle at 100% 100%, var(--app-sidebar-glow-end), transparent 31%),
+            var(--app-sidebar);
 }

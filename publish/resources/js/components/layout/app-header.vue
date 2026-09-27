@@ -20,6 +20,14 @@ const changeLanguage = (newLocale) => {
             </div>
             <div class="flex gap-2">
                 <div class="flex items-center">
+                    <icon-button
+                        :aria-label="$app.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+                        :title="$app.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+                        @click="$app.toggleTheme()"
+                    >
+                        <i class="ti ti-md" :class="$app.theme === 'dark' ? 'ti-sun' : 'ti-moon-stars'"></i>
+                    </icon-button>
+
                     <option-menu :width="160" :top="60" position="auto">
                         <template #button>
                             <icon-button>
@@ -52,18 +60,12 @@ const changeLanguage = (newLocale) => {
                         </div>
 
                         <div class="p-2">
-                            <MenuItem v-slot="{ active }">
-                                <router-link
-                                    to="/profile"
-                                    :class="[
-                                        'flex items-center gap-1 rounded-lg px-3 py-2.5 text-sm transition-colors',
-                                        active ? 'bg-light-primary text-primary' : 'text-gray-700'
-                                    ]"
-                                >
+                            <router-link to="/profile">
+                                <btn-clickable class="flex items-center gap-2">
                                     <i class="ti ti-user-circle text-lg text-[22px]"></i>
-                                    <span>{{ t('app.profile') }}</span>
-                                </router-link>
-                            </MenuItem>
+                                    {{ t(`app.profile`) }}
+                                </btn-clickable>
+                            </router-link>
                         </div>
 
                         <div class="p-2 pt-0">

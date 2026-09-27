@@ -60,6 +60,7 @@ import {
     Legend,
     Title,
 } from 'chart.js'
+import {getTailwindColor} from '@/utils/helper.ts'
 
 Chart.register(PieController, ArcElement, Tooltip, Legend, Title)
 
@@ -236,7 +237,7 @@ export default defineComponent({
                     data: props.data,
                     backgroundColor: props.labels.map((_, i) => sliceColor(i)),
                     hoverBackgroundColor: props.labels.map((_, i) => sliceColor(i) + 'cc'),
-                    borderColor: '#ffffff',
+                    borderColor: getTailwindColor('surface'),
                     borderWidth: 2,
                     borderRadius: props.borderRadius,
                     spacing: props.spacing,
@@ -252,10 +253,10 @@ export default defineComponent({
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#ffffff',
-                    titleColor: '#4b4b6b',
-                    bodyColor: '#6e6b7b',
-                    borderColor: '#ebe9f1',
+                    backgroundColor: getTailwindColor('surface'),
+                    titleColor: getTailwindColor('chart-foreground'),
+                    bodyColor: getTailwindColor('chart-muted'),
+                    borderColor: getTailwindColor('chart-grid'),
                     borderWidth: 1,
                     padding: { top: 10, bottom: 10, left: 14, right: 14 },
                     cornerRadius: 8,
@@ -298,9 +299,13 @@ export default defineComponent({
             chartInstance.update('active')
         }
 
-        onMounted(initChart)
+        onMounted(() => {
+            initChart()
+            window.addEventListener('app-theme-change', updateChart)
+        })
 
         onBeforeUnmount(() => {
+            window.removeEventListener('app-theme-change', updateChart)
             chartInstance?.destroy()
             chartInstance = null
         })
@@ -320,7 +325,7 @@ export default defineComponent({
 
 /* ───── Card Shell ───── */
 .pie-chart-card {
-    background-color: #ffffff;
+    background-color: var(--color-surface);
     border-radius: 0.875rem;
     padding: 1.5rem;
     box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
@@ -351,14 +356,14 @@ export default defineComponent({
 .card-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #4b4b6b;
+    color: var(--color-chart-foreground);
     margin: 0;
     letter-spacing: 0;
 }
 
 .card-subtitle {
     font-size: 0.8rem;
-    color: #b9b7c0;
+    color: var(--color-chart-tick);
     margin: 0;
 }
 
@@ -375,7 +380,7 @@ export default defineComponent({
     align-items: center;
     gap: 0.375rem;
     font-size: 0.8rem;
-    color: #6e6b7b;
+    color: var(--color-chart-muted);
     font-weight: 500;
 }
 
@@ -413,12 +418,12 @@ export default defineComponent({
 .center-value {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #4b4b6b;
+    color: var(--color-chart-foreground);
 }
 
 .center-sub {
     font-size: 0.75rem;
-    color: #b9b7c0;
+    color: var(--color-chart-tick);
 }
 
 /* ───── Footer Stats ───── */
@@ -427,7 +432,7 @@ export default defineComponent({
     flex-wrap: wrap;
     gap: 1.25rem;
     padding-top: 0.85rem;
-    border-top: 1px solid #ebe9f1;
+    border-top: 1px solid var(--color-chart-grid);
 }
 
 .stat-item {
@@ -440,7 +445,7 @@ export default defineComponent({
     width: 3px;
     height: 38px;
     border-radius: 4px;
-    background-color: #ebe9f1;
+    background-color: var(--color-chart-grid);
     flex-shrink: 0;
 }
 
@@ -461,12 +466,12 @@ export default defineComponent({
 .stat-value {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #4b4b6b;
+    color: var(--color-chart-foreground);
 }
 
 .stat-label {
     font-size: 0.75rem;
-    color: #b9b7c0;
+    color: var(--color-chart-tick);
 }
 
 /* ───── Responsive ───── */

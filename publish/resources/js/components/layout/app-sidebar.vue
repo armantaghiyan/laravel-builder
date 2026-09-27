@@ -119,7 +119,7 @@ const visibleMenu = computed(() =>
                 >
                     <i class="tf-icons text-[20px]" :class="$app.isContentMaxWidth ? 'ti ti-arrows-maximize' : 'ti ti-arrows-minimize'"></i>
                 </button>
-                <div class="h-22 flex items-center gap-3 px-5 pe-14">
+                <div class="h-22 flex items-center gap-3 px-5">
                     <div class="size-10 rounded-xl bg-white/10 ring-1 ring-white/10 flex items-center justify-center shadow-lg"><logo/></div>
                     <div class="flex flex-col">
                         <span class="text-white text-[21px] font-bold tracking-tight">{{ t('app_name')}}</span>

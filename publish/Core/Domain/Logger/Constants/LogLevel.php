@@ -7,23 +7,24 @@ use App\Core\Domain\Common\Traits\EnumOptions;
 
 enum LogLevel: string implements EnumStructure {
 
-    use EnumOptions;
+	use EnumOptions;
 
 
-    case Info = 'info';
-    case Warning = 'warning';
-    case Error = 'error';
-    case Critical = 'critical';
+	case Info = 'info';
+	case Warning = 'warning';
+	case Error = 'error';
+	case Critical = 'critical';
 
-    public function color(): string {
-        return match ($this) {
-            self::Info => 'info',
-            self::Warning => 'warning',
-            self::Error, self::Critical => 'danger',
-        };
-    }
+	public function color(): string {
+		return match ($this) {
+			self::Info => 'info',
+			self::Warning => 'warning',
+			self::Error => 'danger',
+			self::Critical => 'primary',
+		};
+	}
 
-    public function label(): string {
-        return __("enum.log_levels.{$this->value}");
-    }
+	public function label(): string {
+		return __("enum.log_levels.{$this->value}");
+	}
 }
