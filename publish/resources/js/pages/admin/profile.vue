@@ -2,6 +2,7 @@
 import {toast} from "@/utils/toastify.ts";
 
 const {t} = useTranslations();
+const router = useRouter();
 const {profileItem, fetchProfile, passwordParams, changePassword, pending} = useAdmin();
 
 function submitPassword() {
@@ -12,6 +13,8 @@ function submitPassword() {
 
     changePassword().then(() => {
         toast(t('admin.password_updated'));
+
+        router.replace({ path: '/login' });
     });
 }
 
@@ -51,12 +54,12 @@ onMounted(fetchProfile);
             </card>
 
             <card :title="t('admin.change_password')" class="lg:col-span-7 col-span-12 detail-surface">
-                <div class="px-6 pb-6 flex flex-col gap-5">
+                <form @submit.prevent="submitPassword" class="px-6 pb-6 flex flex-col gap-5">
                     <text-input id="old_password" :title="t('admin.current_password')" type="password" v-model="passwordParams.old_password"/>
                     <text-input id="new_password" :title="t('auth.password')" type="password" v-model="passwordParams.new_password"/>
                     <text-input id="new_password_confirmation" :title="t('auth.repeat_password')" type="password" v-model="passwordParams.new_password_confirmation"/>
-                    <app-button @click="submitPassword" :loading="pending" class="w-full">{{ t('admin.change_password') }}</app-button>
-                </div>
+                    <app-button type="submit" :loading="pending" class="w-full">{{ t('admin.change_password') }}</app-button>
+                </form>
             </card>
         </div>
     </div>

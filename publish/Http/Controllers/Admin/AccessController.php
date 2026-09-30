@@ -10,6 +10,7 @@ use App\Core\Application\Actions\Access\AccessStoreAction;
 use App\Core\Application\Actions\Access\AccessToggleAdminRoleAction;
 use App\Core\Application\Actions\Access\AccessTogglePermissionAction;
 use App\Core\Application\Actions\Access\AccessUpdateAction;
+use App\Core\Infrastructure\Auth\AuthManger;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Constants\Permissions;
 use App\Http\Data\Admin\Access\AccessPermissionToggleData;
@@ -36,6 +37,7 @@ class AccessController extends Controller {
 		private readonly AccessStoreAction              $storeAction,
 		private readonly AccessUpdateAction             $updateAction,
 		private readonly AccessDestroyAction            $destroyAction,
+		private readonly AuthManger                     $authManger,
 	) {
 	}
 
@@ -51,7 +53,7 @@ class AccessController extends Controller {
 	 */
 	#[Middleware('permission:' . Permissions::ROLE_UPDATE)]
 	public function roleToggle(AccessRoleToggleData $data): SuccessResource {
-		$this->toggleAdminRoleAction->execute($data->admin_id, $data->role_id);
+		$this->toggleAdminRoleAction->execute($data->admin_id, $data->role_id, $this->authManger->currentAdmin());
 
 		return new SuccessResource([]);
 	}
@@ -61,7 +63,7 @@ class AccessController extends Controller {
 	 */
 	#[Middleware('permission:' . Permissions::ROLE_UPDATE)]
 	public function permissionToggle(AccessPermissionToggleData $data): SuccessResource {
-		$this->togglePermissionAction->execute($data->permission_id, $data->role_id);
+		$this->togglePermissionAction->execute($data->permission_id, $data->role_id, $this->authManger->currentAdmin());
 
 		return new SuccessResource([]);
 	}
