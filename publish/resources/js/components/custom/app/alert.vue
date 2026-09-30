@@ -125,7 +125,7 @@ const icons: Record<Variant, string> = {
     gap: 0.85rem;
     padding: 0.95rem 1.1rem;
     border-radius: 0.6rem;
-    background: color-mix(in srgb, var(--vx-c-light) 55%, white);
+    background: color-mix(in srgb, var(--vx-c-light) 100%, white);
     box-shadow: var(--shadow-xs);
     overflow: hidden;
 }

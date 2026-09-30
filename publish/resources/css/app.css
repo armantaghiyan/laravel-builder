@@ -125,17 +125,22 @@
 
     --color-primary: #635bff;
     --color-primary-dark: #7d72ff;
-    --color-light-primary: #eeedff;
+    --color-light-primary: #25213f;
+
     --app-success: #4ade80;
-    --app-light-success: #1a3326;
+    --app-light-success: #13281d;
+
     --app-info: #22d3ee;
-    --app-light-info: #16333d;
+    --app-light-info: #102a32;
+
     --app-warning: #fbbf24;
-    --app-light-warning: #3d2f13;
+    --app-light-warning: #30250f;
+
     --app-danger: #fb7185;
-    --app-light-danger: #3d1f28;
+    --app-light-danger: #301820;
+
     --app-dark: #b4b7bd;
-    --app-light-dark: #2f3349;
+    --app-light-dark: #25283a;
 
     --app-background: #161d31;
     --app-foreground: #d0d2d6;
