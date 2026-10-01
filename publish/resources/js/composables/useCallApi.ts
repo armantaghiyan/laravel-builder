@@ -10,9 +10,10 @@ export function useCallApi() {
 
     const $app = appStore();
     const pending = ref(false);
+    const progress = ref(0);
 
     const callApi = axios.create({
-        baseURL: `${window.location.origin}/admin/admin/`,
+        baseURL: `${window.location.origin}/admin/`,
         timeout: 30000,
         headers: {
             'Accept': 'application/json',
@@ -20,17 +21,24 @@ export function useCallApi() {
     });
 
     function detectOS(): string {
+        if (typeof navigator === 'undefined') return 'unknown';
         const ua = navigator.userAgent;
-        if (/windows/i.test(ua)) return 'windows';
+        const uaData = (navigator as any).userAgentData;
+        const platform: string = uaData?.platform ?? navigator.platform ?? '';
         if (/android/i.test(ua)) return 'android';
         if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
-        if (/mac/i.test(ua)) return 'mac';
-        if (/linux/i.test(ua)) return 'linux';
-        return 'Unknown';
+        if (/mac/i.test(platform) && navigator.maxTouchPoints > 1) return 'ios';
+        if (/cros/i.test(ua)) return 'chromeos';
+        if (/win/i.test(platform) || /windows/i.test(ua)) return 'windows';
+        if (/mac/i.test(platform) || /macintosh|mac os x/i.test(ua)) return 'mac';
+        if (/linux|x11/i.test(platform) || /linux|x11/i.test(ua)) return 'linux';
+
+        return 'unknown';
     }
 
     callApi.interceptors.request.use((config) => {
         pending.value = true;
+        progress.value = 0;
 
         if (apiToken.value.value) {
             config.headers.Authorization = `Bearer ${apiToken.value.value}`;
@@ -42,9 +50,22 @@ export function useCallApi() {
         config.headers['X-App-Version'] = '1.0.0';
         config.headers['X-OS'] = detectOS();
 
+        config.onUploadProgress = (event) => {
+            if (event.total) {
+                progress.value = Math.round((event.loaded * 100) / event.total);
+            }
+        };
+
+        config.onDownloadProgress = (event) => {
+            if (event.total) {
+                progress.value = Math.round((event.loaded * 100) / event.total);
+            }
+        };
+
         return config;
     }, (error) => {
         pending.value = false;
+        progress.value = 0;
         $app.hideLoading();
 
         return Promise.reject(error);
@@ -53,11 +74,13 @@ export function useCallApi() {
     callApi.interceptors.response.use((response) => {
         $app.hideLoading();
         pending.value = false;
+        progress.value = 100;
 
         return response;
     }, (error) => {
         $app.hideLoading();
         pending.value = false;
+        progress.value = 0;
 
         try {
             if(error?.response?.data?.result === 'error_validation'){
@@ -66,6 +89,8 @@ export function useCallApi() {
                 errorToast(error?.response?.data?.message);
             }else if(error?.response?.data?.result === 'rate_limit'){
                 errorToast(error?.response?.data?.message);
+            }else{
+                errorToast('خطایی رخ داده است');
             }
         }catch (e) {}
 
@@ -122,6 +147,7 @@ export function useCallApi() {
     return {
         callApi,
         pending,
+        progress,
         objectToFormData
     }
 }

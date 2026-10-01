@@ -10,6 +10,7 @@ const {
     outline = false,
     disabled = false,
     loading = false,
+    progress = undefined,
     block = false,
     rounded = false,
     iconOnly = false,
@@ -19,6 +20,7 @@ const {
     outline?: boolean;
     disabled?: boolean;
     loading?: boolean;
+    progress?: number | null;
     block?: boolean;
     rounded?: boolean;
     iconOnly?: boolean;
@@ -28,6 +30,20 @@ const slots = useSlots();
 const hasIconLeft = computed(() => !!slots['icon-left']);
 const hasIconRight = computed(() => !!slots['icon-right']);
 const hasDefaultSlot = computed(() => !!slots['default']);
+
+/* ── Progress mode ──────────────────────────────────────────── */
+const isProgress = computed(
+    () => loading && progress !== undefined && progress !== null && !Number.isNaN(progress)
+);
+
+const percent = computed(() =>
+    Math.min(100, Math.max(0, Math.round(Number(progress ?? 0))))
+);
+
+// لایه‌ی پر شده همیشه از چپ به راست به اندازه‌ی درصد نمایش داده می‌شود
+const fillStyle = computed(() => ({
+    clipPath: `inset(0 ${100 - percent.value}% 0 0)`,
+}));
 
 /* ── Size classes ───────────────────────────────────────────── */
 const sizeClasses = computed(() => {
@@ -64,15 +80,41 @@ const outlineClasses: Record<Variant, string> = {
     dark:    'border border-dark    text-dark    hover:bg-dark    hover:text-white',
 };
 
-const variantClasses = computed(() =>
-    outline ? outlineClasses[variant] : solidClasses[variant]
-);
+/* پس‌زمینه‌ی نوار (قسمت پر نشده) + رنگ متن روی آن */
+const progressTrackClasses: Record<Variant, string> = {
+    primary: 'bg-primary/20 text-primary',
+    danger:  'bg-danger/20  text-danger',
+    success: 'bg-success/20 text-success',
+    info:    'bg-info/20    text-info',
+    warning: 'bg-warning/20 text-warning',
+    dark:    'bg-dark/20    text-dark',
+};
+
+/* لایه‌ی پر شده + رنگ متن روی آن */
+const progressFillClasses: Record<Variant, string> = {
+    primary: 'bg-primary text-white',
+    danger:  'bg-danger  text-white',
+    success: 'bg-success text-white',
+    info:    'bg-info    text-white',
+    warning: 'bg-warning text-white',
+    dark:    'bg-dark    text-white',
+};
+
+const variantClasses = computed(() => {
+    if (isProgress.value) return progressTrackClasses[variant];
+    return outline ? outlineClasses[variant] : solidClasses[variant];
+});
 </script>
 
 <template>
     <button
         type="button"
         :disabled="disabled || loading"
+        :role="isProgress ? 'progressbar' : undefined"
+        :aria-valuemin="isProgress ? 0 : undefined"
+        :aria-valuemax="isProgress ? 100 : undefined"
+        :aria-valuenow="isProgress ? percent : undefined"
+        :aria-busy="loading || undefined"
         :class="[
             /* Base */
             'relative inline-flex items-center justify-center font-medium select-none',
@@ -94,7 +136,8 @@ const variantClasses = computed(() =>
             /* Variant */
             variantClasses,
             /* States */
-            'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:pointer-events-none',
+            'disabled:cursor-not-allowed disabled:shadow-none disabled:pointer-events-none',
+            isProgress ? 'overflow-hidden' : 'disabled:opacity-50',
             'active:scale-[0.97]',
             /* Block */
             block ? 'w-full' : '',
@@ -102,9 +145,28 @@ const variantClasses = computed(() =>
             'cursor-pointer',
         ]"
     >
-        <!-- Loading spinner -->
+        <!-- Progress mode: track text + filled layer -->
+        <template v-if="isProgress">
+            <!-- متن روی قسمت پر نشده -->
+            <span dir="rtl" class="absolute inset-0 flex items-center justify-center tabular-nums">
+                {{ percent }}%
+            </span>
+
+            <!-- لایه‌ی پر شده با متن سفید (با clip-path برش می‌خورد تا متن در هر دو قسمت خوانا بماند) -->
+            <span
+                dir="rtl"
+                aria-hidden="true"
+                class="absolute inset-0 flex items-center justify-center tabular-nums transition-[clip-path] duration-300 ease-out"
+                :class="progressFillClasses[variant]"
+                :style="fillStyle"
+            >
+                {{ percent }}%
+            </span>
+        </template>
+
+        <!-- Loading spinner (بدون progress) -->
         <span
-            v-if="loading"
+            v-else-if="loading"
             class="absolute inset-0 flex items-center justify-center"
         >
             <svg
@@ -123,7 +185,7 @@ const variantClasses = computed(() =>
         <span
             :class="['inline-flex items-center justify-center gap-[inherit]', loading ? 'invisible' : '']"
         >
-             <!-- Right icon slot -->
+            <!-- Right icon slot -->
             <span v-if="hasIconRight && !iconOnly" class="shrink-0 flex items-center" :class="size === 'sm' ? 'text-[14px]' : 'text-[16px]'">
                 <slot name="icon-right"/>
             </span>
