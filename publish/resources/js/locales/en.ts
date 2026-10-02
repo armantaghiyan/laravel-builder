@@ -9,6 +9,7 @@ export default {
         delete: 'Delete',
         logout: 'Logout',
         profile: 'My Profile',
+        details: 'details'
     },
     global: {
         id: "ID",

@@ -21,7 +21,7 @@ const sectionTitle = computed(() => t(sections[section.value] || 'menu.dashboard
 const isDetail = computed(() => route.path.split('/').filter(Boolean).length > 1);
 const pageTitle = computed(() => route.path.includes('/create')
     ? t(route.params.id ? 'global.edit' : 'global.add')
-    : t('ux.details'));
+    : t('app.details'));
 </script>
 
 <template>
@@ -43,9 +43,9 @@ const pageTitle = computed(() => route.path.includes('/create')
             <div class="flex gap-2">
                 <div class="flex items-center">
                     <app-header-action/>
-                    <!--                    <icon-button>-->
-                    <!--                        <i class="ti ti-bell ti-md"></i>-->
-                    <!--                    </icon-button>-->
+                    <icon-button>
+                        <i class="ti ti-bell ti-md"></i>
+                    </icon-button>
                 </div>
 
                 <option-menu :width="224" :top="60" :label="t('ux.account_menu')">
