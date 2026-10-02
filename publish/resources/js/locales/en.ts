@@ -15,6 +15,7 @@ export default {
         name: "Name",
         status: "Status",
         search: "Search",
+        no_results: 'No results to display',
         add: "Add",
         customers: "User",
         price: "Amount",

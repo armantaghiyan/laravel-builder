@@ -15,6 +15,7 @@ export default {
         name: "نام",
         status: "وضعیت",
         search: "جستجو",
+        no_results: 'نتیجه‌ای برای نمایش وجود ندارد',
         add: "افزودن",
         customers: "کاربر",
         price: "مبلغ",
