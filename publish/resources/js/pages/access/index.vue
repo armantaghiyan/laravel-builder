@@ -54,7 +54,7 @@ onActivated(() => {
                         <custom-td class="flex">
                             <btn-see v-if="hasPermission(Permissions.ROLE_UPDATE)" :href="`/access/${item.id}`"/>
                             <btn-delete v-if="hasPermission(Permissions.ROLE_DESTROY)" @click="destroyRole(item.id, index)"/>
-                            <router-link v-if="hasPermission(Permissions.ADMIN_UPDATE)" :to="`/access/create/${item.id}`">
+                            <router-link v-if="hasPermission(Permissions.ROLE_UPDATE)" :to="`/access/create/${item.id}`">
                                 <btn-edit/>
                             </router-link>
                         </custom-td>

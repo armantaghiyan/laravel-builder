@@ -167,6 +167,7 @@ const variantClasses = computed(() => {
         <!-- Loading spinner (بدون progress) -->
         <span
             v-else-if="loading"
+            aria-hidden="true"
             class="absolute inset-0 flex items-center justify-center"
         >
             <svg
@@ -183,7 +184,7 @@ const variantClasses = computed(() => {
 
         <!-- Content wrapper (hidden while loading to preserve width) -->
         <span
-            :class="['inline-flex items-center justify-center gap-[inherit]', loading ? 'invisible' : '']"
+            :class="['inline-flex items-center justify-center gap-[inherit]', loading ? 'opacity-0' : '']"
         >
             <!-- Right icon slot -->
             <span v-if="hasIconRight && !iconOnly" class="shrink-0 flex items-center" :class="size === 'sm' ? 'text-[14px]' : 'text-[16px]'">

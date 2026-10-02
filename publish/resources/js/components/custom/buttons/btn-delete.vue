@@ -1,5 +1,9 @@
+<script setup lang="ts">
+const {t} = useTranslations();
+</script>
+
 <template>
-    <icon-button>
-        <i class="ti ti-trash text-gray-800"></i>
+    <icon-button :aria-label="t('app.delete')" :title="t('app.delete')" class="hover:bg-light-danger! hover:text-danger!">
+        <i class="ti ti-trash" aria-hidden="true"></i>
     </icon-button>
 </template>
