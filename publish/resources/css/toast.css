@@ -1,0 +1,74 @@
+.custom-toast {
+    /* کنترل اندازه */
+    box-sizing: border-box;
+    display: block;
+    width: max-content;
+    min-width: 280px;
+    max-width: min(480px, calc(100vw - 32px));
+    padding: 12px 20px;
+    margin-bottom: 24px;
+
+    /* ظاهر */
+    border-radius: 16px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    opacity: 1;
+}
+
+.custom-toast-success {
+    background: #11b46e !important;
+}
+
+.custom-toast-error {
+    background: #f13246 !important;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.toast-icon {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.toast-divider {
+    flex: none;
+    width: 1px;
+    align-self: stretch;
+    min-height: 28px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.toast-text {
+    flex: 1 1 auto;
+    min-width: 0; /* لازم است تا متن بلند داخل flex بشکند */
+}
+
+.toast-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.toast-message {
+    font-size: 14px;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* موبایل */
+@media (max-width: 480px) {
+    .custom-toast {
+        min-width: 0;
+        width: calc(100vw - 32px);
+        margin-bottom: 16px;
+    }
+}

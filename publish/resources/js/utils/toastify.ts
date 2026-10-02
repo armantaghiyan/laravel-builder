@@ -11,12 +11,38 @@ export function errorToast(message: string, errorTitle = "") {
     showToast(message, errorTitle, "error");
 }
 
-function showToast(message: string, errorTitle: string, type: ToastType) {
+const ICONS: Record<ToastType, string> = {
+    error: "/admin-assets/icons/ic_error.svg",
+    success: "/admin-assets/icons/ic_success.svg",
+};
 
+function escapeHtml(str: string): string {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function createToastMessage(message: string, errorTitle: string, type: ToastType): string {
+    return `
+        <div class="toast-content">
+            <img class="toast-icon" src="${ICONS[type]}" alt="" />
+            <span class="toast-divider"></span>
+            <div class="toast-text">
+                ${errorTitle ? `<div class="toast-title">${escapeHtml(errorTitle)}</div>` : ""}
+                <div class="toast-message">${escapeHtml(message)}</div>
+            </div>
+        </div>
+    `;
+}
+
+function showToast(message: string, errorTitle: string, type: ToastType) {
     try {
         const isError = type === "error";
 
-        const toast = Toastify({
+        const instance = Toastify({
             text: createToastMessage(message, errorTitle, type),
             duration: isError ? 6000 : 3000,
             newWindow: false,
@@ -26,29 +52,20 @@ function showToast(message: string, errorTitle: string, type: ToastType) {
             stopOnFocus: true,
             escapeMarkup: false,
             className: `custom-toast custom-toast-${type}`,
-            style: {
-                background: isError ? "#e62a19" : "#66BB6A",
-                ...(isError && { borderRadius: "15px" }),
-            },
         });
 
-        toast.showToast();
+        instance.showToast();
+
+        const toastElement = (instance as any).toastElement as HTMLElement | undefined;
 
         const handleOutsideClick = (e: MouseEvent) => {
-            const toastElement = document.querySelector(".toastify");
-
-            if (!toastElement) {
+            if (!toastElement || !document.body.contains(toastElement)) {
                 document.removeEventListener("click", handleOutsideClick, true);
                 return;
             }
 
             if (!toastElement.contains(e.target as Node)) {
-                if (typeof (toast as any).hideToast === "function") {
-                    (toast as any).hideToast();
-                } else {
-                    toastElement.remove();
-                }
-
+                instance.hideToast();
                 document.removeEventListener("click", handleOutsideClick, true);
             }
         };
@@ -59,30 +76,4 @@ function showToast(message: string, errorTitle: string, type: ToastType) {
     } catch (e) {
         console.error("Toast error:", e);
     }
-}
-
-function createToastMessage(message: string, errorTitle: string, type: ToastType): string {
-    let icon = "";
-    let borderColor = "";
-
-    if (type === "error") {
-        icon = "/admin-assets/icons/ic_error.svg";
-        borderColor = "#F55F6F";
-    } else {
-        icon = "/admin-assets/icons/ic_success.svg";
-        borderColor = "#29CD87";
-    }
-
-    return `
-        <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
-            <div style="flex: none;">
-                <img src="${icon}" alt="" style="width:40px" />
-            </div>
-            <div style="border-left:1px solid ${borderColor};height:32px;margin:0 16px;"></div>
-            <div>
-                ${errorTitle ? `<div>${errorTitle}</div>` : ""}
-                <div style="font-size:14px">${message}</div>
-            </div>
-        </div>
-    `;
 }
