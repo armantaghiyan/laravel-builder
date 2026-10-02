@@ -7,10 +7,14 @@ export function useAlert() {
         const result = await Swal.fire({
             title: t('confirm.title'),
             text: t('confirm.text'),
+            background: 'var(--color-surface)',
+            color: 'var(--color-foreground)',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#28c76f',
-            cancelButtonColor: '#ff4c51',
+            confirmButtonColor: getTailwindColor('danger'),
+            cancelButtonColor: getTailwindColor('dark'),
+            focusCancel: true,
+            reverseButtons: true,
             confirmButtonText: t('confirm.confirm'),
             cancelButtonText: t('confirm.cancel')
         })
