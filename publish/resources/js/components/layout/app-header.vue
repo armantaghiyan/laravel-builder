@@ -43,9 +43,7 @@ const pageTitle = computed(() => route.path.includes('/create')
             <div class="flex gap-2">
                 <div class="flex items-center">
                     <app-header-action/>
-                    <icon-button>
-                        <i class="ti ti-bell ti-md"></i>
-                    </icon-button>
+                    <notification-bell/>
                 </div>
 
                 <option-menu :width="224" :top="60" :label="t('ux.account_menu')">

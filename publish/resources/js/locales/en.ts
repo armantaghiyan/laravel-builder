@@ -65,6 +65,7 @@ export default {
         admin: 'Admins',
         access: 'Roles & Permissions',
         log: 'Logs',
+        notifications: 'Notifications',
     },
     admin: {
         last_login: 'Last Login',
@@ -91,7 +92,8 @@ export default {
         "Super Admin": 'Super Admin',
         add_a_role: 'Add New Role',
         role_information: 'Role Information',
-        log: 'Logs'
+        log: 'Logs',
+        notification: 'Notifications'
     },
     access: {
         permissions: 'Permissions',
@@ -113,7 +115,39 @@ export default {
                 index: "Log list",
                 update: "Log update",
             },
+            notification: {
+                index: 'Notification list',
+                store: 'Send notifications',
+                update: 'Edit notifications',
+                destroy: 'Delete notifications',
+            },
         }
+    },
+    notification: {
+        title: 'Title',
+        send: 'Send notification',
+        edit: 'Edit notification',
+        information: 'Notification information',
+        details: 'Notification details',
+        audience: 'Audience',
+        recipient: 'Recipient',
+        user_type: 'User type',
+        admin: 'Admin',
+        user: 'User',
+        global: 'Everyone (global)',
+        personal: 'Personal',
+        global_hint: 'Select Everyone to send a global notification, or select a user type and enter the recipient ID.',
+        url: 'Link / URL (optional)',
+        url_hint: 'Use an internal path such as /profile or a full https:// URL.',
+        open_link: 'Open link',
+        read_status: 'Read status',
+        read: 'Read',
+        unread: 'Unread',
+        mark_read: 'Mark as read',
+        my_notifications: 'My notifications',
+        view_all: 'View all notifications',
+        loading: 'Loading notifications...',
+        refresh: 'Refresh',
     },
     log: {
         level: "Level",

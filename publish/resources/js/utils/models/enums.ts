@@ -1,4 +1,9 @@
 export enum Permissions {
+    NOTIFICATION_INDEX = 'notification.index',
+    NOTIFICATION_STORE = 'notification.store',
+    NOTIFICATION_UPDATE = 'notification.update',
+    NOTIFICATION_DESTROY = 'notification.destroy',
+
     LOG_INDEX = 'log.index',
     LOG_UPDATE = 'log.update',
 

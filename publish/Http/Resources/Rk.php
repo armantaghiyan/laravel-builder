@@ -16,4 +16,5 @@ class Rk {
     const ENUMS = 'enums';
 
 	const STATISTICS = 'statistics';
+	const UNREAD_COUNT = 'unread_count';
 }

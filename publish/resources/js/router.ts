@@ -21,11 +21,21 @@ import SampleButtonPage from "@/pages/sample/button.vue";
 import LogIndexPage from "@/pages/log/index.vue";
 import LogShowPage from "@/pages/log/show.vue";
 
+import NotificationIndexPage from "@/pages/notification/index.vue";
+import NotificationCreatePage from "@/pages/notification/create.vue";
+import NotificationShowPage from "@/pages/notification/show.vue";
+import NotificationInboxPage from "@/pages/notification/inbox.vue";
+
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
 
     {path: "/", name: "HomePage", component: HomePage},
+
+    {path: "/notification", name: "NotificationIndexPage", component: NotificationIndexPage, meta: {keepAlive: true}},
+    {path: "/notification/create/:id?", name: "NotificationCreatePage", component: NotificationCreatePage},
+    {path: "/notification/inbox", name: "NotificationInboxPage", component: NotificationInboxPage},
+    {path: "/notification/:id", name: "NotificationShowPage", component: NotificationShowPage},
 
     {path: "/log", name: "LogIndexPage", component: LogIndexPage, meta: {keepAlive: true}},
     {path: "/log/:id", name: "LogShowPage", component: LogShowPage},

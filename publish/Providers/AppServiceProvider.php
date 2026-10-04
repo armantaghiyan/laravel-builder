@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Core\Domain\Admin\Models\Admin;
 use App\Http\Constants\Permissions;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Relation::enforceMorphMap([
 			Admin::MORPH_NAME => Admin::class,
+			User::MORPH_NAME => User::class,
 			'role' => Role::class,
 		]);
 	}

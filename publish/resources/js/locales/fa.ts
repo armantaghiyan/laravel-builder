@@ -65,6 +65,7 @@ export default {
         admin: 'مدیران',
         access: 'نقش ها و دسترسی ها',
         log: 'لاگ ها',
+        notifications: 'اعلان‌ها',
     },
     admin: {
         last_login: 'آخرین ورود',
@@ -91,7 +92,8 @@ export default {
         "Super Admin": 'مدیر کل',
         add_a_role: 'اضافه کردن دسترسی جدید',
         role_information: 'اطلاعات نقش',
-        log: 'لاگ ها'
+        log: 'لاگ ها',
+        notification: 'اعلان ها'
     },
     access: {
         permissions: 'دسترسی ها',
@@ -113,7 +115,39 @@ export default {
                 index: "لیست لاگ ها",
                 update: "بروزرسانی لاگ ها",
             }
-        }
+        },
+        notification: {
+            index: 'لیست اعلان‌ها',
+            store: 'ارسال اعلان',
+            update: 'ویرایش اعلان‌ها',
+            destroy: 'حذف اعلان‌ها',
+        },
+    },
+    notification: {
+        title: 'عنوان',
+        send: 'ارسال اعلان',
+        edit: 'ویرایش اعلان',
+        information: 'اطلاعات اعلان',
+        details: 'جزئیات اعلان',
+        audience: 'مخاطبان',
+        recipient: 'گیرنده',
+        user_type: 'نوع کاربر',
+        admin: 'مدیر',
+        user: 'کاربر',
+        global: 'همه (عمومی)',
+        personal: 'شخصی',
+        global_hint: 'برای ارسال عمومی، همه را انتخاب کنید؛ برای ارسال شخصی، نوع کاربر و شناسه گیرنده را وارد کنید.',
+        url: 'لینک / آدرس (اختیاری)',
+        url_hint: 'مسیر داخلی مانند /profile یا آدرس کامل با https:// وارد کنید.',
+        open_link: 'باز کردن لینک',
+        read_status: 'وضعیت مشاهده',
+        read: 'خوانده‌شده',
+        unread: 'خوانده‌نشده',
+        mark_read: 'علامت‌گذاری به‌عنوان خوانده‌شده',
+        my_notifications: 'اعلان‌های من',
+        view_all: 'نمایش همه اعلان‌ها',
+        loading: 'در حال دریافت اعلان‌ها...',
+        refresh: 'بروزرسانی',
     },
     log: {
         level: "سطح",

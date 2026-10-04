@@ -28,6 +28,14 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 			Route::get('log/report', 'report');
 			Route::resource('log', \App\Http\Controllers\Admin\LogController::class);
 		});
+
+		Route::controller(\App\Http\Controllers\Notification\NotificationInboxController::class)->group(function () {
+			Route::get('notification/inbox', 'index');
+			Route::patch('notification/inbox/{id}/read', 'read')->whereNumber('id');
+		});
+
+		Route::resource('notification', \App\Http\Controllers\Admin\NotificationController::class)
+			->only(['index', 'store', 'show', 'update', 'destroy'])->whereNumber('notification');
 	});
 });
 

@@ -18,4 +18,10 @@ class Permissions {
 
 	const LOG_INDEX = 'log.index';
 	const LOG_UPDATE = 'log.update';
+
+
+	const NOTIFICATION_INDEX = 'notification.index';
+	const NOTIFICATION_STORE = 'notification.store';
+	const NOTIFICATION_UPDATE = 'notification.update';
+	const NOTIFICATION_DESTROY = 'notification.destroy';
 }

@@ -80,6 +80,12 @@ const menuConfig: MenuEntry[] = [
                 icon: 'ti ti-device-desktop',
                 permission: Permissions.LOG_INDEX,
             },
+            {
+                href: '/notification',
+                titleKey: 'menu.notifications',
+                icon: 'ti ti-bell',
+                permission: Permissions.NOTIFICATION_INDEX,
+            },
         ],
     },
 ];
