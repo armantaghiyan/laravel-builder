@@ -8,7 +8,6 @@ const {show, loading} = useNotificationShow();
 const {storeAndUpdateParams, store, update, pending} = useNotificationStoreUpdate();
 const updateMode = computed(() => !!route.params.id);
 const recipientTypes = computed(() => [
-    {value: '', label: t('notification.global')},
     {value: 'admin', label: t('notification.admin')},
     {value: 'user', label: t('notification.user')},
 ]);
@@ -31,7 +30,7 @@ onMounted(() => {
             storeAndUpdateParams.title = item.title;
             storeAndUpdateParams.message = item.message;
             storeAndUpdateParams.url = item.url || '';
-            storeAndUpdateParams.user_type = item.user_type || '';
+            storeAndUpdateParams.user_type = item.user_type;
             await nextTick();
             storeAndUpdateParams.user_id = item.user_id || '';
         });
@@ -47,7 +46,7 @@ onMounted(() => {
                 <text-input id="title" :title="t('notification.title')" :maxlength="160" :disabled="loading" v-model="storeAndUpdateParams.title"/>
                 <textarea-input id="message" :title="t('global.message')" :maxlength="10000" :disabled="loading" v-model="storeAndUpdateParams.message"/>
                 <select-input id="user_type" :title="t('notification.recipient')" :options="recipientTypes" v-model="storeAndUpdateParams.user_type"/>
-                <text-input v-if="storeAndUpdateParams.user_type" id="user_id" :title="t('global.user_id')" number-type="int" :min="1" :disabled="loading" v-model="storeAndUpdateParams.user_id"/>
+                <text-input id="user_id" :title="t('global.user_id')" number-type="int" :min="1" :disabled="loading" v-model="storeAndUpdateParams.user_id"/>
                 <p class="text-sm text-gray-600">{{ t('notification.global_hint') }}</p>
                 <text-input id="url" :title="t('notification.url')" inputmode="url" :maxlength="2048" :disabled="loading" v-model="storeAndUpdateParams.url"/>
                 <p class="text-sm text-gray-600">{{ t('notification.url_hint') }}</p>

@@ -64,7 +64,7 @@ onActivated(fetchData);
                     <custom-td :copy="item.id"><id-formater :id="item.id"/></custom-td>
                     <custom-td>{{ item.title }}</custom-td>
                     <custom-td>
-                        <span v-if="item.is_global">{{ t('notification.global') }}</span>
+                        <span v-if="item.is_global">{{ t(`notification.all_${item.user_type}s`) }}</span>
                         <span v-else>{{ t(`notification.${item.user_type}`) }}: {{ item.user_name || item.user_id }} <span v-if="item.user_name">(#{{ item.user_id }})</span></span>
                     </custom-td>
                     <custom-td>

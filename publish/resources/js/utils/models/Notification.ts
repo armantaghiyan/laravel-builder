@@ -3,7 +3,7 @@ export default interface Notification {
     title: string,
     message: string,
     url: string | null,
-    user_type: 'admin' | 'user' | null,
+    user_type: 'admin' | 'user',
     user_id: number | null,
     user_name?: string | null,
     is_global: boolean,

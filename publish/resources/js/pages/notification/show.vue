@@ -33,7 +33,7 @@ onMounted(() => show(route.params.id as string));
             <label-item icon="ti-hash" :title="t('global.id')">{{ item.id }}</label-item>
             <label-item icon="ti-bell" :title="t('notification.title')">{{ item.title }}</label-item>
             <label-item icon="ti-user" :title="t('notification.recipient')">
-                <span v-if="item.is_global">{{ t('notification.global') }}</span>
+                <span v-if="item.is_global">{{ t(`notification.all_${item.user_type}s`) }}</span>
                 <span v-else>{{ t(`notification.${item.user_type}`) }}: {{ item.user_name || item.user_id }} <span v-if="item.user_name">(#{{ item.user_id }})</span></span>
             </label-item>
             <label-item icon="ti-checks" :title="t('notification.read_status')">

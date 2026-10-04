@@ -8,7 +8,7 @@ export default function useNotificationStoreUpdate() {
         title: '',
         message: '',
         url: '',
-        user_type: '' as '' | 'admin' | 'user',
+        user_type: 'admin' as 'admin' | 'user' | null,
         user_id: '' as string | number,
     });
 
@@ -17,8 +17,7 @@ export default function useNotificationStoreUpdate() {
         const payload = {
             ...storeAndUpdateParams,
             url: storeAndUpdateParams.url || null,
-            user_type: storeAndUpdateParams.user_type || null,
-            user_id: storeAndUpdateParams.user_type ? storeAndUpdateParams.user_id : null,
+            user_id: storeAndUpdateParams.user_id || null,
         };
 
         return callApi[method]<NotificationStoreAndUpdateResponse>(url, payload).then(res => {
