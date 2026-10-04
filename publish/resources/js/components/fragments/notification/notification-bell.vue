@@ -39,7 +39,7 @@ watch(() => $user.user.id, () => {
         <template #button>
             <span class="relative size-10 rounded-full hover:bg-panel cursor-pointer flex items-center justify-center" @click="refresh">
                 <span class="sr-only">{{ t('notification.my_notifications') }}</span>
-                <i class="ti ti-bell ti-md" aria-hidden="true"></i>
+                <i class="ti ti-bell ti-md text-[20px]" aria-hidden="true"></i>
                 <span v-if="$notification.unreadCount" class="absolute -top-1 -end-1 min-w-5 h-5 px-1 rounded-full bg-danger text-white text-xs flex items-center justify-center" aria-live="polite">
                     {{ $notification.unreadCount > 99 ? '99+' : $notification.unreadCount }}
                 </span>
