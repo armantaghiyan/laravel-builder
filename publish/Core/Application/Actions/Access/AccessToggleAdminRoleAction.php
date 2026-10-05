@@ -21,7 +21,7 @@ readonly class AccessToggleAdminRoleAction {
 	/**
 	 * @throws ErrorMessageException
 	 */
-	public function execute(int $adminId, int $roleId, Admin $actor): void {
+	public function execute(int $adminId, int $roleId, Admin $actor, bool $force = false): void {
 		$admin = $this->repository->getAdminById($adminId);
 		$role = $this->repository->findRoleById($roleId);
 
@@ -30,6 +30,7 @@ readonly class AccessToggleAdminRoleAction {
 		}
 
 		if (
+			$force === false &&
 			$role->hasPermissionTo(Permissions::ADMIN_SUPER_ADMIN)
 			&& !$actor->hasPermissionTo(Permissions::ADMIN_SUPER_ADMIN)
 		) {

@@ -114,13 +114,13 @@ export default {
             log: {
                 index: "لیست لاگ ها",
                 update: "بروزرسانی لاگ ها",
-            }
-        },
-        notification: {
-            index: 'لیست اعلان‌ها',
-            store: 'ارسال اعلان',
-            update: 'ویرایش اعلان‌ها',
-            destroy: 'حذف اعلان‌ها',
+            },
+            notification: {
+                index: 'لیست اعلان‌ها',
+                store: 'ارسال اعلان',
+                update: 'ویرایش اعلان‌ها',
+                destroy: 'حذف اعلان‌ها',
+            },
         },
     },
     notification: {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Admin\Log;
+namespace App\Http\Resources\Log;
 
 use App\Core\Domain\Logger\Models\Log;
 use App\Core\Shared\Helper\DateHelper;

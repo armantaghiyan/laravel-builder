@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Data\Admin\Log;
+namespace App\Http\Data\Log;
 
 use App\Http\Data\WithApiValidator;
 use Spatie\LaravelData\Attributes\Validation\In;
@@ -10,11 +10,11 @@ use Spatie\LaravelData\Data;
 
 class LogUpdateData extends Data {
 
-    use WithApiValidator;
+	use WithApiValidator;
 
-    public function __construct(
-        #[Required, IntegerType, In([0, 1])]
-        public int $is_reviewed,
-    ) {
-    }
+	public function __construct(
+		#[Required, IntegerType, In([0, 1])]
+		public int $is_reviewed,
+	) {
+	}
 }

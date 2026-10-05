@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Constants\Permissions;
-use App\Http\Data\Admin\Log\LogIndexData;
-use App\Http\Data\Admin\Log\LogReportData;
-use App\Http\Data\Admin\Log\LogUpdateData;
-use App\Http\Resources\Admin\Log\LogIndexResource;
-use App\Http\Resources\Admin\Log\LogReportResource;
-use App\Http\Resources\Admin\Log\LogShowResource;
+use App\Http\Data\Log\LogIndexData;
+use App\Http\Data\Log\LogReportData;
+use App\Http\Data\Log\LogUpdateData;
 use App\Core\Application\Actions\Log\LogIndexAction;
 use App\Core\Application\Actions\Log\LogReportAction;
 use App\Core\Application\Actions\Log\LogShowAction;
 use App\Core\Application\Actions\Log\LogUpdateAction;
+use App\Http\Resources\Log\LogIndexResource;
+use App\Http\Resources\Log\LogReportResource;
+use App\Http\Resources\Log\LogShowResource;
 use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Controller;
 

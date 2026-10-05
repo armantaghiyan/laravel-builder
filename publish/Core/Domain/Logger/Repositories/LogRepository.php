@@ -5,7 +5,7 @@ namespace App\Core\Domain\Logger\Repositories;
 use App\Core\Domain\Common\Repositories\BaseRepository;
 use App\Core\Domain\Logger\Constants\LogLevel;
 use App\Core\Domain\Logger\Models\Log;
-use App\Http\Data\Admin\Log\LogIndexData;
+use App\Http\Data\Log\LogIndexData;
 use Carbon\Carbon;
 
 class LogRepository extends BaseRepository {

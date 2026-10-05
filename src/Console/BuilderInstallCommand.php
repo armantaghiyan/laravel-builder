@@ -115,6 +115,9 @@ class BuilderInstallCommand extends Command {
 		$this->info('✅ Spatie Laravel Data config published.');
 
 		$tableNames = config('permission.table_names');
+
+		Artisan::call('migrate');
+		$this->line(Artisan::output());
 		Schema::table($tableNames['permissions'], static function (Blueprint $table) {
 			$table->unsignedInteger('order')->after('guard_name')->default(0);
 		});

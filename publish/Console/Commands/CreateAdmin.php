@@ -38,6 +38,6 @@ class CreateAdmin extends Command {
 
 		$admin = $adminStoreAction->execute(new AdminStoreData($name, $username, $password));
 
-		$accessToggleAdminRoleAction->execute($admin[Admin::ID], 1);
+		$accessToggleAdminRoleAction->execute($admin[Admin::ID], 1, $admin, true);
 	}
 }

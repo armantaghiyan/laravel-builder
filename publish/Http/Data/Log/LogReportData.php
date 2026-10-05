@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Data\Admin\Log;
+namespace App\Http\Data\Log;
 
 use App\Http\Data\WithApiValidator;
 use Spatie\LaravelData\Attributes\Validation\AfterOrEqual;
@@ -11,14 +11,14 @@ use Spatie\LaravelData\Data;
 
 class LogReportData extends Data {
 
-    use WithApiValidator;
+	use WithApiValidator;
 
-    public function __construct(
-        #[Nullable, RequiredWith('end'), DateFormat('Y-m-d')]
-        public ?string $start = null,
+	public function __construct(
+		#[Nullable, RequiredWith('end'), DateFormat('Y-m-d')]
+		public ?string $start = null,
 
-        #[Nullable, RequiredWith('start'), DateFormat('Y-m-d'), AfterOrEqual('start')]
-        public ?string $end = null,
-    ) {
-    }
+		#[Nullable, RequiredWith('start'), DateFormat('Y-m-d'), AfterOrEqual('start')]
+		public ?string $end = null,
+	) {
+	}
 }

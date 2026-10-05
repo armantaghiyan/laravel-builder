@@ -13,7 +13,7 @@ export function useCallApi() {
     const progress = ref(0);
 
     const callApi = axios.create({
-        baseURL: `${window.location.origin}/admin/`,
+        baseURL: `${window.location.origin}/admin/admin/`,
         timeout: 30000,
         headers: {
             'Accept': 'application/json',
