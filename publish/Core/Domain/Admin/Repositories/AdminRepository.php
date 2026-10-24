@@ -4,6 +4,8 @@ namespace App\Core\Domain\Admin\Repositories;
 
 use App\Core\Domain\Admin\Models\Admin;
 use App\Http\Data\Admin\Admin\AdminIndexData;
+use Illuminate\Database\Eloquent\Collection;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AdminRepository {
 
@@ -40,6 +42,22 @@ class AdminRepository {
 
 	public function revokeTokens(Admin $admin): void {
 		$admin->tokens()->delete();
+	}
+
+	public function activeSessions(Admin $admin): Collection {
+		return $admin->tokens()
+			->where(fn ($query) => $query->whereNull('expires_at')->orWhere('expires_at', '>', now()))
+			->when(config('sanctum.expiration'), fn ($query, $expiration) => $query->where('created_at', '>', now()->subMinutes($expiration)))
+			->orderByDesc('id')
+			->get();
+	}
+
+	public function findSessionById(Admin $admin, int $id): PersonalAccessToken {
+		return $admin->tokens()->where('id', $id)->firstOrFail();
+	}
+
+	public function revokeSession(PersonalAccessToken $session): void {
+		$session->delete();
 	}
 
 	public function delete(Admin $admin): void {

@@ -5,6 +5,7 @@ defineProps<{
     tabs: {
         key: string
         label: string
+        count?: number
         icon?: string  // optional font icon class e.g. 'fa fa-home' or 'i-mdi-home'
     }[]
 }>();
@@ -30,6 +31,7 @@ defineProps<{
                     :class="model === tab.key ? 'text-primary' : 'text-gray-500 group-hover:text-gray-700'"
                 >
                     {{ tab.label }}
+                    <span v-if="tab.count !== undefined" class="ms-1">({{ tab.count }})</span>
                 </span>
 
                 <!-- icon (optional) -->

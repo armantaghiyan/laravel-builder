@@ -76,6 +76,10 @@ export default {
         change_password: 'Change Password',
         current_password: 'Current Password',
         password_updated: 'Password changed successfully',
+        active_sessions: 'Active sessions',
+        current_session: 'Current session',
+        last_activity: 'Last activity',
+        session_expires_at: 'Expires at',
     },
     pagination: {
         desc: "Showing {p1} to {p2} of {p3} entries"

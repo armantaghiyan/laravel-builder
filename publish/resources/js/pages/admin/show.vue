@@ -3,12 +3,15 @@ import {Permissions} from "@/utils/models/enums.ts";
 import useAdmin from "@/composables/admin/useAdmin.js";
 import {usePermission} from "@/composables/usePermission.js";
 import {useTranslations} from "@/composables/useTranslations.js";
+import AdminSessionsFragment from "@/components/fragments/admin/admin-sessions-fragment.vue";
 
 const {show, item, adminRoles, roles} = useAdmin();
 const {hasPermission} = usePermission();
 
 const route = useRoute();
 const {t} = useTranslations();
+const activeTab = ref('details');
+const sessionCount = ref();
 
 onMounted(() => {
     show(route.params.id);
@@ -37,7 +40,15 @@ onMounted(() => {
             <div class="h-22"></div>
         </card>
 
-        <div class="grid grid-cols-12 gap-6">
+        <tab-bar
+            :tabs="[
+                {key: 'details', label: t('admin.admin_detail')},
+                {key: 'sessions', label: t('admin.active_sessions'), count: sessionCount},
+            ]"
+            v-model="activeTab"
+        />
+
+        <div v-if="activeTab === 'details'" class="grid grid-cols-12 gap-6">
             <card class="lg:col-span-4 col-span-12 p-6 detail-surface">
                 <label-title>{{ t('admin.admin_detail') }}</label-title>
 
@@ -67,5 +78,6 @@ onMounted(() => {
 
             </card>
         </div>
+        <admin-sessions-fragment v-if="item" v-show="activeTab === 'sessions'" :admin-id="item.id" :can-destroy="hasPermission(Permissions.ADMIN_UPDATE)" @count="sessionCount = $event"/>
     </div>
 </template>

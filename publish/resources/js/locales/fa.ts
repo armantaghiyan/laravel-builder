@@ -76,6 +76,10 @@ export default {
         change_password: 'تغییر رمز عبور',
         current_password: 'رمز عبور فعلی',
         password_updated: 'رمز عبور با موفقیت تغییر کرد',
+        active_sessions: 'نشست‌های فعال',
+        current_session: 'نشست فعلی',
+        last_activity: 'آخرین فعالیت',
+        session_expires_at: 'زمان انقضا',
     },
     pagination: {
         desc: "نمایش {p1} تا {p2} از {p3} ورودی"

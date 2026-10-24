@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import {toast} from "@/utils/toastify.ts";
+import AdminSessionsFragment from "@/components/fragments/admin/admin-sessions-fragment.vue";
 
 const {t} = useTranslations();
 const router = useRouter();
 const {profileItem, fetchProfile, passwordParams, changePassword, pending} = useAdmin();
+const activeTab = ref('details');
+const sessionCount = ref<number>();
 
 function submitPassword() {
     if (passwordParams.new_password !== passwordParams.new_password_confirmation) {
@@ -42,7 +45,15 @@ onMounted(fetchProfile);
             <div class="h-22"></div>
         </card>
 
-        <div class="grid grid-cols-12 gap-6">
+        <tab-bar
+            :tabs="[
+                {key: 'details', label: t('admin.admin_detail')},
+                {key: 'sessions', label: t('admin.active_sessions'), count: sessionCount},
+            ]"
+            v-model="activeTab"
+        />
+
+        <div v-if="activeTab === 'details'" class="grid grid-cols-12 gap-6">
             <card :title="t('admin.admin_detail')" class="lg:col-span-5 col-span-12 detail-surface">
                 <div class="px-6 pb-6">
                     <label-item icon="ti-hash" :title="t('global.id')">{{ profileItem?.id }}</label-item>
@@ -62,5 +73,6 @@ onMounted(fetchProfile);
                 </form>
             </card>
         </div>
+        <admin-sessions-fragment v-show="activeTab === 'sessions'" @count="sessionCount = $event"/>
     </div>
 </template>

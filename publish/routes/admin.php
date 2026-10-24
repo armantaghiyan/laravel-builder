@@ -36,6 +36,14 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 
 		Route::resource('notification', \App\Http\Controllers\Admin\NotificationController::class)
 			->only(['index', 'store', 'show', 'update', 'destroy'])->whereNumber('notification');
+
+
+		Route::controller(\App\Http\Controllers\Admin\AdminSessionController::class)->group(function () {
+			Route::get('admin/profile/sessions', 'profileIndex');
+			Route::delete('admin/profile/sessions/{id}', 'profileDestroy')->whereNumber('id');
+			Route::get('admin/{adminId}/sessions', 'index')->whereNumber('adminId');
+			Route::delete('admin/{adminId}/sessions/{id}', 'destroy')->whereNumber(['adminId', 'id']);
+		});
 	});
 });
 
