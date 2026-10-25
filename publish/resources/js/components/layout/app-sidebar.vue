@@ -75,6 +75,19 @@ const menuConfig: MenuEntry[] = [
                 permission: Permissions.ROLE_INDEX,
             },
             {
+                href: '/notification',
+                titleKey: 'menu.notifications',
+                icon: 'ti ti-bell',
+                permission: Permissions.NOTIFICATION_INDEX,
+            },
+        ],
+    },
+    {
+        type: 'group',
+        titleKey: 'menu.monitoring',
+        icon: 'ti ti-activity',
+        children: [
+            {
                 href: '/log',
                 titleKey: 'menu.log',
                 icon: 'ti ti-device-desktop',
@@ -85,12 +98,6 @@ const menuConfig: MenuEntry[] = [
                 titleKey: 'menu.log_files',
                 icon: 'ti ti-file-text',
                 permission: Permissions.LOG_INDEX,
-            },
-            {
-                href: '/notification',
-                titleKey: 'menu.notifications',
-                icon: 'ti ti-bell',
-                permission: Permissions.NOTIFICATION_INDEX,
             },
         ],
     },

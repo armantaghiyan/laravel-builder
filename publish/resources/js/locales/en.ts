@@ -75,6 +75,7 @@ export default {
         log: 'Logs',
         notifications: 'Notifications',
         log_files: 'Application log files',
+        monitoring: 'Monitoring',
     },
     admin: {
         last_login: 'Last Login',

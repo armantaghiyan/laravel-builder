@@ -75,6 +75,7 @@ export default {
         log: 'لاگ ها',
         notifications: 'اعلان‌ها',
         log_files: 'فایل‌های لاگ برنامه',
+        monitoring: 'مانیتورینگ',
     },
     admin: {
         last_login: 'آخرین ورود',
