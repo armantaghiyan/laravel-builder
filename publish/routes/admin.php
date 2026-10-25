@@ -24,6 +24,8 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 
 		Route::controller(\App\Http\Controllers\Admin\AccessController::class)->group(function () {
 			Route::get('access/role/{id}', 'showRole');
+			Route::get('access/role/{id}/admins', 'roleAdmins')->whereNumber('id');
+			Route::get('access/permission/{id}/admins', 'permissionAdmins')->whereNumber('id');
 			Route::post('access/role-toggle', 'roleToggle');
 			Route::post('access/permission-toggle', 'permissionToggle');
 			Route::resource('access', \App\Http\Controllers\Admin\AccessController::class);

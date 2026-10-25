@@ -3,9 +3,13 @@
 namespace App\Core\Domain\Admin\Repositories;
 
 use App\Core\Domain\Admin\Models\Admin;
+use App\Http\Constants\Permissions;
+use App\Http\Data\Admin\Access\AccessAdminIndexData;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use Illuminate\Database\Eloquent\Collection;
 use Laravel\Sanctum\PersonalAccessToken;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminRepository {
 
@@ -29,6 +33,24 @@ class AdminRepository {
 
 	public function create(array $data): Admin {
 		return Admin::create($data);
+	}
+
+	public function getRoleAdmins(Role $role, AccessAdminIndexData $data): array {
+		$query = Admin::role($role);
+		$count = $query->count();
+		$items = $query->orderByDesc(Admin::ID)->page2($data->page_rows)
+			->get([Admin::ID, Admin::NAME, Admin::USERNAME]);
+
+		return [$items, $count];
+	}
+
+	public function getPermissionAdmins(Permission $permission, AccessAdminIndexData $data): array {
+		$query = Admin::permission([$permission, Permissions::ADMIN_SUPER_ADMIN]);
+		$count = $query->count();
+		$items = $query->orderByDesc(Admin::ID)->page2($data->page_rows)
+			->get([Admin::ID, Admin::NAME, Admin::USERNAME]);
+
+		return [$items, $count];
 	}
 
 	public function update(Admin $admin, array $data): Admin {

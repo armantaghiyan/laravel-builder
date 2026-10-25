@@ -111,6 +111,13 @@ export default {
     },
     access: {
         permissions: 'دسترسی ها',
+        role_admins: 'مدیران این نقش',
+        permission_admins: 'مدیران دارای این دسترسی',
+        view_admin: 'مشاهده مدیر',
+        loading_admins: 'در حال دریافت فهرست مدیران…',
+        admins_failed: 'دریافت فهرست مدیران انجام نشد.',
+        retry: 'تلاش دوباره',
+        close: 'بستن',
         permission: {
             admin: {
                 super_admin: 'مدیر کل',

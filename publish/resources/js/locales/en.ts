@@ -111,6 +111,13 @@ export default {
     },
     access: {
         permissions: 'Permissions',
+        role_admins: 'Admins with this role',
+        permission_admins: 'Admins with this permission',
+        view_admin: 'View admin',
+        loading_admins: 'Loading admins…',
+        admins_failed: 'Could not load admins.',
+        retry: 'Try again',
+        close: 'Close',
         permission: {
             admin: {
                 super_admin: 'Super Admin',

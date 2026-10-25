@@ -21,7 +21,7 @@ export function useAccess() {
     //==================================================================================================================
     function togglePermission(permissionId: number, roleId: number, callback?: () => void) {
         showLoading();
-        callApi.post<BaseResponse>('access/permission-toggle', {
+        return callApi.post<BaseResponse>('access/permission-toggle', {
             permission_id: permissionId,
             role_id: roleId,
         }).then(() => {

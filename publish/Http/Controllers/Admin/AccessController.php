@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Core\Application\Actions\Access\AccessDestroyAction;
 use App\Core\Application\Actions\Access\AccessGetAllRolesAction;
+use App\Core\Application\Actions\Access\AccessGetPermissionAdminsAction;
 use App\Core\Application\Actions\Access\AccessGetPermissionsRoleAction;
+use App\Core\Application\Actions\Access\AccessGetRoleAdminsAction;
 use App\Core\Application\Actions\Access\AccessShowRoleAction;
 use App\Core\Application\Actions\Access\AccessStoreAction;
 use App\Core\Application\Actions\Access\AccessToggleAdminRoleAction;
@@ -13,10 +15,12 @@ use App\Core\Application\Actions\Access\AccessUpdateAction;
 use App\Core\Infrastructure\Auth\AuthManger;
 use App\Core\Infrastructure\Exceptions\ErrorMessageException;
 use App\Http\Constants\Permissions;
+use App\Http\Data\Admin\Access\AccessAdminIndexData;
 use App\Http\Data\Admin\Access\AccessPermissionToggleData;
 use App\Http\Data\Admin\Access\AccessRoleToggleData;
 use App\Http\Data\Admin\Access\AccessStoreData;
 use App\Http\Data\Admin\Access\AccessUpdateData;
+use App\Http\Resources\Admin\Access\AccessAdminIndexResource;
 use App\Http\Resources\Admin\Access\AccessIndexResource;
 use App\Http\Resources\Admin\Access\AccessShowResource;
 use App\Http\Resources\Admin\Access\AccessShowRoleResource;
@@ -30,6 +34,8 @@ class AccessController extends Controller {
 
 	public function __construct(
 		private readonly AccessGetAllRolesAction        $getAllRolesAction,
+		private readonly AccessGetRoleAdminsAction      $getRoleAdminsAction,
+		private readonly AccessGetPermissionAdminsAction $getPermissionAdminsAction,
 		private readonly AccessGetPermissionsRoleAction $getPermissionsRoleAction,
 		private readonly AccessShowRoleAction           $showRoleAction,
 		private readonly AccessToggleAdminRoleAction    $toggleAdminRoleAction,
@@ -86,6 +92,22 @@ class AccessController extends Controller {
 		$role = $this->showRoleAction->execute($id);
 
 		return new AccessShowRoleResource($role);
+	}
+
+	#[Middleware('permission:' . Permissions::ROLE_INDEX)]
+	#[Middleware('permission:' . Permissions::ADMIN_INDEX)]
+	public function roleAdmins(AccessAdminIndexData $data, int $id): AccessAdminIndexResource {
+		[$items, $count] = $this->getRoleAdminsAction->execute($id, $data);
+
+		return new AccessAdminIndexResource($items, $count);
+	}
+
+	#[Middleware('permission:' . Permissions::ROLE_INDEX)]
+	#[Middleware('permission:' . Permissions::ADMIN_INDEX)]
+	public function permissionAdmins(AccessAdminIndexData $data, int $id): AccessAdminIndexResource {
+		[$items, $count] = $this->getPermissionAdminsAction->execute($id, $data);
+
+		return new AccessAdminIndexResource($items, $count);
 	}
 
 	#[Middleware('permission:' . Permissions::ROLE_STORE)]

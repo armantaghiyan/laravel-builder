@@ -17,7 +17,7 @@ function toggle() {
 
 <template>
     <div class="flex items-center gap-3 py-1">
-        <div v-if="!href" class="grow text-gray-700">{{ title }}</div>
+        <div v-if="!href" class="grow text-gray-700"><slot name="title">{{ title }}</slot></div>
         <router-link v-else :to="href" class="grow text-primary">{{ title }}</router-link>
 
         <button
