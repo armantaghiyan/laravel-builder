@@ -90,10 +90,10 @@ onMounted(() => openDirectory(''));
                 <custom-table v-if="visibleItems.length" :loading="listLoading">
                     <custom-thead>
                         <custom-tr>
-                            <custom-th>{{ t('global.name') }}</custom-th>
-                            <custom-th :width="110">{{ t('log_file.size') }}</custom-th>
-                            <custom-th :width="180">{{ t('global.updated_at') }}</custom-th>
-                            <custom-th :width="110">{{ t('log_file.download') }}</custom-th>
+                            <custom-th :width="280" fixed>{{ t('global.name') }}</custom-th>
+                            <custom-th :width="110" fixed>{{ t('log_file.size') }}</custom-th>
+                            <custom-th :width="180" fixed>{{ t('global.updated_at') }}</custom-th>
+                            <custom-th :width="110" fixed>{{ t('log_file.download') }}</custom-th>
                         </custom-tr>
                     </custom-thead>
                     <custom-tbody>
