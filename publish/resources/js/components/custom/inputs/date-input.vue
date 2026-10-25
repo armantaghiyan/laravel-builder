@@ -49,12 +49,27 @@ const {
 </template>
 
 <style>
-.form-date-control {
+.vpd-input-group .form-date-control {
     background: var(--color-surface);
     color: var(--color-foreground);
-    border-color: var(--color-border);
+    border: 1px solid var(--color-gray-300);
     height: 38px;
-    border-radius: 6px;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    box-shadow: none;
+    transition: border-color 150ms;
+}
+
+.vpd-input-group:hover .form-date-control {
+    border-color: var(--color-gray-600);
+}
+
+.vpd-input-group:focus-within .form-date-control {
+    border-color: var(--color-primary);
+}
+
+.vpd-input-group .form-date-control.error-input {
+    border-color: var(--color-danger);
 }
 
 .vpd-icon-btn {

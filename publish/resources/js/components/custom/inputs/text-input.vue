@@ -16,6 +16,9 @@ const props = defineProps<{
     clearable?: boolean
     error?: string
     autofocus?: boolean
+    name?: string
+    autocomplete?: string
+    required?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -202,10 +205,10 @@ defineExpose({ focus: () => inputRef.value?.focus() });
             <input
                 :id="inputId"
                 ref="inputRef"
-                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-300 bg-transparent hover:border-gray-600 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-300 bg-transparent hover:border-gray-600 focus:border-primary outline-none px-3.5 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                 :class="{
                     '!placeholder:text-start': type === 'password',
-                    'border-red-500': error,
+                    'border-danger!': error,
                 }"
                 :type="actualType"
                 :inputmode="computedInputmode"
@@ -214,6 +217,9 @@ defineExpose({ focus: () => inputRef.value?.focus() });
                 :readonly="readonly"
                 :maxlength="numberType ? undefined : maxlength"
                 :autofocus="autofocus"
+                :name="name"
+                :autocomplete="autocomplete"
+                :required="required"
                 :value="displayValue"
                 dir="auto"
                 @input="handleInput"

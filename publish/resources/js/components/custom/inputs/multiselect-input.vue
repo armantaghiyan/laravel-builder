@@ -6,10 +6,10 @@
         </label>
 
         <div
-            class="custom-multiselect-content relative w-full rounded-lg border border-gray-300 hover:border-gray-600 focus:border-2 focus:border-primary bg-white transition-all duration-200"
+            class="custom-multiselect-content relative w-full rounded-md border border-gray-300 hover:border-gray-600 focus-within:border-primary hover:focus-within:border-primary bg-white transition-colors duration-150"
             :class="{
-                'ring-2 ring-primary/30 border-primary': isOpen,
-                'border-red-400! ring-2 ring-red-100': error,
+                'border-primary hover:border-primary': isOpen,
+                'border-danger!': error,
                 'opacity-50 cursor-not-allowed pointer-events-none': disabled,
             }"
         >

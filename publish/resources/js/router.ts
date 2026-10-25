@@ -26,11 +26,15 @@ import NotificationCreatePage from "@/pages/notification/create.vue";
 import NotificationShowPage from "@/pages/notification/show.vue";
 import NotificationInboxPage from "@/pages/notification/inbox.vue";
 
+import LogFileIndexPage from "@/pages/logFile/index.vue";
+
 
 const routes = [
     {path: "/login", name: "LoginPage", component: LoginPage},
 
     {path: "/", name: "HomePage", component: HomePage},
+
+    {path: "/log-files", name: "LogFileIndexPage", component: LogFileIndexPage},
 
     {path: "/notification", name: "NotificationIndexPage", component: NotificationIndexPage, meta: {keepAlive: true}},
     {path: "/notification/create/:id?", name: "NotificationCreatePage", component: NotificationCreatePage},

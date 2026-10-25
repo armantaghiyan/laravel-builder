@@ -11,6 +11,7 @@ use App\Core\Infrastructure\Services\Logger;
 use App\Http\Data\Admin\Admin\AdminLoginData;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 readonly class AdminLoginAction {
 
@@ -25,15 +26,26 @@ readonly class AdminLoginAction {
      */
     public function execute(AdminLoginData $data): array {
         $admin = $this->adminRepository->findByUsername($data->username);
+        $passwordHash = $admin?->getAuthPassword();
 
-        if (!$admin || !Hash::check($data->password, $admin[Admin::PASSWORD])) {
+        if (!$passwordHash) {
+            // Missing accounts/passwords must also perform the configured hashing work.
+            Hash::make('invalid-admin-login');
+        }
+
+        if (!$admin || !$passwordHash || !Hash::check($data->password, $passwordHash)) {
+            Log::warning('Admin login failed', [
+                'ip' => request()->ip(),
+                'username_hash' => hash('sha256', $data->username),
+            ]);
+
             throw new ErrorMessageException(__('error.password_incorrect'), StatusCodes::Bad_request);
         }
 
-        $token = $admin->createToken("ADMIN TOKEN", ['*'], Carbon::now()->addWeek())->plainTextToken;
+        $token = $admin->createToken('ADMIN TOKEN', ['*'], Carbon::now()->addWeek())->plainTextToken;
 
         $this->adminRepository->updateField($admin, [
-            Admin::LAST_LOGIN => Carbon::now()
+            Admin::LAST_LOGIN => Carbon::now(),
         ]);
 
         $this->logger->log(

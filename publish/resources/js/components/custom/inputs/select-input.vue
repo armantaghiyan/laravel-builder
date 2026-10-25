@@ -51,14 +51,14 @@ function addOptions(){
                 {value: 0, label: 'غیر فعال'},
                 {value: 1, label: 'فعال'},
             ]);
-            // @ts-ignore
+        // @ts-ignore
         }else if (type === 'yes_or_no') {
             localOptions.value.push(...[
                 {value: 0, label: 'خیر'},
                 {value: 1, label: 'بله'},
             ]);
         }else if($app.enums[type]){
-            // @ts-ignore
+        // @ts-ignore
             localOptions.value.push(...$app.enums[type]);
         }
     }else{
@@ -82,10 +82,11 @@ onMounted(() => {
     <div class="relative">
         <label v-if="title" class="pb-1 text-[13px]">{{ title }}</label>
 
-        <Listbox v-model="model">
+        <Listbox v-model="model" v-slot="{ open }">
             <div>
                 <ListboxButton
-                    class="relative w-full h-9.5 rounded-md border border-gray-300 hover:border-gray-600 focus:border-2 focus:border-primary px-3.5 focus:px-4 duration-150"
+                    class="relative w-full h-9.5 rounded-md border border-gray-300 hover:border-gray-600 focus:border-primary outline-none px-3.5 transition-colors duration-150"
+                    :class="{ 'border-primary hover:border-primary': open }"
                 >
 
                     <div class="flex items-start">{{ localOptions.filter((item: any) => item[value] == model )?.[0]?.[label] }}</div>

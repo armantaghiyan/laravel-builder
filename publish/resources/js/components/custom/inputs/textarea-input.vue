@@ -81,9 +81,9 @@ defineExpose({ focus: () => inputRef.value?.focus() });
             <textarea
                 :id="inputId"
                 ref="inputRef"
-                class="input auto-placeholder w-full rounded-md border border-gray-300 bg-transparent hover:border-gray-600 focus:border-2 focus:border-primary px-3.5 py-2.5 focus:px-4 duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="input auto-placeholder w-full rounded-md border border-gray-300 bg-transparent hover:border-gray-600 focus:border-primary outline-none px-3.5 py-2.5 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                 :class="[
-                    { 'border-red-500': error },
+                    { 'border-danger!': error },
                     resizable ? 'resize-y' : 'resize-none',
                 ]"
                 :placeholder="placeholder ?? ''"

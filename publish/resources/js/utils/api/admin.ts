@@ -11,6 +11,14 @@ export interface AdminLoginResponse extends BaseResponse {
     }
 }
 
+export interface AdminLoginCaptchaResponse extends BaseResponse {
+    data: {
+        captcha_id: string
+        image: string
+        expires_in: number
+    }
+}
+
 export interface AdminStartResponse extends BaseResponse {
 
     data: {

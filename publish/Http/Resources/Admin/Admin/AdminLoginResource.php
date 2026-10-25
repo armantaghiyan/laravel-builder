@@ -4,28 +4,33 @@ namespace App\Http\Resources\Admin\Admin;
 
 use App\Http\Resources\ResponseManager;
 use App\Http\Resources\Rk;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminLoginResource extends JsonResource {
 
-	public function __construct(
-		public $admin,
-		public $apiToken,
-	) {
-		parent::__construct($admin);
-	}
+    public function __construct(
+        public $admin,
+        public $apiToken,
+    ) {
+        parent::__construct($admin);
+    }
 
-	/**
-	 * Transform the resource into an array.
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function toArray(Request $request): array {
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array {
 
-		return (new ResponseManager())->cast([
-			Rk::ADMIN => new AdminResource($this->admin),
-			Rk::API_TOKEN => $this->apiToken,
-		]);
-	}
+        return (new ResponseManager)->cast([
+            Rk::ADMIN => new AdminResource($this->admin),
+            Rk::API_TOKEN => $this->apiToken,
+        ]);
+    }
+
+    public function withResponse(Request $request, JsonResponse $response): void {
+        $response->headers->set('Cache-Control', 'no-store, private');
+    }
 }

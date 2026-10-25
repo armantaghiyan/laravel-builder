@@ -30,15 +30,15 @@ function toggle() {
                 model ? 'bg-primary' : 'bg-gray-300',
                 disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
             ]"
-            class="group relative inline-flex h-6 w-12.5 shrink-0 items-center rounded-full
-                   shadow-inner transition-colors duration-200 ease-in-out
-                   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+            class="group relative inline-flex h-6 w-12.5 shrink-0 items-center rounded-full border border-gray-300 hover:border-gray-600
+                   shadow-inner transition-colors duration-150 ease-in-out
+                   outline-none focus:border-primary"
             @click="toggle"
         >
             <span
                 aria-hidden="true"
                 :class="model ? 'inset-s-7' : 'inset-s-0.5'"
-                class="pointer-events-none absolute top-0.5 size-5 rounded-full bg-white
+                class="pointer-events-none absolute top-1/2 -translate-y-1/2 size-5 rounded-full bg-white
                        shadow-md ring-0 transition-all duration-200 ease-out
                        group-active:scale-90"
             />

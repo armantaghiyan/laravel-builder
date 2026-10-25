@@ -253,7 +253,7 @@
 }
 
 .error-input {
-    @apply border-2 border-danger;
+    @apply border border-danger;
 }
 
 .detail-surface {

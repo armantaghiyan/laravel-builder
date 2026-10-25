@@ -81,6 +81,12 @@ const menuConfig: MenuEntry[] = [
                 permission: Permissions.LOG_INDEX,
             },
             {
+                href: '/log-files',
+                titleKey: 'menu.log_files',
+                icon: 'ti ti-file-text',
+                permission: Permissions.LOG_INDEX,
+            },
+            {
                 href: '/notification',
                 titleKey: 'menu.notifications',
                 icon: 'ti ti-bell',

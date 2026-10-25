@@ -5,6 +5,7 @@ interface CookieOptions {
     maxAge?: number
     path?: string
     sameSite?: SameSite
+    secure?: boolean
 }
 
 interface UseCookieReturn<T> {
@@ -38,7 +39,8 @@ export function useCookie<T = string>(
         expires,
         maxAge,
         path = '/',
-        sameSite = 'lax'
+        sameSite = 'lax',
+        secure = window.location.protocol === 'https:'
     } = options
 
     const getCookie = (name: string): string | null => {
@@ -75,6 +77,8 @@ export function useCookie<T = string>(
 
         const finalSameSite = customOptions.sameSite ?? sameSite
         cookieString += `; samesite=${finalSameSite}`
+
+        if (customOptions.secure ?? secure) cookieString += '; secure'
 
         document.cookie = cookieString
         cookieValue.value = value

@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::prefix('admin/admin')->group(function () {
+	Route::get('login/captcha', \App\Http\Controllers\Admin\AdminLoginCaptchaController::class)->middleware('rateLimit:15');
+	Route::post('login', [\App\Http\Controllers\Admin\AdminController::class, 'login'])->middleware(['rateLimit:3']);
+});
+
 Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 	Route::controller(\App\Http\Controllers\Admin\AdminController::class)->group(function () {
 		Route::get('admin/start', 'adminStart');
-		Route::post('admin/login', 'login');
 		Route::post('admin/logout', 'logout');
 	});
 
@@ -37,6 +42,11 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 		Route::resource('notification', \App\Http\Controllers\Admin\NotificationController::class)
 			->only(['index', 'store', 'show', 'update', 'destroy'])->whereNumber('notification');
 
+		Route::controller(\App\Http\Controllers\Admin\LogFileController::class)->group(function () {
+			Route::get('log-files', 'index');
+			Route::get('log-files/show', 'show');
+			Route::get('log-files/download', 'download');
+		});
 
 		Route::controller(\App\Http\Controllers\Admin\AdminSessionController::class)->group(function () {
 			Route::get('admin/profile/sessions', 'profileIndex');
