@@ -63,6 +63,12 @@ const menuConfig: MenuEntry[] = [
         icon: 'ti ti-settings-cog',
         children: [
             {
+                href: '/setting',
+                titleKey: 'settings.title',
+                icon: 'ti ti-adjustments',
+                permission: Permissions.SETTING_INDEX,
+            },
+            {
                 href: '/admin',
                 titleKey: 'menu.admin',
                 icon: 'ti ti-user',

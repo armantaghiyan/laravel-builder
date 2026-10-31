@@ -77,6 +77,23 @@ export default {
         log_files: 'فایل‌های لاگ برنامه',
         monitoring: 'مانیتورینگ',
     },
+    settings: {
+        title: 'تنظیمات سامانه',
+        groups: {
+            general: 'تنظیمات کلی',
+            security: 'تنظیمات امنیتی',
+        },
+        fields: {
+            about_us: 'درباره ما',
+            max_sessions: 'حداکثر نشست‌های فعال هر مدیر',
+        },
+        default_value: 'مقدار پیش‌فرض',
+        empty: 'خالی',
+        loading: 'در حال دریافت تنظیمات…',
+        load_failed: 'دریافت تنظیمات انجام نشد.',
+        saved: 'تنظیمات با موفقیت ذخیره شد.',
+        session_hint: 'بین ۱ تا ۱۰۰ نشست. محدودیت هنگام ورود بعدی اعمال می‌شود و نشست‌های قدیمی‌تر بسته می‌شوند.',
+    },
     admin: {
         last_login: 'آخرین ورود',
         admin_detail: 'جزئیات ادمین',
@@ -107,7 +124,8 @@ export default {
         add_a_role: 'اضافه کردن دسترسی جدید',
         role_information: 'اطلاعات نقش',
         log: 'لاگ ها',
-        notification: 'اعلان ها'
+        notification: 'اعلان ها',
+        setting: 'تنظیمات سامانه',
     },
     access: {
         permissions: 'دسترسی ها',
@@ -119,6 +137,10 @@ export default {
         retry: 'تلاش دوباره',
         close: 'بستن',
         permission: {
+            setting: {
+                index: 'مشاهده تنظیمات',
+                update: 'ویرایش تنظیمات',
+            },
             admin: {
                 super_admin: 'مدیر کل',
                 index: "لیست مدیران",

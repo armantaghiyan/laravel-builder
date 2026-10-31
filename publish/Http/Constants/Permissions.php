@@ -24,4 +24,7 @@ class Permissions {
 	const NOTIFICATION_STORE = 'notification.store';
 	const NOTIFICATION_UPDATE = 'notification.update';
 	const NOTIFICATION_DESTROY = 'notification.destroy';
+
+	const SETTING_INDEX = 'setting.index';
+	const SETTING_UPDATE = 'setting.update';
 }

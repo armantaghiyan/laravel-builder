@@ -20,6 +20,11 @@ Route::middleware(['rateLimit:15'])->prefix('admin')->group(function () {
 			Route::patch('admin/profile/password', 'changePassword');
 		});
 
+		Route::controller(\App\Http\Controllers\Admin\SettingController::class)->group(function () {
+			Route::get('setting', 'index');
+			Route::patch('setting', 'update');
+		});
+
 		Route::resource('admin', \App\Http\Controllers\Admin\AdminController::class);
 
 		Route::controller(\App\Http\Controllers\Admin\AccessController::class)->group(function () {

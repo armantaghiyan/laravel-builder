@@ -77,6 +77,23 @@ export default {
         log_files: 'Application log files',
         monitoring: 'Monitoring',
     },
+    settings: {
+        title: 'System settings',
+        groups: {
+            general: 'General settings',
+            security: 'Security settings',
+        },
+        fields: {
+            about_us: 'About us',
+            max_sessions: 'Maximum active sessions per admin',
+        },
+        default_value: 'Default value',
+        empty: 'Empty',
+        loading: 'Loading settings…',
+        load_failed: 'Could not load settings.',
+        saved: 'Settings saved successfully.',
+        session_hint: 'Between 1 and 100 sessions. Applied on the next login; older sessions will be signed out.',
+    },
     admin: {
         last_login: 'Last Login',
         admin_detail: 'Admin Details',
@@ -107,7 +124,8 @@ export default {
         add_a_role: 'Add New Role',
         role_information: 'Role Information',
         log: 'Logs',
-        notification: 'Notifications'
+        notification: 'Notifications',
+        setting: 'System settings',
     },
     access: {
         permissions: 'Permissions',
@@ -119,6 +137,10 @@ export default {
         retry: 'Try again',
         close: 'Close',
         permission: {
+            setting: {
+                index: 'View settings',
+                update: 'Edit settings',
+            },
             admin: {
                 super_admin: 'Super Admin',
                 index: "Admin List",

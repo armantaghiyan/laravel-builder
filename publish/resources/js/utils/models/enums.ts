@@ -17,6 +17,9 @@ export enum Permissions {
     ROLE_UPDATE = 'role.update',
     ROLE_STORE = 'role.store',
     ROLE_DESTROY = 'role.destroy',
+
+    SETTING_INDEX = 'setting.index',
+    SETTING_UPDATE = 'setting.update',
 }
 
 export enum Roles {

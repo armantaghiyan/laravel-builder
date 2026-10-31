@@ -7,6 +7,8 @@ use App\Http\Constants\Permissions;
 use App\Http\Data\Admin\Access\AccessAdminIndexData;
 use App\Http\Data\Admin\Admin\AdminIndexData;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\NewAccessToken;
 use Laravel\Sanctum\PersonalAccessToken;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -66,10 +68,24 @@ class AdminRepository {
 		$admin->tokens()->delete();
 	}
 
+	public function createSession(Admin $admin, int $maxSessions): NewAccessToken {
+		return DB::transaction(function () use ($admin, $maxSessions): NewAccessToken {
+			// Serialize logins for this admin so simultaneous requests also respect the limit.
+			Admin::whereKey($admin->getKey())->lockForUpdate()->firstOrFail();
+
+			$token = $admin->createToken('ADMIN TOKEN', ['*'], now()->addWeek());
+			$oldSessionIds = $this->activeSessions($admin)->slice($maxSessions)->modelKeys();
+
+			$admin->tokens()->whereKey($oldSessionIds)->delete();
+
+			return $token;
+		});
+	}
+
 	public function activeSessions(Admin $admin): Collection {
 		return $admin->tokens()
-			->where(fn ($query) => $query->whereNull('expires_at')->orWhere('expires_at', '>', now()))
-			->when(config('sanctum.expiration'), fn ($query, $expiration) => $query->where('created_at', '>', now()->subMinutes($expiration)))
+			->where(fn($query) => $query->whereNull('expires_at')->orWhere('expires_at', '>', now()))
+			->when(config('sanctum.expiration'), fn($query, $expiration) => $query->where('created_at', '>', now()->subMinutes($expiration)))
 			->orderByDesc('id')
 			->get();
 	}
