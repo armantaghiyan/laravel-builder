@@ -43,6 +43,7 @@ class BuilderPublishCommand extends Command {
 		$this->publishDir('seeders', 'database/seeders');
 		$this->publishDir('bootstrap', 'bootstrap');
 		$this->publishDir('routes', 'routes');
+		$this->publishDir('config', 'config');
 		$this->publishDir('resources', 'resources');
 		$this->publishDir('Providers', 'app/Providers');
 		$this->publishDir('admin-assets', 'public/admin-assets');
