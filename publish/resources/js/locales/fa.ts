@@ -9,7 +9,8 @@ export default {
         delete: 'حذف',
         logout: 'خروج',
         profile: 'پروفایل من',
-        details: 'جزئیات'
+        details: 'جزئیات',
+        back: 'بازگشت',
     },
     global: {
         id: "شناسه",

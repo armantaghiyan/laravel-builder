@@ -22,12 +22,33 @@ const isDetail = computed(() => route.path.split('/').filter(Boolean).length > 1
 const pageTitle = computed(() => route.path.includes('/create')
     ? t(route.params.id ? 'global.edit' : 'global.add')
     : t('app.details'));
+
+const showBackButton = computed(() => route.path !== '/');
+
+function goBack() {
+    if (window.history.state?.back) {
+        router.back();
+
+        return;
+    }
+
+    router.push('/');
+}
 </script>
 
 <template>
     <div class="sticky top-0 pt-4 px-4 z-50 bg-panel/85 backdrop-blur-xl">
         <card class="min-h-15 flex gap-3 px-3 sm:px-6 items-center justify-between !rounded-xl !shadow-sm">
             <div class="flex items-center gap-3 min-w-0">
+                <icon-button
+                    v-if="showBackButton"
+                    :aria-label="t('app.back')"
+                    :title="t('app.back')"
+                    @click="goBack"
+                    class="lg:flex hidden"
+                >
+                    <i class="ti ti-arrow-left rtl:rotate-180" aria-hidden="true"></i>
+                </icon-button>
                 <icon-button :aria-label="t($app.isOpenSidebar ? 'ux.close_navigation' : 'ux.open_navigation')" :aria-expanded="$app.isOpenSidebar" aria-controls="admin-navigation" @click="$app.isOpenSidebar=!$app.isOpenSidebar">
                     <i class="ti ti-menu-2" aria-hidden="true"></i>
                 </icon-button>

@@ -9,7 +9,8 @@ export default {
         delete: 'Delete',
         logout: 'Logout',
         profile: 'My Profile',
-        details: 'details'
+        details: 'details',
+        back: 'Back',
     },
     global: {
         id: "ID",
