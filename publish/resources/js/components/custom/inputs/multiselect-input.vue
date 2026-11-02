@@ -6,7 +6,7 @@
         </label>
 
         <div
-            class="custom-multiselect-content relative w-full rounded-md border border-gray-300 hover:border-gray-600 focus-within:border-primary hover:focus-within:border-primary bg-white transition-colors duration-150"
+            class="custom-multiselect-content relative w-full rounded-md border border-gray-400 bg-surface hover:border-gray-600 focus-within:border-primary focus-within:ring-3 focus-within:ring-primary/10 hover:focus-within:border-primary transition-[border-color,box-shadow] duration-150"
             :class="{
                 'border-primary hover:border-primary': isOpen,
                 'border-danger!': error,
@@ -104,7 +104,7 @@
             >
                 <div
                     v-if="isOpen"
-                    class="absolute z-50 left-0 right-0 mt-1.5 bg-white border border-gray-100 rounded-xl shadow-xl shadow-gray-200/60 overflow-hidden"
+                    class="absolute z-50 left-0 right-0 mt-1.5 rounded-xl border border-border bg-surface shadow-xl overflow-hidden"
                     :style="{ top: '100%' }"
                 >
                     <div v-if="isLoading" class="flex items-center gap-2.5 px-4 py-3.5 text-sm text-gray-400">
@@ -128,7 +128,7 @@
                         >
                             <span
                                 class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-all"
-                                :class="allSelected ? 'bg-primary border-primary' : someSelected ? 'bg-primary/10 border-primary/50' : 'border-gray-300'"
+                                :class="allSelected ? 'bg-primary border-primary' : someSelected ? 'bg-primary/10 border-primary/50' : 'border-gray-400'"
                             >
                                 <svg v-if="allSelected" class="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg>
                                 <svg v-else-if="someSelected" class="w-2 h-2 text-primary" viewBox="0 0 8 8" fill="currentColor"><rect x="1" y="3" width="6" height="2" rx="1"/></svg>
@@ -151,7 +151,7 @@
                             <span
                                 v-if="multiple"
                                 class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-all"
-                                :class="isSelected(option) ? 'bg-primary border-primary' : 'border-gray-300'"
+                                :class="isSelected(option) ? 'bg-primary border-primary' : 'border-gray-400'"
                             >
                                 <svg v-if="isSelected(option)" class="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1.5 5l2.5 2.5 4.5-4"/></svg>
                             </span>

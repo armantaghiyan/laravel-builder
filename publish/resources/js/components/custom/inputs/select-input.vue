@@ -51,14 +51,14 @@ function addOptions(){
                 {value: 0, label: 'غیر فعال'},
                 {value: 1, label: 'فعال'},
             ]);
-        // @ts-ignore
+            // @ts-ignore
         }else if (type === 'yes_or_no') {
             localOptions.value.push(...[
                 {value: 0, label: 'خیر'},
                 {value: 1, label: 'بله'},
             ]);
         }else if($app.enums[type]){
-        // @ts-ignore
+            // @ts-ignore
             localOptions.value.push(...$app.enums[type]);
         }
     }else{
@@ -85,7 +85,7 @@ onMounted(() => {
         <Listbox v-model="model" v-slot="{ open }">
             <div>
                 <ListboxButton
-                    class="relative w-full h-9.5 rounded-md border border-gray-300 hover:border-gray-600 focus:border-primary outline-none px-3.5 transition-colors duration-150"
+                    class="relative w-full h-9.5 rounded-md border border-gray-400 bg-surface hover:border-gray-600 focus:border-primary focus:ring-3 focus:ring-primary/10 outline-none px-3.5 transition-[border-color,box-shadow] duration-150"
                     :class="{ 'border-primary hover:border-primary': open }"
                 >
 
@@ -102,7 +102,7 @@ onMounted(() => {
                     leave-to-class="opacity-0"
                 >
                     <ListboxOptions
-                        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-md text-base ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-border bg-surface py-1 shadow-md text-base focus:outline-none sm:text-sm"
                     >
                         <ListboxOption v-slot="{ active, selected }" v-for="(option, index) in localOptions" :key="index" :value="option[value]" as="template">
                             <li

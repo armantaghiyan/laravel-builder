@@ -52,7 +52,7 @@ const {
 .vpd-input-group .form-date-control {
     background: var(--color-surface);
     color: var(--color-foreground);
-    border: 1px solid var(--color-gray-300);
+    border: 1px solid var(--color-gray-400);
     height: 38px;
     border-radius: 6px 0 0 6px;
     outline: none;

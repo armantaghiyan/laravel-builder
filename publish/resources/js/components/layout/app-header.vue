@@ -26,7 +26,7 @@ const pageTitle = computed(() => route.path.includes('/create')
 
 <template>
     <div class="sticky top-0 pt-4 px-4 z-50 bg-panel/85 backdrop-blur-xl">
-        <card class="min-h-15 flex gap-3 px-3 sm:px-6 items-center justify-between !rounded-xl !shadow-[0_6px_22px_rgba(33,43,85,0.06)]">
+        <card class="min-h-15 flex gap-3 px-3 sm:px-6 items-center justify-between !rounded-xl !shadow-sm">
             <div class="flex items-center gap-3 min-w-0">
                 <icon-button :aria-label="t($app.isOpenSidebar ? 'ux.close_navigation' : 'ux.open_navigation')" :aria-expanded="$app.isOpenSidebar" aria-controls="admin-navigation" @click="$app.isOpenSidebar=!$app.isOpenSidebar">
                     <i class="ti ti-menu-2" aria-hidden="true"></i>

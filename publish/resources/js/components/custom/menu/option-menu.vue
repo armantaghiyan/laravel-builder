@@ -29,7 +29,7 @@ const {
             leave-to-class="transform scale-95 opacity-0"
         >
             <MenuItems
-                class="absolute z-50 bg-white shadow-lg inset-e-0"
+                class="absolute z-50 inset-e-0 border border-border bg-surface shadow-lg"
                 :style="`width: ${width}px;border-radius: ${rounded}px; top: ${top}px`"
             >
                 <slot/>

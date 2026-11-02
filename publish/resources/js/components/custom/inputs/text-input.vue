@@ -205,7 +205,7 @@ defineExpose({ focus: () => inputRef.value?.focus() });
             <input
                 :id="inputId"
                 ref="inputRef"
-                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-300 bg-transparent hover:border-gray-600 focus:border-primary outline-none px-3.5 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="input auto-placeholder w-full h-9.5 rounded-md border border-gray-400 bg-surface hover:border-gray-600 focus:border-primary focus:ring-3 focus:ring-primary/10 outline-none px-3.5 transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                 :class="{
                     '!placeholder:text-start': type === 'password',
                     'border-danger!': error,

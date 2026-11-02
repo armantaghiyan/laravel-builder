@@ -196,6 +196,7 @@
         font-family: vazirmatn, serif;
         @apply font-normal text-[15px] leading-[20.6px] text-base;
         background-color: var(--color-panel);
+        transition: background-color 150ms ease, color 150ms ease;
     }
 
     h4 {
@@ -215,8 +216,24 @@
     }
 
     ::selection {
-        background: #dedcff;
-        color: #312e81;
+        background: var(--color-light-primary);
+        color: var(--color-primary);
+    }
+
+    :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
 
