@@ -83,7 +83,7 @@ watch(() => [props.count, props.pageRows, props.loading], () => {
             }}
         </div>
 
-        <div v-if="paginationPageCount > 1" dir="ltr" class="flex gap-1 sm:gap-1.5">
+        <div v-if="paginationPageCount > 1" dir="ltr" class="flex gap-1 sm:gap-1.5 w-full">
             <btn-pagination :is-active="false" :disabled="loading || page <= 1" :aria-label="t('ux.first_page')" @click="changePage(1)" class="sm:flex hidden">
                 <i class="ti ti-chevrons-left" aria-hidden="true"></i>
             </btn-pagination>
